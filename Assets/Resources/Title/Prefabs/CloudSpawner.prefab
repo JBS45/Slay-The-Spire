@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7875149105848143491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7875149105848143490}
+  - component: {fileID: 7875149105848143489}
+  m_Layer: 5
+  m_Name: CloudSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7875149105848143490
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875149105848143491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7875149105848143489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875149105848143491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3790b8b41c0dcfc4db1d08375d7364f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CloudSpriteResources:
+  - {fileID: 1321434383930595580, guid: 5fd718d086c51a147a12f8fb099ad60b, type: 3}
+  - {fileID: -985660270841655580, guid: 1e3379bc815868f49a1e37a1a691a96c, type: 3}
+  - {fileID: -4881561690762161108, guid: 1e3379bc815868f49a1e37a1a691a96c, type: 3}
+  - {fileID: 4745141421318410329, guid: 1e3379bc815868f49a1e37a1a691a96c, type: 3}
+  - {fileID: 940746905887843019, guid: 86b32873e72feb54d9cdffe00922a0ec, type: 3}
+  - {fileID: 8616960235736244859, guid: 86b32873e72feb54d9cdffe00922a0ec, type: 3}
+  - {fileID: 6738102176254529093, guid: e846cc56d85c46a4a9b519adf62b54a6, type: 3}
+  - {fileID: -7794118202383239365, guid: e846cc56d85c46a4a9b519adf62b54a6, type: 3}
+  - {fileID: 4102898551374849222, guid: e846cc56d85c46a4a9b519adf62b54a6, type: 3}
+  - {fileID: -896996397758221803, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: 9136323924615075595, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: -2189447777127570220, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: 7779510178083992571, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: 3471745752046311600, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: 5250608514021564245, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: 4966838250682800506, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: -8327734872950801652, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: -7669475172567602689, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  - {fileID: 8630022431229963643, guid: 68c7d1756a3ec1445a0a3f4264b991dc, type: 3}
+  CloudRes: {fileID: 8914338750449180755, guid: b2ac43ef4fccd5e488c30a1defd2d3fe,
+    type: 3}
+  CloudMax: 5
+  TargetPos1: {x: 2000, y: 0, z: 0}
+  TargetPos2: {x: -2000, y: 0, z: 0}

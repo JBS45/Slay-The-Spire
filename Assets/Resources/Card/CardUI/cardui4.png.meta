@@ -1,0 +1,560 @@
+fileFormatVersion: 2
+guid: b706313eeb70b104184a1c16d1a29fc0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -185974091162540673
+    second: 1024/bg_skill_purple
+  - first:
+      213: 1532739498857177370
+    second: 512/bg_attack_purple
+  - first:
+      213: 9022820820930219831
+    second: 512/bg_attack_red
+  - first:
+      213: 7627807342441820612
+    second: 512/bg_power_green
+  - first:
+      213: 1183571276173964202
+    second: 512/bg_power_purple
+  - first:
+      213: -254849810803694820
+    second: 512/bg_power_red
+  - first:
+      213: -4313782975867092048
+    second: 512/bg_power_silhouette
+  - first:
+      213: 6147758222624804506
+    second: 512/bg_skill_black
+  - first:
+      213: -4556345971709389718
+    second: 512/bg_skill_blue
+  - first:
+      213: -6201496607586315573
+    second: 512/bg_skill_gray
+  - first:
+      213: 8020594582337427511
+    second: 512/bg_skill_green
+  - first:
+      213: -8903430952831194764
+    second: 512/bg_skill_purple
+  - first:
+      213: -769305767964346302
+    second: 512/bg_skill_red
+  - first:
+      213: 7990754646331801495
+    second: 512/bg_skill_silhouette
+  - first:
+      213: 8350276785593208637
+    second: 512/card_back
+  - first:
+      213: 9104070147321150373
+    second: 512/card_bg
+  - first:
+      213: -6755756077659800976
+    second: 512/card_flash_vfx
+  - first:
+      213: 5054167496368327126
+    second: 512/card_shadow
+  - first:
+      213: -4164294381922785647
+    second: 512/card_super_shadow
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 1024/bg_skill_purple
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 187
+        width: 596
+        height: 837
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f75a4d6ac894b6df0800000000000000
+      internalID: -185974091162540673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_attack_purple
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 187
+        width: 302
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a11a7921472654510800000000000000
+      internalID: 1532739498857177370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_attack_red
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 187
+        width: 302
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f4b8f4bbf773d70800000000000000
+      internalID: 9022820820930219831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_power_green
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1026
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c17c553d5a6bd960800000000000000
+      internalID: 7627807342441820612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_power_purple
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1447
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa374ba0ec3ec6010800000000000000
+      internalID: 1183571276173964202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_power_red
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 678
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1368f38277967cf0800000000000000
+      internalID: -254849810803694820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_power_silhouette
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 678
+        width: 298
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b380552d3d5224c0800000000000000
+      internalID: -4313782975867092048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_black
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1099
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9ec9800889315550800000000000000
+      internalID: 6147758222624804506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_blue
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1520
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64da72ba7b94c0c0800000000000000
+      internalID: -4556345971709389718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_gray
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 1099
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc2170d31bbdfe9a0800000000000000
+      internalID: -6201496607586315573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_green
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 1520
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73815a71740ee4f60800000000000000
+      internalID: 8020594582337427511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_purple
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 608
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 479674688b8a07480800000000000000
+      internalID: -8903430952831194764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_red
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 609
+        width: 299
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24873d0ea70e255f0800000000000000
+      internalID: -769305767964346302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/bg_skill_silhouette
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 1029
+        width: 298
+        height: 419
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79fb8e5930dd4ee60800000000000000
+      internalID: 7990754646331801495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/card_back
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1613
+        width: 317
+        height: 433
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3f497dae7422e370800000000000000
+      internalID: 8350276785593208637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/card_bg
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 1450
+        width: 288
+        height: 412
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5abb0554097285e70800000000000000
+      internalID: 9104070147321150373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/card_flash_vfx
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1026
+        width: 339
+        height: 585
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07ab6e114abbe32a0800000000000000
+      internalID: -6755756077659800976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/card_shadow
+      rect:
+        serializedVersion: 2
+        x: 1576
+        y: 187
+        width: 300
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d90c505f82042640800000000000000
+      internalID: 5054167496368327126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 512/card_super_shadow
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 187
+        width: 366
+        height: 489
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1966651b2547536c0800000000000000
+      internalID: -4164294381922785647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
