@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SelectMenuButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class OutlineButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image Outline;
     public Image ButtonImage;

@@ -78,6 +78,10 @@ public class ZeroFloorEvent : MonoBehaviour
 
     void Finish()
     {
-        GameEvent.Instance.ChangeEventState(GameEvent.EventType.Battle);
+        //원래는 MainSceneUI에게 맵UI를 보여주게 해야한다.
+
+        //임시
+        MainSceneController.Instance.EventStateChange(MainSceneController.EventState.Battle);
+        Destroy(this.gameObject);
     }
 }

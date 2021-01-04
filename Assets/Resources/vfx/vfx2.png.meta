@@ -3,20 +3,20 @@ guid: 214df629ba451c14eaf10216788d6a8e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7418652272508035025
-    second: vfx2_0
+      213: 6866833700615582671
+    second: combat/cleave
   - first:
-      213: -9141062036269409479
-    second: vfx2_1
+      213: 8995106848211176075
+    second: combat/laserThick
   - first:
-      213: -7996517290121847826
-    second: vfx2_2
+      213: -3138175655803198361
+    second: combat/laserThin
   - first:
-      213: 9006541351050426135
-    second: vfx2_3
+      213: 9128688396148388401
+    second: cone7
   - first:
-      213: 6377994082767146611
-    second: vfx2_4
+      213: 1140418001840624633
+    second: cone9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +79,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -91,7 +91,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,7 +102,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vfx2_0
+      name: combat/cleave
       rect:
         serializedVersion: 2
         x: 2
@@ -110,20 +110,41 @@ TextureImporter:
         width: 964
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 1df5cf6afe854f660800000000000000
-      internalID: 7418652272508035025
+      spriteID: fc37fd06ed4eb4f50800000000000000
+      internalID: 6866833700615582671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vfx2_1
+      name: combat/laserThick
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 671
+        width: 982
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8a8f44350a05dc70800000000000000
+      internalID: 8995106848211176075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: combat/laserThin
       rect:
         serializedVersion: 2
         x: 2
@@ -131,77 +152,56 @@ TextureImporter:
         width: 981
         height: 101
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 93b5a5a628c642180800000000000000
-      internalID: -9141062036269409479
+      spriteID: 76462192ed5f274d0800000000000000
+      internalID: -3138175655803198361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: vfx2_2
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 669
-        width: 982
-        height: 146
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eeb940a54e9a60190800000000000000
-      internalID: -7996517290121847826
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: vfx2_3
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 453
-        width: 1058
-        height: 214
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7173a3cd3a9adfc70800000000000000
-      internalID: 9006541351050426135
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: vfx2_4
+      name: cone7
       rect:
         serializedVersion: 2
         x: 2
-        y: 99
-        width: 1140
-        height: 352
+        y: 455
+        width: 1058
+        height: 214
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 37e01e283df238850800000000000000
-      internalID: 6377994082767146611
+      spriteID: 132b7adfabd9fae70800000000000000
+      internalID: 9128688396148388401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cone9
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 101
+        width: 1140
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f3db27612493df00800000000000000
+      internalID: 1140418001840624633
       vertices: []
       indices: 
       edges: []
@@ -209,7 +209,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 

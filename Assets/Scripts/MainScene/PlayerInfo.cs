@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
+    CharacterType CharType;
     [SerializeField]
-    public List<CardAsset> OriginDeck;
+    List<CardAsset> OriginDeck;
 
     int MaxHp;
     int CurrentHp;
     int CurrentFloor;
     int CurrentMoney;
     int MaxPotions;
-
+    int DrawPerTurn = 5;
+    int Seed;
     //유물
     //덱
     //포션
     private void Awake()
     {
         OriginDeck = new List<CardAsset>();
+        //원래는 이 시점이 아니라 맵이 생성 될때 
+        Seed = Random.Range(0, int.MaxValue);
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -54,10 +58,31 @@ public class PlayerInfo : MonoBehaviour
     {
         return MaxPotions;
     }
+    public int GetDrawPerTurn()
+    {
+        return DrawPerTurn;
+    }
+    public int GetSeed()
+    {
+        return Seed;
+    }
+    public void SetSeed(int num)
+    {
+        Seed = num;
+    }
+    public List<CardAsset> GetOriginDeck()
+    {
+        return OriginDeck;
+    }
+    public CharacterType GetCharacterType()
+    {
+        return CharType;
+    }
 
     public void GameDataInit()
     {
         //저장 정보가 없으면
+        CharType = CharDB.Instance.GetPlayChar();
         MaxHp = CharDB.Instance.GetCharacterAsset().Hp;
         CurrentHp = CharDB.Instance.GetCharacterAsset().Hp;
         CurrentMoney = CharDB.Instance.GetCharacterAsset().Gold;
@@ -66,13 +91,9 @@ public class PlayerInfo : MonoBehaviour
 
         //유물 기본
 
-        OriginDeck = new List<CardAsset>();
-        for(int i = 0; i < 5; ++i) {
-            OriginDeck.Add(CardDB.Instance.FindCard(CharacterType.Ironclad, "Strike"));
-        }
-        for (int i = 0; i < 5; ++i)
+        for(int i=0;i< CharDB.Instance.GetCharacterAsset().StartDeck.Length; ++i)
         {
-            OriginDeck.Add(CardDB.Instance.FindCard(CharacterType.Ironclad, "Defend"));
+            OriginDeck.Add(CharDB.Instance.GetCharacterAsset().StartDeck[i]);
         }
         //포션 없음
 

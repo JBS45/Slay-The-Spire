@@ -20,4 +20,5 @@ public class CharacterAsset : ScriptableObject
     public int Hp;
     public int Gold;
 
+    public CardAsset[] StartDeck;
 }

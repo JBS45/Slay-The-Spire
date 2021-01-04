@@ -17,3 +17,13 @@ MonoBehaviour:
   Prefab: {fileID: 6921262958194185632, guid: 0fe8a9134ac642b45b908f8ae0964b4b, type: 3}
   Hp: 80
   Gold: 99
+  StartDeck:
+  - {fileID: 11400000, guid: 70f4fc89c398d184886d52624676d73b, type: 2}
+  - {fileID: 11400000, guid: 70f4fc89c398d184886d52624676d73b, type: 2}
+  - {fileID: 11400000, guid: 70f4fc89c398d184886d52624676d73b, type: 2}
+  - {fileID: 11400000, guid: 70f4fc89c398d184886d52624676d73b, type: 2}
+  - {fileID: 11400000, guid: 70f4fc89c398d184886d52624676d73b, type: 2}
+  - {fileID: 11400000, guid: 2549f358ed12ef1448c0cb31ecf9e231, type: 2}
+  - {fileID: 11400000, guid: 2549f358ed12ef1448c0cb31ecf9e231, type: 2}
+  - {fileID: 11400000, guid: 2549f358ed12ef1448c0cb31ecf9e231, type: 2}
+  - {fileID: 11400000, guid: 2549f358ed12ef1448c0cb31ecf9e231, type: 2}

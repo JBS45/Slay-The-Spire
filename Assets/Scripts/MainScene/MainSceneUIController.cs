@@ -10,6 +10,7 @@ public class MainSceneUIController : MonoBehaviour
     public Image FadePanel;
     public BarScript InfoBar;
     public GameObject ZeroPanel;
+    public GameObject BattleUI;
 
     // Start is called before the first frame update
     void Start()
@@ -74,14 +75,19 @@ public class MainSceneUIController : MonoBehaviour
         }
 
     }
-    public void ZeroFloorUI(ref List<GameObject> list)
+    public void ZeroFloorUI()
     {
-        GameObject Tmp;
-        Tmp = Instantiate(ZeroPanel);
-        Tmp.transform.SetParent(UICanvas.transform);
-        Tmp.transform.localScale = Vector3.one;
-        Tmp.transform.localPosition = new Vector3(-480.0f, -390.0f, 0.0f);
-        list.Add(Tmp);
+        GameObject Obj;
+        Obj = Instantiate(ZeroPanel);
+        Obj.transform.SetParent(UICanvas.transform);
+        Obj.transform.localScale = Vector3.one;
+        Obj.transform.localPosition = new Vector3(-480.0f, -390.0f, 0.0f);
+    }
+    public void MakeBattleUI()
+    {
+        GameObject obj = Instantiate(BattleUI);
+        obj.transform.SetParent(UICanvas.transform);
+        obj.transform.localScale = Vector3.one;
     }
 
     

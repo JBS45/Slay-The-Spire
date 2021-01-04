@@ -43,6 +43,10 @@ public class CharDB : MonoBehaviour
     {
         m_PlayCharacter = type;
     }
+    public CharacterType GetPlayChar()
+    {
+        return m_PlayCharacter;
+    }
     public CharacterAsset GetCharacterAsset()
     {
         switch (m_PlayCharacter)
