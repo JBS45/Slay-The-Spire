@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IntentVFx
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: ea23cb15aaad2144fb877bad0783c279, type: 3}
+    - {fileID: 2800000, guid: 94586d93a3f464542be766ad20af40b3, type: 3}
+    - {fileID: 2800000, guid: 853862ce33971c24fa1cdf821d0036c7, type: 3}
+    - {fileID: 2800000, guid: f0b2def07c4441647951b5e1b66cf45d, type: 3}
+    - {fileID: 2800000, guid: 353473c121f5c104bbb7bec63889ff93, type: 3}
+    - {fileID: 2800000, guid: ed7768240b451d24b991975acaf3b2f0, type: 3}
+    - {fileID: 2800000, guid: 6c52b2a9b6b40ec41bd4626e3f62d8dd, type: 3}
+    - {fileID: 2800000, guid: 98da3e0faaabfe34b8582ba317366e39, type: 3}
+    - {fileID: 2800000, guid: d38998dad5bb6db479c5271fd8d0a32c, type: 3}
+    - {fileID: 2800000, guid: 07369a8ebcae5684dabcb39bb5d3fe78, type: 3}
+    - {fileID: 2800000, guid: 9ae212b90dba069479955cdc52ea68bf, type: 3}
+    - {fileID: 2800000, guid: 4ae68547e3238f347bd25ea99b6ce1e3, type: 3}
+    - {fileID: 2800000, guid: 0415fef6c038fea4fb84d1ddcd91eae2, type: 3}
+    - {fileID: 2800000, guid: a595fc687d7ee2341903cf0854f49e05, type: 3}
+    totalSpriteSurfaceArea: 137216
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f0b2def07c4441647951b5e1b66cf45d, type: 3}
+  - {fileID: 21300000, guid: 353473c121f5c104bbb7bec63889ff93, type: 3}
+  - {fileID: 21300000, guid: 94586d93a3f464542be766ad20af40b3, type: 3}
+  - {fileID: 21300000, guid: ed7768240b451d24b991975acaf3b2f0, type: 3}
+  - {fileID: 21300000, guid: ea23cb15aaad2144fb877bad0783c279, type: 3}
+  - {fileID: 21300000, guid: 0415fef6c038fea4fb84d1ddcd91eae2, type: 3}
+  - {fileID: 21300000, guid: 4ae68547e3238f347bd25ea99b6ce1e3, type: 3}
+  - {fileID: 21300000, guid: a595fc687d7ee2341903cf0854f49e05, type: 3}
+  - {fileID: 21300000, guid: 6c52b2a9b6b40ec41bd4626e3f62d8dd, type: 3}
+  - {fileID: 21300000, guid: 9ae212b90dba069479955cdc52ea68bf, type: 3}
+  - {fileID: 21300000, guid: d38998dad5bb6db479c5271fd8d0a32c, type: 3}
+  - {fileID: 21300000, guid: 07369a8ebcae5684dabcb39bb5d3fe78, type: 3}
+  - {fileID: 21300000, guid: 853862ce33971c24fa1cdf821d0036c7, type: 3}
+  - {fileID: 21300000, guid: 98da3e0faaabfe34b8582ba317366e39, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - buffVFX3
+  - debuff1L
+  - buffVFX1
+  - debuff2L
+  - buff1L
+  - unknownL
+  - sleepL
+  - stunL
+  - debuffVFX1
+  - defendL
+  - debuffVFX3
+  - defendBuffL
+  - buffVFX2
+  - debuffVFX2
+  m_Tag: IntentVFx
+  m_IsVariant: 0

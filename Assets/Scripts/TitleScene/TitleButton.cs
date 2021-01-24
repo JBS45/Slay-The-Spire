@@ -11,11 +11,13 @@ public class TitleButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
     public TMP_Text ButtonText;
     Vector3 target;
     bool bTextMoving = false;
+    SEManager m_SEManager;
 
     private void Awake()
     {
         HighligtImage.enabled = false;
         target = ButtonText.transform.localPosition;
+        m_SEManager = GameObject.Find("SEManager").GetComponent<SEManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class TitleButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
         {
             StartCoroutine(PointerEventTextMove());
         }
+        m_SEManager.PlaySE(0);
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)

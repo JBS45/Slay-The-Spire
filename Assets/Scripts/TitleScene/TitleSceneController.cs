@@ -41,6 +41,11 @@ public class TitleSceneController : MonoBehaviour
     public Image FadePanel;
     public GameObject SelectPanelRes;
 
+    [SerializeField]
+    BGMManager m_BGMManager;
+    [SerializeField]
+    SEManager m_SEManager;
+
     TitleSceneState m_State=TitleSceneState.Create;
 
     Vector3 TargetPos;
@@ -72,6 +77,10 @@ public class TitleSceneController : MonoBehaviour
                 StartCoroutine(m_BackCloudSpawner.GetComponent<CloudSpawner>().StartSpawnCloud());
                 break;
             case TitleSceneState.Ready:
+                if (!m_BGMManager.IsPlay())
+                {
+                    m_BGMManager.PlayBGM();
+                }
                 TitleString.SetActive(true);
                 StartCoroutine(MoveToTarget(ButtonPanel, new Vector3(550, 0, 0), null));
                 break;
@@ -106,6 +115,7 @@ public class TitleSceneController : MonoBehaviour
     //버튼 함수 구역
     public void PushStartButton()
     {
+        m_SEManager.PlaySE(1);
         //셀렉트 메뉴 패널 초기화
         GameObject obj = Instantiate(SelectPanelRes);
         obj.transform.SetParent(MainCanvas.transform);
@@ -116,16 +126,17 @@ public class TitleSceneController : MonoBehaviour
         obj.GetComponent<SelectPanelScript>().InitMenu();
 
         //캔슬버튼에 상태를 원래상태로 돌리는 이벤트 추가
-        obj.GetComponent<SelectPanelScript>().CancelButton.GetComponentInChildren<Button>().onClick.AddListener(() => { ChangeState(TitleSceneState.Ready); });
+        obj.GetComponent<SelectPanelScript>().CancelButton.GetComponentInChildren<Button>().onClick.AddListener(() => { ChangeState(TitleSceneState.Ready); m_SEManager.PlaySE(1); });
 
         ChangeState(TitleSceneState.CharSelectPanel);
     }
     public void PushOptionButton()
     {
-
+        m_SEManager.PlaySE(1);
     }
     public void PushQuitButton()
     {
+        m_SEManager.PlaySE(1);
         Application.Quit();
     }
 

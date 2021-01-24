@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BarScript : MonoBehaviour
+public class BarScript : MonoBehaviour,IObservers
 {
     public TMP_Text m_CharName;
     public TMP_Text m_HPText;
@@ -14,6 +14,9 @@ public class BarScript : MonoBehaviour
     public TMP_Text m_FloorText;
     public TMP_Text m_DeckCount;
 
+
+
+    PlayerDataAsset m_PlayerData;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,30 +29,37 @@ public class BarScript : MonoBehaviour
         
     }
 
-    public void BarInit(string CharName,int MaxPotions, int CurrentHp, int MaxHP, int CurrentGold, int Floor ,int DeckCount)
+    public void BarInit(PlayerDataAsset playerdata)
     {
-        m_CharName.text = CharName;
-        foreach(var potion in Potions)
+        m_PlayerData = playerdata;
+        m_CharName.text = CharDB.Instance.GetCharacterAsset().CharacterName;
+        m_PlayerData.Attach(this);
+        UpdateData();
+    }
+    public void UpdateData()
+    {
+        foreach (var potion in Potions)
         {
             potion.SetActive(false);
         }
-        for(int i = 0; i < MaxPotions; ++i)
+        for (int i = 0; i < m_PlayerData.MaxPotions; ++i)
         {
             Potions[i].SetActive(true);
         }
-        m_HPText.text = CurrentHp + "/" + MaxHP;
-        m_GoldText.text = CurrentGold.ToString();
-        if (Floor > 0)
+        m_HPText.text = m_PlayerData.CurrentHp.ToString() + "/" + m_PlayerData.MaxHp.ToString();
+        m_GoldText.text = m_PlayerData.CurrentMoney.ToString();
+        if (m_PlayerData.CurrentFloor > 0)
         {
             m_FloorImage.enabled = true;
-            m_FloorText.text = Floor.ToString();
+            m_FloorText.enabled = true;
+            m_FloorText.text = m_PlayerData.CurrentFloor.ToString();
         }
         else
         {
             m_FloorImage.enabled = false;
             m_FloorText.enabled = false;
         }
-        m_DeckCount.text = DeckCount.ToString();
+        m_DeckCount.text = m_PlayerData.OriginDecks.Count.ToString();
     }
 
 }

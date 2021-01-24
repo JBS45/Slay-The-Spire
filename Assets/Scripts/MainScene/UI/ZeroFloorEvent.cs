@@ -7,6 +7,9 @@ public class ZeroFloorEvent : MonoBehaviour
     public GameObject ButtonRes;
 
     List<GameObject> m_Buttons;
+
+    [SerializeField]
+    Relic Lament;
     private void Awake()
     {
         m_Buttons = new List<GameObject>();
@@ -39,19 +42,22 @@ public class ZeroFloorEvent : MonoBehaviour
         {
             MakeButton();
         }
-
-        m_Buttons[0].GetComponent<MainSceneEventButton>().ButtonSetting("[1번]", 
+        int tmpHp = MainSceneController.Instance.PlayerData.MaxHp / 10;
+        int MaxHp = MainSceneController.Instance.PlayerData.MaxHp;
+        m_Buttons[0].GetComponent<MainSceneEventButton>().ButtonSetting("[최대 체력을 "+ tmpHp+" 을 추가로 얻습니다.]", 
             ()=> 
             {
-                Debug.Log("1번");
+                MainSceneController.Instance.Character.GetComponentInChildren<Stat>().MaxHealthPoint = MaxHp + tmpHp;
+                MainSceneController.Instance.Character.GetComponentInChildren<Stat>().CurrentHealthPoint = MaxHp + tmpHp;
+                MainSceneController.Instance.PlayerData.Notify();
                 DestroyButton();
                 MakeButton();
                 m_Buttons[0].GetComponent<MainSceneEventButton>().ButtonSetting("[떠난다]", Finish);
             });
-        m_Buttons[1].GetComponent<MainSceneEventButton>().ButtonSetting("[2번]",
+        m_Buttons[1].GetComponent<MainSceneEventButton>().ButtonSetting("[다음 세번의 전투를 적의 체력이 1인채로 시작합니다.]",
             () =>
             {
-                Debug.Log("1번");
+                MainSceneController.Instance.PlayerData.AddRelic(Lament);
                 DestroyButton();
                 MakeButton();
                 m_Buttons[0].GetComponent<MainSceneEventButton>().ButtonSetting("[떠난다]", Finish);
@@ -79,9 +85,8 @@ public class ZeroFloorEvent : MonoBehaviour
     void Finish()
     {
         //원래는 MainSceneUI에게 맵UI를 보여주게 해야한다.
+        MainSceneController.Instance.GetUIControl().OpenMapProgress();
+        StartCoroutine(MainSceneController.Instance.GetUIControl().GetMapUI().GetComponent<MapUIScript>().FirstMapOpen());
 
-        //임시
-        MainSceneController.Instance.EventStateChange(MainSceneController.EventState.Battle);
-        Destroy(this.gameObject);
     }
 }

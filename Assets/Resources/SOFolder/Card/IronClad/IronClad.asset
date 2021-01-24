@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab388daef9ae9884788e831e7a5e5d0c, type: 3}
+  m_Name: IronClad
+  m_EditorClassIdentifier: 
+  _BaseCard:
+  - {fileID: 11400000, guid: da842a3a516f1d542b247383ef404157, type: 2}
+  - {fileID: 11400000, guid: 50c59b6477d761e46be1201102db88cc, type: 2}
+  - {fileID: 11400000, guid: 03eac06d07189ae41816da800ddcad31, type: 2}
+  _Card:
+  - {fileID: 11400000, guid: 8a319681e240ba44a86de9e48c7a3c53, type: 2}
+  - {fileID: 11400000, guid: f80877defc76ff747aeec9b885f5b2e9, type: 2}
+  - {fileID: 11400000, guid: f21d7e2149e27aa40aeb7aaed2fb0666, type: 2}
+  - {fileID: 11400000, guid: fda838ba08f7ad246a49bd7374680483, type: 2}
+  - {fileID: 11400000, guid: 9257d94762f55f549ba03adacee54044, type: 2}
+  - {fileID: 11400000, guid: bbfa10277c6c22944843ed3ed4f7d483, type: 2}

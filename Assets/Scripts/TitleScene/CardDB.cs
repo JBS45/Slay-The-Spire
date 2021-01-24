@@ -18,7 +18,9 @@ public class CardDB : MonoBehaviour
     }
 
     public CardAsset[] Neutral;
-    public CardAsset[] IronClad;
+    [SerializeField]
+    CardPool _IronClad;
+    public CardPool IronClad { get => _IronClad; }
 
     public List<CardAsset[]> m_CardDB;
     // Start is called before the first frame update
@@ -26,7 +28,6 @@ public class CardDB : MonoBehaviour
     {
         m_CardDB = new List<CardAsset[]>();
         m_CardDB.Add(Neutral);
-        m_CardDB.Add(IronClad);
         DontDestroyOnLoad(this.gameObject);
     }
     void Start()

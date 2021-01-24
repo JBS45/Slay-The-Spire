@@ -12,6 +12,48 @@ public class MainSceneUIController : MonoBehaviour
     public GameObject ZeroPanel;
     public GameObject BattleUI;
 
+    [SerializeField]
+    Transform RelicBar;
+    public Transform RelicBarPos { get => RelicBar; }
+
+    GameObject CurUI;
+    GameObject PastUI;
+
+    [SerializeField]
+    GameObject MapRes;
+    GameObject Map;
+    bool IsMapOpen = false;
+
+    [SerializeField]
+    GameObject FireCampWindowRes;
+
+    [SerializeField]
+    GameObject CardWindowRes;
+    GameObject CurrentDeckWindow;
+    bool IsDeckWindowOpen = true;
+
+    [SerializeField]
+    GameObject RewardRes;
+    GameObject Reward;
+
+    [SerializeField]
+    GameObject AddRewardRes;
+    GameObject AddReward;
+    public GameObject AddRewardWinodow { get => AddReward; set => AddReward = value; }
+
+
+    [Header("ToolTip")]
+    [SerializeField]
+    GameObject ToolTipRes;
+    GameObject _ToolTip;
+    public GameObject ToolTip { get => _ToolTip; set => _ToolTip = value; }
+
+
+    private void Awake()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,18 +119,142 @@ public class MainSceneUIController : MonoBehaviour
     }
     public void ZeroFloorUI()
     {
-        GameObject Obj;
-        Obj = Instantiate(ZeroPanel);
-        Obj.transform.SetParent(UICanvas.transform);
-        Obj.transform.localScale = Vector3.one;
-        Obj.transform.localPosition = new Vector3(-480.0f, -390.0f, 0.0f);
+        CurUI = Instantiate(ZeroPanel);
+        CurUI.transform.SetParent(UICanvas.transform);
+        CurUI.transform.localScale = Vector3.one;
+        CurUI.transform.localPosition = new Vector3(-480.0f, -390.0f, 0.0f);
+        InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void MakeBattleUI()
     {
-        GameObject obj = Instantiate(BattleUI);
-        obj.transform.SetParent(UICanvas.transform);
-        obj.transform.localScale = Vector3.one;
+        CurUI = Instantiate(BattleUI);
+        CurUI.transform.SetParent(UICanvas.transform);
+        CurUI.transform.localScale = Vector3.one;
+        InfoBar.gameObject.transform.SetAsLastSibling();
     }
+    public void MakeReward()
+    {
+        CurUI = Instantiate(RewardRes);
+        CurUI.GetComponent<RewardWindow>().WindowSetting(MainSceneController.Instance.Reward);
+        CurUI.transform.SetParent(UICanvas.transform);
+        CurUI.transform.localScale = Vector3.one;
+        CurUI.transform.localPosition = Vector3.zero;
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+    public void MakeAddReward()
+    {
+        AddReward = Instantiate(AddRewardRes);
+        AddReward.transform.SetParent(UICanvas.transform);
+        AddReward.transform.localScale = Vector3.one;
+        AddReward.transform.localPosition = Vector3.zero;
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+    public void MakeToolTip()
+    {
+        _ToolTip = Instantiate(ToolTipRes);
+        _ToolTip.transform.SetParent(UICanvas.transform);
+        _ToolTip.transform.localScale = Vector3.one;
+        _ToolTip.transform.localPosition = Vector3.zero;
+        _ToolTip.SetActive(false);
+    }
+    public void MakeFireCampWindow()
+    {
+        CurUI = Instantiate(FireCampWindowRes);
+        CurUI.transform.SetParent(UICanvas.transform);
+        CurUI.transform.localScale = Vector3.one;
+        CurUI.transform.localPosition = Vector3.zero;
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+    public void GetDeckWindow()
+    {
+        if (CurrentDeckWindow == null)
+        {
+            CurrentDeckWindow = Instantiate(CardWindowRes);
+            CurrentDeckWindow.transform.SetParent(UICanvas.transform);
+            CurrentDeckWindow.transform.localScale = Vector3.one;
+            CurrentDeckWindow.transform.localPosition = Vector3.zero;
+            CurrentDeckWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Show, true);
+            CurrentDeckWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(CurrentDeckWindow.GetComponent<CardWindow>().CancelButtonEvent);
+            InfoBar.gameObject.transform.SetAsLastSibling();
+        }
+        else
+        {
+            if (IsDeckWindowOpen)
+            {
+                CurrentDeckWindow.SetActive(false);
+                IsDeckWindowOpen = false;
+            }
+            else
+            {
+                CurrentDeckWindow.SetActive(true);
+                IsDeckWindowOpen = true;
+            }
+        }
+    }
+    public GameObject MakeCardWindow()
+    {
+        GameObject tmp = Instantiate(CardWindowRes);
+        tmp.transform.SetParent(UICanvas.transform);
+        tmp.transform.localScale = Vector3.one;
+        tmp.transform.localPosition = Vector3.zero;
+        tmp.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Show, false);
+        InfoBar.gameObject.transform.SetAsLastSibling();
 
-    
+        return tmp;
+    }
+    public void MakeMap()
+    {
+        Map = Instantiate(MapRes);
+        Map.transform.SetParent(UICanvas.transform);
+        Map.transform.localScale = Vector3.one;
+        Map.transform.localPosition = Vector3.zero;
+        InfoBar.gameObject.transform.SetAsLastSibling();
+        Map.GetComponent<MapUIScript>().CancelButtonEvent(OffIsMapOpen);
+    }
+    public void ToggleMapInfoBar()
+    {
+        if (IsMapOpen == false)
+        {
+            Map.GetComponent<MapUIScript>().OpenMapInfoBar();
+            Map.transform.SetAsLastSibling();
+            InfoBar.gameObject.transform.SetAsLastSibling();
+            IsMapOpen = true;
+        }
+        else
+        {
+            Map.GetComponent<MapUIScript>().HideMap();
+            IsMapOpen = false;
+        }
+
+    }
+    public void OpenMapProgress()
+    {
+        Map.GetComponent<MapUIScript>().OpenMapProgress();
+        Map.transform.SetAsLastSibling();
+        InfoBar.gameObject.transform.SetAsLastSibling();
+        IsMapOpen = true;
+    }
+    public void OffMap()
+    {
+        Map.GetComponent<MapUIScript>().HideMap();
+        IsMapOpen = false;
+    }
+    public GameObject GetMapUI()
+    {
+        return Map;
+    }
+    public void OffIsMapOpen()
+    {
+        IsMapOpen = false;
+    }
+    public void RemoveCurUI()
+    {
+        PastUI = CurUI;
+        CurUI = null;
+        Destroy(PastUI);
+    }
+    public GameObject GetCurUI()
+    {
+        return CurUI;
+    }
 }

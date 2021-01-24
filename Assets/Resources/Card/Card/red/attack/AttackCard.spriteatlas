@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AttackCard
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: d1eef7ef64616fb488d353db86bc9519, type: 3}
+    - {fileID: 2800000, guid: d273bf5042bebb04ab0e3626f162c6b3, type: 3}
+    - {fileID: 2800000, guid: 80835fd35187f2843b84cfc05ef0a0f6, type: 3}
+    - {fileID: 2800000, guid: 5191962ca828bd94e96d989e521a29fe, type: 3}
+    - {fileID: 2800000, guid: c70f3e7314afc204d8cc7245259d47a6, type: 3}
+    - {fileID: 2800000, guid: 5c35876364f3069469c88dd406aff5cc, type: 3}
+    - {fileID: 2800000, guid: afe45b9cfb0b8574e8554ea0f50cea4b, type: 3}
+    - {fileID: 2800000, guid: c2a7ecb7a2efdf045ab5706b428db5e3, type: 3}
+    - {fileID: 2800000, guid: 5c45e12dd7fa0cb4c82e9692cdb1a6f1, type: 3}
+    - {fileID: 2800000, guid: e1386fa92e4db3c4483a3cb4a7013d5a, type: 3}
+    - {fileID: 2800000, guid: 837f35abbc11d324882f1e0b0a13253a, type: 3}
+    - {fileID: 2800000, guid: 4519e6ddb5e12ee4e94968d16ccfebf8, type: 3}
+    - {fileID: 2800000, guid: 64179e54f12797c4cb2f34be4ae43dc2, type: 3}
+    - {fileID: 2800000, guid: 495f1d464c1068c4e933db6dec17d766, type: 3}
+    - {fileID: 2800000, guid: 8479b80a3740fa44db9a7e54e02056ab, type: 3}
+    - {fileID: 2800000, guid: 3ba6b1cf7d865234a83df82bc13767cc, type: 3}
+    - {fileID: 2800000, guid: 732fdd8d6b2ac0d43987fe9441211435, type: 3}
+    - {fileID: 2800000, guid: cd92b258a11f1164f894655c656bebf2, type: 3}
+    - {fileID: 2800000, guid: bffea1ed2515554408f025e90235397c, type: 3}
+    - {fileID: 2800000, guid: ad9382928e0b7a44f97a17ff29c1c0b3, type: 3}
+    - {fileID: 2800000, guid: dcd1a633248ec394bb4ebec4330932ce, type: 3}
+    - {fileID: 2800000, guid: cba8dd29d622bf1458f6cb079e81b424, type: 3}
+    - {fileID: 2800000, guid: 07c1585dd53dc8b4a8e1bb3461fe6475, type: 3}
+    - {fileID: 2800000, guid: d072a21704ad12b4f8f31488d13dc771, type: 3}
+    - {fileID: 2800000, guid: 8d9e51877de13784f8e5ac19e81468f0, type: 3}
+    - {fileID: 2800000, guid: 269d4d213e07943439c435f1c55e0124, type: 3}
+    - {fileID: 2800000, guid: 1b0d6c5aa601aa24b93dc82732b9c001, type: 3}
+    - {fileID: 2800000, guid: 203efbd28d623df4b8188f54120e4409, type: 3}
+    - {fileID: 2800000, guid: 1e431613f0ee40544bccc08621507ce1, type: 3}
+    - {fileID: 2800000, guid: f60b417e4ed59964fb3cd7e5cd5eb583, type: 3}
+    - {fileID: 2800000, guid: 2cf9ad7ce24b9d0408ba66bf908eba7d, type: 3}
+    - {fileID: 2800000, guid: f0906d8b7650eb441987da4be29fb515, type: 3}
+    totalSpriteSurfaceArea: 6080000
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: d273bf5042bebb04ab0e3626f162c6b3, type: 3}
+  - {fileID: 21300000, guid: 269d4d213e07943439c435f1c55e0124, type: 3}
+  - {fileID: 21300000, guid: ad9382928e0b7a44f97a17ff29c1c0b3, type: 3}
+  - {fileID: 21300000, guid: 203efbd28d623df4b8188f54120e4409, type: 3}
+  - {fileID: 21300000, guid: 1e431613f0ee40544bccc08621507ce1, type: 3}
+  - {fileID: 21300000, guid: dcd1a633248ec394bb4ebec4330932ce, type: 3}
+  - {fileID: 21300000, guid: 5c35876364f3069469c88dd406aff5cc, type: 3}
+  - {fileID: 21300000, guid: c70f3e7314afc204d8cc7245259d47a6, type: 3}
+  - {fileID: 21300000, guid: 80835fd35187f2843b84cfc05ef0a0f6, type: 3}
+  - {fileID: 21300000, guid: 64179e54f12797c4cb2f34be4ae43dc2, type: 3}
+  - {fileID: 21300000, guid: 495f1d464c1068c4e933db6dec17d766, type: 3}
+  - {fileID: 21300000, guid: d072a21704ad12b4f8f31488d13dc771, type: 3}
+  - {fileID: 21300000, guid: 8d9e51877de13784f8e5ac19e81468f0, type: 3}
+  - {fileID: 21300000, guid: c2a7ecb7a2efdf045ab5706b428db5e3, type: 3}
+  - {fileID: 21300000, guid: cd92b258a11f1164f894655c656bebf2, type: 3}
+  - {fileID: 21300000, guid: cba8dd29d622bf1458f6cb079e81b424, type: 3}
+  - {fileID: 21300000, guid: e1386fa92e4db3c4483a3cb4a7013d5a, type: 3}
+  - {fileID: 21300000, guid: 8479b80a3740fa44db9a7e54e02056ab, type: 3}
+  - {fileID: 21300000, guid: 1b0d6c5aa601aa24b93dc82732b9c001, type: 3}
+  - {fileID: 21300000, guid: f0906d8b7650eb441987da4be29fb515, type: 3}
+  - {fileID: 21300000, guid: 837f35abbc11d324882f1e0b0a13253a, type: 3}
+  - {fileID: 21300000, guid: 5191962ca828bd94e96d989e521a29fe, type: 3}
+  - {fileID: 21300000, guid: 2cf9ad7ce24b9d0408ba66bf908eba7d, type: 3}
+  - {fileID: 21300000, guid: afe45b9cfb0b8574e8554ea0f50cea4b, type: 3}
+  - {fileID: 21300000, guid: 5c45e12dd7fa0cb4c82e9692cdb1a6f1, type: 3}
+  - {fileID: 21300000, guid: 07c1585dd53dc8b4a8e1bb3461fe6475, type: 3}
+  - {fileID: 21300000, guid: 732fdd8d6b2ac0d43987fe9441211435, type: 3}
+  - {fileID: 21300000, guid: 4519e6ddb5e12ee4e94968d16ccfebf8, type: 3}
+  - {fileID: 21300000, guid: bffea1ed2515554408f025e90235397c, type: 3}
+  - {fileID: 21300000, guid: f60b417e4ed59964fb3cd7e5cd5eb583, type: 3}
+  - {fileID: 21300000, guid: 3ba6b1cf7d865234a83df82bc13767cc, type: 3}
+  - {fileID: 21300000, guid: d1eef7ef64616fb488d353db86bc9519, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - bash
+  - strike
+  - pummel
+  - thunder_clap
+  - twin_strike
+  - rampage
+  - carnage
+  - body_slam
+  - blood_for_blood
+  - headbutt
+  - heavy_blade
+  - searing_blow
+  - sever_soul
+  - cleave
+  - perfected_strike
+  - reaper
+  - drop_kick
+  - hemokinesis
+  - sword_boomerang
+  - wild_strike
+  - feed
+  - bludgeon
+  - whirlwind
+  - clash
+  - clothesline
+  - reckless_charge
+  - iron_wave
+  - fiend_fire
+  - pommel_strike
+  - uppercut
+  - immolate
+  - anger
+  m_Tag: AttackCard
+  m_IsVariant: 0

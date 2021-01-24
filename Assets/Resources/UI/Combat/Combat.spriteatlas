@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combat
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 386ddc97e049a2a41a0be853a24411db, type: 3}
+    - {fileID: 2800000, guid: dfaf96837ebf39f4cbf67a681b10cee5, type: 3}
+    - {fileID: 2800000, guid: 322e0192fcb8fef4694dd389cdbd96dc, type: 3}
+    - {fileID: 2800000, guid: c78801bf1307db348abc4e991bbd1af8, type: 3}
+    - {fileID: 2800000, guid: 9822e1a1a6f0d74459c0feed05e9f436, type: 3}
+    - {fileID: 2800000, guid: a8d5c65d04df760438a2541e7fe3c11b, type: 3}
+    - {fileID: 2800000, guid: 23d0ac1fb8fc0524c8d5ea971ddf1810, type: 3}
+    - {fileID: 2800000, guid: e6403782322716644be81731470a0afe, type: 3}
+    - {fileID: 2800000, guid: b11936d4d0628f145b7b9743a1a46868, type: 3}
+    - {fileID: 2800000, guid: 21aa58d4a2866a445acbe43f6cfe2d09, type: 3}
+    - {fileID: 2800000, guid: b929dcaedfc3ca343b9e56b12bc7197a, type: 3}
+    - {fileID: 2800000, guid: f1b415df3700a48429a14fab39e46945, type: 3}
+    - {fileID: 2800000, guid: 634e850018ff631419c82ebbe10c9b0c, type: 3}
+    - {fileID: 2800000, guid: 1e411e419e627d847b40ef0ba0952af4, type: 3}
+    - {fileID: 2800000, guid: b05e8f5d1e9d2a44bbc2edf8b8f5adcc, type: 3}
+    - {fileID: 2800000, guid: e59d55851b3629c45a1aff18c77b982c, type: 3}
+    - {fileID: 2800000, guid: 378711c02fcb0c84e83b600a6dba5233, type: 3}
+    totalSpriteSurfaceArea: 112112
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 634e850018ff631419c82ebbe10c9b0c, type: 3}
+  - {fileID: 21300000, guid: 378711c02fcb0c84e83b600a6dba5233, type: 3}
+  - {fileID: 21300000, guid: 1e411e419e627d847b40ef0ba0952af4, type: 3}
+  - {fileID: 21300000, guid: 9822e1a1a6f0d74459c0feed05e9f436, type: 3}
+  - {fileID: 21300000, guid: e6403782322716644be81731470a0afe, type: 3}
+  - {fileID: 21300000, guid: 322e0192fcb8fef4694dd389cdbd96dc, type: 3}
+  - {fileID: 3737897332693287829, guid: dfaf96837ebf39f4cbf67a681b10cee5, type: 3}
+  - {fileID: 21300000, guid: b11936d4d0628f145b7b9743a1a46868, type: 3}
+  - {fileID: 21300000, guid: 21aa58d4a2866a445acbe43f6cfe2d09, type: 3}
+  - {fileID: 21300000, guid: e59d55851b3629c45a1aff18c77b982c, type: 3}
+  - {fileID: -7443756053782179069, guid: 386ddc97e049a2a41a0be853a24411db, type: 3}
+  - {fileID: 21300000, guid: a8d5c65d04df760438a2541e7fe3c11b, type: 3}
+  - {fileID: 21300000, guid: b05e8f5d1e9d2a44bbc2edf8b8f5adcc, type: 3}
+  - {fileID: 21300000, guid: b929dcaedfc3ca343b9e56b12bc7197a, type: 3}
+  - {fileID: 21300000, guid: 23d0ac1fb8fc0524c8d5ea971ddf1810, type: 3}
+  - {fileID: 21300000, guid: c78801bf1307db348abc4e991bbd1af8, type: 3}
+  - {fileID: 21300000, guid: f1b415df3700a48429a14fab39e46945, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - reticleArrow
+  - rightBg
+  - reticleBlock
+  - blockL
+  - blockRight3
+  - block
+  - Bar_0
+  - body7
+  - bodyBg
+  - right7
+  - background_0
+  - blockLeft3
+  - reticleCorner
+  - left7
+  - blockR
+  - blockBody3
+  - leftBg
+  m_Tag: Combat
+  m_IsVariant: 0

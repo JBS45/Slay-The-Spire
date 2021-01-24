@@ -47,11 +47,11 @@ public class CameraController : MonoBehaviour
 
             Vector3 TmpRandom = TmpOriginRot + new Vector3(TmpRotX, TmpRotY, TmpRotZ);
             Quaternion TmpQuat = Quaternion.Euler(TmpRandom);
-            while (Quaternion.Angle(transform.rotation, TmpQuat) > 0.01f)
+            while (Quaternion.Angle(transform.rotation, TmpQuat) > 0.001f)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, TmpQuat, m_Force);
                 m_Timer += Time.deltaTime;
-                yield return null;
+                yield return new WaitForSeconds(0.01f);
             }
             yield return null;
         }

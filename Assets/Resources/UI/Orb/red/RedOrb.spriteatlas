@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RedOrb
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 2b15d97de73a19644a84258f9dda13dd, type: 3}
+    - {fileID: 2800000, guid: 97e8f8fe36333fe49a0e599fe4b53428, type: 3}
+    - {fileID: 2800000, guid: d08c1414d3fe1924cadcc5ff8933b72e, type: 3}
+    - {fileID: 2800000, guid: 0cb9d47c47142ac4c898d2b073a34dc5, type: 3}
+    - {fileID: 2800000, guid: cc113ca361d01214089ab1242fd3d2c8, type: 3}
+    - {fileID: 21300000, guid: cc113ca361d01214089ab1242fd3d2c8, type: 3}
+    - {fileID: 2800000, guid: 020ce354efca88d478d612207dd50fea, type: 3}
+    - {fileID: 2800000, guid: 0a4b6ca6bdd80c04987c3b00dba303c1, type: 3}
+    - {fileID: 2800000, guid: a42add73d83dcb44db9d7ee5e00884f5, type: 3}
+    - {fileID: 2800000, guid: a7bf2d43d6eafcf41a388bccede732de, type: 3}
+    - {fileID: 2800000, guid: d0d5423f8ba258445be5d57be1f4a35d, type: 3}
+    - {fileID: 2800000, guid: 1a99e484346da2a47adc08a113ad1837, type: 3}
+    - {fileID: 2800000, guid: f5eb2cdad93650b46a69563cfae34203, type: 3}
+    totalSpriteSurfaceArea: 245760
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a7bf2d43d6eafcf41a388bccede732de, type: 3}
+  - {fileID: 21300000, guid: a42add73d83dcb44db9d7ee5e00884f5, type: 3}
+  - {fileID: 21300000, guid: cc113ca361d01214089ab1242fd3d2c8, type: 3}
+  - {fileID: 21300000, guid: d08c1414d3fe1924cadcc5ff8933b72e, type: 3}
+  - {fileID: 21300000, guid: 020ce354efca88d478d612207dd50fea, type: 3}
+  - {fileID: 21300000, guid: 1a99e484346da2a47adc08a113ad1837, type: 3}
+  - {fileID: 21300000, guid: 0a4b6ca6bdd80c04987c3b00dba303c1, type: 3}
+  - {fileID: 21300000, guid: f5eb2cdad93650b46a69563cfae34203, type: 3}
+  - {fileID: 21300000, guid: 0cb9d47c47142ac4c898d2b073a34dc5, type: 3}
+  - {fileID: 21300000, guid: 2b15d97de73a19644a84258f9dda13dd, type: 3}
+  - {fileID: 21300000, guid: 97e8f8fe36333fe49a0e599fe4b53428, type: 3}
+  - {fileID: 21300000, guid: d0d5423f8ba258445be5d57be1f4a35d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - layer4d
+  - layer4
+  - layer2d
+  - layer1d
+  - layer3
+  - layer5d
+  - layer3d
+  - layer6
+  - layer2
+  - energyRedVFX
+  - layer1
+  - layer5
+  m_Tag: RedOrb
+  m_IsVariant: 0

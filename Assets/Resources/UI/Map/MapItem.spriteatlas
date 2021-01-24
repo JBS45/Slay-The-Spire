@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MapItem
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 0638240fbbb05fe4492a7571fb486108, type: 3}
+    - {fileID: 2800000, guid: 51ba695f91d183747b29d3c0a4dee8f0, type: 3}
+    - {fileID: 2800000, guid: 8ff1f011f6e2e7a4fb068722dda87134, type: 3}
+    - {fileID: 2800000, guid: 1231e7016261fcb42b8603f97c33a4c9, type: 3}
+    - {fileID: 2800000, guid: 5cbab1ffd016304469efe89c22e344b5, type: 3}
+    - {fileID: 2800000, guid: d2745cd54b09c094aa67c7ee42730f1c, type: 3}
+    - {fileID: 2800000, guid: 9eeae7a229a9abd47b75f59dbe324d79, type: 3}
+    - {fileID: 2800000, guid: 8c1f07403c8d8d7488816ba80efdb440, type: 3}
+    - {fileID: 2800000, guid: 3d9e55db283b4184abc103b3519d624e, type: 3}
+    - {fileID: 2800000, guid: d9fb10a1d7e97384f9e4ff8178e800f0, type: 3}
+    - {fileID: 2800000, guid: e86c93c4a8631ec4f8ef7f01bdcbea65, type: 3}
+    - {fileID: 2800000, guid: 3d671aaa8579f25458128c456bd12097, type: 3}
+    - {fileID: 2800000, guid: c11d35ee1d4ec014b8f7454d1d8c307a, type: 3}
+    - {fileID: 2800000, guid: 69dae63c3ae765541a7a4ef65aae68a1, type: 3}
+    - {fileID: 2800000, guid: afb1a6db9be82614fa93c41c89049d93, type: 3}
+    - {fileID: 2800000, guid: 1017036bbb38cb84e877c7a319ad31c3, type: 3}
+    - {fileID: 2800000, guid: a1812a2c32be0614aafae6163bdce683, type: 3}
+    - {fileID: 2800000, guid: 744404137d685f845a693631ffbd2b50, type: 3}
+    - {fileID: 2800000, guid: dbc8845f18c9b974b89c63497306bf4f, type: 3}
+    - {fileID: 2800000, guid: 44096c8ca165ebe4f93490634263f059, type: 3}
+    - {fileID: 2800000, guid: 9aaa1a06edcdcf544ad98211d6fa6fdd, type: 3}
+    totalSpriteSurfaceArea: 434944
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 8c1f07403c8d8d7488816ba80efdb440, type: 3}
+  - {fileID: 21300000, guid: 1231e7016261fcb42b8603f97c33a4c9, type: 3}
+  - {fileID: 21300000, guid: 8ff1f011f6e2e7a4fb068722dda87134, type: 3}
+  - {fileID: 21300000, guid: d9fb10a1d7e97384f9e4ff8178e800f0, type: 3}
+  - {fileID: 21300000, guid: 9eeae7a229a9abd47b75f59dbe324d79, type: 3}
+  - {fileID: 21300000, guid: 744404137d685f845a693631ffbd2b50, type: 3}
+  - {fileID: 21300000, guid: e86c93c4a8631ec4f8ef7f01bdcbea65, type: 3}
+  - {fileID: 21300000, guid: d2745cd54b09c094aa67c7ee42730f1c, type: 3}
+  - {fileID: 21300000, guid: 9aaa1a06edcdcf544ad98211d6fa6fdd, type: 3}
+  - {fileID: 21300000, guid: 3d671aaa8579f25458128c456bd12097, type: 3}
+  - {fileID: 21300000, guid: 1017036bbb38cb84e877c7a319ad31c3, type: 3}
+  - {fileID: 21300000, guid: 3d9e55db283b4184abc103b3519d624e, type: 3}
+  - {fileID: 21300000, guid: afb1a6db9be82614fa93c41c89049d93, type: 3}
+  - {fileID: 21300000, guid: a1812a2c32be0614aafae6163bdce683, type: 3}
+  - {fileID: 21300000, guid: 69dae63c3ae765541a7a4ef65aae68a1, type: 3}
+  - {fileID: 21300000, guid: 44096c8ca165ebe4f93490634263f059, type: 3}
+  - {fileID: 21300000, guid: c11d35ee1d4ec014b8f7454d1d8c307a, type: 3}
+  - {fileID: 21300000, guid: 0638240fbbb05fe4492a7571fb486108, type: 3}
+  - {fileID: 21300000, guid: dbc8845f18c9b974b89c63497306bf4f, type: 3}
+  - {fileID: 21300000, guid: 51ba695f91d183747b29d3c0a4dee8f0, type: 3}
+  - {fileID: 21300000, guid: 5cbab1ffd016304469efe89c22e344b5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - dot1
+  - circle2
+  - circle1
+  - eliteOutline
+  - circle5
+  - restOutline
+  - event
+  - circle4
+  - purgeWellIcon
+  - eventOutline
+  - rest
+  - elite
+  - shop_blood
+  - selectBox
+  - shop
+  - monsterOutline
+  - shopOutline
+  - chest
+  - monster
+  - chestOutline
+  - circle3
+  m_Tag: MapItem
+  m_IsVariant: 0

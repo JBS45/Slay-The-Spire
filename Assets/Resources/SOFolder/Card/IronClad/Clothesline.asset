@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
+  m_Name: Clothesline
+  m_EditorClassIdentifier: 
+  IsExtinct: 0
+  charType: 1
+  CardName: "\uD06C\uB85C\uC2A4\uB77C\uC778"
+  cardType: 1
+  Rarity: 0
+  Targets: 3
+  Cost: 2
+  CardImage: {fileID: 21300000, guid: 5c45e12dd7fa0cb4c82e9692cdb1a6f1, type: 3}
+  MultipleEnchant: 0
+  FunctionAndValue:
+  - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+    SkillEffect: {fileID: 6999890455055589010, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      type: 3}
+    SkillSprite: {fileID: 0}
+    variety: 0
+    Value: 12
+    Repeat: 1
+    RepeatEnchantRate: 0
+    EnchantRate: 2
+    Stack: 0
+    Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4.
+      \n"
+  - CardAbility: {fileID: 11400000, guid: 91b9152e05274554e995e63c1a22fc01, type: 2}
+    SkillEffect: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
+    SkillSprite: {fileID: 0}
+    variety: 4
+    Value: 2
+    Repeat: 1
+    RepeatEnchantRate: 0
+    EnchantRate: 1
+    Stack: 0
+    Decription: "<color=#ffa500ff>\uC57D\uD654</color>\uB97C <size=24><color=#{0}>{1}</color></size>
+      \uBD80\uC5EC\uD569\uB2C8\uB2E4."

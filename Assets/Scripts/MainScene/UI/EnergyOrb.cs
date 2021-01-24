@@ -89,20 +89,23 @@ public class EnergyOrb : MonoBehaviour
                     {
                         OrbImage[i].sprite = IronClad_D[i];
                     }
+                    OrbImage[6].sprite = VFX[0];
+                    OrbImage[7].sprite = VFX[0];
                     break;
                 case CharacterType.Silent:
                     for (int i = 0; i < IronClad.Length; ++i)
                     {
                         OrbImage[i].sprite = Silent_D[i];
                     }
+                    OrbImage[6].sprite = VFX[1];
+                    OrbImage[7].sprite = VFX[1];
                     break;
             }
         }
     }
-
     public void OrbImageInit(CharacterType type)
     {
-        IsCostEmpty = false;
+        IsCostEmpty = true;
         IsInit = true;
         m_Type = type;
         switch (m_Type)
@@ -120,11 +123,15 @@ public class EnergyOrb : MonoBehaviour
                 }
                 break;
         }
+        ChangeImage();
     }
     public void EnergyCharge(int CurEnergy, int MaxEnergy)
     {
+        if (IsCostEmpty&&CurEnergy==MaxEnergy)
+        {
+            StartCoroutine(EnergyVFX());
+        }
         IsCostEmpty = false;
-        StartCoroutine(EnergyVFX());
         OrbImage[6].color = new Color(1.0f, 1.0f, 1.0f, 0.7f);
         EnergyChargeUpdate(CurEnergy, MaxEnergy);
     }

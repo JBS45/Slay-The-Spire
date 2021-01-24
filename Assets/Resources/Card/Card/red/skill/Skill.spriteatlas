@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skill
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 2fb3f24a19161994a9e3b201ef9a1de5, type: 3}
+    - {fileID: 2800000, guid: 547e87a9d5dd97349a57b683f91f1ca9, type: 3}
+    - {fileID: 2800000, guid: 1cc7dd72e8cfa2f4c9bc8f8aceb178f7, type: 3}
+    - {fileID: 2800000, guid: 17f5ded2d734b2e48907f29ac4cc0c5c, type: 3}
+    - {fileID: 2800000, guid: 0c4587db4d7860449bbae6fc72276539, type: 3}
+    - {fileID: 2800000, guid: 5783626748d699449be1526bb2754cc3, type: 3}
+    - {fileID: 2800000, guid: 3d293be56546af44e9eac0082a71343a, type: 3}
+    - {fileID: 2800000, guid: d452f93e49cc3c04197f75c141b4938f, type: 3}
+    - {fileID: 2800000, guid: fff5965cc5bc3af48a23e17aa21f25cd, type: 3}
+    - {fileID: 2800000, guid: 7f060c507229889448623369e3ece3d9, type: 3}
+    - {fileID: 2800000, guid: d38a84b9d435b6c42905347d2fcbe7e4, type: 3}
+    - {fileID: 2800000, guid: 7ad2185f2839ad54292b277f0e74d3f7, type: 3}
+    - {fileID: 2800000, guid: 0fc6a17410d53e749b31ae191321a0da, type: 3}
+    - {fileID: 2800000, guid: 5bda5617af9a57847b987d1a70a43f33, type: 3}
+    - {fileID: 2800000, guid: 589b4ef5c8ab39f4ca8bc94695d98ab0, type: 3}
+    - {fileID: 2800000, guid: 7290d62cc5241b046ad5321030b41a23, type: 3}
+    - {fileID: 2800000, guid: 509e114c2ef68b04897a0335ad653dae, type: 3}
+    - {fileID: 2800000, guid: 5e2cf30736c4aa84f82603cd95f742d5, type: 3}
+    - {fileID: 2800000, guid: a5f730e365c4bf3438edebebfd274a9f, type: 3}
+    - {fileID: 2800000, guid: ef2ef21e63d68fb43b0963501ed3e8a3, type: 3}
+    - {fileID: 2800000, guid: 8948c387c35ef6544b2f92a50b861066, type: 3}
+    - {fileID: 2800000, guid: 61e74841b87505e4d97974b012093f22, type: 3}
+    - {fileID: 2800000, guid: 78396d5216488d34185c7dfb2b6c0fe6, type: 3}
+    - {fileID: 2800000, guid: 09b133190e2476a459cb39a9cb27cdeb, type: 3}
+    - {fileID: 2800000, guid: d3d051ce0015bee45820c7b53f4b7c15, type: 3}
+    - {fileID: 2800000, guid: 7de74d8a51081c549b2aacde27deba59, type: 3}
+    - {fileID: 2800000, guid: 1aeedbe7b4d19f947b7ec41390fa04cd, type: 3}
+    - {fileID: 2800000, guid: 05db9d2a3a0e29c44903847e85ee7ce3, type: 3}
+    - {fileID: 2800000, guid: d4b816be02d73df45b3d1307e45a48b0, type: 3}
+    - {fileID: 2800000, guid: fc8edf02f44dc4445a7cc84b99da1c62, type: 3}
+    totalSpriteSurfaceArea: 5700000
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 7f060c507229889448623369e3ece3d9, type: 3}
+  - {fileID: 21300000, guid: 61e74841b87505e4d97974b012093f22, type: 3}
+  - {fileID: 21300000, guid: fc8edf02f44dc4445a7cc84b99da1c62, type: 3}
+  - {fileID: 21300000, guid: 78396d5216488d34185c7dfb2b6c0fe6, type: 3}
+  - {fileID: 21300000, guid: 1cc7dd72e8cfa2f4c9bc8f8aceb178f7, type: 3}
+  - {fileID: 21300000, guid: 17f5ded2d734b2e48907f29ac4cc0c5c, type: 3}
+  - {fileID: 21300000, guid: a5f730e365c4bf3438edebebfd274a9f, type: 3}
+  - {fileID: 21300000, guid: 0fc6a17410d53e749b31ae191321a0da, type: 3}
+  - {fileID: 21300000, guid: 3d293be56546af44e9eac0082a71343a, type: 3}
+  - {fileID: 21300000, guid: 589b4ef5c8ab39f4ca8bc94695d98ab0, type: 3}
+  - {fileID: 21300000, guid: 5e2cf30736c4aa84f82603cd95f742d5, type: 3}
+  - {fileID: 21300000, guid: 5bda5617af9a57847b987d1a70a43f33, type: 3}
+  - {fileID: 21300000, guid: 5783626748d699449be1526bb2754cc3, type: 3}
+  - {fileID: 21300000, guid: 8948c387c35ef6544b2f92a50b861066, type: 3}
+  - {fileID: 21300000, guid: 1aeedbe7b4d19f947b7ec41390fa04cd, type: 3}
+  - {fileID: 21300000, guid: 09b133190e2476a459cb39a9cb27cdeb, type: 3}
+  - {fileID: 21300000, guid: 547e87a9d5dd97349a57b683f91f1ca9, type: 3}
+  - {fileID: 21300000, guid: d38a84b9d435b6c42905347d2fcbe7e4, type: 3}
+  - {fileID: 21300000, guid: 05db9d2a3a0e29c44903847e85ee7ce3, type: 3}
+  - {fileID: 21300000, guid: 2fb3f24a19161994a9e3b201ef9a1de5, type: 3}
+  - {fileID: 21300000, guid: 7de74d8a51081c549b2aacde27deba59, type: 3}
+  - {fileID: 21300000, guid: 0c4587db4d7860449bbae6fc72276539, type: 3}
+  - {fileID: 21300000, guid: 7290d62cc5241b046ad5321030b41a23, type: 3}
+  - {fileID: 21300000, guid: 509e114c2ef68b04897a0335ad653dae, type: 3}
+  - {fileID: 21300000, guid: fff5965cc5bc3af48a23e17aa21f25cd, type: 3}
+  - {fileID: 21300000, guid: ef2ef21e63d68fb43b0963501ed3e8a3, type: 3}
+  - {fileID: 21300000, guid: d452f93e49cc3c04197f75c141b4938f, type: 3}
+  - {fileID: 21300000, guid: d4b816be02d73df45b3d1307e45a48b0, type: 3}
+  - {fileID: 21300000, guid: d3d051ce0015bee45820c7b53f4b7c15, type: 3}
+  - {fileID: 21300000, guid: 7ad2185f2839ad54292b277f0e74d3f7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - entrench
+  - rage
+  - warcry
+  - second_wind
+  - bloodletting
+  - burning_pact
+  - limit_break
+  - flex
+  - disarm
+  - havoc
+  - intimidate
+  - ghostly_armor
+  - defend
+  - power_through
+  - shrug_it_off
+  - seeing_red
+  - battle_trance
+  - exhume
+  - true_grit
+  - armaments
+  - shockwave
+  - clothesline
+  - impervious
+  - infernal_blade
+  - dual_wield
+  - offering
+  - double_tap
+  - spot_weakness
+  - sentinel
+  - flame_barrier
+  m_Tag: Skill
+  m_IsVariant: 0

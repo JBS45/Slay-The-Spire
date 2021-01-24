@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7ef86b307478c4abf8d9fc09958b6e, type: 3}
+  m_Name: Ironclad
+  m_EditorClassIdentifier: 
+  CharacterName: "\uC544\uC774\uC5B8\uD074\uB798\uB4DC"
+  Description: "\uC544\uC774\uC5B8\uD074\uB798\uB4DC\uC758 \uC0B4\uC544\uB0A8\uC740
+    \uBCD1\uC0AC\uC785\uB2C8\uB2E4. \n\uC545\uB9C8\uC758 \uD798\uC744 \uC0AC\uC6A9\uD558\uAE30
+    \uC704\uD574 \uC601\uD63C\uC744 \uD314\uC558\uC2B5\uB2C8\uB2E4"
+  StartRelic: {fileID: 11400000, guid: c3cb9a043f0d90448a6b268086e534ac, type: 2}
+  Prefab: {fileID: 6921262958194185632, guid: 0fe8a9134ac642b45b908f8ae0964b4b, type: 3}
+  Hp: 80
+  Gold: 99
+  StartDeck:
+  - {fileID: 11400000, guid: da842a3a516f1d542b247383ef404157, type: 2}
+  - {fileID: 11400000, guid: da842a3a516f1d542b247383ef404157, type: 2}
+  - {fileID: 11400000, guid: da842a3a516f1d542b247383ef404157, type: 2}
+  - {fileID: 11400000, guid: da842a3a516f1d542b247383ef404157, type: 2}
+  - {fileID: 11400000, guid: da842a3a516f1d542b247383ef404157, type: 2}
+  - {fileID: 11400000, guid: 50c59b6477d761e46be1201102db88cc, type: 2}
+  - {fileID: 11400000, guid: 50c59b6477d761e46be1201102db88cc, type: 2}
+  - {fileID: 11400000, guid: 50c59b6477d761e46be1201102db88cc, type: 2}
+  - {fileID: 11400000, guid: 50c59b6477d761e46be1201102db88cc, type: 2}
+  - {fileID: 11400000, guid: 03eac06d07189ae41816da800ddcad31, type: 2}

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
+  m_Name: SwiftStrike
+  m_EditorClassIdentifier: 
+  IsExtinct: 0
+  charType: 0
+  CardName: "\uC7AC\uBE60\uB978 \uD0C0\uACA9"
+  cardType: 1
+  Rarity: 0
+  Targets: 0
+  Cost: 0
+  Repeat: 1
+  CardImage: {fileID: 21300000, guid: f001d3599da3191448673029131a2e1e, type: 3}
+  MultipleEnchant: 0
+  FunctionAndValue:
+  - CardAbility: {fileID: 0}
+    SkillEffect: {fileID: 0}
+    Value: 7
+    EnchantRate: 3
+    Decription: "\uD53C\uD574\uB97C <size=40><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4. "

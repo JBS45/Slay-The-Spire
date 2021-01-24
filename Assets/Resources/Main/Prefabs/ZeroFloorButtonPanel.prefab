@@ -76,3 +76,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonRes: {fileID: 4679624918599881510, guid: 91166da6d6e65014a99c5fed570a5feb,
     type: 3}
+  Lament: {fileID: 11400000, guid: 759e2b84fa7af5d41b985a698dad0516, type: 2}

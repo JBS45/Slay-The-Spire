@@ -11,6 +11,7 @@ public class OutlineButtonScript : MonoBehaviour, IPointerEnterHandler, IPointer
     public Color OutlineColor;
     float m_alpha;
     float m_timer;
+    SEManager m_SEManager;
 
     // Start is called before the first frame update
 
@@ -20,6 +21,7 @@ public class OutlineButtonScript : MonoBehaviour, IPointerEnterHandler, IPointer
         ButtonImage.color = Color.gray;
         m_alpha = 0.5f;
         m_timer = 0.0f;
+        m_SEManager = GameObject.Find("SEManager").GetComponent<SEManager>();
     }
     void Start()
     {
@@ -42,6 +44,10 @@ public class OutlineButtonScript : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
+        if (m_SEManager != null)
+        {
+            m_SEManager.PlaySE(0);
+        }
         ButtonImage.color = Color.white;
     }
 

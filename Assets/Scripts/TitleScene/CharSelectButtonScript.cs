@@ -18,6 +18,8 @@ public class CharSelectButtonScript : MonoBehaviour, IPointerEnterHandler, IPoin
     float m_timer;
 
     bool Selected;
+
+    SEManager m_SEManager;
     // Start is called before the first frame update
     void Awake()
     {
@@ -29,7 +31,8 @@ public class CharSelectButtonScript : MonoBehaviour, IPointerEnterHandler, IPoin
         m_Toggle = GetComponent<Toggle>();
 
         GetComponentInChildren<Button>().onClick.AddListener(OnPushButton);
-        //m_Toggle.onValueChanged.AddListener(() => {Debug.Log("!"); });
+
+        m_SEManager = GameObject.Find("SEManager").GetComponent<SEManager>();
     }
     void Start()
     {
@@ -76,10 +79,12 @@ public class CharSelectButtonScript : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPushButton()
     {
+        m_SEManager.PlaySE(1);
         GetComponentInParent<SelectPanelScript>().CharTypeToBackground(m_CharButton);
     }
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
+        m_SEManager.PlaySE(0);
         if (m_CharButton != CharacterType.None)
         {
             ButtonImage.color = Color.white;

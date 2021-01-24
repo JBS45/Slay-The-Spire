@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 
+public enum AnimState
+{
+    None, Idle, Hit
+}
 public class CharacterRenderer : MonoBehaviour
 {
-    public SkeletonAnimation m_SkelAnim;
-    public AnimationReferenceAsset[] m_AnimClips;
-
-    public enum AnimState
-    {
-        None,Idle,Hit
-    }
+    [Header("Spine Render")]
+    [SerializeField]
+    SkeletonAnimation m_SkelAnim;
+    [SerializeField]
+    AnimationReferenceAsset[] m_AnimClips;
 
     AnimState m_AnimState = AnimState.None;
     string CurrentAnim;
@@ -28,16 +30,22 @@ public class CharacterRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(m_AnimState== AnimState.Hit&& m_SkelAnim.AnimationState.Tracks.Items[0].IsComplete)
+        {
+            ChangeAnimState(AnimState.Idle);
+        }
     }
-    void SetAnimation(AnimationReferenceAsset animClip,bool loop,float timeScale)
+
+    void SetAnimation(AnimationReferenceAsset animClip, bool loop, float timeScale)
     {
         if (animClip.name.Equals(CurrentAnim)) return;
 
         m_SkelAnim.state.SetAnimation(0, animClip, loop).TimeScale = timeScale;
+        
 
-        CurrentAnim = animClip.name;
+       CurrentAnim = animClip.name;
     }
+
     public void ChangeAnimState(AnimState state)
     {
         if (state == m_AnimState) return;

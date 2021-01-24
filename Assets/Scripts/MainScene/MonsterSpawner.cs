@@ -2,23 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BossType
+{
+    BossSlime=0,Guardian,Hexaghost
+}
+public enum NPCType
+{
+    Neow = 0, Merchant
+}
+public enum MonsterType
+{
+    BlueSlaver=0,RedSlaver
+}
 public class MonsterSpawner : MonoBehaviour
 {
     public Transform MonsterSpawnPoint;
 
-    public enum SpawnMonsterType
-    {
-        Neow = 0,Merchant
-    }
 
+    [SerializeField]
     GameObject Neow;
+    [SerializeField]
     GameObject Merchant;
-    GameObject[] Monsters;
+    [SerializeField]
+    MonsterSpawn MonsterPool;
 
     private void Awake()
     {
 
-        Neow = Resources.Load<GameObject>("NPC/Neow/Neow");
 
     }
     // Start is called before the first frame update
@@ -33,18 +43,38 @@ public class MonsterSpawner : MonoBehaviour
         
     }
 
-    public void MonsterSpawn(SpawnMonsterType MonsterType)
+    public void NPCSpawn(NPCType Type)
     {
         GameObject obj;
-        switch (MonsterType)
+        switch (Type)
         {
-            case SpawnMonsterType.Neow:
+            case NPCType.Neow:
                 obj = Instantiate(Neow);
                 obj.tag = "NPC";
                 obj.transform.SetParent(MonsterSpawnPoint);
-                MainSceneController.Instance.m_BattleData.GetMonsterData().Add(obj);
+                MainSceneController.Instance.BattleData.Monsters.Add(obj);
                 break;
         }
     }
+    public void MonsterSpawn()
+    {
 
+        int random = Random.Range(0, MonsterPool.MonsterPool.Count);
+        int randomHP;
+
+        List<MonsterAsset> tmp = new List<MonsterAsset>();
+        tmp = MonsterPool.MonsterPool[random].Monsters;
+        for (int i = 0; i < tmp.Count; ++i)
+        {
+            GameObject obj = Instantiate(tmp[i].Prefab);
+            obj.tag = "Monster";
+            obj.transform.SetParent(MonsterSpawnPoint);
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localPosition = new Vector3(0,0,0) - new Vector3(4f, 0, 0)* (tmp.Count-1) + new Vector3(6f, 0, 0)*i;
+            randomHP = Random.Range(tmp[i].MinHp, tmp[i].MaxHp + 1);
+            obj.GetComponentInChildren<Stat>().SetUp(randomHP, randomHP);
+            obj.GetComponentInChildren<MonsterStat>().SetPattern(tmp[i]);
+            MainSceneController.Instance.BattleData.Monsters.Add(obj);
+        }
+    }
 }

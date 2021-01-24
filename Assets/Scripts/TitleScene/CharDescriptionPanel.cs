@@ -54,6 +54,9 @@ public class CharDescriptionPanel : MonoBehaviour
                 m_HpText.text = "HP : " + CharDB.Instance.GetCharacterAsset().Hp + "/" + CharDB.Instance.GetCharacterAsset().Hp;
                 m_GoldText.text = "Gold : " + CharDB.Instance.GetCharacterAsset().Gold;
                 m_CharDescription.text = CharDB.Instance.GetCharacterAsset().Description;
+                m_RelicImage.sprite = CharDB.Instance.GetCharacterAsset().StartRelic.RelicImage;
+                m_RelicName.text = CharDB.Instance.GetCharacterAsset().StartRelic.Name;
+                m_RelicDescription.text = CharDB.Instance.GetCharacterAsset().StartRelic.Description;
                 break;
             case CharacterType.Silent:
                 break;

@@ -13,11 +13,13 @@ public class SelectPanelScript : MonoBehaviour
 
     public CharacterType m_CurrentChar = CharacterType.None;
 
+    SEManager m_SEManager;
+
     // Start is called before the first frame update
 
     private void Awake()
     {
-       
+        m_SEManager = GameObject.Find("SEManager").GetComponent<SEManager>();
     }
     void Start()
     {

@@ -4,29 +4,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-public class BattleCardUIScript : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerDownHandler,ICardObserver
+
+public delegate void Delvoidint(int num);
+
+
+public class BattleCardUIScript : MonoBehaviour
 {
-    public Sprite[] CardBackgroundRes;
-    public Sprite[] RareFrameRes;
-    public Sprite[] CardNameBanner;
-    public Sprite[] CostOrbRes;
+    [SerializeField]
+    Sprite[] CardBackgroundRes;
+    [SerializeField]
+    Sprite[] RareFrameRes;
+    [SerializeField]
+    Sprite[] CardNameBanner;
+    [SerializeField]
+    Sprite[] CostOrbRes;
 
-    CardAsset m_Data;
-    bool IsEnable;
-    bool IsClicked;
-    bool IsInRange;
-    int CardCost;
+    [SerializeField]
+    BattleCardData BattleCardData;
 
+    CharacterStat CharStat;
     GameObject UICanvas;
 
-    int sibliingIndex;
+    int siblingIndex;
 
-    public GameObject AfterImage;
-    Image[] AfterImages;
-    public Color HighlightColor;
+    [Header("TextColorTable")]
+    [SerializeField]
+    Color[] TextColor;
 
+    [Header("Card Setting")]
     public GameObject TotalCard;
-    public Image Highlight;
     public Image CardBackground;
     public TMP_Text CardDescription;
     public Image CardImage;
@@ -36,20 +42,27 @@ public class BattleCardUIScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
     public TMP_Text CardName;
     public Image CostOrb;
     public TMP_Text CostText;
-    public TMP_Text HandNum;
+    public TMP_Text HandNumText;
+
+    [SerializeField]
+    CardEffectScript _CardEffect;
+    public CardEffectScript CardEffect { get=> _CardEffect; }
+
+    Vector3 DiscardDeckPos;
+    Vector3 BattleDeckPos;
+    Vector3 CardUsedPos;
+
+    GameObject BattleUI;
+
+    int HandNum;
 
     Vector3 originPos;
 
-    IEnumerator AfterImageCoroutine;
+
 
     private void Awake()
     {
-        IsClicked = false;
-        IsEnable = true;
-        IsInRange = false;
-        AfterImages = AfterImage.GetComponentsInChildren<Image>();
-        AfterImageCoroutine = AfterImageEffect();
-
+        CharStat = MainSceneController.Instance.Character.GetComponentInChildren<CharacterStat>();
         UICanvas = GameObject.Find("Canvas");
     }
     // Start is called before the first frame update
@@ -61,76 +74,68 @@ public class BattleCardUIScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
     // Update is called once per frame
     void Update()
     {
-        if (IsEnable)
-        {
-            if (AfterImageCoroutine != null)
-            {
-                AfterImageCoroutine.MoveNext();
-            }
-        }
-        CardPositionCheck();
-
-    }
-    void CardPositionCheck()
-    {
-        if (IsClicked)
-        {
-            Vector3 tmp = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-            transform.localPosition = new Vector3(Camera.main.scaledPixelWidth * (tmp.x - 0.5f), Camera.main.scaledPixelHeight * tmp.y);
-            if (transform.localPosition.y > Camera.main.scaledPixelHeight / 3)
-            {
-                if (IsInRange == false)
-                {
-                    IsInRange = true;
-                    AfterImageCoroutine = AfterImageEffectInRange();
-                }
-
-            }
-            else
-            {
-                IsInRange = false;
-            }
-        }
+        SetDescription(BattleCardData.Data);
     }
 
-    public void SetCardUI(CardAsset cardAsset)
-    {
-        m_Data = cardAsset;
 
-        switch (m_Data.cardType)
+    //여러 사용하는 위치들 저장
+    public void SetPos(Vector3 DeckPos,Vector3 Discard,Vector3 cardUsedPos,GameObject battleUI)
+    {
+        BattleDeckPos = DeckPos;
+        DiscardDeckPos = Discard;
+        CardUsedPos = cardUsedPos;
+        BattleUI = battleUI;
+    }
+
+    //카드 기본적인 이미지나 기본값 저장
+    public void SetCardUI(CardData card)
+    {
+
+        switch (card.CardType)
         {
             case CardType.Attack:
                 CardTypeText.text = "Attack";
-                CardBackground.sprite = CardBackgroundRes[((int)m_Data.charType) * 3 + 1];
-                RareFrame.sprite = RareFrameRes[((int)m_Data.cardType * 3) + (int)m_Data.Rarity];
+                CardBackground.sprite = CardBackgroundRes[((int)card.CharType) * 3 + 1];
+                RareFrame.sprite = RareFrameRes[((int)(card.CardType-1) * 3) + (int)card.Rarity];
                 break;
             case CardType.Skill:
                 CardTypeText.text = "Skill";
-                CardBackground.sprite = CardBackgroundRes[((int)m_Data.charType) * 3 + 2];
-                RareFrame.sprite = RareFrameRes[((int)m_Data.cardType * 3) + (int)m_Data.Rarity];
+                CardBackground.sprite = CardBackgroundRes[((int)card.CharType) * 3 + 2];
+                RareFrame.sprite = RareFrameRes[((int)(card.CardType - 1) * 3) + (int)card.Rarity];
                 break;
             case CardType.Power:
                 CardTypeText.text = "Power";
-                CardBackground.sprite = CardBackgroundRes[((int)m_Data.charType) * 3 + 3];
-                RareFrame.sprite = RareFrameRes[((int)m_Data.cardType * 3) + (int)m_Data.Rarity];
+                CardBackground.sprite = CardBackgroundRes[((int)card.CharType) * 3 + 3];
+                RareFrame.sprite = RareFrameRes[((int)(card.CardType - 1) * 3) + (int)card.Rarity];
                 break;
             case CardType.Condition:
                 CardTypeText.text = "Condition";
                 CardBackground.sprite = CardBackgroundRes[2];
-                RareFrame.sprite = RareFrameRes[((int)m_Data.cardType * 3) + (int)m_Data.Rarity];
+                RareFrame.sprite = RareFrameRes[((int)card.CardType * 3) + (int)card.Rarity];
                 break;
             case CardType.Curse:
                 CardTypeText.text = "Curse";
                 CardBackground.sprite = CardBackgroundRes[0];
-                RareFrame.sprite = RareFrameRes[((int)m_Data.cardType * 3) + (int)m_Data.Rarity];
+                RareFrame.sprite = RareFrameRes[((int)card.CardType * 3) + (int)card.Rarity];
                 break;
         }
-        CardDescription.text = m_Data.Description;
-        CardImage.sprite = m_Data.CardImage;
-        CardName.text = m_Data.CardName;
-        CardCost = m_Data.Cost;
+        switch (card.Rarity)
+        {
+            case RarityOptions.Basic:
+                NameBanner.sprite = CardNameBanner[0];
+                break;
+            case RarityOptions.Common:
+                NameBanner.sprite = CardNameBanner[1];
+                break;
+            case RarityOptions.Rare:
+                NameBanner.sprite = CardNameBanner[2];
+                break;
+        }
+        SetDescription(card);
+        CardImage.sprite = card.CardImage;
+        CardName.text = card.CardName;
 
-        switch (m_Data.charType)
+        switch (card.CharType)
         {
             case CharacterType.None:
                 CostOrb.sprite = CostOrbRes[0];
@@ -140,116 +145,146 @@ public class BattleCardUIScript : MonoBehaviour,IPointerEnterHandler,IPointerExi
                 break;
         }
 
-        CostText.text = CardCost.ToString();
+        CostText.text = card.Cost.ToString();
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
 
-    }
-    public void OnPointerDown(PointerEventData eventData)
+    public void ShowCard()
     {
-        if (IsInRange == false)
-        {
-            if (IsEnable && (!IsClicked))
-            {
-                IsClicked = true;
-                sibliingIndex = transform.GetSiblingIndex();
-                transform.SetAsLastSibling();
+        TotalCard.transform.localRotation = Quaternion.identity;
+    }
 
-            }
-            else if (IsEnable && IsClicked)
-            {
-                IsClicked = false;
-                transform.localPosition = originPos;
-                transform.SetSiblingIndex(sibliingIndex);
-            }
-        }
-        else
-        {
-            if (IsEnable)
-            {
-                IsClicked = false;
-                transform.SetSiblingIndex(sibliingIndex);
-                //사용됨
-            }
-        }
-    }
-    public void ChangeCardCost(int cost)
-    {
-        CardCost = cost;
-    }
-    public void UpdateData(int deck, int discard, int extinction, int hand, int currEnergy)
-    {
-        if (currEnergy >= CardCost)
-        {
-            IsEnable = true;
-            Highlight.enabled = true;
-        }
-        else
-        {
-            IsEnable = false;
-            Highlight.enabled = false;
-        }
-    }
-    public void DrawCard(CardAsset cardAsset)
-    {
 
-    }
     public void SetOriginPos(Vector3 pos)
     {
         originPos = pos;
     }
-    
-    IEnumerator AfterImageEffect()
+    //정렬에 맞춰서 회전
+    public void CardAlignRotate(float z)
     {
-        float min = 1.05f;
-        float max = 1.15f;
-
-        for(int i=0;i< AfterImages.Length; ++i)
-        {
-            AfterImages[i].rectTransform.localScale = new Vector2(min+(0.5f*i), min + (0.5f * i));
-            AfterImages[i].color = new Color(HighlightColor.r, HighlightColor.g, HighlightColor.b, 1.0f);
-        }
-        while (true)
-        {
-            for (int i = 0; i < AfterImages.Length; ++i)
-            {
-                AfterImages[i].rectTransform.localScale += new Vector3(Time.deltaTime*0.2f, Time.deltaTime * 0.2f);
-                AfterImages[i].color -= new Color(0, 0, 0, Time.deltaTime*2);
-                if (AfterImages[i].rectTransform.localScale.x >= max)
-                {
-                    AfterImages[i].rectTransform.localScale = new Vector3(min, min);
-                    AfterImages[i].color = new Color(HighlightColor.r, HighlightColor.g, HighlightColor.b,1.0f);
-                }
-            }
-            yield return null;
-        }
+        TotalCard.transform.eulerAngles = new Vector3(0, 0, z);
     }
-    IEnumerator AfterImageEffectInRange()
+    //UI랑 battleData의 list번호를 가짐
+    public void SetHandNum(int num)
     {
-        float min = 1.05f;
-        float max = 1.2f;
-
-        int Last = AfterImages.Length - 1;
-        for (int i = 0; i < AfterImages.Length; ++i)
-        {
-            AfterImages[i].rectTransform.localScale = new Vector2(min + (0.5f * i), min + (0.5f * i));
-            AfterImages[i].color = Color.white;
-        }
-        while (AfterImages[Last].rectTransform.localScale.x>=max)
-        {
-            for (int i = 0; i < AfterImages.Length; ++i)
-            {
-                AfterImages[i].rectTransform.localScale += new Vector3(Time.deltaTime * 0.5f, Time.deltaTime * 0.5f);
-                AfterImages[i].color -= new Color(0, 0, 0, Time.deltaTime * 2);
-            }
-            yield return null;
-        }
-        AfterImageCoroutine = AfterImageEffect();
+        HandNumText.text = (num + 1).ToString();
     }
 
+
+    //타겟 종류에 따라 다음 함수를 정해줌
+
+    public void DestroyCard()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void UseCard(HandCardStateDel Del, HandCardState state)
+    {
+        StartCoroutine(MoveToUseCardPos(Del, state));
+    }
+    //사용된 카드 이동
+    IEnumerator MoveToUseCardPos(HandCardStateDel Del, HandCardState state)
+    {
+        transform.SetParent(BattleUI.transform);
+        while (Vector3.Distance(transform.localPosition, CardUsedPos) > 1.0f)
+        {
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, CardUsedPos, 70.0f);
+            yield return null;
+        }
+        transform.localPosition = CardUsedPos;
+
+        yield return new WaitForSeconds(0.1f);
+        Del(state);
+        
+    }
+
+    public void DiscardCard()
+    {
+        StartCoroutine(MoveToDiscard());
+    }
+    //버려지는 카드 이동
+    IEnumerator MoveToDiscard()
+    {
+        transform.SetParent(BattleUI.transform);
+        Quaternion tmp = Quaternion.FromToRotation(transform.localPosition, DiscardDeckPos);
+        transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        while (Quaternion.Angle(transform.localRotation,tmp)>1.0f)
+        {
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, tmp, 20.0f);
+            yield return null;
+        }
+        while (Vector3.Distance(transform.localPosition, DiscardDeckPos) > 1.0f)
+        {
+            transform.localPosition=Vector3.MoveTowards(transform.localPosition, DiscardDeckPos, 100.0f);
+            yield return null;
+        }
+        DestroyCard();
+    }
+    void SetDescription(CardData data)
+    {
+        
+        string tmp="";
+        int tmpInt = 0;
+        Color tmpColor;
+
+        
+        for (int i = 0; i < data.Action.Count; ++i)
+        {
+            tmpInt = data.Action[i].CardAbility.PredictValue(MainSceneController.Instance.Character, data.GetTarget(), data.Action[i], data.EnchantCount);
+            if (data.Action[i].Value> tmpInt)
+            {
+                tmpColor = TextColor[1];
+            }
+            else if(data.Action[i].Value == tmpInt)
+            {
+                tmpColor = TextColor[0];
+            }
+            else
+            {
+                tmpColor = TextColor[2];
+            }
+            tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt,0);
+        }
+        CardDescription.text = tmp;
+    }
+
+    string ColorTohexadecimal(Color color)
+    {
+        string result = "";
+
+        int[] RGB = { (int)(color.r * 255)/16 , (int)(color.r * 255)%16, (int)(color.g * 255)/16, (int)(color.g * 255)%16, (int)(color.b * 255)/16, (int)(color.r * 255)%16 };
+
+        for(int i = 0; i < RGB.Length; ++i)
+        {
+            if (RGB[i] < 10)
+            {
+                result += RGB[i].ToString();
+            }
+            else if (RGB[i] == 10)
+            {
+                result += "A";
+            }
+            else if (RGB[i] == 11)
+            {
+                result += "B";
+            }
+            else if (RGB[i] == 12)
+            {
+                result += "C";
+            }
+            else if (RGB[i] == 13)
+            {
+                result += "D";
+            }
+            else if (RGB[i] == 14)
+            {
+                result += "E";
+            }
+            else if (RGB[i] == 15)
+            {
+                result += "F";
+            }
+        }
+
+        return result;
+    }
 }

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723ed49b48b2f4f40859460c90388c0b, type: 3}
+  m_Name: BlueSlaver
+  m_EditorClassIdentifier: 
+  MonsterName: BlueSlaver
+  Description: "\uB178\uC608\uC0C1\uC778"
+  Prefab: {fileID: 6921262958194185632, guid: 7dd2644351cebc442848224f52a86d6b, type: 3}
+  MinHp: 46
+  MaxHp: 50
+  Pattern:
+  - OnlyOnceAction: 0
+    Intent: 0
+    Function:
+    - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+      SkillEffect: {fileID: -4964818982224020305, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+        type: 3}
+      SkillSprite: {fileID: 7447516423718122844, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+        type: 3}
+      variety: 0
+      Value: 12
+      Repeat: 1
+      RepeatEnchantRate: 0
+      EnchantRate: 0
+      Stack: 0
+      Decription: 
+    Repeat: 1
+  - OnlyOnceAction: 0
+    Intent: 7
+    Function:
+    - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+      SkillEffect: {fileID: 3297825888562002999, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+        type: 3}
+      SkillSprite: {fileID: -4964818982224020305, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+        type: 3}
+      variety: 0
+      Value: 7
+      Repeat: 1
+      RepeatEnchantRate: 0
+      EnchantRate: 0
+      Stack: 0
+      Decription: 
+    - CardAbility: {fileID: 11400000, guid: 0ddd726eb6d943d4d95e023e594832a8, type: 2}
+      SkillEffect: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+        type: 3}
+      SkillSprite: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+        type: 3}
+      variety: 4
+      Value: 2
+      Repeat: 1
+      RepeatEnchantRate: 0
+      EnchantRate: 0
+      Stack: 0
+      Decription: 
+    Repeat: 1
