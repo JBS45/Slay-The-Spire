@@ -18,6 +18,9 @@ public class MapNode
     List<int> UpPath;
     List<int> DownPath;
 
+    int m_Seed;
+    public int Seed { get => m_Seed; }
+
 
     public MapNode(Vector2 pos, Vector2Int gridPos, MapNodeType type, int floor,int floorIndex)
     {
@@ -28,6 +31,7 @@ public class MapNode
         FloorIndex = floorIndex;
         UpPath = new List<int>();
         DownPath = new List<int>();
+        m_Seed = Random.Range(0, int.MaxValue);
     }
 
     public Vector2 GetPos()
@@ -599,5 +603,9 @@ public class MapGenerator : MonoBehaviour
     public MapNodeType GetMapNodeType(int floor, int floorIndex)
     {
         return Map[floor][floorIndex].GetNodeType();
+    }
+    public MapNode GetMapNode(int floor, int floorIndex)
+    {
+        return Map[floor][floorIndex];
     }
 }

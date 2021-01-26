@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 
-public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,IShopWindow
 {
     [SerializeField]
     GameObject TotalCard;
@@ -37,6 +37,15 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField]
     public TMP_Text CostText;
 
+
+    [SerializeField]
+    GameObject GoldText;
+    int _Gold;
+    public int Gold { get => _Gold; set => _Gold = value; }
+    bool _IsCanBuy;
+    public bool IsCanBuy { get => _IsCanBuy; set => _IsCanBuy = value; }
+    bool IsShop;
+
     [SerializeField]
     Button m_Button;
 
@@ -54,6 +63,8 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     void Awake()
     {
         Trail.enabled = false;
+        IsShop = false;
+        GoldText.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -88,6 +99,9 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 CardTypeText.text = "Power";
                 CardBackground.sprite = CardBackgroundRes[((int)card.CharType) * 3 + 3];
                 RareFrame.sprite = RareFrameRes[((int)(card.CardType - 1) * 3) + (int)card.Rarity];
+                RareFrame.SetNativeSize();
+                RareFrame.transform.localPosition = new Vector3(0, 80, 0);
+                RareFrame.GetComponentInChildren<TMP_Text>().transform.localPosition = new Vector3(0, -110, 0);
                 break;
             case CardType.Condition:
                 CardTypeText.text = "Condition";
@@ -126,7 +140,14 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 break;
         }
 
-        CostText.text = card.Cost.ToString();
+        if (card.IsAllCost)
+        {
+            CostText.text = "X";
+        }
+        else
+        {
+            CostText.text = card.Cost.ToString();
+        }
     }
     void SetDescription(CardData data)
     {
@@ -136,12 +157,12 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Color tmpColor;
         for (int i = 0; i < data.Action.Count; ++i)
         {
-            tmpInt = data.Action[i].Value;
-            if (data.Action[i].Value > tmpInt)
+            tmpInt = data.Action[i].CardAbility.PredictValue(MainSceneController.Instance.Character, data.GetTarget(), data.Action[i], data.EnchantCount);
+            if (data.BaseValue[i] > tmpInt)
             {
                 tmpColor = TextColor[1];
             }
-            else if (data.Action[i].Value == tmpInt)
+            else if (data.BaseValue[i] == tmpInt)
             {
                 tmpColor = TextColor[0];
             }
@@ -149,7 +170,7 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             {
                 tmpColor = TextColor[2];
             }
-            tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt);
+            tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt,data.Repeat);
         }
         CardDescription.text = tmp;
     }
@@ -200,12 +221,20 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             transform.localScale = new Vector3(1.3f* CardSize, 1.3f* CardSize, 1.3f* CardSize);
         }
+        if (IsShop)
+        {
+            HandEnter();
+        }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         if (IsEnable)
         {
             transform.localScale = new Vector3(CardSize, CardSize, CardSize);
+        }
+        if (IsShop)
+        {
+            HandExit();
         }
     }
 
@@ -233,6 +262,7 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, 60.0f);
             yield return null;
         }
+
         Destroy(this.gameObject);
     }
     public void SetButtonEvent(Delvoid del)
@@ -246,6 +276,52 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void SetSize(float size)
     {
         CardSize = size;
+    }
+
+    public void SelectCardUI(WindowType type)
+    {
+        MainSceneController.Instance.UIControl.MakeEnchantCardWindow();
+        MainSceneController.Instance.UIControl.EnchantCardWindow.GetComponent<CardSelectWindow>().SetWindowType(Data, type);
+    }
+    public void ShopUISetting(int gold,ShopWindowDelegate del)
+    {
+        GoldText.SetActive(true);
+        Gold = gold;
+        GoldText.GetComponentInChildren<TMP_Text>().text = Gold.ToString();
+        m_Button.onClick.AddListener(()=> { ShopButtonEvent(del); });
+        IsShop = true;
+    }
+    public void ShopRefresh()
+    {
+        if (Gold > MainSceneController.Instance.PlayerData.CurrentMoney)
+        {
+            GoldText.GetComponentInChildren<TMP_Text>().color = TextColor[1];
+        }
+        else
+        {
+            GoldText.GetComponentInChildren<TMP_Text>().color = TextColor[0];
+        }
+    }
+    public void ShopButtonEvent(ShopWindowDelegate del)
+    {
+        if (Gold < MainSceneController.Instance.PlayerData.CurrentMoney) { 
+
+            transform.SetAsLastSibling();
+            transform.SetParent(MainSceneController.Instance.UIControl.UICanvas.transform);
+            MainSceneController.Instance.PlayerData.CurrentMoney -= Gold;
+            MainSceneController.Instance.PlayerData.AddCard(Data);
+            MainSceneController.Instance.PlayerData.Notify();
+            StartCoroutine(MoveToOriginDeck());
+            del(this);
+        }
+    }
+    public void HandEnter()
+    {
+        MainSceneController.Instance.UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetTarget(this.gameObject);
+    }
+    public void HandExit()
+    {
+        MainSceneController.Instance.UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetTarget(null);
     }
 }
 

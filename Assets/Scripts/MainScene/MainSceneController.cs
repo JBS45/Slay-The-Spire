@@ -100,6 +100,8 @@ public class MainSceneController : MonoBehaviour
         m_BattleData.ClearData();
         m_UIControl.RemoveCurUI();
         m_UIControl.OffMap();
+        Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
+
         switch (m_State)
         {
             case MapNodeType.None:
@@ -111,13 +113,17 @@ public class MainSceneController : MonoBehaviour
                 break;
             case MapNodeType.Merchant:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
+                m_Spawner.NPCSpawn(NPCType.Merchant);
+                m_UIControl.MakeShopWindow();
+                m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetClassCard(Reward.CardSelector(CharacterType.Ironclad, 5));
+                m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetNeutralCard(Reward.CardSelector(CharacterType.None, 2));
+                m_BattleData.Monsters[0].GetComponent<Merchant>().SetShowWindow(m_UIControl.GetCurUI().GetComponent<ShopWindowScript>());
                 break;
             case MapNodeType.Mistery:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 break;
             case MapNodeType.Monster:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
-                m_Reward.BasicReward();
                 m_Spawner.MonsterSpawn();
                 m_UIControl.MakeBattleUI();
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
@@ -169,6 +175,7 @@ public class MainSceneController : MonoBehaviour
         m_playerData.MaxPotions = 3;
         m_playerData.DrawPerTurn = 5;
         m_playerData.EnergeyPerTurn = 3;
+        m_playerData.CardRemoveCount = 0;
 
         //유물 기본
         if (m_playerData.Relics == null)

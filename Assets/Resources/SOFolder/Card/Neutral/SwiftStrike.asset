@@ -13,18 +13,29 @@ MonoBehaviour:
   m_Name: SwiftStrike
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 0
   CardName: "\uC7AC\uBE60\uB978 \uD0C0\uACA9"
   cardType: 1
-  Rarity: 0
-  Targets: 0
+  Rarity: 1
+  Targets: 3
   Cost: 0
   Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uC7AC\uBE60\uB978 \uD0C0\uACA9+"
+    EnchantTargets: 3
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 03000000
   CardImage: {fileID: 21300000, guid: f001d3599da3191448673029131a2e1e, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
-  - CardAbility: {fileID: 0}
+  - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
     SkillEffect: {fileID: 0}
+    SkillSprite: {fileID: 6731979846000164124, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      type: 3}
+    variety: 0
     Value: 7
-    EnchantRate: 3
-    Decription: "\uD53C\uD574\uB97C <size=40><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4. "
+    Stack: 0
+    Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4. "

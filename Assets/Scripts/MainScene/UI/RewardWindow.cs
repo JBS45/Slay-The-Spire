@@ -37,7 +37,6 @@ public class RewardWindow : MonoBehaviour
     private void Awake()
     {
         
-
         IsGold = false;
         IsPotion = false;
         IsCard = false;
@@ -82,7 +81,7 @@ public class RewardWindow : MonoBehaviour
         StartCoroutine(ProceedButtonMove());
         StartCoroutine(InitRewardBarMove());
     }
-    public void WindowSetting(RewardManager reward)
+    public void BattleReward(RewardManager reward)
     {
         Reward = reward;
         
@@ -91,7 +90,7 @@ public class RewardWindow : MonoBehaviour
 
         tmp.transform.SetParent(Background);
         tmp.transform.localScale = Vector3.one;
-        tmp.GetComponent<RewardButtonScript>().SetReward(RewardType.Gold, Reward.Gold, PotionType.None, this.gameObject);
+        tmp.GetComponent<RewardButtonScript>().SetGoldReward(RewardType.Gold, reward.RandomGoldGenerator(20));
         RewardButtonList.Add(tmp);
 
         /*if (Reward.Potion != PotionType.None)
@@ -106,7 +105,7 @@ public class RewardWindow : MonoBehaviour
         tmp = Instantiate(RewardButtonRes);
         tmp.transform.SetParent(Background);
         tmp.transform.localScale = Vector3.one;
-        tmp.GetComponent<RewardButtonScript>().SetReward(RewardType.Card, 0, PotionType.None, this.gameObject);
+        tmp.GetComponent<RewardButtonScript>().SetCardReward(RewardType.Card, reward.CardSelector(CharacterType.Ironclad, 3), this.gameObject);
         RewardButtonList.Add(tmp);
 
         //Addwindow

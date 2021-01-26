@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: Cleave
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 1
   CardName: "\uC808\uB2E8"
   cardType: 1
   Rarity: 0
   Targets: 1
   Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uC808\uB2E8+"
+    EnchantTargets: 1
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 03000000
   CardImage: {fileID: 21300000, guid: c2a7ecb7a2efdf045ab5706b428db5e3, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -28,9 +37,6 @@ MonoBehaviour:
     SkillSprite: {fileID: 0}
     variety: 0
     Value: 8
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 3
     Stack: 0
     Decription: "\uC801 \uC804\uCCB4\uC5D0\uAC8C \uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size>
       \uC90D\uB2C8\uB2E4. "

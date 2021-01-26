@@ -26,10 +26,13 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
 
     [SerializeField]
     GameObject BattleDeckButton;
+    GameObject DeckWindow;
     [SerializeField]
     GameObject DiscardDeckButton;
+    GameObject DiscardWindow;
     [SerializeField]
     GameObject ExtinctiontButton;
+    GameObject ExtinctionWindow;
     [SerializeField]
     Button TurnEndButton;
     [SerializeField]
@@ -368,6 +371,41 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
         }
         Control.SetIsCardUsing(IsUsing);
     }
+
+    public void ShowDeck()
+    {
+        if (DeckWindow == null)
+        {
+            DeckWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
+        }
+        DeckWindow.SetActive(true);
+        DeckWindow.GetComponent<CardWindow>().SetCardWindow(m_BattleCardData.Deck, WindowType.Show, false);
+        DeckWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => { DeckWindow.SetActive(false); });
+        DeckWindow.GetComponent<CardWindow>().NameButton();
+    }
+    public void ShowDiscard()
+    {
+        if (DiscardWindow == null)
+        {
+            DiscardWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
+        }
+        DiscardWindow.SetActive(true);
+        DiscardWindow.GetComponent<CardWindow>().SetCardWindow(m_BattleCardData.Discard, WindowType.Show, false);
+        DiscardWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => { DiscardWindow.SetActive(false); });
+        DiscardWindow.GetComponent<CardWindow>().NameButton();
+    }
+    public void ShowExtinction()
+    {
+        if (ExtinctionWindow == null)
+        {
+            ExtinctionWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
+        }
+        ExtinctionWindow.SetActive(true);
+        ExtinctionWindow.GetComponent<CardWindow>().SetCardWindow(m_BattleCardData.Extinction, WindowType.Show, false);
+        ExtinctionWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => { ExtinctionWindow.SetActive(false); });
+        ExtinctionWindow.GetComponent<CardWindow>().NameButton();
+    }
+
     void OnDestroy()
     {
         m_BattleCardData.Detach(this);

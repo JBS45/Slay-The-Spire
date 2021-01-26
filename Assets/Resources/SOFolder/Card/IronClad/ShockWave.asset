@@ -13,35 +13,40 @@ MonoBehaviour:
   m_Name: ShockWave
   m_EditorClassIdentifier: 
   IsExtinct: 1
+  IsAllCost: 0
   charType: 1
   CardName: "\uCDA9\uACA9\uD30C"
   cardType: 2
   Rarity: 1
   Targets: 1
   Cost: 2
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uCDA9\uACA9\uD30C+"
+    EnchantTargets: 1
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 0200000002000000
   CardImage: {fileID: 21300000, guid: 7de74d8a51081c549b2aacde27deba59, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
-  - CardAbility: {fileID: 11400000, guid: 91b9152e05274554e995e63c1a22fc01, type: 2}
+  - CardAbility: {fileID: 11400000, guid: f6ac8c60f77bb8042baf405401758967, type: 2}
     SkillEffect: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
       type: 3}
-    SkillSprite: {fileID: 0}
+    SkillSprite: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
     variety: 4
     Value: 3
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 2
     Stack: 0
     Decription: "\uC801 \uC804\uCCB4\uC5D0\uAC8C <color=#ffa500ff>\uC57D\uD654</color>\uC640 "
-  - CardAbility: {fileID: 11400000, guid: 91b9152e05274554e995e63c1a22fc01, type: 2}
+  - CardAbility: {fileID: 11400000, guid: f6ac8c60f77bb8042baf405401758967, type: 2}
     SkillEffect: {fileID: -6800670824589739073, guid: a0d9e576c7fd8b84d82e630e15a321d9,
       type: 3}
-    SkillSprite: {fileID: 0}
+    SkillSprite: {fileID: -6800670824589739073, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
     variety: 3
     Value: 3
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 2
     Stack: 0
     Decription: "<color=#ffa500ff>\uCDE8\uC57D</color>\uC744 <size=24><color=#{0}>{1}</color></size>
       \uBD80\uC5EC\uD569\uB2C8\uB2E4.\n<color=#ffa500ff>\uC18C\uBA78</color>"

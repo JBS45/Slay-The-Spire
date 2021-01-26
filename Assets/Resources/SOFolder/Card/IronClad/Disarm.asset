@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
+  m_Name: Disarm
+  m_EditorClassIdentifier: 
+  IsExtinct: 1
+  IsAllCost: 0
+  charType: 1
+  CardName: "\uBB34\uC7A5 \uD574\uC81C"
+  cardType: 2
+  Rarity: 1
+  Targets: 3
+  Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 1
+    EnchantCardName: "\uBB34\uC7A5 \uD574\uC81C+"
+    EnchantTargets: 3
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 01000000
+  CardImage: {fileID: 21300000, guid: 3d293be56546af44e9eac0082a71343a, type: 3}
+  MultipleEnchant: 0
+  FunctionAndValue:
+  - CardAbility: {fileID: 11400000, guid: f6ac8c60f77bb8042baf405401758967, type: 2}
+    SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
+      type: 3}
+    SkillSprite: {fileID: 2933273942965145907, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
+    variety: 1
+    Value: -2
+    Stack: 0
+    Decription: "\uC801\uC758 \uD798\uC744 <size=24><color=#{0}>{1}</color></size>
+      \n\uAC10\uC18C\uC2DC\uD0B5\uB2C8\uB2E4. \n<color=#ffa500ff>\uC18C\uBA78</color>"

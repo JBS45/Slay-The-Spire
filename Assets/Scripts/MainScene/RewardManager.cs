@@ -16,12 +16,9 @@ public class RewardManager : MonoBehaviour
     int UnCommon=30;
     int Rare=10;
 
-    int RewardCardCount;
-
     private void Awake()
     {
         RewardCardList = new List<CardData>();
-        RewardCardCount = 3;
     }
     // Start is called before the first frame update
     void Start()
@@ -41,19 +38,29 @@ public class RewardManager : MonoBehaviour
         RewardPotion = PotionType.None;
         RewardCardList.Clear();
     }
-    public void BasicReward()
+    public int RandomGoldGenerator(int Amount)
     {
-        int goldRandom = Random.Range(-5, 6);
-        int IsGetPotionRandom = Random.Range(0, 10);
-        int cardMaxNum = CardDB.Instance.IronClad.Card.Count;
-        List<int> randomCard = new List<int>();
-
-        RewardGold = 15 + goldRandom;
-        if (IsGetPotionRandom < 4)
+        int tmp = Amount + Random.Range(-(Amount / 4), (Amount / 4) + 1);
+        RewardGold = tmp;
+        return tmp;
+    }
+    public List<PotionType> PotionSelector(int Count)
+    {
+        List<PotionType> tmp = new List<PotionType>();
+        int potionNum;
+        for(int i=0; i < Count; )
         {
-            RewardPotion=PotionSelector();
+            potionNum = Random.Range(1, System.Enum.GetValues(typeof(PotionType)).Length);
+            if (tmp.Exists(item => item != (PotionType)potionNum))
+            {
+                tmp.Add((PotionType)potionNum);
+                ++i;
+            }
+            
         }
-        CardSelector(ref RewardCardList);
+
+
+        return tmp;
     }
 
     PotionType PotionSelector()
@@ -62,15 +69,30 @@ public class RewardManager : MonoBehaviour
 
         return (PotionType)potionNum;
     }
-    void CardSelector(ref List<CardData> list)
+    public List<CardData> CardSelector(CharacterType type,int count)
     {
-        List<CardAsset> BasicList = CardDB.Instance.IronClad.Card.FindAll(item => item.Rarity == RarityOptions.Basic);
-        List<CardAsset> UnCommonList = CardDB.Instance.IronClad.Card.FindAll(item => item.Rarity == RarityOptions.Common);
-        List<CardAsset> RarityList = CardDB.Instance.IronClad.Card.FindAll(item => item.Rarity == RarityOptions.Rare);
+        List<CardData> tmpList = new List<CardData>();
+        List<CardAsset> BasicList = new List<CardAsset>();
+        List<CardAsset> UnCommonList = new List<CardAsset>();
+        List<CardAsset> RarityList = new List<CardAsset>();
+
+        switch (type) {
+            case CharacterType.None:
+                BasicList = CardDB.Instance.Neutral.Card.FindAll(item => item.Rarity == RarityOptions.Basic);
+                UnCommonList = CardDB.Instance.Neutral.Card.FindAll(item => item.Rarity == RarityOptions.Common);
+                RarityList = CardDB.Instance.Neutral.Card.FindAll(item => item.Rarity == RarityOptions.Rare);
+                break;
+            case CharacterType.Ironclad:
+                BasicList = CardDB.Instance.IronClad.Card.FindAll(item => item.Rarity == RarityOptions.Basic);
+                UnCommonList = CardDB.Instance.IronClad.Card.FindAll(item => item.Rarity == RarityOptions.Common);
+                RarityList = CardDB.Instance.IronClad.Card.FindAll(item => item.Rarity == RarityOptions.Rare);
+                break;
+        }
+
 
         int RaritySelector;
 
-        for(int i=0;i< RewardCardCount;)
+        for(int i=0;i< count;)
         {
             RaritySelector = Random.Range(0, 100);
             if (BasicList.Count > 0 && RaritySelector < Basic)
@@ -78,7 +100,7 @@ public class RewardManager : MonoBehaviour
                 int random = Random.Range(0, BasicList.Count);
                 CardData tmp = new CardData(BasicList[random]);
                 BasicList.RemoveAt(random);
-                list.Add(tmp);
+                tmpList.Add(tmp);
                 i++;
             }
             else if (UnCommonList.Count>0 && RaritySelector < Basic + UnCommon)
@@ -86,7 +108,7 @@ public class RewardManager : MonoBehaviour
                 int random = Random.Range(0, UnCommonList.Count);
                 CardData tmp = new CardData(UnCommonList[random]);
                 UnCommonList.RemoveAt(random);
-                list.Add(tmp);
+                tmpList.Add(tmp);
                 i++;
             }
             else if(RarityList.Count>0 && RaritySelector < Basic + UnCommon + Rare)
@@ -94,11 +116,15 @@ public class RewardManager : MonoBehaviour
                 int random = Random.Range(0, RarityList.Count);
                 CardData tmp = new CardData(RarityList[random]);
                 RarityList.RemoveAt(random);
-                list.Add(tmp);
+                tmpList.Add(tmp);
                 i++;
             }
 
 
         }
+
+        RewardCardList = tmpList;
+
+        return tmpList;
     }
 }

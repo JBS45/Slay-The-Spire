@@ -2,16 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Power/AllBuff")]
-public class AllBuff : Ability
+[CreateAssetMenu(menuName = "Power/Buff")]
+public class Buff : Ability
 {
 
     public override void OnExcute(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        List<GameObject> TmpTarget = MainSceneController.Instance.BattleData.Monsters;
+        List<GameObject> TmpTarget = new List<GameObject>();
+        if (Target == null)
+        {
+            TmpTarget = MainSceneController.Instance.BattleData.Monsters;
+        }
+        else
+        {
+            TmpTarget.Add(Target);
+        }
         foreach (var target in TmpTarget)
         {
-            float result = Func.Value + (EnchantCount * Func.EnchantRate);
+            float result = Func.Value;
             if (target.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
             {
                 target.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
@@ -30,7 +38,7 @@ public class AllBuff : Ability
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        float result = Func.Value + (EnchantCount * Func.EnchantRate);
+        float result = Mathf.Abs(Func.Value);
 
         return (int)result;
     }

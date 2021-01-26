@@ -6,7 +6,7 @@ using TMPro;
 
 public enum RewardType
 {
-    Gold,Potion,Card
+    Gold,Potion,Card,Relic
 }
 public enum PotionType
 {
@@ -45,34 +45,33 @@ public class RewardButtonScript : MonoBehaviour
         
     }
 
-    public void SetReward(RewardType type,int gold, PotionType potion,GameObject reward)
+    public void SetGoldReward(RewardType type, int gold)
     {
         m_Type = type;
-        switch (m_Type)
-        {
-            case RewardType.Gold:
-                RewardImage.sprite = Gold;
-                m_Gold = gold;
-                Text.text = m_Gold.ToString() + " 골드";
-                m_Button.onClick.AddListener(
-                    ()=>    {   MainSceneController.Instance.PlayerData.CurrentMoney += gold;
-                                MainSceneController.Instance.PlayerData.Notify();
-                                Destroy(this.gameObject);
-                    });
-                break;
-            case RewardType.Potion:
-                break;
-            case RewardType.Card:
-                RewardImage.sprite = Card;
-                Text.text = "덱에 카드를 추가";
-                m_Button.onClick.AddListener(
-                    () => {
-                        MainSceneController.Instance.UIControl.AddRewardWinodow.SetActive(true);
-                        reward.SetActive(false);
-                    });
-                break;
-        }
-        
+        RewardImage.sprite = Gold;
+        m_Gold = gold;
+        Text.text = m_Gold.ToString() + " 골드";
+        m_Button.onClick.AddListener(
+            () => {
+                MainSceneController.Instance.PlayerData.CurrentMoney += gold;
+                MainSceneController.Instance.PlayerData.Notify();
+                Destroy(this.gameObject);
+            });
     }
+    public void SetPotionReward(RewardType type,List<PointerType> Potions)
+    {
+
+    }
+    public void SetCardReward(RewardType type, List<CardData> CardDatas,GameObject RewardWindow)
+    {
+        RewardImage.sprite = Card;
+        Text.text = "덱에 카드를 추가";
+        m_Button.onClick.AddListener(
+            () => {
+                MainSceneController.Instance.UIControl.AddRewardWinodow.SetActive(true);
+                RewardWindow.SetActive(false);
+            });
+    }
+
 
 }

@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: Bludgeon
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 1
   CardName: "\uBABD\uB465\uC774\uC9C8"
   cardType: 1
   Rarity: 2
   Targets: 3
   Cost: 3
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uBABD\uB465\uC774\uC9C8+"
+    EnchantTargets: 3
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 0a000000
   CardImage: {fileID: 21300000, guid: 5191962ca828bd94e96d989e521a29fe, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -29,8 +38,5 @@ MonoBehaviour:
       type: 3}
     variety: 0
     Value: 32
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 10
     Stack: 0
     Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4. "

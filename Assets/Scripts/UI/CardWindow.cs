@@ -35,26 +35,34 @@ public class CardWindow : MonoBehaviour
 
     RectTransform rect;
 
+    ScrollRect ScrollRect;
+    Scrollbar Scroll;
+
     bool IsOrder = true;
     bool IsName = false;
     bool IsType = false;
     bool IsCost = false;
     private void OnEnable()
     {
+        Scroll.size = 0.2f;
+        Scroll.value = 1;
+        Content.localPosition = new Vector3(Content.localPosition.x, -500, Content.localPosition.z);
         StartCoroutine(OnEnableCancelButton());
     }
+
     private void Awake()
     {
         Layout = Content.GetComponent<GridLayoutGroup>();
         rect = GetComponent<RectTransform>();
         Cards = new List<GameObject>();
         PosList = new List<Vector3>();
+        Scroll = GetComponentInChildren<Scrollbar>();
+        ScrollRect = GetComponentInChildren<ScrollRect>();
         CancelButtonOriginVector = CancelButton.transform.localPosition;
     }
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -78,18 +86,32 @@ public class CardWindow : MonoBehaviour
             CardOrderBar.SetActive(false);
         }
 
-        SettingWindow(CardDataList);
-
         switch (m_Type)
         {
             case WindowType.Enchant:
+                SettingEnchantWindow(CardDataList);
                 break;
             case WindowType.Show:
+                SettingWindow(CardDataList);
+                break;
+            case WindowType.Remove:
+                SettingWindow(CardDataList);
                 break;
         }
+
+        
     }
     void SettingWindow(List<CardData> CardDataList)
     {
+        if (Cards.Count > 0)
+        {
+            foreach (var item in Cards)
+            {
+                Destroy(item);
+            }
+            Cards.Clear();
+        }
+
         foreach (var item in CardDataList) {
             GameObject tmp = Instantiate(CardRes);
             tmp.transform.SetParent(Content);
@@ -99,6 +121,40 @@ public class CardWindow : MonoBehaviour
 
             Cards.Add(tmp);
         }
+        
+    }
+    void SettingEnchantWindow(List<CardData> CardDataList)
+    {
+        if (Cards.Count > 0)
+        {
+            foreach (var item in Cards)
+            {
+                Destroy(item);
+            }
+            Cards.Clear();
+        }
+
+        List<CardData> tmpList = new List<CardData>();
+
+        foreach (var item in CardDataList)
+        {
+            if(item.MultipleEnchant==true || item.EnchantCount == 0)
+            {
+                tmpList.Add(item);
+            }
+        }
+
+        foreach (var item in tmpList)
+        {
+            GameObject tmp = Instantiate(CardRes);
+            tmp.transform.SetParent(Content);
+            tmp.transform.localScale = new Vector3((Layout.cellSize.x / 240), (Layout.cellSize.x / 240), (Layout.cellSize.x / 240));
+            tmp.GetComponent<CardUIScript>().SetCardUI(item);
+            tmp.GetComponent<CardUIScript>().SetSize(Layout.cellSize.x / 240);
+
+            Cards.Add(tmp);
+        }
+
     }
 
     public void CancelButtonEvent()
@@ -246,5 +302,24 @@ public class CardWindow : MonoBehaviour
             yield return null;
         }
         Card.transform.localPosition = target;
+    }
+    public void OnValueChange()
+    {
+        CardOrderBar.transform.localPosition = Content.localPosition + new Vector3(0, 40, 0);
+        Scroll.size = 0.2f;
+    }
+    public void SetEnchantCardButtonEvent()
+    {
+        foreach(var item in Cards)
+        {
+            item.GetComponentInChildren<Button>().onClick.AddListener(()=> { item.GetComponent<CardUIScript>().SelectCardUI(WindowType.Enchant); });
+        }
+    }
+    public void SetRemoveCardButtonEvent()
+    {
+        foreach (var item in Cards)
+        {
+            item.GetComponentInChildren<Button>().onClick.AddListener(() => { item.GetComponent<CardUIScript>().SelectCardUI(WindowType.Remove); });
+        }
     }
 }

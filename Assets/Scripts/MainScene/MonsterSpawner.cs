@@ -54,6 +54,13 @@ public class MonsterSpawner : MonoBehaviour
                 obj.transform.SetParent(MonsterSpawnPoint);
                 MainSceneController.Instance.BattleData.Monsters.Add(obj);
                 break;
+            case NPCType.Merchant:
+                obj = Instantiate(Merchant);
+                obj.tag = "NPC";
+                obj.transform.SetParent(MonsterSpawnPoint);
+                obj.transform.localPosition = Vector3.zero;
+                MainSceneController.Instance.BattleData.Monsters.Add(obj);
+                break;
         }
     }
     public void MonsterSpawn()

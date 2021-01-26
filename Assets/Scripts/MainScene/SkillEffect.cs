@@ -52,7 +52,6 @@ public class SkillEffect : MonoBehaviour
     }
     IEnumerator FadeOutMoveDown()
     {
-        Debug.Log("?"); 
         while (Vector3.Distance(Vector3.zero, transform.localPosition) > 0.01f)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition,Vector3.zero, Time.deltaTime*2.0f);

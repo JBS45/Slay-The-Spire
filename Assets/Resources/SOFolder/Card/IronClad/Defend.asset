@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: Defend
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 1
   CardName: "\uC218\uBE44"
   cardType: 2
   Rarity: 0
   Targets: 0
   Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uC218\uBE44+"
+    EnchantTargets: 0
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 03000000
   CardImage: {fileID: 21300000, guid: 5783626748d699449be1526bb2754cc3, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -29,9 +38,6 @@ MonoBehaviour:
       type: 3}
     variety: 0
     Value: 5
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 3
     Stack: 0
     Decription: "<color=#ffa500ff>\uBC29\uC5B4\uB3C4</color>\uB97C <size=24><color=#{0}>{1}</color></size>
       \uC5BB\uC2B5\uB2C8\uB2E4. "

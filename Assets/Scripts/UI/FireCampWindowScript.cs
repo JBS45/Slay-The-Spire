@@ -5,6 +5,11 @@ using UnityEngine;
 public class FireCampWindowScript : MonoBehaviour
 {
     [SerializeField]
+    GameObject Title;
+    [SerializeField]
+    GameObject Text;
+
+    [SerializeField]
     GameObject RestBtn;
     [SerializeField]
     GameObject EnchantBtn;
@@ -43,22 +48,33 @@ public class FireCampWindowScript : MonoBehaviour
         if(CardWindow == null)
         {
             CardWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
+            CardWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => {CardWindow.SetActive(false); });
+            CardWindow.GetComponent<CardWindow>().SetEnchantCardButtonEvent();
         }
-        CardWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => { CardWindow.SetActive(false); });
-        //인챈트 윈도우
-        //인챈트 윈도우의 카드에 
-        //MainSceneController.Instance.UIControl.FadeInEffect(MainSceneController.Instance.Background.FireOff); 붙이기
+        else
+        {
+            CardWindow.SetActive(true);
+        }
+
     }
 
     public void FireOff()
     {
         MainSceneController.Instance.Background.FireOff();
         StartCoroutine(OnEnableProceedButton());
+        MainSceneController.Instance.UIControl.FadeOutEffect(()=> { });
+        RestBtn.SetActive(false);
+        EnchantBtn.SetActive(false);
+        Title.SetActive(false);
+        Text.SetActive(false);
+        if (CardWindow!=null){
+            Destroy(CardWindow);
+        }
     }
     IEnumerator OnEnableProceedButton()
     {
         ProccedBtn.transform.localPosition = ProceedBtnOriginPos;
-        Vector3 target = ProceedBtnOriginPos + new Vector3(250, 0, 0);
+        Vector3 target = ProceedBtnOriginPos - new Vector3(250, 0, 0);
         while (Vector3.Distance(ProccedBtn.transform.localPosition, target) > 1.0f)
         {
             ProccedBtn.transform.localPosition = Vector3.MoveTowards(ProccedBtn.transform.localPosition, target, 10.0f);

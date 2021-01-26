@@ -7,6 +7,15 @@ public interface IObservers
     //각 덱의 갯수나 어떤 카드가 사용되었는지등의 온갖 정보를 넘겨줌
     void UpdateData();
 }
+public interface IShopWindow
+{
+    void ShopUISetting(int gold, ShopWindowDelegate del);
+    void ShopRefresh();
+    void ShopButtonEvent(ShopWindowDelegate del);
+    void HandEnter();
+    void HandExit();
+}
+public delegate void ShopWindowDelegate(IShopWindow shopWindow);
 
 public interface IDrawEvent
 {

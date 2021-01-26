@@ -8,12 +8,13 @@ public class Defence : Ability
 
     public override void OnExcute(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        float result = Func.Value + (EnchantCount * Func.EnchantRate);
+        float result = Func.Value;
         int agi = 0;
         //민첩이 있으면 힘만큼 증가
-        if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Strength))
+
+        if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Agillity))
         {
-            agi = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Strength).Value;
+            agi = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Agillity).Value;
         }
 
         result += agi;
@@ -31,19 +32,22 @@ public class Defence : Ability
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        float result = Func.Value + (EnchantCount * Func.EnchantRate);
+        float result = Func.Value;
         int agi = 0;
         //민첩이 있으면 힘만큼 증가
-        if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Strength))
+        if (Performer != null)
         {
-            agi = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Strength).Value;
-        }
+            if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Agillity))
+            {
+                agi = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Agillity).Value;
+            }
 
-        result += agi;
-        //플레이어가 손상 걸려있으면
-        if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.injure))
-        {
-            result *= 0.75f;
+            result += agi;
+            //플레이어가 손상 걸려있으면
+            if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.injure))
+            {
+                result *= 0.75f;
+            }
         }
 
         return (int)result;

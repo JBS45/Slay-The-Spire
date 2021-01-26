@@ -33,6 +33,11 @@ public class MainSceneUIController : MonoBehaviour
     bool IsDeckWindowOpen = true;
 
     [SerializeField]
+    GameObject EnchantCardWindowRes;
+    GameObject EnchantCard;
+    public GameObject EnchantCardWindow { get => EnchantCard; set => EnchantCard = value; }
+
+    [SerializeField]
     GameObject RewardRes;
     GameObject Reward;
 
@@ -40,6 +45,9 @@ public class MainSceneUIController : MonoBehaviour
     GameObject AddRewardRes;
     GameObject AddReward;
     public GameObject AddRewardWinodow { get => AddReward; set => AddReward = value; }
+
+    [SerializeField]
+    GameObject ShopRes;
 
 
     [Header("ToolTip")]
@@ -70,6 +78,7 @@ public class MainSceneUIController : MonoBehaviour
     public void FadeInEffect(Delvoid Del)
     {
         FadePanel.enabled = true;
+        FadePanel.transform.SetAsLastSibling();
         StartCoroutine(FadeIn(Del));
         
     }
@@ -135,7 +144,7 @@ public class MainSceneUIController : MonoBehaviour
     public void MakeReward()
     {
         CurUI = Instantiate(RewardRes);
-        CurUI.GetComponent<RewardWindow>().WindowSetting(MainSceneController.Instance.Reward);
+        CurUI.GetComponent<RewardWindow>().BattleReward(MainSceneController.Instance.Reward);
         CurUI.transform.SetParent(UICanvas.transform);
         CurUI.transform.localScale = Vector3.one;
         CurUI.transform.localPosition = Vector3.zero;
@@ -149,6 +158,15 @@ public class MainSceneUIController : MonoBehaviour
         AddReward.transform.localPosition = Vector3.zero;
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
+    public void MakeShopWindow()
+    {
+        CurUI = Instantiate(ShopRes);
+        CurUI.transform.SetParent(UICanvas.transform);
+        CurUI.transform.localScale = Vector3.one;
+        CurUI.transform.localPosition = Vector3.zero;
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+
     public void MakeToolTip()
     {
         _ToolTip = Instantiate(ToolTipRes);
@@ -163,6 +181,15 @@ public class MainSceneUIController : MonoBehaviour
         CurUI.transform.SetParent(UICanvas.transform);
         CurUI.transform.localScale = Vector3.one;
         CurUI.transform.localPosition = Vector3.zero;
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+    public void MakeEnchantCardWindow()
+    {
+        EnchantCard = Instantiate(EnchantCardWindowRes);
+        EnchantCard.transform.SetParent(UICanvas.transform);
+        EnchantCard.transform.localScale = Vector3.one;
+        EnchantCard.transform.localPosition = Vector3.zero;
+        EnchantCard.transform.SetAsLastSibling();
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void GetDeckWindow()
@@ -187,6 +214,9 @@ public class MainSceneUIController : MonoBehaviour
             else
             {
                 CurrentDeckWindow.SetActive(true);
+                CurrentDeckWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Show, true);
+                CurrentDeckWindow.transform.SetAsLastSibling();
+                InfoBar.gameObject.transform.SetAsLastSibling();
                 IsDeckWindowOpen = true;
             }
         }
@@ -197,6 +227,7 @@ public class MainSceneUIController : MonoBehaviour
         tmp.transform.SetParent(UICanvas.transform);
         tmp.transform.localScale = Vector3.one;
         tmp.transform.localPosition = Vector3.zero;
+        tmp.transform.SetAsLastSibling();
         tmp.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Show, false);
         InfoBar.gameObject.transform.SetAsLastSibling();
 

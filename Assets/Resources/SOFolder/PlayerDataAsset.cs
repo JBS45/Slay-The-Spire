@@ -26,6 +26,8 @@ public class PlayerDataAsset : ScriptableObject
     public int DrawPerTurn { get => _DrawPerTurn; set => _DrawPerTurn = value; }
     int _EnergeyPerTurn = 3;
     public int EnergeyPerTurn { get => _EnergeyPerTurn; set => _EnergeyPerTurn = value; }
+    int _CardRemove = 0;
+    public int CardRemoveCount { get => _CardRemove; set => _CardRemove = value; }
     int _Seed;
     public int Seed { get => _Seed; set => _Seed = value; }
 
@@ -77,5 +79,10 @@ public class PlayerDataAsset : ScriptableObject
         tmp.transform.localScale = Vector3.one;
         tmp.GetComponent<RelicScript>().SetData(tmpData);
         tmpData.Attach(tmp.GetComponent<RelicScript>());
+    }
+    public int RemoveCardGold()
+    {
+        int tmp = 75 + (CardRemoveCount * 25);
+        return tmp;
     }
 }

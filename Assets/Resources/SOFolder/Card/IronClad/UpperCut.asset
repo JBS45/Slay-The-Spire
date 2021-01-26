@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: UpperCut
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 1
   CardName: "\uC5B4\uD37C\uCEF7"
   cardType: 1
   Rarity: 1
   Targets: 3
   Cost: 2
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uC5B4\uD37C\uCEF7+"
+    EnchantTargets: 3
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 000000000100000001000000
   CardImage: {fileID: 21300000, guid: f60b417e4ed59964fb3cd7e5cd5eb583, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -28,32 +37,25 @@ MonoBehaviour:
     SkillSprite: {fileID: 0}
     variety: 0
     Value: 13
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 0
     Stack: 0
     Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4.\n"
-  - CardAbility: {fileID: 11400000, guid: 91b9152e05274554e995e63c1a22fc01, type: 2}
+  - CardAbility: {fileID: 11400000, guid: f6ac8c60f77bb8042baf405401758967, type: 2}
     SkillEffect: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
       type: 3}
-    SkillSprite: {fileID: 0}
+    SkillSprite: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
     variety: 4
     Value: 1
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 1
     Stack: 0
     Decription: "<color=#ffa500ff>\uC57D\uD654</color>\uC744 \n<size=24><color=#{0}>{1}</color></size>
       \uBD80\uC5EC\uD569\uB2C8\uB2E4.\n"
-  - CardAbility: {fileID: 11400000, guid: 91b9152e05274554e995e63c1a22fc01, type: 2}
+  - CardAbility: {fileID: 11400000, guid: f6ac8c60f77bb8042baf405401758967, type: 2}
     SkillEffect: {fileID: -6800670824589739073, guid: a0d9e576c7fd8b84d82e630e15a321d9,
       type: 3}
-    SkillSprite: {fileID: 0}
+    SkillSprite: {fileID: -6800670824589739073, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
     variety: 3
     Value: 1
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 1
     Stack: 0
     Decription: "<color=#ffa500ff>\uCDE8\uC57D</color>\uC744 \n<size=24><color=#{0}>{1}</color></size>
       \uBD80\uC5EC\uD569\uB2C8\uB2E4.\n"

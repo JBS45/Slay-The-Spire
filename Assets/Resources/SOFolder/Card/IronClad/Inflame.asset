@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
+  m_Name: Inflame
+  m_EditorClassIdentifier: 
+  IsExtinct: 1
+  IsAllCost: 0
+  charType: 1
+  CardName: "\uBC1C\uD654"
+  cardType: 3
+  Rarity: 1
+  Targets: 0
+  Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 1
+    EnchantCardName: "\uBC1C\uD654+"
+    EnchantTargets: 0
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 01000000
+  CardImage: {fileID: 21300000, guid: 0fc25cd501aa2d3429d0bebd4684dfb9, type: 3}
+  MultipleEnchant: 0
+  FunctionAndValue:
+  - CardAbility: {fileID: 11400000, guid: 3aec5086e88545b40aafe2aae681af32, type: 2}
+    SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
+      type: 3}
+    SkillSprite: {fileID: 2933273942965145907, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      type: 3}
+    variety: 1
+    Value: 2
+    Stack: 0
+    Decription: "\uD798\uC744 <size=24><color=#{0}>{1}</color></size> \uC5BB\uC2B5\uB2C8\uB2E4. "

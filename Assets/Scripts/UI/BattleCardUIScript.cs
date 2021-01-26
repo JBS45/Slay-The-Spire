@@ -107,6 +107,9 @@ public class BattleCardUIScript : MonoBehaviour
                 CardTypeText.text = "Power";
                 CardBackground.sprite = CardBackgroundRes[((int)card.CharType) * 3 + 3];
                 RareFrame.sprite = RareFrameRes[((int)(card.CardType - 1) * 3) + (int)card.Rarity];
+                RareFrame.SetNativeSize();
+                RareFrame.transform.localPosition = new Vector3(0, 80, 0);
+                RareFrame.GetComponentInChildren<TMP_Text>().transform.localPosition = new Vector3(0, -110, 0);
                 break;
             case CardType.Condition:
                 CardTypeText.text = "Condition";
@@ -145,7 +148,14 @@ public class BattleCardUIScript : MonoBehaviour
                 break;
         }
 
-        CostText.text = card.Cost.ToString();
+        if (card.IsAllCost)
+        {
+            CostText.text = "X";
+        }
+        else
+        {
+            CostText.text = card.Cost.ToString();
+        }
     }
 
     public void ShowCard()
@@ -230,11 +240,11 @@ public class BattleCardUIScript : MonoBehaviour
         for (int i = 0; i < data.Action.Count; ++i)
         {
             tmpInt = data.Action[i].CardAbility.PredictValue(MainSceneController.Instance.Character, data.GetTarget(), data.Action[i], data.EnchantCount);
-            if (data.Action[i].Value> tmpInt)
+            if (data.BaseValue[i] > tmpInt)
             {
                 tmpColor = TextColor[1];
             }
-            else if(data.Action[i].Value == tmpInt)
+            else if(data.BaseValue[i] == tmpInt)
             {
                 tmpColor = TextColor[0];
             }

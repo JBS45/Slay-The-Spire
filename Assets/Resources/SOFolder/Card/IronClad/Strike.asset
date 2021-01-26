@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: Strike
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 1
   CardName: "\uD0C0\uACA9"
   cardType: 1
   Rarity: 0
   Targets: 3
   Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uD0C0\uACA9+"
+    EnchantTargets: 3
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 03000000
   CardImage: {fileID: 21300000, guid: 269d4d213e07943439c435f1c55e0124, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -29,8 +38,5 @@ MonoBehaviour:
       type: 3}
     variety: 0
     Value: 6
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 3
     Stack: 0
     Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4. "

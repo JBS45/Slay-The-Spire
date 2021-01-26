@@ -7,7 +7,7 @@ public class AssginDebuff : Ability
 {
     public override void OnExcute(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        float result = Func.Value + (EnchantCount * Func.EnchantRate);
+        float result = Func.Value;
         if (Target.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
         {
             Target.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
@@ -26,7 +26,7 @@ public class AssginDebuff : Ability
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        float result = Func.Value + (EnchantCount * Func.EnchantRate);
+        float result = Func.Value;
 
         return (int)result;
     }

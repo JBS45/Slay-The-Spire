@@ -21,25 +21,46 @@ public class FunctionModule
     [Header("General Info")]
     public int Value;
 
-    public int Repeat;
-    public int RepeatEnchantRate;
-    public int EnchantRate;
-
     public int Stack;
 
     [TextArea(2, 3)]
     public string Decription;
 
+
+    public FunctionModule(FunctionModule data)
+    {
+        CardAbility = data.CardAbility;
+        SkillEffect = data.SkillEffect;
+        SkillSprite = data.SkillSprite;
+        variety = data.variety;
+        Value = data.Value;
+        Stack = data.Stack;
+        Decription = data.Decription;
+    }
+}
+[System.Serializable]
+public class CardEnchantData
+{
+    public bool EnchantIsExtinct;
+    public string EnchantCardName;
+    public TargetOptions EnchantTargets;
+    public int EnchantCost;
+    public int EnchantRepeat;
+
+    public List<int> EnchantValue;
 }
 
 [System.Serializable]
-public class CardData: ITargetLoader
+public class CardData : ITargetLoader
 {
     bool m_IsEnable;
     public bool IsEnable { get => m_IsEnable; set => m_IsEnable = value; }
 
     bool m_IsExtinct;
     public bool IsExtinct { get => m_IsExtinct; }
+
+    bool m_IsAllCost;
+    public bool IsAllCost { get => m_IsAllCost; }
 
     CharacterType m_CharType;
     public CharacterType CharType { get { return m_CharType; } }
@@ -58,6 +79,9 @@ public class CardData: ITargetLoader
     int m_Cost;
     public int Cost { get { return m_Cost; } set { m_Cost = Cost; } }
 
+    int m_Repeat;
+    public int Repeat { get { return m_Repeat; } set { m_Cost = m_Repeat; } }
+
     Sprite m_CardImage;
     public Sprite CardImage { get { return m_CardImage; } }
 
@@ -68,14 +92,20 @@ public class CardData: ITargetLoader
     public int EnchantCount { get { return m_EnchantCount; } set { m_EnchantCount = value; } }
 
 
+    CardEnchantData m_EnchantData;
+    public CardEnchantData Enchant { get { return m_EnchantData; } }
 
     List<FunctionModule> FunctionAndValue;
     public List<FunctionModule> Action { get { return FunctionAndValue; } }
 
+    List<int> m_BaseValue;
+    public List<int> BaseValue { get { return m_BaseValue; } }
+
+
     List<GameObject> TargetsList;
 
     GameObject Target;
-    
+
     //어빌리티를 갖고
     //타겟 정해져서 사용되는 시점에 이 클래스에 타겟을 정해주고
     //타겟에게 효과가 사용되게 OnExcute 수정
@@ -86,20 +116,35 @@ public class CardData: ITargetLoader
     {
         m_IsEnable = false;
         m_IsExtinct = asset.IsExtinct;
+        m_IsAllCost = asset.IsAllCost;
         m_CharType = asset.charType;
         m_CardName = asset.CardName;
         m_CardType = asset.cardType;
         m_Rarity = asset.Rarity;
         m_Targets = asset.Targets;
+        m_Repeat = asset.Repeat;
         m_Cost = asset.Cost;
 
         m_CardImage = asset.CardImage;
- 
+
 
         m_MultipleEnchant = false;
         m_EnchantCount = 0;
 
-        FunctionAndValue = asset.FunctionAndValue;
+        m_EnchantData = asset.EnchantData;
+
+        FunctionAndValue = new List<FunctionModule>();
+        foreach (var item in asset.FunctionAndValue)
+        {
+            FunctionModule tmp = new FunctionModule(item);
+            FunctionAndValue.Add(tmp);
+        }
+
+        m_BaseValue = new List<int>();
+        foreach(var action in FunctionAndValue)
+        {
+            m_BaseValue.Add(Mathf.Abs(action.Value));
+        }
 
         TargetsList = new List<GameObject>();
 
@@ -107,21 +152,36 @@ public class CardData: ITargetLoader
     public CardData(CardData data)
     {
         m_IsEnable = false;
-        m_IsExtinct = data.m_IsExtinct;
+        m_IsExtinct = data.IsExtinct;
+        m_IsAllCost = data.IsAllCost;
         m_CharType = data.m_CharType;
         m_CardName = data.m_CardName;
         m_CardType = data.m_CardType;
         m_Rarity = data.m_Rarity;
         m_Targets = data.m_Targets;
+        m_Repeat = data.m_Repeat;
         m_Cost = data.m_Cost;
+
 
         m_CardImage = data.CardImage;
 
 
-        m_MultipleEnchant = false;
-        m_EnchantCount = 0;
+        m_MultipleEnchant = data.MultipleEnchant;
+        m_EnchantCount = data.EnchantCount;
 
-        FunctionAndValue = data.FunctionAndValue;
+        m_EnchantData = data.m_EnchantData;
+
+        FunctionAndValue = new List<FunctionModule>();
+        foreach (var item in data.FunctionAndValue)
+        {
+            FunctionModule tmp = new FunctionModule(item);
+            FunctionAndValue.Add(tmp);
+        }
+        m_BaseValue = new List<int>();
+        foreach (var action in FunctionAndValue)
+        {
+            m_BaseValue.Add(action.Value);
+        }
 
         TargetsList = new List<GameObject>();
 
@@ -130,30 +190,38 @@ public class CardData: ITargetLoader
     {
         MainSceneController.Instance.UIControl.GetCurUI().GetComponent<BattleUIScript>().IsCardUsing(true);
 
-        if (Action[0].Repeat > 1)
+
+        for (int i = 0; i < Repeat; ++i)
         {
-            int tmpRepeat = Action[0].Repeat + (Action[0].RepeatEnchantRate * m_EnchantCount);
-            for (int i = 0; i < tmpRepeat; ++i)
+            foreach (var action in Action)
             {
-                Action[0].CardAbility.OnExcute(MainSceneController.Instance.Character, Target, Action[0], EnchantCount);
-                yield return new WaitForSeconds(0.2f);
+                action.CardAbility.OnExcute(MainSceneController.Instance.Character, Target, action, EnchantCount);
             }
+            yield return new WaitForSeconds(0.2f);
         }
-        else
-        {
-            foreach (var Func in Action)
-            {
-                int tmpRepeat = Func.Repeat + (Func.RepeatEnchantRate * m_EnchantCount);
-                for (int i = 0; i < tmpRepeat; ++i)
-                {
-                    Func.CardAbility.OnExcute(MainSceneController.Instance.Character, Target, Func, EnchantCount);
-                }
-            }
-        }
+
         if (MainSceneController.Instance.BattleData.CurrentBattelState == BattleDataState.Battle)
         {
             MainSceneController.Instance.UIControl.GetCurUI().GetComponent<BattleUIScript>().IsCardUsing(false);
             ClearTarget();
+        }
+    }
+
+    public void CardEnchant()
+    {
+        if (MultipleEnchant || EnchantCount == 0)
+        {
+            m_IsExtinct = Enchant.EnchantIsExtinct;
+            m_CardName = Enchant.EnchantCardName;
+            m_Targets = Enchant.EnchantTargets;
+            m_Cost -= Enchant.EnchantCost;
+            m_Repeat += Enchant.EnchantRepeat;
+
+            for (int i = 0; i < Action.Count; ++i)
+            {
+                Action[i].Value += Enchant.EnchantValue[i];
+            }
+            EnchantCount++;
         }
     }
 

@@ -24,6 +24,7 @@ public class BattleData : MonoBehaviour
 
     [SerializeField]
     BattleDataAsset m_CardData;
+    public BattleDataAsset CardData { get => m_CardData; }
 
     bool IsCardUsing;
 
@@ -121,10 +122,6 @@ public class BattleData : MonoBehaviour
         {
             m_CardData.Deck.Add(card);
         }
-
-        //전투로 넘어가기전에 시드값 초기화로 항상 세이브 로드해도 같은 결과가 나오게 함
-        Random.InitState(MainSceneController.Instance.PlayerData.CurrentFloor + MainSceneController.Instance.PlayerData.Seed);
-        MainSceneController.Instance.PlayerData.Seed = MainSceneController.Instance.PlayerData.CurrentFloor + MainSceneController.Instance.PlayerData.Seed;
 
         //덱셔플
         DeckShuffle();
@@ -425,6 +422,10 @@ public class BattleData : MonoBehaviour
 
     public void UseCard(int num)
     {
+        if (m_CardData.Hand[num].CardType == CardType.Attack)
+        {
+            Player.GetComponentInChildren<CharacterStat>().Attack();
+        }
         //카드 효과
         StartCoroutine(m_CardData.Hand[num].OnExcute());
 

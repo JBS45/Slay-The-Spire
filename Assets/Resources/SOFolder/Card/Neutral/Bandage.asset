@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
+  m_Name: Bandage
+  m_EditorClassIdentifier: 
+  IsExtinct: 1
+  IsAllCost: 0
+  charType: 0
+  CardName: "\uBD95\uB300 \uAC10\uAE30"
+  cardType: 2
+  Rarity: 1
+  Targets: 0
+  Cost: 0
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uBD95\uB300 \uAC10\uAE30+"
+    EnchantTargets: 0
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 02000000
+  CardImage: {fileID: 0}
+  MultipleEnchant: 0
+  FunctionAndValue:
+  - CardAbility: {fileID: 11400000, guid: 0b45a008e964b0c43bf57ce8b4f35902, type: 2}
+    SkillEffect: {fileID: 0}
+    SkillSprite: {fileID: 0}
+    variety: 0
+    Value: 4
+    Stack: 0
+    Decription: "\uCCB4\uB825\uC744 <size=24><color=#{0}>{1}</color></size> \uD68C\uBCF5\uD569\uB2C8\uB2E4.\n<color=#ffa500ff>\uC18C\uBA78</color>"

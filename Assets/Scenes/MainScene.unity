@@ -712,10 +712,13 @@ MonoBehaviour:
     type: 3}
   CardWindowRes: {fileID: 1526423932700059192, guid: b2f96a965e1936644b4049ba6858ffbe,
     type: 3}
+  EnchantCardWindowRes: {fileID: 8603287467739723495, guid: c377e3d6ea696c244b2936b4d5890348,
+    type: 3}
   RewardRes: {fileID: 4706210844591582738, guid: 7c1a9c365364a234fa77b6ff6a8e5431,
     type: 3}
   AddRewardRes: {fileID: 2748948925350086732, guid: a3feb6c62c8287f4c96eb0ea043685b3,
     type: 3}
+  ShopRes: {fileID: 1421705131200332211, guid: adaa320ca26656740a8a460b75ed25ed, type: 3}
   ToolTipRes: {fileID: 6073765331406560190, guid: 7d0ec5f3bc3ff414ea0a888638fe261a,
     type: 3}
 --- !u!4 &228450476

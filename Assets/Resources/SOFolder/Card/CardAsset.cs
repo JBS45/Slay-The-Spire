@@ -30,6 +30,7 @@ public class CardAsset : ScriptableObject
 {
     [Header("Genaral Info")]
     public bool IsExtinct = false;
+    public bool IsAllCost = false;
     public CharacterType charType;
     [TextArea(2, 3)]
     public string CardName ;
@@ -38,6 +39,10 @@ public class CardAsset : ScriptableObject
     public TargetOptions Targets;
 
     public int Cost;
+    public int Repeat;
+
+    public CardEnchantData EnchantData;
+
     
     [Header("Sprite"),Space(10.0f),PreviewSprite]
     public Sprite CardImage;

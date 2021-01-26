@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
+  m_Name: ShrugItOff
+  m_EditorClassIdentifier: 
+  IsExtinct: 0
+  IsAllCost: 0
+  charType: 1
+  CardName: "\uD758\uB824\uBCF4\uB0B4\uAE30"
+  cardType: 2
+  Rarity: 0
+  Targets: 0
+  Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uD758\uB824\uBCF4\uB0B4\uAE30+"
+    EnchantTargets: 0
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 0300000000000000
+  CardImage: {fileID: 21300000, guid: 1aeedbe7b4d19f947b7ec41390fa04cd, type: 3}
+  MultipleEnchant: 0
+  FunctionAndValue:
+  - CardAbility: {fileID: 11400000, guid: 6d59289cb4c8d59469135c7d9546d7a2, type: 2}
+    SkillEffect: {fileID: 0}
+    SkillSprite: {fileID: 294558369115392861, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      type: 3}
+    variety: 0
+    Value: 8
+    Stack: 0
+    Decription: "<color=#ffa500ff>\uBC29\uC5B4\uB3C4</color>\uB97C <size=24><color=#{0}>{1}</color></size>
+      \uC5BB\uC2B5\uB2C8\uB2E4. "
+  - CardAbility: {fileID: 11400000, guid: 94f2eda3406847948942cfbb94f5b84c, type: 2}
+    SkillEffect: {fileID: 0}
+    SkillSprite: {fileID: 0}
+    variety: 0
+    Value: 1
+    Stack: 0
+    Decription: "\uCE74\uB4DC\uB97C <size=24><color=#{0}>{1}</color></size>\uC7A5
+      \uC2B5\uB2C8\uB2E4. "

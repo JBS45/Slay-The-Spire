@@ -180,6 +180,7 @@ public class BattleCardData : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             case TargetOptions.AllEnemy:
             case TargetOptions.Random:
                 MainSceneController.Instance.BattleData.AllEnemyTargetOn();
+                m_Data.ClearTarget();
                 break;
             case TargetOptions.Enemy:
                 ChangeState(HandCardState.FindTarget);
@@ -188,6 +189,7 @@ public class BattleCardData : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 break;
             case TargetOptions.NoTarget:
                 MainSceneController.Instance.BattleData.NoTargetTargetOn();
+                m_Data.SetTarget(MainSceneController.Instance.Character);
                 break;
 
         }

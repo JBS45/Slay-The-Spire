@@ -26,7 +26,7 @@ public class AllPercentDamage : Ability
 
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        float result = Func.Value + (EnchantCount * Func.EnchantRate);
+        float result = Func.Value;
         int str = 0;
         //힘이 있으면 힘만큼 증가
         if (MainSceneController.Instance.Character.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Strength))

@@ -13,24 +13,31 @@ MonoBehaviour:
   m_Name: IronWave
   m_EditorClassIdentifier: 
   IsExtinct: 0
+  IsAllCost: 0
   charType: 1
   CardName: "\uCCA0\uC758\uD30C\uB3D9"
   cardType: 1
   Rarity: 0
-  Targets: 1
+  Targets: 3
   Cost: 1
+  Repeat: 1
+  EnchantData:
+    EnchantIsExtinct: 0
+    EnchantCardName: "\uCCA0\uC758\uD30C\uB3D9+"
+    EnchantTargets: 3
+    EnchantCost: 0
+    EnchantRepeat: 0
+    EnchantValue: 0200000002000000
   CardImage: {fileID: 21300000, guid: 732fdd8d6b2ac0d43987fe9441211435, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
   - CardAbility: {fileID: 11400000, guid: 6d59289cb4c8d59469135c7d9546d7a2, type: 2}
     SkillEffect: {fileID: -7182246342224306813, guid: 77c451ff4f5d19e45b21ded97f1525ab,
       type: 3}
-    SkillSprite: {fileID: 0}
+    SkillSprite: {fileID: 294558369115392861, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      type: 3}
     variety: 0
     Value: 5
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 2
     Stack: 0
     Decription: "<color=#ffa500ff>\uBC29\uC5B4\uB3C4</color>\uB97C <size=24><color=#{0}>{1}</color></size>
       \uC5BB\uC2B5\uB2C8\uB2E4. \n"
@@ -40,8 +47,5 @@ MonoBehaviour:
     SkillSprite: {fileID: 0}
     variety: 0
     Value: 5
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 2
     Stack: 0
     Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4. "

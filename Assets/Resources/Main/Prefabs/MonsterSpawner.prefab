@@ -45,5 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterSpawnPoint: {fileID: 0}
   Neow: {fileID: 6921262958194185632, guid: d88b779990e5a2f4c815166a655a584d, type: 3}
-  Merchant: {fileID: 0}
+  Merchant: {fileID: 6921262958194185632, guid: eeae21e1f983d6f4c915d90bf69a5240,
+    type: 3}
   MonsterPool: {fileID: 11400000, guid: 73ad13b2cbe85364cb78b0ed63019179, type: 2}
