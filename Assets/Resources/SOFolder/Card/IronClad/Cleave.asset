@@ -32,7 +32,7 @@ MonoBehaviour:
   MultipleEnchant: 0
   FunctionAndValue:
   - CardAbility: {fileID: 11400000, guid: 4ba0e099feb2f9f4aa882cb71693192b, type: 2}
-    SkillEffect: {fileID: 6866833700615582671, guid: 214df629ba451c14eaf10216788d6a8e,
+    SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
       type: 3}
     SkillSprite: {fileID: 0}
     variety: 0

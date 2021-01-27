@@ -23,7 +23,7 @@ public class Debuff : Ability
             if (target.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
             {
                 target.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
-                target.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillSprite, Vector3.one);
+                target.GetComponentInChildren<Stat>().PowerRefresh();
             }
             else
             {
@@ -31,8 +31,9 @@ public class Debuff : Ability
                 tmpPower.Value = (int)result;
                 tmpPower.Type = PowerType.Debuff;
                 tmpPower.Variety = Func.variety;
+                tmpPower.SetTarget(target);
                 target.GetComponentInChildren<Stat>().Powers.Add(tmpPower);
-                target.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillSprite, Vector3.one);
+                target.GetComponentInChildren<Stat>().AddPowerUI(tmpPower,Func.SkillSprite);
             }
         }
     }

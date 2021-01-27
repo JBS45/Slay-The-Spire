@@ -219,16 +219,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb0570b4d6e291f4eb326a385be9d8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PowerList: []
   DamageTextRes: {fileID: 1133823748517024180, guid: 439cc7e7d2c5fbc49ad138fdb3447e14,
     type: 3}
   TargetEffectPos: {fileID: 3038108685983942937}
   TargetEffectRes: {fileID: 7880534930852382647, guid: 75238b47a9e6f11499247736d493f83c,
     type: 3}
   SkillEffectPos: {fileID: 3462148434377297436}
-  SkillEffectRes: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
-    type: 3}
   HPBarPos: {fileID: 5066706445909604475}
   HPBarRes: {fileID: 3549689214868293827, guid: 0941deecc785db043a952a829743dc76,
+    type: 3}
+  PowerContentRes: {fileID: 7294779962514861490, guid: 5ae2b0216998ddd40902ba8139dd25ec,
     type: 3}
   IntentPos: {fileID: 2758214309647041932}
   DamagePos: {fileID: 1030885125418488303}

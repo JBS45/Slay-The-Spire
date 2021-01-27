@@ -55,7 +55,7 @@ public class CharacterStat : Stat,IObservers
         base.GetDamage(damage);
         UpdateData();
         m_PlayerData.Notify();
-        renderer.ChangeAnimState(AnimState.Hit);
+        renderer.SetHitAnimation();
 
     }
     public override void Cure(int value)

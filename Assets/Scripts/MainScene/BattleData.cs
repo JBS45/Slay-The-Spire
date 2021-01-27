@@ -283,7 +283,7 @@ public class BattleData : MonoBehaviour
     {
         foreach (var monster in Monsters)
         {
-            monster.GetComponentInChildren<MonsterStat>().SetIntent();
+            monster.GetComponentInChildren<IMonsterPatten>().SetIntent();
         }
     }
     //플레이어 턴에 해야하는거
@@ -305,7 +305,7 @@ public class BattleData : MonoBehaviour
             power.TurnEnd();
             
         }
-        Player.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
+        Player.GetComponentInChildren<Stat>().PowerRefresh();
 
         //몬스터들의 방어력 전부 초기화
         foreach (var monster in Monsters)
@@ -366,8 +366,11 @@ public class BattleData : MonoBehaviour
     {
         for (int i = 0; i < Monsters.Count; ++i)
         {
-            StartCoroutine(Monsters[i].GetComponentInChildren<MonsterStat>().Action());
-            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(Monsters[i].GetComponentInChildren<IMonsterPatten>().Action());
+            while (!Monsters[i].GetComponentInChildren<IMonsterPatten>().GetAttackEnd())
+            {
+                yield return null;
+            }
         }
         yield return new WaitForSeconds(0.5f);
         EnemyTurnProgress(TurnState.TurnEnd);
@@ -381,7 +384,7 @@ public class BattleData : MonoBehaviour
             {
                 power.TurnEnd();
             }
-            Monster.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
+            Monster.GetComponentInChildren<Stat>().PowerRefresh();
         }
 
         //플레이어 쉴드 리셋

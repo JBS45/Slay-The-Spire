@@ -31,7 +31,7 @@ public class SimpleStrike : Ability
         Target.GetComponentInChildren<Stat>().GetDamage((int)result);
         if (Func.SkillSprite != null)
         {
-            Target.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillSprite);
+            Target.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillEffect, Func.SkillSprite);
         }
         Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
     }

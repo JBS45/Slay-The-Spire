@@ -138,13 +138,6 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
         m_BattleData = MainSceneController.Instance.BattleData;
         Length = 600.0f;
 
-        //함수에 버튼 눌렀을시 덱을 보여주는 함수를 넣어야함
-        BattleDeckButton.GetComponent<BattleDeckButton>().ButtonSetting(() => { Debug.Log("Deck"); });
-
-        //함수에 버튼 눌렀을시 덱을 보여주는 함수를 넣어야함
-        DiscardDeckButton.GetComponent<BattleDeckButton>().ButtonSetting(() => { Debug.Log("Discard"); });
-
-        ExtinctiontButton.GetComponent<BattleDeckButton>().ButtonSetting(() => { Debug.Log("Extinct"); });
         ExtinctiontButton.GetComponent<BattleDeckButton>().DisEnableButton(false);
         m_BattleCardData = CardData;
         m_BattleCardData.Attach(this);
@@ -311,7 +304,7 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
 
     IEnumerator MoveOrb()
     {
-        Vector3 target = EnergyOrb.gameObject.transform.localPosition + new Vector3(450, 0, 0);
+        Vector3 target = EnergyOrb.gameObject.transform.localPosition + new Vector3(300, 0, 0);
 
         while (Vector3.Distance(EnergyOrb.gameObject.transform.localPosition, target) > 1.0f)
         {

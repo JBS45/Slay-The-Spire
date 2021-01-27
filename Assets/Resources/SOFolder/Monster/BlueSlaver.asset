@@ -22,15 +22,12 @@ MonoBehaviour:
     Intent: 0
     Function:
     - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
-      SkillEffect: {fileID: -4964818982224020305, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
       SkillSprite: {fileID: 7447516423718122844, guid: 77c451ff4f5d19e45b21ded97f1525ab,
         type: 3}
       variety: 0
       Value: 12
-      Repeat: 1
-      RepeatEnchantRate: 0
-      EnchantRate: 0
       Stack: 0
       Decription: 
     Repeat: 1
@@ -38,27 +35,21 @@ MonoBehaviour:
     Intent: 7
     Function:
     - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
-      SkillEffect: {fileID: 3297825888562002999, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
       SkillSprite: {fileID: -4964818982224020305, guid: 77c451ff4f5d19e45b21ded97f1525ab,
         type: 3}
       variety: 0
       Value: 7
-      Repeat: 1
-      RepeatEnchantRate: 0
-      EnchantRate: 0
       Stack: 0
       Decription: 
-    - CardAbility: {fileID: 11400000, guid: 0ddd726eb6d943d4d95e023e594832a8, type: 2}
-      SkillEffect: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+    - CardAbility: {fileID: 11400000, guid: f6ac8c60f77bb8042baf405401758967, type: 2}
+      SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
         type: 3}
       SkillSprite: {fileID: -475837940912171656, guid: a0d9e576c7fd8b84d82e630e15a321d9,
         type: 3}
       variety: 4
       Value: 2
-      Repeat: 1
-      RepeatEnchantRate: 0
-      EnchantRate: 0
       Stack: 0
       Decription: 
     Repeat: 1

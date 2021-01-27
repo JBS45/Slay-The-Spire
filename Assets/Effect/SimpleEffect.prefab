@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 5040321344787170669}
   - component: {fileID: 3195246552147447263}
   m_Layer: 0
-  m_Name: SkillEffect
+  m_Name: SimpleEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

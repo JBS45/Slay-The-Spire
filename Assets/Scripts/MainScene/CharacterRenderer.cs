@@ -46,6 +46,11 @@ public class CharacterRenderer : MonoBehaviour
        CurrentAnim = animClip.name;
     }
 
+    public void SetHitAnimation()
+    {
+        m_SkelAnim.state.SetAnimation(0, m_AnimClips[1], false);
+        m_SkelAnim.state.AddAnimation(0, m_AnimClips[0], true, 0);
+    }
     public void ChangeAnimState(AnimState state)
     {
         if (state == m_AnimState) return;

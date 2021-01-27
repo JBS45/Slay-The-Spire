@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6921262956983131452}
   - component: {fileID: 2063189895313544866}
   - component: {fileID: 2919536636287155574}
-  - component: {fileID: 6217249409545337879}
+  - component: {fileID: 2064348398132701410}
   m_Layer: 9
   m_Name: SpineRenderer
   m_TagString: Monster
@@ -145,7 +145,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: idleNoNet
+  _animationName: idle
   loop: 1
   timeScale: 1
 --- !u!61 &2063189895313544866
@@ -195,7 +195,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6217249409545337879
+--- !u!114 &2064348398132701410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6921262956983131454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e68c140964296545b7f9d24e3e468a0, type: 3}
+  m_Script: {fileID: 11500000, guid: d7bf66efc85d0624d9054fb3b78f0ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PowerList: []
@@ -214,10 +214,10 @@ MonoBehaviour:
   TargetEffectRes: {fileID: 7880534930852382647, guid: 75238b47a9e6f11499247736d493f83c,
     type: 3}
   SkillEffectPos: {fileID: 3462148434377297436}
-  SkillEffectRes: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
-    type: 3}
   HPBarPos: {fileID: 5066706445909604475}
   HPBarRes: {fileID: 3549689214868293827, guid: 0941deecc785db043a952a829743dc76,
+    type: 3}
+  PowerContentRes: {fileID: 7294779962514861490, guid: 5ae2b0216998ddd40902ba8139dd25ec,
     type: 3}
   IntentPos: {fileID: 5717812827923581880}
   DamagePos: {fileID: 8861519852730359852}

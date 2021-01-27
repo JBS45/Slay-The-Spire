@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 
-public class MonsterStat : Stat
+public class BlueSlaver : Stat,IMonsterPatten
 {
     [SerializeField]
     GameObject Monster;
@@ -22,7 +22,7 @@ public class MonsterStat : Stat
     MonsterAction[] Deck;
     GameObject Intent;
 
-    
+    MonsterRenderer m_MonsterRenderer;
 
     int CurDeckCount;
     int SelectPattern;
@@ -32,6 +32,7 @@ public class MonsterStat : Stat
         base.Awake();
         GetComponentInParent<AttackEvent>().SetAnimationEnd(() => { IsAttackEnd = true; });
         anim = GetComponentInParent<Animator>();
+        m_MonsterRenderer = GetComponentInParent<MonsterRenderer>();
         Deck = new MonsterAction[3];
         CurDeckCount = 0;
     }
@@ -162,15 +163,18 @@ public class MonsterStat : Stat
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
-        for (int i = 0; i < Deck[CurDeckCount].Function.Count; ++i)
+        for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
         {
-            Deck[CurDeckCount].Function[i].CardAbility.OnExcute(Monster,MainSceneController.Instance.Character, Deck[CurDeckCount].Function[i], 0);
+            foreach (var func in Deck[CurDeckCount].Function)
+            {
+                func.CardAbility.OnExcute(Monster, MainSceneController.Instance.Character, func, 0);
+            }
 
             yield return new WaitForSeconds(0.3f);
         }
         CurDeckCount++;
         Intent.GetComponent<IntentControl>().OnAction();
-        
+        IsAttackEnd = true;
     }
     public bool GetAttackEnd()
     {
@@ -183,6 +187,7 @@ public class MonsterStat : Stat
 
     private void OnDestroy()
     {
+
         StopAllCoroutines();
         Destroy(HPBar);
         Destroy(Intent);

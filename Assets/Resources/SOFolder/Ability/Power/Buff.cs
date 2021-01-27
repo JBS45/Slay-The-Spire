@@ -20,10 +20,10 @@ public class Buff : Ability
         foreach (var target in TmpTarget)
         {
             float result = Func.Value;
-            if (target.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
+            if (Performer.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
             {
-                target.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
-                target.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillSprite, Vector3.one);
+                Performer.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
+                Performer.GetComponentInChildren<Stat>().PowerRefresh();
             }
             else
             {
@@ -31,8 +31,9 @@ public class Buff : Ability
                 tmpPower.Value = (int)result;
                 tmpPower.Type = PowerType.Debuff;
                 tmpPower.Variety = Func.variety;
-                target.GetComponentInChildren<Stat>().Powers.Add(tmpPower);
-                target.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillSprite, Vector3.one);
+                tmpPower.SetTarget(Performer);
+                Performer.GetComponentInChildren<Stat>().Powers.Add(tmpPower);
+                Performer.GetComponentInChildren<Stat>().AddPowerUI(tmpPower, Func.SkillSprite);
             }
         }
     }

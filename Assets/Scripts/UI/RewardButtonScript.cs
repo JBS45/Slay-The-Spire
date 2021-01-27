@@ -64,6 +64,7 @@ public class RewardButtonScript : MonoBehaviour
     }
     public void SetCardReward(RewardType type, List<CardData> CardDatas,GameObject RewardWindow)
     {
+        m_Type = type;
         RewardImage.sprite = Card;
         Text.text = "덱에 카드를 추가";
         m_Button.onClick.AddListener(

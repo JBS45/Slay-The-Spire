@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Spine.Unity;
 
 public class Stat : MonoBehaviour
@@ -39,8 +40,6 @@ public class Stat : MonoBehaviour
     //스킬 이펙트
     [SerializeField]
     protected Transform SkillEffectPos;
-    [SerializeField]
-    GameObject SkillEffectRes;
 
     //HP바
     [SerializeField]
@@ -48,6 +47,13 @@ public class Stat : MonoBehaviour
     [SerializeField]
     protected GameObject HPBarRes;
     protected GameObject HPBar;
+
+    //Power
+    GameObject PowerUI;
+    [SerializeField]
+    GameObject PowerContentRes;
+    List<GameObject> PowerContents;
+
 
     [SerializeField]
     protected Transform IntentPos;
@@ -71,6 +77,7 @@ public class Stat : MonoBehaviour
         m_Skeleton = GetComponent<SkeletonAnimation>();
         origin = m_Skeleton.Skeleton.GetColor();
         PowerList = new List<Power>();
+        PowerContents = new List<GameObject>();
     }
     public void SetClear()
     {
@@ -86,11 +93,11 @@ public class Stat : MonoBehaviour
         mesh = GetComponentInChildren<MeshRenderer>();
         collider = GetComponentInChildren<BoxCollider2D>();
 
-
         CurrentHP = curHP;
         MaxHP = maxHP;
 
         UIPositionSelector(ref HPBar, HPBarPos.position);
+
         RT = mesh.bounds.max;
         LB = mesh.bounds.min;
         TargetEffect.transform.SetParent(Canvas.transform);
@@ -111,6 +118,7 @@ public class Stat : MonoBehaviour
     protected void UIPositionSelector(ref GameObject obj, Vector3 pos)
     {
         obj.transform.SetParent(Canvas.transform);
+        obj.transform.SetAsFirstSibling();
         obj.transform.localScale = Vector3.one;
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
@@ -208,15 +216,10 @@ public class Stat : MonoBehaviour
         }
         
     }
-    public void MakeSkillEffect(Sprite sprite)
+    public void MakeSkillEffect(GameObject EffectRes,Sprite sprite)
     {
-        GameObject obj = Instantiate(SkillEffectRes);
-        obj.GetComponent<SkillEffect>().SetData(SkillEffectPos, sprite);
-    }
-    public void MakeSkillEffect(Sprite sprite,Vector2 size)
-    {
-        GameObject obj = Instantiate(SkillEffectRes);
-        obj.GetComponent<SkillEffect>().SetData(SkillEffectPos, sprite,size);
+        GameObject obj = Instantiate(EffectRes);
+        obj.GetComponent<SkillEffect>().Setting(SkillEffectPos, sprite);
     }
     public void SetIsEnableTarget(bool Is)
     {
@@ -262,8 +265,16 @@ public class Stat : MonoBehaviour
     protected void Death()
     {
         IsLive = false;
+        Powers.Clear();
         Destroy(HPBar);
         Destroy(TargetEffect);
+        foreach (var power in PowerContents)
+        {
+            Destroy(power);
+        }
+        PowerContents.Clear();
+        Defence = 0;
+        IsEnableTarget = false;
     }
     IEnumerator DamageEffect()
     {
@@ -303,7 +314,49 @@ public class Stat : MonoBehaviour
         Powers.Clear();
         Destroy(HPBar);
         Destroy(TargetEffect);
+        foreach(var power in PowerContents)
+        {
+            Destroy(power);
+        }
+        PowerContents.Clear();
         Defence = 0;
         IsEnableTarget = false;
+    }
+    public void PowerRefresh()
+    {
+        Powers.RemoveAll(item => item.Value == 0);
+        Powers.RemoveAll(item => item == null);
+        PowerContents.RemoveAll(item => item == null);
+        foreach (var power in PowerContents)
+        {
+            power.GetComponent<PowerImage>().Refresh();
+        }
+    }
+    public void AddPowerUI(Power power,Sprite sprite)
+    {
+        if (PowerUI == null)
+        {
+            PowerUI = new GameObject("PowerUI");
+            UIPositionSelector(ref PowerUI, HPBarPos.position);
+            PowerUI.transform.localPosition += new Vector3(60, -80, 0);
+            PowerUI.transform.SetAsFirstSibling();
+            PowerUI.AddComponent<RectTransform>();
+            PowerUI.AddComponent<HorizontalLayoutGroup>();
+            PowerUI.GetComponent<HorizontalLayoutGroup>().childControlWidth = false;
+            PowerUI.GetComponent<HorizontalLayoutGroup>().childControlHeight = false;
+            PowerUI.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight = false;
+            PowerUI.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth = false;
+
+            PowerContents.Clear();
+        }
+
+        GameObject tmp = Instantiate(PowerContentRes);
+        tmp.transform.SetParent(PowerUI.transform);
+        tmp.transform.localScale = Vector3.one;
+        tmp.GetComponent<PowerImage>().SetImage(power, sprite);
+        tmp.GetComponent<PowerImage>().Refresh();
+
+
+        PowerContents.Add(tmp);
     }
 }

@@ -96,6 +96,7 @@ public class IntentControl : MonoBehaviour
                 Intent[1].transform.localPosition = Vector3.zero;
                 Intent[1].GetComponent<IntentItemControl>().SetData(IntentSprite[4]);
                 Intent[1].GetComponent<IntentItemControl>().SetAfterImage(true);
+                Intent[0].transform.SetAsLastSibling();
                 DamageText.text = text;
                 break;
             case IntentType.Buff:

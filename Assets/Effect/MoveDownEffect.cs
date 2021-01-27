@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillEffect : MonoBehaviour
+public class MoveDownEffect : MonoBehaviour, SkillEffect
 {
     [SerializeField]
     SpriteRenderer Renderer;
@@ -22,39 +22,25 @@ public class SkillEffect : MonoBehaviour
     {
         
     }
-    public void SetData(Transform target,Sprite sprite)
+    public void Setting(Transform target,Sprite sprite)
     {
         transform.SetParent(target);
         transform.localScale = Vector3.one;
         transform.localPosition = Vector3.zero;
         Renderer.sprite = sprite;
 
-        StartCoroutine(FadeOut());
+        OnExcute();
     }
-    public void SetData(Transform target, Sprite sprite,Vector2 size)
+    public void OnExcute()
     {
-        transform.SetParent(target);
-        transform.localScale = Vector3.one;
-        transform.localPosition = new Vector3(0, 0.25f, 0);
-        transform.localScale = size;
-        Renderer.sprite = sprite;
-
         StartCoroutine(FadeOutMoveDown());
-    }
-    IEnumerator FadeOut()
-    {
-        while (Renderer.color.a>0.1f)
-        {
-            Renderer.color -= new Color(0, 0, 0, Time.deltaTime*2);
-            yield return null;
-        }
-        Destroy(this.gameObject);
     }
     IEnumerator FadeOutMoveDown()
     {
-        while (Vector3.Distance(Vector3.zero, transform.localPosition) > 0.01f)
+        transform.localPosition = new Vector3(0, 1, 0);
+        while (Vector3.Distance(transform.localPosition,Vector3.zero) > 0.01f)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition,Vector3.zero, Time.deltaTime*2.0f);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition,Vector3.zero, Time.deltaTime*10.0f);
             yield return null;
         }
         transform.localPosition = Vector3.zero;

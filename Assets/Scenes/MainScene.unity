@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53264182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 5.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -348,7 +348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130246540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -512,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175580678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.5, z: 0}
+  m_LocalPosition: {x: 0, y: 9.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -1097,6 +1097,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect3
       objectReference: {fileID: 0}
+    - target: {fileID: 4289769301111203585, guid: a93b69570bfe16f48a5054d674926353,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6152316666862921422, guid: a93b69570bfe16f48a5054d674926353,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1634,7 +1639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632783071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 3.5, z: 0}
+  m_LocalPosition: {x: 2.5, y: 4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -1676,7 +1681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734936040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: -3, z: 0}
+  m_LocalPosition: {x: -10, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -2191,7 +2196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: -3}
+  m_AnchoredPosition: {x: 9, y: -2.5}
   m_SizeDelta: {x: 15, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1066964775
@@ -2547,7 +2552,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546890862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -8, z: 0}
+  m_LocalPosition: {x: 1, y: -7.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -2770,6 +2775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireEffect2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289769301111203585, guid: a93b69570bfe16f48a5054d674926353,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6152316666862921422, guid: a93b69570bfe16f48a5054d674926353,
         type: 3}
@@ -3052,7 +3062,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833032990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1066964777}
@@ -3564,6 +3574,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireEffect1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289769301111203585, guid: a93b69570bfe16f48a5054d674926353,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6152316666862921422, guid: a93b69570bfe16f48a5054d674926353,
         type: 3}

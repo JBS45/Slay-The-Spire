@@ -80,7 +80,7 @@ public class MonsterSpawner : MonoBehaviour
             obj.transform.localPosition = new Vector3(0,0,0) - new Vector3(4f, 0, 0)* (tmp.Count-1) + new Vector3(6f, 0, 0)*i;
             randomHP = Random.Range(tmp[i].MinHp, tmp[i].MaxHp + 1);
             obj.GetComponentInChildren<Stat>().SetUp(randomHP, randomHP);
-            obj.GetComponentInChildren<MonsterStat>().SetPattern(tmp[i]);
+            obj.GetComponentInChildren<IMonsterPatten>().SetPattern(tmp[i]);
             MainSceneController.Instance.BattleData.Monsters.Add(obj);
         }
     }

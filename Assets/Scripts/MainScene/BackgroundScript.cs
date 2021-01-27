@@ -43,7 +43,7 @@ public class BackgroundScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        WallChange();
     }
 
     // Update is called once per frame
@@ -63,6 +63,10 @@ public class BackgroundScript : MonoBehaviour
                     item.SetActive(true);
                 }
                 foreach (var item in Background)
+                {
+                    item.enabled = true;
+                }
+                foreach(var item in WallSprite)
                 {
                     item.enabled = true;
                 }
@@ -137,7 +141,7 @@ public class BackgroundScript : MonoBehaviour
 
     void WallTypeChange(WallType Wall)
     {
-        if (m_Wall == Wall) return;
+
         m_Wall = Wall;
         switch (m_Wall)
         {

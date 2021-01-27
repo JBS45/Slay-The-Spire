@@ -27,7 +27,7 @@ public class Defence : Ability
         Performer.GetComponentInChildren<Stat>().SetDefence((int)result);
         if (Func.SkillSprite != null)
         {
-            Performer.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillSprite, Vector3.one);
+            Performer.GetComponentInChildren<Stat>().MakeSkillEffect(Func.SkillEffect,Func.SkillSprite);
         }
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)

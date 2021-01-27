@@ -13,7 +13,7 @@ public enum PowerType
 }
 public enum PowerVariety
 {
-    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle
+    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual
 }
 [System.Serializable]
 public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleStart,IBattleEnd
@@ -27,7 +27,7 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
     public int Value { get => m_Value; set => m_Value = value; }
     protected bool m_IsEnable = true;
     public bool IsEnable { get => m_IsEnable; set => m_IsEnable = value; }
-
+    GameObject Target;
 
 
     public void DrawCard(CardData data)
@@ -46,7 +46,8 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
     {
         switch (m_Variety)
         {
-            
+            case PowerVariety.Ritual:
+                break;
         }
     }
     public void TurnEnd()
@@ -81,6 +82,10 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
     public void BattleEnd()
     {
 
+    }
+    public void SetTarget(GameObject target)
+    {
+        Target = target;
     }
 }
 
