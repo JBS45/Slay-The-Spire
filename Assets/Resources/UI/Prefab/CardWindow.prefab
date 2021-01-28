@@ -648,7 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardRes: {fileID: 1633461781091136167, guid: 5906ffdf1aa0df0428ddcd2da816dd4b, type: 3}
   Content: {fileID: 6690176039701719311}
-  CancelButton: {fileID: 5008504220027616699}
+  _CancelButton: {fileID: 5008504220027616699}
   CardOrderBar: {fileID: 6096087447031373603}
 --- !u!1 &1526423933722160530
 GameObject:

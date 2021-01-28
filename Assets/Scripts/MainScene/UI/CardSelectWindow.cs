@@ -43,20 +43,20 @@ public class CardSelectWindow : MonoBehaviour
         
     }
 
-    public void SetWindowType(CardData data,WindowType type)
+    public void SetWindowType(CardData data,WindowType type, Delvoid del)
     {
         switch (type)
         {
             case WindowType.Enchant:
-                Enchant(data);
+                Enchant(data,del);
                 break;
             case WindowType.Remove:
-                Remove(data);
+                Remove(data,del);
                 break;
         }
     }
 
-    void Enchant(CardData data)
+    void Enchant(CardData data,Delvoid del)
     {
         Data = data;
         UpgradeData = new CardData(data);
@@ -75,10 +75,10 @@ public class CardSelectWindow : MonoBehaviour
         Cards[1].GetComponent<CardUIScript>().SetCardUI(UpgradeData);
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(MainSceneController.Instance.UIControl.UICanvas.pixelRect.width, MainSceneController.Instance.UIControl.UICanvas.pixelRect.height);
-        ConfirmButton.GetComponentInChildren<Button>().onClick.AddListener(EnchantConfirm);
+        ConfirmButton.GetComponentInChildren<Button>().onClick.AddListener(()=> { EnchantConfirm(del); });
 
     }
-    void Remove(CardData data)
+    void Remove(CardData data, Delvoid del)
     {
         Data = data;
 
@@ -89,7 +89,7 @@ public class CardSelectWindow : MonoBehaviour
         Cards[0].GetComponent<CardUIScript>().SetCardUI(Data);
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(MainSceneController.Instance.UIControl.UICanvas.pixelRect.width, MainSceneController.Instance.UIControl.UICanvas.pixelRect.height);
-        ConfirmButton.GetComponentInChildren<Button>().onClick.AddListener(RemoveConfirm);
+        ConfirmButton.GetComponentInChildren<Button>().onClick.AddListener(()=>{ RemoveConfirm(del); });
     }
 
     IEnumerator OnEnableConfirmButton()
@@ -119,25 +119,19 @@ public class CardSelectWindow : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-    public void EnchantConfirm()
+    public void EnchantConfirm(Delvoid del)
     {
         Data.CardEnchant();
-        if (MainSceneController.Instance.UIControl.GetCurUI().GetComponent<FireCampWindowScript>() != null)
-        {
-            MainSceneController.Instance.UIControl.GetCurUI().GetComponent<FireCampWindowScript>().FireOff();
-        }
+        del();
         Destroy(this.gameObject);
     }
-    public void RemoveConfirm()
+    public void RemoveConfirm(Delvoid del)
     {
         MainSceneController.Instance.PlayerData.RemoveCard(Data);
         MainSceneController.Instance.PlayerData.CurrentMoney -= MainSceneController.Instance.PlayerData.RemoveCardGold();
         MainSceneController.Instance.PlayerData.CardRemoveCount++;
         MainSceneController.Instance.PlayerData.Notify();
-        if (MainSceneController.Instance.UIControl.GetCurUI().GetComponent<ShopWindowScript>() != null)
-        {
-            MainSceneController.Instance.UIControl.GetCurUI().GetComponent<ShopWindowScript>().UseRemove();
-        }
+        del();
         Destroy(this.gameObject);
     }
 }

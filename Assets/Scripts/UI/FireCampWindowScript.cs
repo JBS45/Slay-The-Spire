@@ -49,7 +49,7 @@ public class FireCampWindowScript : MonoBehaviour
         {
             CardWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
             CardWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => {CardWindow.SetActive(false); });
-            CardWindow.GetComponent<CardWindow>().SetEnchantCardButtonEvent();
+            CardWindow.GetComponent<CardWindow>().SetEnchantCardButtonEvent(FireOff);
         }
         else
         {

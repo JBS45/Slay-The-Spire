@@ -806,6 +806,52 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8424956190855316011}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1966343180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966343182}
+  - component: {fileID: 1966343181}
+  m_Layer: 0
+  m_Name: MysteryDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1966343181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966343180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd401a06b1bcbf246963f8b95fbca227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventKeys:
+  - {fileID: 11400000, guid: d4e97944c0780fa49b52e9607f61f215, type: 2}
+  - {fileID: 11400000, guid: e163b971d65af9f41a604527cdcb665f, type: 2}
+--- !u!4 &1966343182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966343180}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.3372474, y: 2.703737, z: -13.151312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053974688 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8424956191561869451, guid: 51735bd51bf474b4cb2b25ca94cb0c3b,

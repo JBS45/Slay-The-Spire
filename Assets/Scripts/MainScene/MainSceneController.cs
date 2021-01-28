@@ -121,6 +121,8 @@ public class MainSceneController : MonoBehaviour
                 break;
             case MapNodeType.Mistery:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
+                m_UIControl.MakeEventWindow();
+                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(MysterySelector());
                 break;
             case MapNodeType.Monster:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
@@ -177,6 +179,8 @@ public class MainSceneController : MonoBehaviour
         m_playerData.EnergeyPerTurn = 3;
         m_playerData.CardRemoveCount = 0;
 
+        //미스터리 이벤트
+        MysteryDB.Instance.NoSaveInit();
         //유물 기본
         if (m_playerData.Relics == null)
         {
@@ -203,5 +207,8 @@ public class MainSceneController : MonoBehaviour
 
         //저장 정보가 있으면
     }
-
+    string MysterySelector()
+    {
+        return MysteryDB.Instance.RandomSelector();
+    }
 }

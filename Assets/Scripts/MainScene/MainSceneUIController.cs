@@ -49,6 +49,8 @@ public class MainSceneUIController : MonoBehaviour
     [SerializeField]
     GameObject ShopRes;
 
+    [SerializeField]
+    GameObject EventRes;
 
     [Header("ToolTip")]
     [SerializeField]
@@ -128,67 +130,50 @@ public class MainSceneUIController : MonoBehaviour
     }
     public void ZeroFloorUI()
     {
-        CurUI = Instantiate(ZeroPanel);
-        CurUI.transform.SetParent(UICanvas.transform);
-        CurUI.transform.localScale = Vector3.one;
+        CurUI = Instantiate(ZeroPanel, UICanvas.transform);
         CurUI.transform.localPosition = new Vector3(-480.0f, -390.0f, 0.0f);
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void MakeBattleUI()
     {
-        CurUI = Instantiate(BattleUI);
-        CurUI.transform.SetParent(UICanvas.transform);
-        CurUI.transform.localScale = Vector3.one;
+        CurUI = Instantiate(BattleUI, UICanvas.transform);
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void MakeReward()
     {
-        CurUI = Instantiate(RewardRes);
+        CurUI = Instantiate(RewardRes, UICanvas.transform);
         CurUI.GetComponent<RewardWindow>().BattleReward(MainSceneController.Instance.Reward);
-        CurUI.transform.SetParent(UICanvas.transform);
-        CurUI.transform.localScale = Vector3.one;
-        CurUI.transform.localPosition = Vector3.zero;
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void MakeAddReward()
     {
-        AddReward = Instantiate(AddRewardRes);
-        AddReward.transform.SetParent(UICanvas.transform);
-        AddReward.transform.localScale = Vector3.one;
-        AddReward.transform.localPosition = Vector3.zero;
+        AddReward = Instantiate(AddRewardRes, UICanvas.transform);
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void MakeShopWindow()
     {
-        CurUI = Instantiate(ShopRes);
-        CurUI.transform.SetParent(UICanvas.transform);
-        CurUI.transform.localScale = Vector3.one;
-        CurUI.transform.localPosition = Vector3.zero;
+        CurUI = Instantiate(ShopRes, UICanvas.transform);
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+    public void MakeEventWindow()
+    {
+        CurUI = Instantiate(EventRes, UICanvas.transform);
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
 
     public void MakeToolTip()
     {
-        _ToolTip = Instantiate(ToolTipRes);
-        _ToolTip.transform.SetParent(UICanvas.transform);
-        _ToolTip.transform.localScale = Vector3.one;
-        _ToolTip.transform.localPosition = Vector3.zero;
+        _ToolTip = Instantiate(ToolTipRes, UICanvas.transform);
         _ToolTip.SetActive(false);
     }
     public void MakeFireCampWindow()
     {
-        CurUI = Instantiate(FireCampWindowRes);
-        CurUI.transform.SetParent(UICanvas.transform);
-        CurUI.transform.localScale = Vector3.one;
-        CurUI.transform.localPosition = Vector3.zero;
+        CurUI = Instantiate(FireCampWindowRes, UICanvas.transform);
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
     public void MakeEnchantCardWindow()
     {
-        EnchantCard = Instantiate(EnchantCardWindowRes);
-        EnchantCard.transform.SetParent(UICanvas.transform);
-        EnchantCard.transform.localScale = Vector3.one;
-        EnchantCard.transform.localPosition = Vector3.zero;
+        EnchantCard = Instantiate(EnchantCardWindowRes, UICanvas.transform);
         EnchantCard.transform.SetAsLastSibling();
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
@@ -196,10 +181,7 @@ public class MainSceneUIController : MonoBehaviour
     {
         if (CurrentDeckWindow == null)
         {
-            CurrentDeckWindow = Instantiate(CardWindowRes);
-            CurrentDeckWindow.transform.SetParent(UICanvas.transform);
-            CurrentDeckWindow.transform.localScale = Vector3.one;
-            CurrentDeckWindow.transform.localPosition = Vector3.zero;
+            CurrentDeckWindow = Instantiate(CardWindowRes, UICanvas.transform);
             CurrentDeckWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Show, true);
             CurrentDeckWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(CurrentDeckWindow.GetComponent<CardWindow>().CancelButtonEvent);
             InfoBar.gameObject.transform.SetAsLastSibling();
@@ -223,10 +205,7 @@ public class MainSceneUIController : MonoBehaviour
     }
     public GameObject MakeCardWindow()
     {
-        GameObject tmp = Instantiate(CardWindowRes);
-        tmp.transform.SetParent(UICanvas.transform);
-        tmp.transform.localScale = Vector3.one;
-        tmp.transform.localPosition = Vector3.zero;
+        GameObject tmp = Instantiate(CardWindowRes, UICanvas.transform);
         tmp.transform.SetAsLastSibling();
         tmp.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Show, false);
         InfoBar.gameObject.transform.SetAsLastSibling();
@@ -235,10 +214,7 @@ public class MainSceneUIController : MonoBehaviour
     }
     public void MakeMap()
     {
-        Map = Instantiate(MapRes);
-        Map.transform.SetParent(UICanvas.transform);
-        Map.transform.localScale = Vector3.one;
-        Map.transform.localPosition = Vector3.zero;
+        Map = Instantiate(MapRes, UICanvas.transform);
         InfoBar.gameObject.transform.SetAsLastSibling();
         Map.GetComponent<MapUIScript>().CancelButtonEvent(OffIsMapOpen);
     }

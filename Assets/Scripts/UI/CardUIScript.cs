@@ -278,10 +278,10 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         CardSize = size;
     }
 
-    public void SelectCardUI(WindowType type)
+    public void SelectCardUI(WindowType type, Delvoid del)
     {
         MainSceneController.Instance.UIControl.MakeEnchantCardWindow();
-        MainSceneController.Instance.UIControl.EnchantCardWindow.GetComponent<CardSelectWindow>().SetWindowType(Data, type);
+        MainSceneController.Instance.UIControl.EnchantCardWindow.GetComponent<CardSelectWindow>().SetWindowType(Data, type,del);
     }
     public void ShopUISetting(int gold,ShopWindowDelegate del)
     {

@@ -23,10 +23,14 @@ public class CardWindow : MonoBehaviour
     List<Vector3> PosList;
 
     [SerializeField]
-    GameObject CancelButton;
+    GameObject _CancelButton;
+    public GameObject CancelButton
+    {
+        get => _CancelButton;
+    }
     public Button Cancel
     {
-        get => CancelButton.GetComponentInChildren<Button>();
+        get => _CancelButton.GetComponentInChildren<Button>();
     }
     Vector3 CancelButtonOriginVector;
 
@@ -113,8 +117,7 @@ public class CardWindow : MonoBehaviour
         }
 
         foreach (var item in CardDataList) {
-            GameObject tmp = Instantiate(CardRes);
-            tmp.transform.SetParent(Content);
+            GameObject tmp = Instantiate(CardRes,Content);
             tmp.transform.localScale = new Vector3((Layout.cellSize.x / 240), (Layout.cellSize.x / 240), (Layout.cellSize.x / 240));
             tmp.GetComponent<CardUIScript>().SetCardUI(item);
             tmp.GetComponent<CardUIScript>().SetSize(Layout.cellSize.x / 240);
@@ -146,8 +149,7 @@ public class CardWindow : MonoBehaviour
 
         foreach (var item in tmpList)
         {
-            GameObject tmp = Instantiate(CardRes);
-            tmp.transform.SetParent(Content);
+            GameObject tmp = Instantiate(CardRes, Content);
             tmp.transform.localScale = new Vector3((Layout.cellSize.x / 240), (Layout.cellSize.x / 240), (Layout.cellSize.x / 240));
             tmp.GetComponent<CardUIScript>().SetCardUI(item);
             tmp.GetComponent<CardUIScript>().SetSize(Layout.cellSize.x / 240);
@@ -308,18 +310,20 @@ public class CardWindow : MonoBehaviour
         CardOrderBar.transform.localPosition = Content.localPosition + new Vector3(0, 40, 0);
         Scroll.size = 0.2f;
     }
-    public void SetEnchantCardButtonEvent()
+    public void SetEnchantCardButtonEvent(Delvoid del)
     {
+        del += () => { Destroy(this.gameObject); };
         foreach(var item in Cards)
         {
-            item.GetComponentInChildren<Button>().onClick.AddListener(()=> { item.GetComponent<CardUIScript>().SelectCardUI(WindowType.Enchant); });
+            item.GetComponentInChildren<Button>().onClick.AddListener(()=> { item.GetComponent<CardUIScript>().SelectCardUI(WindowType.Enchant,del); });
         }
     }
-    public void SetRemoveCardButtonEvent()
+    public void SetRemoveCardButtonEvent(Delvoid del)
     {
+        del += () => { Destroy(this.gameObject); };
         foreach (var item in Cards)
         {
-            item.GetComponentInChildren<Button>().onClick.AddListener(() => { item.GetComponent<CardUIScript>().SelectCardUI(WindowType.Remove); });
+            item.GetComponentInChildren<Button>().onClick.AddListener(() => { item.GetComponent<CardUIScript>().SelectCardUI(WindowType.Remove,del); });
         }
     }
 }

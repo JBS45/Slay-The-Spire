@@ -90,7 +90,7 @@ public class CardRemoveScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
             }
             RemoveCardWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Remove, false);
             RemoveCardWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => { RemoveCardWindow.SetActive(false); });
-            RemoveCardWindow.GetComponent<CardWindow>().SetRemoveCardButtonEvent();
+            RemoveCardWindow.GetComponent<CardWindow>().SetRemoveCardButtonEvent(MainSceneController.Instance.UIControl.GetCurUI().GetComponent<ShopWindowScript>().UseRemove);
             del(this);
         }
     }
