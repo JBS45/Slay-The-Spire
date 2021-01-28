@@ -121,16 +121,21 @@ public class Stat : MonoBehaviour
         obj.transform.SetAsFirstSibling();
         obj.transform.localScale = Vector3.one;
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
-        screenPos -= new Vector3((Canvas.GetComponent<Canvas>().pixelRect.width / 2) + 150, Canvas.GetComponent<Canvas>().pixelRect.height / 2, 0);
+        Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+        screenPos =  new Vector3((Canvas.GetComponent<RectTransform>().rect.size.x*screenPos.x)- Canvas.GetComponent<RectTransform>().rect.size.x / 2 - 150,
+            (Canvas.GetComponent<RectTransform>().rect.size.y * screenPos.y)- Canvas.GetComponent<RectTransform>().rect.size.y / 2, 0);
         obj.transform.localPosition = screenPos;
     }
     protected Vector3 UIcoordinatePos(Vector3 pos)
     {
-        Vector3 tmp = Camera.main.WorldToScreenPoint(pos);
-        tmp -= new Vector3((Canvas.GetComponent<Canvas>().pixelRect.width / 2), Canvas.GetComponent<Canvas>().pixelRect.height / 2, 0);
 
-        return tmp;
+        //1920:743 = ?:tmp.x
+        Vector3 screenPos = Camera.main.WorldToViewportPoint(pos);
+        screenPos = new Vector3((Canvas.GetComponent<RectTransform>().rect.size.x * screenPos.x) - Canvas.GetComponent<RectTransform>().rect.size.x / 2,
+            (Canvas.GetComponent<RectTransform>().rect.size.y * screenPos.y) - Canvas.GetComponent<RectTransform>().rect.size.y / 2, 0);
+
+
+        return screenPos;
     }
     public void TargetOn()
     {

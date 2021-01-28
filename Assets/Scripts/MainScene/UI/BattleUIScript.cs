@@ -241,10 +241,9 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
         Sword2.color = new Color(Sword2.color.r, Sword2.color.g, Sword2.color.b, alpha);
         BattleStartText.color = new Color(BattleStartText.color.r, BattleStartText.color.g, BattleStartText.color.b, alpha);
 
-        float tmp = Camera.main.pixelWidth;
+        float tmp = GetComponent<RectTransform>().sizeDelta.x;
 
-
-        Vector3 target = Sword1.transform.localPosition - new Vector3(tmp, 0, 0);
+        Vector3 target = Sword1.transform.localPosition + new Vector3(tmp, 0, 0);
 
         while (Vector3.Distance(Sword1.transform.localPosition, target) > 1.0f)
         {

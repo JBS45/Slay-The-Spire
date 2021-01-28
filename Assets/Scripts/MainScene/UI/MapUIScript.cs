@@ -102,7 +102,6 @@ public class MapUIScript : MonoBehaviour
         tmp.transform.SetParent(Content);
         tmp.transform.localScale = Vector3.one;
         tmp.transform.localPosition = node.GetPos();
-        Debug.Log(node.GetPos());
         tmp.name = "Boss";
         tmp.GetComponent<MapIconScript>().SetBossType(type);
 
