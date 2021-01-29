@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MysteryEventWindow : MonoBehaviour
+public class MysteryEventWindow : MonoBehaviour,IDeckChange
 {
     [SerializeField]
     Image EventImage;
@@ -22,17 +22,18 @@ public class MysteryEventWindow : MonoBehaviour
     [SerializeField]
     TMP_Text Name;
 
+    delegate void MysteryButtonEvent(MysteryButton button);
 
     Mystery Value;
 
     GameObject ExtraWindow;
 
-    Dictionary<string, Delvoid> Methods;
+    Dictionary<string, MysteryButtonEvent> Methods;
 
     private void Awake()
     {
         Buttons = new List<GameObject>();
-        Methods = new Dictionary<string, Delvoid>();
+        Methods = new Dictionary<string, MysteryButtonEvent>();
         SetMethod();
     }
     // Start is called before the first frame update
@@ -74,17 +75,18 @@ public class MysteryEventWindow : MonoBehaviour
         for(int i = 0; i < Value.Button.Count; ++i)
         {
             GameObject tmp = Instantiate(ButtonRes,ButtonPos);
-            Delvoid del = new Delvoid(() => { });
-            foreach(var ButtonEvent in Value.Button[i].ButtonEventKey)
+            MysteryButtonEvent EventDel = new MysteryButtonEvent((MysteryButton button) => {});
+            foreach (var ButtonEvent in Value.Button[i].ButtonEventKey)
             {
-                del += Methods[ButtonEvent];
+                EventDel += Methods[ButtonEvent];
             }
             tmp.GetComponentInChildren<TMP_Text>().text = Value.Button[i].ButtonString;
             tmp.transform.SetAsFirstSibling();
+            int num = i;
             tmp.GetComponentInChildren<Button>().onClick.AddListener(
                 () => 
                 {
-                    del();
+                    EventDel(Value.Button[num]);
                 });
             Buttons.Add(tmp);
         }
@@ -94,32 +96,37 @@ public class MysteryEventWindow : MonoBehaviour
 
     }
 
-    public void NextWindow()
+    public void NextWindow(MysteryButton button)
     {
-        SetWindow(Value.NextKey);
+        SetWindow(button.NextKey);
     }
-    public void CardEnchant()
+    public void CardEnchant(MysteryButton button)
     {
         ExtraWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
         ExtraWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Enchant, false);
         ExtraWindow.GetComponent<CardWindow>().CancelButton.SetActive(false);
-        ExtraWindow.GetComponent<CardWindow>().SetEnchantCardButtonEvent(NextWindow);
+        ExtraWindow.GetComponent<CardWindow>().SetEnchantCardButtonEvent(()=> { NextWindow(button); });
     }
-    public void CardRemove()
+    public void CardRemove(MysteryButton button)
     {
         ExtraWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
         ExtraWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Remove, false);
         ExtraWindow.GetComponent<CardWindow>().CancelButton.SetActive(false);
-        ExtraWindow.GetComponent<CardWindow>().SetRemoveCardButtonEvent(NextWindow);
+        ExtraWindow.GetComponent<CardWindow>().SetRemoveCardButtonEvent(() => { NextWindow(button); });
     }
-    public void AddRandomCard()
+    public void AddRandomCard(MysteryButton button)
     {
         int random = Random.Range(0, CardDB.Instance.IronClad.Card.Count);
         CardData tmp = new CardData(CardDB.Instance.IronClad.Card[random]);
         MainSceneController.Instance.PlayerData.AddCard(tmp);
     }
-    public void Progress()
+    public void Progress(MysteryButton button)
     {
         MainSceneController.Instance.UIControl.OpenMapProgress();
+    }
+
+    public CardData OriginDeckChange(CardData data)
+    {
+        return data;
     }
 }

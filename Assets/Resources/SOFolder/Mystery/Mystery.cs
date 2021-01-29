@@ -14,13 +14,13 @@ public class Mystery : ScriptableObject
     [TextArea(1,6)]
     public string Description;
 
-    public string NextKey;
     public List<MysteryButton> Button;
 
 }
 [System.Serializable]
 public class MysteryButton
 {
+    public string NextKey;
     public string ButtonString;
     public List<string> ButtonEventKey;
 }

@@ -33,6 +33,7 @@ public class PlayerDataAsset : ScriptableObject
 
     public List<CardData> OriginDecks { get; set; }
     public List<IObservers> Observers { get; set; }
+    public List<IDeckChange> DeckChanges { get; set; }
 
     public List<RelicData> Relics;
 
@@ -41,11 +42,22 @@ public class PlayerDataAsset : ScriptableObject
     {
         if (Observers == null)
         {
-            return;
+            Observers = new List<IObservers>();
         }
         foreach (var observer in Observers)
         {
             observer.UpdateData();
+        }
+    }
+    public void Notify(CardData data)
+    {
+        if (DeckChanges == null)
+        {
+            DeckChanges = new List<IDeckChange>();
+        }
+        foreach (var observer in DeckChanges)
+        {
+            observer.OriginDeckChange(data);
         }
     }
     public void Attach(IObservers observer)
@@ -64,10 +76,12 @@ public class PlayerDataAsset : ScriptableObject
     {
         CardData tmp = new CardData(data);
         OriginDecks.Add(tmp);
+        Notify(data);
     }
     public void RemoveCard(CardData data)
     {
         OriginDecks.Remove(data);
+        Notify(data);
     }
     public void AddRelic(Relic data)
     {

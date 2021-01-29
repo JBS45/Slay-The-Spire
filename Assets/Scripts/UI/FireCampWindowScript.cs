@@ -48,6 +48,7 @@ public class FireCampWindowScript : MonoBehaviour
         if(CardWindow == null)
         {
             CardWindow = MainSceneController.Instance.UIControl.MakeCardWindow();
+            CardWindow.GetComponent<CardWindow>().SetCardWindow(MainSceneController.Instance.PlayerData.OriginDecks, WindowType.Enchant, false);
             CardWindow.GetComponent<CardWindow>().Cancel.onClick.AddListener(() => {CardWindow.SetActive(false); });
             CardWindow.GetComponent<CardWindow>().SetEnchantCardButtonEvent(FireOff);
         }

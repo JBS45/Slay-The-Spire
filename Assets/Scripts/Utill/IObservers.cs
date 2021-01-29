@@ -49,3 +49,7 @@ public interface IBattleEnd
 {
     void BattleEnd();
 }
+public interface IDeckChange
+{
+    CardData OriginDeckChange(CardData data);
+}
