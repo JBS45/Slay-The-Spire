@@ -19,22 +19,26 @@ MonoBehaviour:
   MaxHp: 54
   Pattern:
   - OnlyOnceAction: 1
+    Target: 1
     Intent: 2
     Function:
-    - CardAbility: {fileID: 11400000, guid: 3aec5086e88545b40aafe2aae681af32, type: 2}
+    - Type: 2
+      AbilityKey: 
       SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
         type: 3}
-      SkillSprite: {fileID: 7486017478780492331, guid: a0d9e576c7fd8b84d82e630e15a321d9,
+      SkillSprite: {fileID: 7486017478780492331, guid: 5cce1e5c1c511c943a395c75943f19bd,
         type: 3}
-      variety: 0
-      Value: 0
+      variety: 7
+      Value: 3
       Stack: 0
       Decription: 
     Repeat: 1
   - OnlyOnceAction: 0
+    Target: 0
     Intent: 0
     Function:
-    - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+    - Type: 0
+      AbilityKey: Attack
       SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
       SkillSprite: {fileID: 7447516423718122844, guid: 77c451ff4f5d19e45b21ded97f1525ab,

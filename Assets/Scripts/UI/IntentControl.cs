@@ -31,11 +31,13 @@ public class IntentControl : MonoBehaviour
 
     IntentType Type;
 
+    bool IsInit = false;
     private void Awake()
     {
         BuffEffect.GetComponent<ParticleSystem>().Stop();
         DeBuffEffect.GetComponent<ParticleSystem>().Stop();
         DamageText.enabled = false;
+        IsInit = false;
         Intent = new List<GameObject>();
     }
 
@@ -63,83 +65,92 @@ public class IntentControl : MonoBehaviour
         {
             text = Damage.ToString();
         }
-
-        Intent.Add(Instantiate(IntentImageRes));
-        Intent[0].transform.SetParent(transform);
-        Intent[0].transform.localScale = Vector3.one;
-        Intent[0].transform.localPosition = Vector3.zero;
-        switch (Type)
+        if (IsInit == false)
         {
-            case IntentType.Attack:
-                DamageText.enabled = true;
-                Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
-                DamageText.text = text;
-                break;
-            case IntentType.AttackAndBuff:
-                DamageText.enabled = true;
-                Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
-                BuffEffect.GetComponent<ParticleSystem>().Play();
-                DamageText.text = text;
-                break;
-            case IntentType.AttackAndDeBuff:
-                DamageText.enabled = true;
-                Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
-                DeBuffEffect.GetComponent<ParticleSystem>().Play();
-                DamageText.text = text;
-                break;
-            case IntentType.AttackAndDefend:
-                DamageText.enabled = true;
-                Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
-                Intent.Add(Instantiate(IntentImageRes));
-                Intent[1].transform.SetParent(transform);
-                Intent[1].transform.localScale = Vector3.one;
-                Intent[1].transform.localPosition = Vector3.zero;
-                Intent[1].GetComponent<IntentItemControl>().SetData(IntentSprite[4]);
-                Intent[1].GetComponent<IntentItemControl>().SetAfterImage(true);
-                Intent[0].transform.SetAsLastSibling();
-                DamageText.text = text;
-                break;
-            case IntentType.Buff:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[0]);
-                BuffEffect.GetComponent<ParticleSystem>().Play();
-                break;
-            case IntentType.Debuff:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[1]);
-                Intent[0].GetComponent<IntentItemControl>().SetRotate(true);
-                DeBuffEffect.GetComponent<ParticleSystem>().Play();
-                break;
-            case IntentType.Debuff2:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[2]);
-                Intent[0].GetComponent<IntentItemControl>().SetRotate(true);
-                break;
-            case IntentType.Defend:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[4]);
-                break;
-            case IntentType.DefendAndBuff:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[3]);
-                BuffEffect.GetComponent<ParticleSystem>().Play();
-                break;
-            case IntentType.Sleep:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[5]);
-                Intent[0].GetComponent<IntentItemControl>().Setflicker(true);
-                break;
-            case IntentType.Stun:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[6]);
-                Intent[0].GetComponent<IntentItemControl>().Setflicker(true);
-                break;
-            case IntentType.UnKnown:
-                DamageText.enabled = false;
-                Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[7]);
-                Intent[0].GetComponent<IntentItemControl>().Setflicker(true);
-                break;
+            Intent.Add(Instantiate(IntentImageRes));
+            Intent[0].transform.SetParent(transform);
+            Intent[0].transform.localScale = Vector3.one;
+            Intent[0].transform.localPosition = Vector3.zero;
+            switch (Type)
+            {
+                case IntentType.Attack:
+                    DamageText.enabled = true;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
+                    DamageText.text = text;
+                    break;
+                case IntentType.AttackAndBuff:
+                    DamageText.enabled = true;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
+                    BuffEffect.GetComponent<ParticleSystem>().Play();
+                    DamageText.text = text;
+                    break;
+                case IntentType.AttackAndDeBuff:
+                    DamageText.enabled = true;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
+                    DeBuffEffect.GetComponent<ParticleSystem>().Play();
+                    DamageText.text = text;
+                    break;
+                case IntentType.AttackAndDefend:
+                    DamageText.enabled = true;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
+                    Intent.Add(Instantiate(IntentImageRes));
+                    Intent[1].transform.SetParent(transform);
+                    Intent[1].transform.localScale = Vector3.one;
+                    Intent[1].transform.localPosition = Vector3.zero;
+                    Intent[1].GetComponent<IntentItemControl>().SetData(IntentSprite[4]);
+                    Intent[1].GetComponent<IntentItemControl>().SetAfterImage(true);
+                    Intent[0].transform.SetAsLastSibling();
+                    DamageText.text = text;
+                    break;
+                case IntentType.Buff:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[0]);
+                    BuffEffect.GetComponent<ParticleSystem>().Play();
+                    break;
+                case IntentType.Debuff:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[1]);
+                    Intent[0].GetComponent<IntentItemControl>().SetRotate(true);
+                    DeBuffEffect.GetComponent<ParticleSystem>().Play();
+                    break;
+                case IntentType.Debuff2:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[2]);
+                    Intent[0].GetComponent<IntentItemControl>().SetRotate(true);
+                    break;
+                case IntentType.Defend:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[4]);
+                    break;
+                case IntentType.DefendAndBuff:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[3]);
+                    BuffEffect.GetComponent<ParticleSystem>().Play();
+                    break;
+                case IntentType.Sleep:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[5]);
+                    Intent[0].GetComponent<IntentItemControl>().Setflicker(true);
+                    break;
+                case IntentType.Stun:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[6]);
+                    Intent[0].GetComponent<IntentItemControl>().Setflicker(true);
+                    break;
+                case IntentType.UnKnown:
+                    DamageText.enabled = false;
+                    Intent[0].GetComponent<IntentItemControl>().SetData(IntentSprite[7]);
+                    Intent[0].GetComponent<IntentItemControl>().Setflicker(true);
+                    break;
+            }
         }
+        else
+        {
+            Intent[0].GetComponent<IntentItemControl>().SetData(tmp);
+            DamageText.text = text;
+        }
+        IsInit = true;
+
     }
     Sprite SpriteSelector(int Damage)
     {

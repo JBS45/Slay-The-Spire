@@ -587,7 +587,7 @@ public class MapGenerator : MonoBehaviour
     }
     void MakeBossNode()
     {
-        Boss = (BossType)Random.Range(0, 3);
+        Boss = (BossType)Random.Range(0,System.Enum.GetValues(typeof(BossType)).Length);
         BossNode = new MapNode(new Vector2(0,MapHeight/2), Vector2Int.zero, MapNodeType.Boss, MaxHeight + 1, 0);
         for(int i = 0; i < Map[MaxHeight].Count; ++i) {
             Map[MaxHeight][i].AddUpPath(BossNode.GetFloorIndex());

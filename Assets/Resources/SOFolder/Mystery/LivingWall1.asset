@@ -22,15 +22,37 @@ MonoBehaviour:
     \uC54C\uB358 \uAC83\uC744 \uC78A\uC73C\uBA74, \uB108\uB97C \uBCF4\uB0B4\uC8FC\uB9C8.\"</color>\n<color=#E9A7F1>\"\uBCC0\uD654\uD574\uC57C\uB9CC
     \uC0C8\uB85C\uC6B4 \uC7A5\uC18C\uC5D0 \uB2E4\uB2E4\uB97C \uC218 \uC788\uB2E4.\"</color>\n<color=#F8B865>\"\uB098\uB97C
     \uC9C0\uB098\uAC00\uB824\uBA74, \uC131\uC7A5\uD574\uC57C \uD55C\uB2E4.\"</color>"
-  NextKey: M202
   Button:
-  - ButtonString: "[\uB9DD\uAC01] <color=#7EC346>\uCE74\uB4DC\uB97C 1\uC7A5 \uC81C\uAC70\uD569\uB2C8\uB2E4.</color>"
-    ButtonEventKey:
-    - Remove
-  - ButtonString: "[\uBCC0\uD654] <color=#7EC346>\uCE74\uB4DC\uB97C 1\uC7A5 \uBCC0\uD654\uC2DC\uD0B5\uB2C8\uB2E4.</color>"
-    ButtonEventKey:
-    - Remove
-    - AddRandom
-  - ButtonString: "[\uC131\uC7A5] <color=#7EC346>\uCE74\uB4DC\uB97C 1\uC7A5 \uAC15\uD654\uD569\uB2C8\uB2E4.</color>"
-    ButtonEventKey:
-    - Enchant
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: M202
+    ButtonEvents:
+    - ButtonString: "[\uB9DD\uAC01] "
+      ButtonEventKey: 
+      Value: 0
+    - ButtonString: "<color=#{0}> \uCE74\uB4DC {1}\uC7A5\uC744 \uC81C\uAC70\uD569\uB2C8\uB2E4.</color>"
+      ButtonEventKey: Remove
+      Value: 1
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: M202
+    ButtonEvents:
+    - ButtonString: "[\uBCC0\uD654] "
+      ButtonEventKey: 
+      Value: 0
+    - ButtonString: "<color=#{0}> \uCE74\uB4DC {1}\uC7A5\uC744 \uBCC0\uD654\uC2DC\uD0B5\uB2C8\uB2E4.</color>"
+      ButtonEventKey: Change
+      Value: 1
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: M202
+    ButtonEvents:
+    - ButtonString: "[\uC131\uC7A5] "
+      ButtonEventKey: 
+      Value: 0
+    - ButtonString: "<color=#{0}> \uCE74\uB4DC {1}\uC7A5\uC744 \uAC15\uD654\uD569\uB2C8\uB2E4.</color>"
+      ButtonEventKey: Enchant
+      Value: 1

@@ -13,26 +13,22 @@ public enum PowerType
 }
 public enum PowerVariety
 {
-    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual
+    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual,Rage
 }
 [System.Serializable]
 public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleStart,IBattleEnd
 {
-    protected Timing m_Timing;
-    protected PowerType m_Type;
-    public PowerType Type { get => m_Type; set => m_Type = value; }
-    protected PowerVariety m_Variety;
-    public PowerVariety Variety { get => m_Variety; set => m_Variety = value; }
-    protected int m_Value;
-    public int Value { get => m_Value; set => m_Value = value; }
-    protected bool m_IsEnable = true;
-    public bool IsEnable { get => m_IsEnable; set => m_IsEnable = value; }
+    public Timing Timing;
+    public PowerType Type;
+    public PowerVariety Variety;
+    public int Value;
+    public bool IsEnable = true;
     GameObject Target;
 
 
     public void DrawCard(CardData data)
     {
-        switch (m_Variety)
+        switch (Variety)
         {
             case PowerVariety.Entangle:
                 if (data.CardType == CardType.Attack)
@@ -44,15 +40,16 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
     }
     public void TurnBegin()
     {
-        switch (m_Variety)
+        switch (Variety)
         {
             case PowerVariety.Ritual:
+                PowerManager.Instance.AssginBuff(Target, PowerVariety.Strength, Value,true);
                 break;
         }
     }
     public void TurnEnd()
     {
-        switch (m_Variety)
+        switch (Variety)
         {
             case PowerVariety.Fragile:
             case PowerVariety.injure:
@@ -69,7 +66,15 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
     }
     public void CardUse(CardData data)
     {
-
+        switch (Variety)
+        {
+            case PowerVariety.Rage:
+                if (data.CardType == CardType.Skill)
+                {
+                    PowerManager.Instance.AssginBuff(Target, PowerVariety.Strength, Value, true);
+                }
+                break;
+        }
     }
     public void CardExtinct(CardData data)
     {

@@ -157,12 +157,23 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Color tmpColor;
         for (int i = 0; i < data.Action.Count; ++i)
         {
-            tmpInt = data.Action[i].CardAbility.PredictValue(MainSceneController.Instance.Character, data.GetTarget(), data.Action[i], data.EnchantCount);
-            if (data.BaseValue[i] > tmpInt)
+            switch (data.Action[i].Type)
+            {
+                case AbilityType.Attack:
+                    tmpInt=AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, data.GetTarget(), data.Action[i].SkillEffect, data.Action[i].AbilityKey, data.Action[i].Value, false);
+                    break;
+                case AbilityType.Skill:
+                    tmpInt=SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, data.GetTarget(), data.Action[i].AbilityKey, data.Action[i].Value, false);
+                    break;
+                case AbilityType.Power:
+                    tmpInt=PowerManager.Instance.AssginBuff(data.GetTarget(), data.Action[i].variety, data.Action[i].Value,false);
+                    break;
+            }
+            if (Mathf.Abs(data.BaseValue[i]) > tmpInt)
             {
                 tmpColor = TextColor[1];
             }
-            else if (data.BaseValue[i] == tmpInt)
+            else if (Mathf.Abs(data.BaseValue[i]) == tmpInt)
             {
                 tmpColor = TextColor[0];
             }

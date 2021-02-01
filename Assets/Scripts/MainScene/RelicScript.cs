@@ -109,6 +109,11 @@ public class RelicScript : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
     public void UpdateData()
     {
         OnAfterImage();
+        if (!Data.IsEnable)
+        {
+            RelicImage.color = Color.gray;
+            Text.enabled = false;
+        }
         if (Data.IsStack)
         {
             Text.text = Data.StackCount.ToString();

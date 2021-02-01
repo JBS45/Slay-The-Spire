@@ -88,25 +88,39 @@ public class RewardWindow : MonoBehaviour
         //골드
         GameObject tmp = Instantiate(RewardButtonRes);
 
-        tmp.transform.SetParent(Background);
-        tmp.transform.localScale = Vector3.one;
-        tmp.GetComponent<RewardButtonScript>().SetGoldReward(RewardType.Gold, reward.RandomGoldGenerator(20));
-        RewardButtonList.Add(tmp);
+        if (Reward.Gold > 0)
+        {
+            tmp.transform.SetParent(Background);
+            tmp.transform.localScale = Vector3.one;
+            tmp.GetComponent<RewardButtonScript>().SetGoldReward(RewardType.Gold, reward.Gold);
+            RewardButtonList.Add(tmp);
+        }
 
-        /*if (Reward.Potion != PotionType.None)
+        if (Reward.Potion != PotionType.None)
         {
             tmp = Instantiate(RewardButtonRes);
             tmp.transform.SetParent(Background);
             tmp.transform.localScale = Vector3.one;
-            tmp.GetComponent<RewardButtonScript>().SetReward(RewardType.Potion, 0, PotionType.None, this.gameObject, AddCard,CheckButtonCount);
+            tmp.GetComponent<RewardButtonScript>().SetPotionReward(RewardType.Potion, reward.Potion);
             RewardButtonList.Add(tmp);
         }
-        */
-        tmp = Instantiate(RewardButtonRes);
-        tmp.transform.SetParent(Background);
-        tmp.transform.localScale = Vector3.one;
-        tmp.GetComponent<RewardButtonScript>().SetCardReward(RewardType.Card, reward.CardSelector(CharacterType.Ironclad, 3), this.gameObject);
-        RewardButtonList.Add(tmp);
+        if (Reward.CardList.Count > 0)
+        {
+            tmp = Instantiate(RewardButtonRes);
+            tmp.transform.SetParent(Background);
+            tmp.transform.localScale = Vector3.one;
+            tmp.GetComponent<RewardButtonScript>().SetCardReward(RewardType.Card, reward.CardList, this.gameObject);
+            RewardButtonList.Add(tmp);
+
+        }
+        if (Reward.Relic != null)
+        {
+            tmp = Instantiate(RewardButtonRes);
+            tmp.transform.SetParent(Background);
+            tmp.transform.localScale = Vector3.one;
+            tmp.GetComponent<RewardButtonScript>().SetRelicReward(RewardType.Relic, reward.Relic);
+            RewardButtonList.Add(tmp);
+        }
 
         //Addwindow
         MainSceneController.Instance.UIControl.MakeAddReward();
@@ -142,7 +156,7 @@ public class RewardWindow : MonoBehaviour
     void MakeAddCardWindow()
     {
         AddCard.GetComponent<AddCardWindow>().Setting(MainSceneController.Instance.Reward.CardList, WindowType.Reward);
-        AddCard.GetComponent<AddCardWindow>().SetCardButton(RewardButtonList[RewardButtonList.Count - 1]);
+        AddCard.GetComponent<AddCardWindow>().SetCardButton(RewardButtonList.Find(item=>item.GetComponent<RewardButtonScript>().Type== RewardType.Card));
         AddCard.GetComponent<AddCardWindow>().SetButtonEvent(
                     () => {
                         this.gameObject.SetActive(true);
@@ -164,6 +178,9 @@ public class RewardWindow : MonoBehaviour
                     break;
                 case RewardType.Card:
                     ProceedText.text = "카드 넘기기";
+                    break;
+                case RewardType.Relic:
+                    ProceedText.text = "유물 넘기기";
                     break;
             }
         }

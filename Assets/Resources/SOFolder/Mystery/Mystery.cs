@@ -20,7 +20,25 @@ public class Mystery : ScriptableObject
 [System.Serializable]
 public class MysteryButton
 {
+    public Condtion condtion = new Condtion();
     public string NextKey;
+    public List<ButtonFunc> ButtonEvents;
+}
+
+public enum ConditionType
+{
+    None,Gold
+}
+[System.Serializable]
+public class Condtion
+{
+    public ConditionType type = ConditionType.None;
+    public float value;
+}
+[System.Serializable]
+public class ButtonFunc
+{
     public string ButtonString;
-    public List<string> ButtonEventKey;
+    public string ButtonEventKey;
+    public int Value;
 }

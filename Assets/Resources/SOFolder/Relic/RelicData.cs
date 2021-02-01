@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinct, IBattleStart, IBattleEnd
 {
-
+    bool m_IsEnable;
+    public bool IsEnable { get => m_IsEnable; set => m_IsEnable = value; }
     string m_Name;
     public string Name { get => m_Name; set => m_Name = value; }
     CharacterType m_CharType;
@@ -18,8 +19,7 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
 
     bool m_IsStack;
     public bool IsStack { get => m_IsStack; set => m_IsStack = value; }
-    bool m_IsOnceStack;
-    public bool IsOnceStack { get => m_IsOnceStack; set => m_IsOnceStack = value; }
+    bool m_IsDecrease;
     int m_StackCount;
     public int StackCount { get => m_StackCount; set => m_StackCount = value; }
     int m_MaxStack;
@@ -72,28 +72,36 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
 
     void StackCheck()
     {
-        if (IsStack)
+        if (IsEnable)
         {
-            if (IsOnceStack)
+            if (IsStack)
             {
-                if (StackCount > 0)
+                if (m_IsDecrease)
                 {
-                    StackCount--;
-                    OnExcute();
+                    if (StackCount > 0)
+                    {
+                        StackCount--;
+                        OnExcute();
+                    }
+                    if (StackCount == 0)
+                    {
+                        IsEnable = false;
+                    }
+
+                }
+                else
+                {
+                    if (StackCount >= MaxStack)
+                    {
+                        StackCount = 0;
+                        OnExcute();
+                    }
                 }
             }
             else
             {
-                if (StackCount >= MaxStack)
-                {
-                    StackCount = 0;
-                    OnExcute();
-                }
+                OnExcute();
             }
-        }
-        else
-        {
-            OnExcute();
         }
     }
     void OnExcute()
@@ -104,7 +112,15 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
             case TargetOptions.NoTarget:
                 foreach (var Func in Action)
                 {
-                    Func.CardAbility.OnExcute(MainSceneController.Instance.Character, MainSceneController.Instance.Character, Func, 0);
+                    switch (Func.Type)
+                    {
+                        case AbilityType.Skill:
+                            SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, MainSceneController.Instance.Character, Func.AbilityKey, Func.Value, true);
+                            break;
+                        case AbilityType.Power:
+                            PowerManager.Instance.AssginBuff(MainSceneController.Instance.Character, Func.variety, Func.Value,true);
+                            break;
+                    }
                 }
                 break;
             case TargetOptions.AllEnemy:
@@ -112,7 +128,18 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
                 {
                     foreach (var Func in Action)
                     {
-                        Func.CardAbility.OnExcute(MainSceneController.Instance.Character, monster, Func, 0);
+                        switch (Func.Type)
+                        {
+                            case AbilityType.Attack:
+                                AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, Func.SkillEffect, Func.AbilityKey, Func.Value, true);
+                                break;
+                            case AbilityType.Skill:
+                                SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, monster, Func.AbilityKey, Func.Value, true);
+                                break;
+                            case AbilityType.Power:
+                                PowerManager.Instance.AssginBuff(monster, Func.variety, Func.Value,true);
+                                break;
+                        }
                     }
                 }
                 break;
@@ -129,6 +156,7 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
 
     public RelicData(Relic data)
     {
+        IsEnable = true;
         Name = data.Name;
         CharType = data.CharType;
         Description = data.Description;
@@ -137,7 +165,7 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
         RelicImage = data.RelicImage;
 
         IsStack = data.IsStack;
-        IsOnceStack = data.IsOnceStack;
+        m_IsDecrease = data.IsDecrease;
         StackCount = data.StackCount;
         MaxStack = data.MaxStack;
 

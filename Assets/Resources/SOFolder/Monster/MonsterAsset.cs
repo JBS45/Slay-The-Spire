@@ -6,15 +6,16 @@ using UnityEngine;
 public class MonsterAction
 {
     public bool OnlyOnceAction;
+    public MonsterTargetType Target;
     public IntentType Intent;
     public List<FunctionModule> Function;
     public int Repeat = 1;
 }
 
 
-public enum MonsterFunctionType
+public enum MonsterTargetType
 {
-    Attack,Defend,Weak,Fragile
+    Player,Self,Monster
 }
 
 [CreateAssetMenu(menuName = "MonsterAsset")]

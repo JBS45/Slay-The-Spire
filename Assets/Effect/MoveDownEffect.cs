@@ -31,6 +31,14 @@ public class MoveDownEffect : MonoBehaviour, SkillEffect
 
         OnExcute();
     }
+    public void Setting(Transform target)
+    {
+        transform.SetParent(target);
+        transform.localScale = Vector3.one;
+        transform.localPosition = Vector3.zero;
+
+        OnExcute();
+    }
     public void OnExcute()
     {
         StartCoroutine(FadeOutMoveDown());

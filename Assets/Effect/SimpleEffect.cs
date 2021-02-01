@@ -5,6 +5,7 @@ using UnityEngine;
 public interface SkillEffect
 {
     void Setting(Transform target,Sprite sprite);
+    void Setting(Transform target);
     void OnExcute();
 }
 public class SimpleEffect : MonoBehaviour, SkillEffect
@@ -33,6 +34,14 @@ public class SimpleEffect : MonoBehaviour, SkillEffect
         transform.localScale = Vector3.one;
         transform.localPosition = Vector3.zero;
         Renderer.sprite = sprite;
+
+        OnExcute();
+    }
+    public void Setting(Transform target)
+    {
+        transform.SetParent(target);
+        transform.localScale = Vector3.one;
+        transform.localPosition = Vector3.zero;
 
         OnExcute();
     }

@@ -122,14 +122,14 @@ public class MapIconScript : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
                 Icon.sprite = BossImages[2];
                 Outline.sprite = BossImages[2];
                 break;
-            case BossType.Guardian:
+            /*case BossType.Guardian:
                 Icon.sprite=BossImages[0];
                 Outline.sprite = BossImages[0];
                 break;
             case BossType.Hexaghost:
                 Icon.sprite = BossImages[1];
                 Outline.sprite = BossImages[1];
-                break;
+                break;*/
         }
         Icon.SetNativeSize();
         Outline.SetNativeSize();

@@ -2163,7 +2163,7 @@ SpriteRenderer:
   m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1028036448
@@ -3243,6 +3243,12 @@ PrefabInstance:
       propertyPath: MonsterSpawnPoint
       value: 
       objectReference: {fileID: 1028036449}
+    - target: {fileID: 297190042220269409, guid: e04ced9c912c3014aa52b898234673ba,
+        type: 3}
+      propertyPath: Chest
+      value: 
+      objectReference: {fileID: 6921262958194185632, guid: a7b12d4fc627d4c4b915bee551cf879c,
+        type: 3}
     - target: {fileID: 297190042220269410, guid: e04ced9c912c3014aa52b898234673ba,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,7 +9,8 @@ using UnityEngine.Events;
 public class FunctionModule
 {
     [Header("Ability")]
-    public Ability CardAbility;
+    public AbilityType Type;
+    public string AbilityKey;
 
     [Header("Effect")]
     public GameObject SkillEffect;
@@ -29,7 +30,8 @@ public class FunctionModule
 
     public FunctionModule(FunctionModule data)
     {
-        CardAbility = data.CardAbility;
+        Type = data.Type;
+        AbilityKey = data.AbilityKey;
         SkillEffect = data.SkillEffect;
         SkillSprite = data.SkillSprite;
         variety = data.variety;
@@ -37,6 +39,11 @@ public class FunctionModule
         Stack = data.Stack;
         Decription = data.Decription;
     }
+}
+[System.Serializable]
+public enum AbilityType
+{
+    Attack,Skill,Power
 }
 [System.Serializable]
 public class CardEnchantData
@@ -195,7 +202,18 @@ public class CardData : ITargetLoader
         {
             foreach (var action in Action)
             {
-                action.CardAbility.OnExcute(MainSceneController.Instance.Character, Target, action, EnchantCount);
+                switch (action.Type)
+                {
+                    case AbilityType.Attack:
+                        AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, Target, action.SkillEffect, action.AbilityKey, action.Value, true);
+                        break;
+                    case AbilityType.Skill:
+                        SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, Target, action.AbilityKey, action.Value, true);
+                        break;
+                    case AbilityType.Power:
+                        PowerManager.Instance.AssginBuff(Target, action.variety, action.Value,true);
+                        break;
+                }
             }
             yield return new WaitForSeconds(0.2f);
         }

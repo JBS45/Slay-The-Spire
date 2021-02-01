@@ -9,19 +9,7 @@ public class AllPercentDamage : Ability
 
     public override void OnExcute(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
-        List<GameObject> tmpTarget = MainSceneController.Instance.BattleData.Monsters;
-        for (int i = 0; i < tmpTarget.Count; ++i)
-        {
-            float result = Func.Value * tmpTarget[i].GetComponentInChildren<Stat>().CurrentHealthPoint;
-
-            if(result>= tmpTarget[i].GetComponentInChildren<Stat>().CurrentHealthPoint)
-            {
-                result = tmpTarget[i].GetComponentInChildren<Stat>().CurrentHealthPoint - 1;
-            }
-
-            tmpTarget[i].GetComponentInChildren<Stat>().GetDamage((int)result);
-        }
-        Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
+        AttackManager.Instance.UseAttack(Performer, Target, Func.SkillEffect,"Kill", Func.Value, true);
     }
 
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)

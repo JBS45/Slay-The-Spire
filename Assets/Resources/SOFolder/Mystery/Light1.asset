@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc693ef6ee90354a954ef3b8a97e7e6, type: 3}
+  m_Name: Light1
+  m_EditorClassIdentifier: 
+  Key: M401
+  Name: "\uBC1D\uC740 \uBE5B"
+  sprite: {fileID: 21300000, guid: d3236e7c20cf9ec46b6855914cbdeee1, type: 3}
+  Description: "\uB2F9\uC2E0\uC740 \uBC29 \uD55C\uAC00\uC6B4\uB370\uC5D0\uC11C \uC77C\uB801\uC774\uB294
+    <color=#F8B865>\uBE5B\uC758 \uB369\uC5B4\uB9AC</color>\uB97C \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4.\n\uB530\uB73B\uD55C
+    \uBE5B\uACFC \uD669\uD640\uD55C \uBB38\uC591\uC774 \uB2F9\uC2E0\uC744 \uD5A5\uD574
+    \uC190\uC9D3\uD569\uB2C8\uB2E4."
+  Button:
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: M402
+    ButtonEvents:
+    - ButtonString: "[\uB4E4\uC5B4\uAC04\uB2E4]"
+      ButtonEventKey: 
+      Value: 0
+    - ButtonString: "<color=#{0}> \uBB34\uC791\uC704\uC758 \uCE74\uB4DC {1}\uC7A5\uC744
+        \uAC15\uD654\uD569\uB2C8\uB2E4.</color>"
+      ButtonEventKey: RandomEnchant
+      Value: 2
+    - ButtonString: "<color=#{0}> \uCCB4\uB825\uC744 {1}\uC783\uC2B5\uB2C8\uB2E4.</color>"
+      ButtonEventKey: Damage
+      Value: 20
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: M403
+    ButtonEvents:
+    - ButtonString: "[\uB5A0\uB098\uAE30]"
+      ButtonEventKey: 
+      Value: 0

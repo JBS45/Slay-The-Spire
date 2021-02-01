@@ -27,6 +27,9 @@ public class Cultist : Stat,IMonsterPatten
 
     int CurDeckCount;
     int SelectPattern;
+    int Count;
+
+    bool IsIntent;
 
     private new void Awake()
     {
@@ -34,12 +37,11 @@ public class Cultist : Stat,IMonsterPatten
         GetComponentInParent<AttackEvent>().SetAnimationEnd(() => { IsAttackEnd = true; });
         anim = GetComponentInParent<Animator>();
         m_MonsterRenderer = GetComponentInParent<MonsterRenderer>();
-        Deck = new MonsterAction[3];
+        IsIntent = false;
         CurDeckCount = 0;
     }
     public new void SetUp(int curHP,int maxHP)
     {
-
         base.SetUp(curHP,maxHP);
     }
     // Start is called before the first frame update
@@ -52,7 +54,18 @@ public class Cultist : Stat,IMonsterPatten
     // Update is called once per frame
     void Update()
     {
-        
+        if (IsIntent)
+        {
+            foreach (var item in Deck[CurDeckCount].Function)
+            {
+                if (item.Type == AbilityType.Attack)
+                {
+                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, item.AbilityKey, item.Value, false);
+                    Intent.GetComponent<IntentControl>().SetIntent(tmp, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
+                }
+            }
+
+        }
     }
 
     void PreBattleOperation()
@@ -134,12 +147,36 @@ public class Cultist : Stat,IMonsterPatten
             }
 
         }
+        else
+        {
+            Count = Pattern.Count;
+            Deck = new MonsterAction[Count];
+            for (int i = 0; i < Count; ++i)
+            {
+                Deck[i] = Pattern[i];
+                if (Deck[i].OnlyOnceAction)
+                {
+                    Pattern.Remove(Deck[i]);
+                    Count = Pattern.Count;
+                }
+            }
+        }
     }
     public void SetIntent()
     {
-        if (CurDeckCount >= 3)
+        if (IsMonsterPatternRandom)
         {
-            SetDeck();
+            if (CurDeckCount >= 3)
+            {
+                SetDeck();
+            }
+        }
+        else
+        {
+            if(CurDeckCount>= Count)
+            {
+                SetDeck();
+            }
         }
         if (Intent != null)
         {
@@ -155,11 +192,13 @@ public class Cultist : Stat,IMonsterPatten
         Intent.transform.localScale = Vector3.one;
         Intent.transform.localPosition = UIcoordinatePos(IntentPos.position);
         Intent.GetComponent<IntentControl>().SetIntent(Deck[CurDeckCount].Function[0].Value, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
+        IsIntent = true;
 
         
     }
     public IEnumerator Action()
     {
+        IsIntent = false;
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
@@ -172,7 +211,27 @@ public class Cultist : Stat,IMonsterPatten
             }
             foreach (var func in Deck[CurDeckCount].Function)
             {
-                func.CardAbility.OnExcute(Monster, MainSceneController.Instance.Character, func, 0);
+                MonsterTargetType target = Deck[CurDeckCount].Target;
+                switch (func.Type)
+                {
+                    case AbilityType.Attack:
+                        AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.AbilityKey, func.Value, true);
+                        break;
+                    case AbilityType.Skill:
+                        SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
+                        break;
+                    case AbilityType.Power:
+                        if (target == MonsterTargetType.Self)
+                        {
+                            PowerManager.Instance.AssginBuff(Monster, func.variety, func.Value,true);
+                        }
+                        else if (target == MonsterTargetType.Player)
+                        {
+                            PowerManager.Instance.AssginBuff(MainSceneController.Instance.Character, func.variety, func.Value,true);
+                        }
+                        break;
+                }
+                //func.CardAbility.OnExcute(Monster, MainSceneController.Instance.Character, func, 0);
             }
 
             yield return new WaitForSeconds(0.3f);

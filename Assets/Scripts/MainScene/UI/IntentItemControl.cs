@@ -158,7 +158,7 @@ public class IntentItemControl : MonoBehaviour
             {
                 AfterImages[i].color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 AfterImages[i].transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, 0);
-                if(AfterImages[i].transform.localScale.x > 1.5f)
+                if(AfterImages[i].transform.localScale.x > 2.0f)
                 {
                     AfterImages[i].transform.localScale = Vector3.one;
                 }
@@ -171,10 +171,6 @@ public class IntentItemControl : MonoBehaviour
                 }
             }
             yield return null;
-        }
-        foreach (var image in AfterImages)
-        {
-            image.enabled = false;
         }
     }
 

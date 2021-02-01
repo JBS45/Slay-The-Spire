@@ -18,8 +18,12 @@ MonoBehaviour:
   Description: "\uC131\uC18C\uC758 \uC5D0\uB108\uC9C0\uAC00 \uB2F9\uC2E0 \uC18D\uC73C\uB85C
     \uD758\uB7EC\uB4E4\uC5B4\uAC00, \uB2F9\uC2E0\uC744 \uB354\uC6B1 \uAC15\uD558\uAC8C
     \uD569\uB2C8\uB2E4."
-  NextKey: 
   Button:
-  - ButtonString: "[\uB5A0\uB098\uAE30]"
-    ButtonEventKey:
-    - Progress
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: 
+    ButtonEvents:
+    - ButtonString: "[\uB5A0\uB098\uAE30]"
+      ButtonEventKey: Progress
+      Value: 0

@@ -31,8 +31,10 @@ MonoBehaviour:
   CardImage: {fileID: 21300000, guid: f001d3599da3191448673029131a2e1e, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
-  - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
-    SkillEffect: {fileID: 0}
+  - Type: 0
+    AbilityKey: Attack
+    SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
+      type: 3}
     SkillSprite: {fileID: 6731979846000164124, guid: 77c451ff4f5d19e45b21ded97f1525ab,
       type: 3}
     variety: 0

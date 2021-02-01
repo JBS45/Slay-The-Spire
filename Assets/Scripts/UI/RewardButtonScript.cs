@@ -58,9 +58,21 @@ public class RewardButtonScript : MonoBehaviour
                 Destroy(this.gameObject);
             });
     }
-    public void SetPotionReward(RewardType type,List<PointerType> Potions)
+    public void SetPotionReward(RewardType type,PotionType Potions)
     {
 
+    }
+    public void SetRelicReward(RewardType type, RelicData data)
+    {
+        m_Type = type;
+        RewardImage.sprite = data.RelicImage;
+        Text.text = data.Name;
+        m_Button.onClick.AddListener(
+            () => {
+                MainSceneController.Instance.PlayerData.AddRelic(data);
+                MainSceneController.Instance.PlayerData.Notify();
+                Destroy(this.gameObject);
+            });
     }
     public void SetCardReward(RewardType type, List<CardData> CardDatas,GameObject RewardWindow)
     {

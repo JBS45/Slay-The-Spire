@@ -226,6 +226,11 @@ public class Stat : MonoBehaviour
         GameObject obj = Instantiate(EffectRes);
         obj.GetComponent<SkillEffect>().Setting(SkillEffectPos, sprite);
     }
+    public void MakeSkillEffect(GameObject EffectRes)
+    {
+        GameObject obj = Instantiate(EffectRes);
+        obj.GetComponent<SkillEffect>().Setting(SkillEffectPos);
+    }
     public void SetIsEnableTarget(bool Is)
     {
         IsEnableTarget = Is;

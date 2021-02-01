@@ -31,7 +31,8 @@ MonoBehaviour:
   CardImage: {fileID: 21300000, guid: 732fdd8d6b2ac0d43987fe9441211435, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
-  - CardAbility: {fileID: 11400000, guid: 6d59289cb4c8d59469135c7d9546d7a2, type: 2}
+  - Type: 1
+    AbilityKey: Defence
     SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
       type: 3}
     SkillSprite: {fileID: 294558369115392861, guid: 77c451ff4f5d19e45b21ded97f1525ab,
@@ -41,7 +42,8 @@ MonoBehaviour:
     Stack: 0
     Decription: "<color=#ffa500ff>\uBC29\uC5B4\uB3C4</color>\uB97C <size=24><color=#{0}>{1}</color></size>
       \uC5BB\uC2B5\uB2C8\uB2E4. \n"
-  - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+  - Type: 0
+    AbilityKey: Attack
     SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
       type: 3}
     SkillSprite: {fileID: 0}

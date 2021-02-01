@@ -18,7 +18,7 @@ public class Relic : ScriptableObject
 
     [Header("Stack")]
     public bool IsStack;
-    public bool IsOnceStack;
+    public bool IsDecrease;
     public int StackCount;
     public int MaxStack;
 

@@ -17,11 +17,23 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: f5c7a825e9f475440a70ac0c703fe2ce, type: 3}
   Description: "\uB2F9\uC2E0 \uC55E\uC5D0 \uC78A\uD78C \uC601\uD63C\uC744 \uAE30\uB9AC\uB294
     \uACF5\uB4E4\uC778 \uC131\uC18C\uAC00 \uB193\uC5EC\uC788\uC2B5\uB2C8\uB2E4."
-  NextKey: M102
   Button:
-  - ButtonString: "[\uAE30\uB3C4] <color=#7EC346>\uCE74\uB4DC\uB97C 1\uC7A5 \uAC15\uD654\uD569\uB2C8\uB2E4.</color>"
-    ButtonEventKey:
-    - Enchant
-  - ButtonString: "[\uB5A0\uB098\uAE30]"
-    ButtonEventKey:
-    - Progress
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: M102
+    ButtonEvents:
+    - ButtonString: "[\uAE30\uB3C4] "
+      ButtonEventKey: 
+      Value: 0
+    - ButtonString: "<color=#{0}> \uCE74\uB4DC {1}\uC7A5\uC744 \uAC15\uD654\uD569\uB2C8\uB2E4.</color>"
+      ButtonEventKey: Enchant
+      Value: 1
+  - condtion:
+      type: 0
+      value: 0
+    NextKey: 
+    ButtonEvents:
+    - ButtonString: "[\uB5A0\uB098\uAE30]"
+      ButtonEventKey: Progress
+      Value: 0

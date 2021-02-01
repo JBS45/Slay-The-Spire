@@ -31,7 +31,8 @@ MonoBehaviour:
   CardImage: {fileID: 0}
   MultipleEnchant: 0
   FunctionAndValue:
-  - CardAbility: {fileID: 11400000, guid: 0b45a008e964b0c43bf57ce8b4f35902, type: 2}
+  - Type: 1
+    AbilityKey: Heal
     SkillEffect: {fileID: 0}
     SkillSprite: {fileID: 0}
     variety: 0

@@ -24,13 +24,11 @@ MonoBehaviour:
   ExcuteTiming: 4
   Target: 0
   Action:
-  - CardAbility: {fileID: 11400000, guid: 0b45a008e964b0c43bf57ce8b4f35902, type: 2}
+  - Type: 1
+    AbilityKey: Heal
     SkillEffect: {fileID: 0}
     SkillSprite: {fileID: 0}
     variety: 0
     Value: 6
-    Repeat: 1
-    RepeatEnchantRate: 0
-    EnchantRate: 0
     Stack: 0
     Decription: 

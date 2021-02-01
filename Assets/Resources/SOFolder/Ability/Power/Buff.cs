@@ -19,22 +19,7 @@ public class Buff : Ability
         }
         foreach (var target in TmpTarget)
         {
-            float result = Func.Value;
-            if (Performer.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
-            {
-                Performer.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
-                Performer.GetComponentInChildren<Stat>().PowerRefresh();
-            }
-            else
-            {
-                Power tmpPower = new Power();
-                tmpPower.Value = (int)result;
-                tmpPower.Type = PowerType.Debuff;
-                tmpPower.Variety = Func.variety;
-                tmpPower.SetTarget(Performer);
-                Performer.GetComponentInChildren<Stat>().Powers.Add(tmpPower);
-                Performer.GetComponentInChildren<Stat>().AddPowerUI(tmpPower, Func.SkillSprite);
-            }
+            PowerManager.Instance.AssginBuff(Performer, Func.variety, Func.Value,true);
         }
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)

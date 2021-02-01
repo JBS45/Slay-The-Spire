@@ -8,8 +8,12 @@ public class RewardManager : MonoBehaviour
     public int Gold { get => RewardGold; }
     PotionType RewardPotion;
     public PotionType Potion { get => RewardPotion; }
-    List<CardData> RewardCardList;
-    public List<CardData> CardList { get => RewardCardList; }
+    List<CardData> CharCardList;
+    public List<CardData> CardList { get => CharCardList; }
+    List<CardData> NeutralCardList;
+    public List<CardData> Neutral { get => NeutralCardList; }
+    RelicData RewardRelic;
+    public RelicData Relic { get => RewardRelic; }
 
 
     int Basic=60;
@@ -18,7 +22,8 @@ public class RewardManager : MonoBehaviour
 
     private void Awake()
     {
-        RewardCardList = new List<CardData>();
+        CharCardList = new List<CardData>();
+        NeutralCardList = new List<CardData>();
     }
     // Start is called before the first frame update
     void Start()
@@ -31,12 +36,37 @@ public class RewardManager : MonoBehaviour
     {
         
     }
+    public void NormalReward(CharacterType type,int count)
+    {
+        RewardGold = RandomGoldGenerator(20);
+        RewardPotion = PotionType.None;
+        CharCardList = CardSelector(type, count);
+        RewardRelic = null;
+    }
+    public void EliteReward(CharacterType type, int count)
+    {
+        RewardGold = RandomGoldGenerator(30);
+        RewardPotion = PotionType.None;
+        CharCardList = CardSelector(type, count);
+        RewardRelic = RelicDB.Instance.RandomSelector();
+    }
 
+    public void ShopReward()
+    {
+        CharCardList = CardSelector(CharacterType.Ironclad, 5);
+        NeutralCardList = CardSelector(CharacterType.None, 2);
+    }      
+    
+    public void TreasureReward()
+    {
+        RewardRelic = RelicDB.Instance.RandomSelector();
+    }
     public void Clear()
     {
-        RewardGold = 15;
+        RewardGold = -1;
         RewardPotion = PotionType.None;
-        RewardCardList.Clear();
+        CharCardList.Clear();
+        NeutralCardList.Clear();
     }
     public int RandomGoldGenerator(int Amount)
     {
@@ -123,7 +153,15 @@ public class RewardManager : MonoBehaviour
 
         }
 
-        RewardCardList = tmpList;
+        switch (type)
+        {
+            case CharacterType.None:
+                NeutralCardList = tmpList;
+                break;
+            case CharacterType.Ironclad:
+                CharCardList = tmpList;
+                break;
+        }
 
         return tmpList;
     }

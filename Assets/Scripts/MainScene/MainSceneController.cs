@@ -98,6 +98,7 @@ public class MainSceneController : MonoBehaviour
     {
         m_State = state;
         m_BattleData.ClearData();
+        m_Reward.Clear();
         m_UIControl.RemoveCurUI();
         m_UIControl.OffMap();
         Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
@@ -112,26 +113,30 @@ public class MainSceneController : MonoBehaviour
                 m_Char.GetComponentInChildren<CharacterStat>().HIdeUI();
                 break;
             case MapNodeType.Merchant:
+                m_Reward.ShopReward();
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.NPCSpawn(NPCType.Merchant);
                 m_UIControl.MakeShopWindow();
-                m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetClassCard(Reward.CardSelector(CharacterType.Ironclad, 5));
-                m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetNeutralCard(Reward.CardSelector(CharacterType.None, 2));
+                m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetClassCard(Reward.CardList);
+                m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetNeutralCard(Reward.Neutral);
                 m_BattleData.Monsters[0].GetComponent<Merchant>().SetShowWindow(m_UIControl.GetCurUI().GetComponent<ShopWindowScript>());
                 break;
             case MapNodeType.Mistery:
-                m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
-                m_UIControl.MakeEventWindow();
-                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(MysterySelector());
+                MysterySelect();
                 break;
             case MapNodeType.Monster:
+                m_Reward.NormalReward(PlayerData.CharType, 3);
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.MonsterSpawn();
                 m_UIControl.MakeBattleUI();
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
                 break;
             case MapNodeType.Elite:
+                m_Reward.EliteReward(PlayerData.CharType, 3);
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
+                m_Spawner.EliteSpawn();
+                m_UIControl.MakeBattleUI();
+                m_BattleData.ChangeBattleState(BattleDataState.Init);
                 break;
             case MapNodeType.Boss:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
@@ -141,6 +146,8 @@ public class MainSceneController : MonoBehaviour
                 m_UIControl.MakeFireCampWindow();
                 break;
             case MapNodeType.Treasure:
+                m_Reward.TreasureReward();
+                m_Spawner.NPCSpawn(NPCType.Chest);
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 break;
         }
@@ -181,6 +188,10 @@ public class MainSceneController : MonoBehaviour
 
         //미스터리 이벤트
         MysteryDB.Instance.NoSaveInit();
+
+        //유물 DB 초기화
+        RelicDB.Instance.NoSaveInit();
+
         //유물 기본
         if (m_playerData.Relics == null)
         {
@@ -206,6 +217,38 @@ public class MainSceneController : MonoBehaviour
         //포션 없음
 
         //저장 정보가 있으면
+    }
+    void MysterySelect()
+    {
+        if (MysteryDB.Instance.CurrentKey.Count > 0)
+        {
+            int rand = Random.Range(0, 100);
+            if (rand <= 15)
+            {
+                ChangeState(MapNodeType.Monster);
+            }
+            else if(rand>=16&&rand<30){
+                ChangeState(MapNodeType.Merchant);
+            }
+            else
+            {
+                m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
+                m_UIControl.MakeEventWindow();
+                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(MysterySelector());
+            }
+        }
+        else
+        {
+            int rand = Random.Range(0, 100);
+            if (rand <= 50)
+            {
+                ChangeState(MapNodeType.Monster);
+            }
+            else
+            {
+                ChangeState(MapNodeType.Merchant);
+            }
+        }
     }
     string MysterySelector()
     {

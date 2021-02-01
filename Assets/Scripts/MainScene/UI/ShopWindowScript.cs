@@ -141,6 +141,7 @@ public class ShopWindowScript : MonoBehaviour
         StartCoroutine(MoveShop());
         CancelButtonMove();
         ProceedButtonMove();
+        Refresh();
     }
 
     public void HideShop()

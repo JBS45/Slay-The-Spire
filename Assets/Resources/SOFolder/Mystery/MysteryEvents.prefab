@@ -577,8 +577,16 @@ MonoBehaviour:
   ButtonRes: {fileID: 8153356661170845697, guid: e6617f5f5c62fd44eae53d073fb7a04b,
     type: 3}
   ButtonPos: {fileID: 3032449812915545371}
+  ButtonImage:
+  - {fileID: 21300000, guid: 3cb1e14396533564190e855490d44ab1, type: 3}
+  - {fileID: 21300000, guid: b2d6dbd8913a27943879914a5e4b9e5f, type: 3}
   Description: {fileID: 836327686046964570}
   Name: {fileID: 3388032410374427767}
+  TextColor:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.5163702, g: 0.8679245, b: 0.40121043, a: 1}
+  - {r: 0.7924528, g: 0.25418296, b: 0.25418296, a: 1}
+  - {r: 0.8867924, g: 0.7672264, b: 0.3932004, a: 1}
 --- !u!1 &4378140758002479597
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,9 +45,9 @@ public class BattleData : MonoBehaviour
     public List<GameObject> Monsters { get => _Monsters; set => _Monsters = value; }
 
     BattleUIScript BattleUI;
- 
 
 
+    bool IsDraw;
     int CurrEnergy;
     public int CurrentEnergy { get => CurrEnergy; }
 
@@ -348,9 +348,9 @@ public class BattleData : MonoBehaviour
         //몬스터들 턴시작시 파워
         foreach (var Monster in Monsters)
         {
-            foreach(var power in Monster.GetComponentInChildren<Stat>().Powers)
+            for(int i=0;i<Monster.GetComponentInChildren<Stat>().Powers.Count;++i)
             {
-                power.TurnBegin();
+                Monster.GetComponentInChildren<Stat>().Powers[i].TurnBegin();
             }
             Monster.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
         }
@@ -450,6 +450,14 @@ public class BattleData : MonoBehaviour
             foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
             {
                 power.CardUse(m_CardData.Hand[num]);
+            }
+            foreach(var monster in Monsters)
+            {
+                int tmp = monster.GetComponentInChildren<Stat>().Powers.Count;
+                for (int i=0;i<tmp;++i)
+                {
+                    monster.GetComponentInChildren<Stat>().Powers[i].CardUse(m_CardData.Hand[num]);
+                }
             }
             m_CardData.Hand[0].IsEnable = false;
             m_CardData.Discard.Add(m_CardData.Hand[num]);

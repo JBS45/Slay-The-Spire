@@ -19,9 +19,11 @@ MonoBehaviour:
   MaxHp: 44
   Pattern:
   - OnlyOnceAction: 0
+    Target: 0
     Intent: 0
     Function:
-    - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+    - Type: 0
+      AbilityKey: Attack
       SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
       SkillSprite: {fileID: 5980422821403453991, guid: 77c451ff4f5d19e45b21ded97f1525ab,
@@ -32,9 +34,11 @@ MonoBehaviour:
       Decription: 
     Repeat: 1
   - OnlyOnceAction: 0
+    Target: 0
     Intent: 5
     Function:
-    - CardAbility: {fileID: 11400000, guid: 5d6fc96411b810e4a90ca03f31b3e26e, type: 2}
+    - Type: 0
+      AbilityKey: Attack
       SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
       SkillSprite: {fileID: 8360412116082898132, guid: 77c451ff4f5d19e45b21ded97f1525ab,
@@ -43,7 +47,8 @@ MonoBehaviour:
       Value: 7
       Stack: 0
       Decription: 
-    - CardAbility: {fileID: 11400000, guid: 6d59289cb4c8d59469135c7d9546d7a2, type: 2}
+    - Type: 1
+      AbilityKey: Defence
       SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
         type: 3}
       SkillSprite: {fileID: 294558369115392861, guid: 77c451ff4f5d19e45b21ded97f1525ab,
@@ -54,9 +59,11 @@ MonoBehaviour:
       Decription: 
     Repeat: 1
   - OnlyOnceAction: 0
+    Target: 1
     Intent: 8
     Function:
-    - CardAbility: {fileID: 11400000, guid: 6d59289cb4c8d59469135c7d9546d7a2, type: 2}
+    - Type: 1
+      AbilityKey: Defence
       SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
         type: 3}
       SkillSprite: {fileID: 294558369115392861, guid: 77c451ff4f5d19e45b21ded97f1525ab,
@@ -65,7 +72,8 @@ MonoBehaviour:
       Value: 6
       Stack: 0
       Decription: 
-    - CardAbility: {fileID: 11400000, guid: 3aec5086e88545b40aafe2aae681af32, type: 2}
+    - Type: 2
+      AbilityKey: 
       SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
         type: 3}
       SkillSprite: {fileID: 2933273942965145907, guid: a0d9e576c7fd8b84d82e630e15a321d9,

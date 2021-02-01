@@ -20,21 +20,7 @@ public class Debuff : Ability
         foreach (var target in TmpTarget)
         {
             float result = Func.Value;
-            if (target.GetComponentInChildren<Stat>().Powers.Exists(Power => Power.Variety == Func.variety))
-            {
-                target.GetComponentInChildren<Stat>().Powers.Find(Power => Power.Variety == Func.variety).Value += (int)result;
-                target.GetComponentInChildren<Stat>().PowerRefresh();
-            }
-            else
-            {
-                Power tmpPower = new Power();
-                tmpPower.Value = (int)result;
-                tmpPower.Type = PowerType.Debuff;
-                tmpPower.Variety = Func.variety;
-                tmpPower.SetTarget(target);
-                target.GetComponentInChildren<Stat>().Powers.Add(tmpPower);
-                target.GetComponentInChildren<Stat>().AddPowerUI(tmpPower,Func.SkillSprite);
-            }
+            PowerManager.Instance.AssginBuff(target, Func.variety, Func.Value,true);
         }
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)

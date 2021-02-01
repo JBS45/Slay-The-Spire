@@ -94,6 +94,16 @@ public class PlayerDataAsset : ScriptableObject
         tmp.GetComponent<RelicScript>().SetData(tmpData);
         tmpData.Attach(tmp.GetComponent<RelicScript>());
     }
+    public void AddRelic(RelicData data)
+    {
+        Relics.Add(data);
+        GameObject tmp = Instantiate(data.Prefab);
+        tmp.transform.SetParent(MainSceneController.Instance.UIControl.RelicBarPos);
+        tmp.transform.localPosition = Vector3.zero;
+        tmp.transform.localScale = Vector3.one;
+        tmp.GetComponent<RelicScript>().SetData(data);
+        data.Attach(tmp.GetComponent<RelicScript>());
+    }
     public int RemoveCardGold()
     {
         int tmp = 75 + (CardRemoveCount * 25);
