@@ -202,6 +202,10 @@ public class JawWorm : Stat,IMonsterPatten
         
         
     }
+    public void BattleInit()
+    {
+
+    }
     public void OnAction(TrackEntry entry)
     {
         IsIntent = false;

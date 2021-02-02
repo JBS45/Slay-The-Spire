@@ -185,6 +185,10 @@ public class NobGremlin : Stat, IMonsterPatten
 
 
     }
+    public void BattleInit()
+    {
+
+    }
     public IEnumerator Action()
     {
         IsIntent = false;

@@ -200,7 +200,10 @@ public class Stat : MonoBehaviour
             IsDefenceOn = false;
             CurrentHP -= Damage;
             MakeDamageText(Damage);
-            HPBar.GetComponentInChildren<HPBarScript>().GetDamage(CurrentHP, MaxHP, Defence);
+            if (HPBar != null)
+            {
+                HPBar.GetComponentInChildren<HPBarScript>().GetDamage(CurrentHP, MaxHP, Defence);
+            }
         }
 
         StartCoroutine(ShakeEffect(0.4f));

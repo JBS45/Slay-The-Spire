@@ -133,6 +133,10 @@ public class BattleData : MonoBehaviour
 
         TurnCount = 0;
 
+        foreach(var item in Monsters)
+        {
+            item.GetComponentInChildren<IMonsterPatten>().BattleInit();
+        }
         //UI 배틀 시작시에 움직임
         //종료시 Battle로 상태전환
         BattleUI.StartBattle(ChangeBattleState, BattleDataState.Battle);

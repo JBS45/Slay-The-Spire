@@ -38,6 +38,12 @@ public class SkillManager : MonoBehaviour
             case "Heal":
                 result = Heal(Performer, Target, value, IsUse);
                 break;
+            case "Slime":
+                result = AddSlime(Performer, Target, value, IsUse);
+                break;
+            case "NoAction":
+                result = NoAction(Performer, Target, value, IsUse);
+                break;
         }
 
         return result;
@@ -86,5 +92,19 @@ public class SkillManager : MonoBehaviour
             Target.GetComponentInChildren<Stat>().Cure((int)result);
         }
         return (int)result;
+    }
+    int AddSlime(GameObject Performer, GameObject Target, int value, bool IsUse)
+    {
+        float result = value;
+        if (IsUse)
+        {
+            CardData tmp = new CardData(CardDB.Instance.Condition.Card.Find(item => item.CardName == "점액투성이"));
+            MainSceneController.Instance.BattleData.CardData.Discard.Add(tmp);
+        }
+        return (int)result;
+    }
+    int NoAction(GameObject Performer, GameObject Target, int value, bool IsUse)
+    {
+        return 0;
     }
 }

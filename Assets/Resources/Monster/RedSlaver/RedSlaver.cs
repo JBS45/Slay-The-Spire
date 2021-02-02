@@ -149,6 +149,10 @@ public class RedSlaver : Stat,IMonsterPatten
 
         }
     }
+    public void BattleInit()
+    {
+
+    }
     public void SetIntent()
     {
         if (CurDeckCount >= 3)

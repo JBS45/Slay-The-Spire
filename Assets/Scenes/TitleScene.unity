@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8512d4c1efd7e40b029af82d506028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Condition: {fileID: 11400000, guid: d51da34b759a6914391893931b79715f, type: 2}
   _Neutral: {fileID: 11400000, guid: 85e0afa7fa420b5408091f48b7e3405d, type: 2}
   _IronClad: {fileID: 11400000, guid: ac8e5660cd1fc5a46abe0dee1b5513ac, type: 2}
 --- !u!4 &509578055
@@ -741,6 +742,7 @@ MonoBehaviour:
   - {fileID: 8047661416215860382, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
   - {fileID: 7486017478780492331, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
   - {fileID: -5207760925450329673, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
+  - {fileID: -3699505331945966078, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
 --- !u!4 &1535488548
 Transform:
   m_ObjectHideFlags: 0
@@ -830,7 +832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629168438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8752604, y: -5.867228, z: -8.674451}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

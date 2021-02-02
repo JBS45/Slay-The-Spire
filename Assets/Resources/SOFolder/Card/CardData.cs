@@ -197,34 +197,83 @@ public class CardData : ITargetLoader
     {
         MainSceneController.Instance.UIControl.GetCurUI().GetComponent<BattleUIScript>().IsCardUsing(true);
 
-
-        for (int i = 0; i < Repeat; ++i)
+        if (Targets == TargetOptions.Enemy)
         {
-            foreach (var action in Action)
+            for (int i = 0; i < Repeat; ++i)
             {
-                switch (action.Type)
+                foreach (var action in Action)
                 {
-                    case AbilityType.Attack:
-                        AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, Target, action.SkillEffect, action.AbilityKey, action.Value, true);
-                        break;
-                    case AbilityType.Skill:
-                        SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, Target, action.AbilityKey, action.Value, true);
-                        break;
-                    case AbilityType.Power:
-                        PowerManager.Instance.AssginBuff(Target, action.variety, action.Value,true);
-                        break;
+                    switch (action.Type)
+                    {
+                        case AbilityType.Attack:
+                            AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, Target, action.SkillEffect, action.AbilityKey, action.Value, true);
+                            break;
+                        case AbilityType.Skill:
+                            SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, Target, action.AbilityKey, action.Value, true);
+                            break;
+                        case AbilityType.Power:
+                            PowerManager.Instance.AssginBuff(Target, action.variety, action.Value, true);
+                            break;
+                    }
                 }
+                yield return new WaitForSeconds(0.2f);
             }
-            yield return new WaitForSeconds(0.2f);
         }
+        else if (Targets == TargetOptions.AllEnemy)
+        {
+            for (int i = 0; i < Repeat; ++i)
+            {
+                foreach (var monster in MainSceneController.Instance.BattleData.Monsters)
+                {
 
+                    foreach (var action in Action)
+                    {
+                        switch (action.Type)
+                        {
+                            case AbilityType.Attack:
+                                AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, action.SkillEffect, action.AbilityKey, action.Value, true);
+                                break;
+                            case AbilityType.Skill:
+                                SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, monster, action.AbilityKey, action.Value, true);
+                                break;
+                            case AbilityType.Power:
+                                PowerManager.Instance.AssginBuff(monster, action.variety, action.Value, true);
+                                break;
+                        }
+                    }
+                }
+                yield return new WaitForSeconds(0.2f);
+
+            }
+        }
+        else
+        {
+            for (int i = 0; i < Repeat; ++i)
+            {
+                foreach (var action in Action)
+                {
+                    switch (action.Type)
+                    {
+                        case AbilityType.Attack:
+                            AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, MainSceneController.Instance.Character, action.SkillEffect, action.AbilityKey, action.Value, true);
+                            break;
+                        case AbilityType.Skill:
+                            SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, MainSceneController.Instance.Character, action.AbilityKey, action.Value, true);
+                            break;
+                        case AbilityType.Power:
+                            PowerManager.Instance.AssginBuff(MainSceneController.Instance.Character, action.variety, action.Value, true);
+                            break;
+                    }
+                }
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
         if (MainSceneController.Instance.BattleData.CurrentBattelState == BattleDataState.Battle)
         {
             MainSceneController.Instance.UIControl.GetCurUI().GetComponent<BattleUIScript>().IsCardUsing(false);
             ClearTarget();
         }
     }
-
     public void CardEnchant()
     {
         if (MultipleEnchant || EnchantCount == 0)

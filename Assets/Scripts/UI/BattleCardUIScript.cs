@@ -114,12 +114,17 @@ public class BattleCardUIScript : MonoBehaviour
             case CardType.Condition:
                 CardTypeText.text = "Condition";
                 CardBackground.sprite = CardBackgroundRes[2];
-                RareFrame.sprite = RareFrameRes[((int)card.CardType * 3) + (int)card.Rarity];
+                RareFrame.sprite = RareFrameRes[(int)(card.CardType - 3)];
+                if (card.Cost == 0)
+                {
+                    CostOrb.enabled = false;
+                    CostText.enabled = false;
+                }
                 break;
             case CardType.Curse:
                 CardTypeText.text = "Curse";
                 CardBackground.sprite = CardBackgroundRes[0];
-                RareFrame.sprite = RareFrameRes[((int)card.CardType * 3) + (int)card.Rarity];
+                RareFrame.sprite = RareFrameRes[(int)(card.CardType - 3)];
                 break;
         }
         switch (card.Rarity)

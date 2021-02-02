@@ -13,7 +13,7 @@ public enum PowerType
 }
 public enum PowerVariety
 {
-    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual,Rage
+    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual,Rage,Split
 }
 [System.Serializable]
 public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleStart,IBattleEnd
@@ -87,6 +87,19 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
     public void BattleEnd()
     {
 
+    }
+    public void GetDamage()
+    {
+        switch (Variety)
+        {
+            case PowerVariety.Split:
+                if (Target.GetComponentInChildren<Stat>().CurrentHealthPoint <= Value)
+                {
+                    //타겟의 인터페이스 split함수를 실행하면 될거 같음
+                    Target.GetComponentInChildren<ISplit>().Split();
+                }
+                break;
+        }
     }
     public void SetTarget(GameObject target)
     {

@@ -240,6 +240,10 @@ public class Cultist : Stat,IMonsterPatten
         Intent.GetComponent<IntentControl>().OnAction();
         IsAttackEnd = true;
     }
+    public void BattleInit()
+    {
+
+    }
     public bool GetAttackEnd()
     {
         return IsAttackEnd;

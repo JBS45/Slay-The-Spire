@@ -227,11 +227,11 @@ public class MysteryEventWindow : MonoBehaviour,IDeckChange
                     break;
                 case "Damage":
                     button.GetComponentInChildren<TMP_Text>().text += string.Format(func.ButtonString, ColorTohexadecimal(TextColor[2]), (int)(((float)func.Value / 100) * MainSceneController.Instance.PlayerData.MaxHp));
-                    Del += (MysteryButton) => { MainSceneController.Instance.Character.GetComponent<Stat>().GetDamage((int)(((float)func.Value / 100) * MainSceneController.Instance.PlayerData.MaxHp)); };
+                    Del += (MysteryButton) => { MainSceneController.Instance.Character.GetComponentInChildren<Stat>().GetDamage((int)(((float)func.Value / 100) * MainSceneController.Instance.PlayerData.MaxHp)); };
                     break;
                 case "Heal":
                     button.GetComponentInChildren<TMP_Text>().text += string.Format(func.ButtonString, ColorTohexadecimal(TextColor[1]), (int)(((float)func.Value/100)*(float)MainSceneController.Instance.PlayerData.MaxHp));
-                    Del += (MysteryButton) => { MainSceneController.Instance.Character.GetComponent<Stat>().Cure((int)(((float)func.Value / 100) * MainSceneController.Instance.PlayerData.MaxHp)); };
+                    Del += (MysteryButton) => { MainSceneController.Instance.Character.GetComponentInChildren<Stat>().Cure((int)(((float)func.Value / 100) * MainSceneController.Instance.PlayerData.MaxHp)); };
                     break;
                 case "Progress":
                     button.GetComponentInChildren<TMP_Text>().text += string.Format(func.ButtonString, ColorTohexadecimal(TextColor[0]), func.Value);

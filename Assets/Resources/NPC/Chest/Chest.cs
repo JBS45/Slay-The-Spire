@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Chest : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class Chest : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if (IsClick && IsEnable)
+        if (IsClick && IsEnable && !EventSystem.current.IsPointerOverGameObject())
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool IsHit = Physics2D.GetRayIntersection(ray);

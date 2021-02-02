@@ -49,6 +49,10 @@ public interface IBattleEnd
 {
     void BattleEnd();
 }
+public interface IGetDamage
+{
+    void GetDamage();
+}
 public interface IDeckChange
 {
     CardData OriginDeckChange(CardData data);

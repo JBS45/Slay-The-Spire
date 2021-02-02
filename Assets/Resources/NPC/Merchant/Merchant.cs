@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Spine.Unity;
 
 public class Merchant : MonoBehaviour
@@ -52,7 +53,7 @@ public class Merchant : MonoBehaviour
     }
     private void OnMouseUp()
     {
-        if (IsClick&&IsEnable)
+        if (IsClick&&IsEnable&&!EventSystem.current.IsPointerOverGameObject())
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool IsHit = Physics2D.GetRayIntersection(ray);

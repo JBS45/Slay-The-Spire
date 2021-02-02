@@ -112,6 +112,11 @@ public class RewardWindow : MonoBehaviour
             tmp.GetComponent<RewardButtonScript>().SetCardReward(RewardType.Card, reward.CardList, this.gameObject);
             RewardButtonList.Add(tmp);
 
+            //AddWindow
+            MainSceneController.Instance.UIControl.MakeAddReward();
+            AddCard = MainSceneController.Instance.UIControl.AddRewardWinodow;
+            MakeAddCardWindow();
+
         }
         if (Reward.Relic != null)
         {
@@ -122,10 +127,6 @@ public class RewardWindow : MonoBehaviour
             RewardButtonList.Add(tmp);
         }
 
-        //Addwindow
-        MainSceneController.Instance.UIControl.MakeAddReward();
-        AddCard = MainSceneController.Instance.UIControl.AddRewardWinodow;
-        MakeAddCardWindow();
     }
     public void RemoveAddCard()
     {

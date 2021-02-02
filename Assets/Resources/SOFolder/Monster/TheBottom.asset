@@ -24,4 +24,6 @@ MonoBehaviour:
   Elite:
   - Monsters:
     - {fileID: 11400000, guid: 8a1947f83dfb8004b8ac8d666ab52551, type: 2}
-  Boss: []
+  Boss:
+  - Monsters:
+    - {fileID: 11400000, guid: c95f32ac47693ea41a0fd183a2220520, type: 2}

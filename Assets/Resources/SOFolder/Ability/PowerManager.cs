@@ -109,6 +109,16 @@ public class PowerManager: MonoBehaviour
                     result = Mathf.Abs(value);
                 }
                 break;
+            case PowerVariety.Split:
+                if (IsUse)
+                {
+                    Buff(Target, PowerVariety.Split, value, PowerImage[8]);
+                }
+                else
+                {
+                    result = Mathf.Abs(value);
+                }
+                break;
         }
         return result;
     }

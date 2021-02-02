@@ -30,6 +30,8 @@ public class MainSceneController : MonoBehaviour
     }
     [SerializeField]
     MapGenerator m_MapControl;
+    BossType _Boss;
+    public BossType Boss { get => _Boss; set => _Boss = value; }
 
     [SerializeField]
     MonsterSpawner m_Spawner;
@@ -140,6 +142,9 @@ public class MainSceneController : MonoBehaviour
                 break;
             case MapNodeType.Boss:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
+                m_Spawner.BossSpawn(Boss);
+                m_UIControl.MakeBattleUI();
+                m_BattleData.ChangeBattleState(BattleDataState.Init);
                 break;
             case MapNodeType.Rest:
                 m_BackgroundControl.BackgroundChange(BackgroundType.FireCamp);

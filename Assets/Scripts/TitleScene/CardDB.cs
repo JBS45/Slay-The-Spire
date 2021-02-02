@@ -18,6 +18,9 @@ public class CardDB : MonoBehaviour
     }
 
     [SerializeField]
+    CardPool _Condition;
+    public CardPool Condition { get => _Condition; }
+    [SerializeField]
     CardPool _Neutral;
     public CardPool Neutral { get => _Neutral; }
     [SerializeField]
