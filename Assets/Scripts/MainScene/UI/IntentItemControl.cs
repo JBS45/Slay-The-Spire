@@ -81,10 +81,10 @@ public class IntentItemControl : MonoBehaviour
             MainImage.transform.eulerAngles = Vector3.zero;
         }
     }
-    public void OnAfterImage()
+    public void OnAfterImage(Delvoid del)
     {
         StopAllCoroutines();
-        StartCoroutine(EndAfterImageEffect());
+        StartCoroutine(EndAfterImageEffect(del));
     }
 
     IEnumerator Flicker()
@@ -102,7 +102,7 @@ public class IntentItemControl : MonoBehaviour
         }
     }
 
-    IEnumerator EndAfterImageEffect()
+    IEnumerator EndAfterImageEffect(Delvoid del)
     {
         int count = 0;
         foreach (var image in AfterImages)
@@ -132,6 +132,7 @@ public class IntentItemControl : MonoBehaviour
         {
             image.enabled = false;
         }
+        del();
     }
 
     IEnumerator Rotate()

@@ -70,6 +70,16 @@ public class MonsterSpawner : MonoBehaviour
                 break;
         }
     }
+    public void SummonMonster(string Name,int Hp,Vector3 pos)
+    {
+        MonsterAsset tmp = MonsterPool.Slime.Find(item => item.MonsterName == Name);
+        GameObject obj = Instantiate(tmp.Prefab, MonsterSpawnPoint);
+        obj.tag = "Monster";
+        obj.transform.localPosition = pos;
+        obj.GetComponentInChildren<Stat>().SetUp(Hp, Hp);
+        obj.GetComponentInChildren<IMonsterPatten>().SetPattern(tmp);
+        MainSceneController.Instance.BattleData.Monsters.Add(obj);
+    }
     public void MonsterSpawn()
     {
 

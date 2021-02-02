@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9166891eec20c46b41fe6d4a1c7c3c, type: 3}
   m_Name: TheBottom
   m_EditorClassIdentifier: 
+  Slime:
+  - {fileID: 11400000, guid: 994bb8aed21a7bb48b67ddfccb44daae, type: 2}
+  - {fileID: 11400000, guid: 5a984a1dcbbaa664695ed825a7bfac75, type: 2}
+  - {fileID: 11400000, guid: 7eb02f996b9d9a84087944d70a3aa719, type: 2}
+  - {fileID: 11400000, guid: 7428746695d7eb64daba94d70930e801, type: 2}
+  - {fileID: 11400000, guid: 6274bbab0ba7063488e70ccf2cbf15b2, type: 2}
+  - {fileID: 11400000, guid: c9994741a1244df4f836a781689956fe, type: 2}
   MonsterPool:
   - Monsters:
     - {fileID: 11400000, guid: 047f019bfa158104fb78b1e25a07d34d, type: 2}
@@ -21,6 +28,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7592407aa75b9a444aa134544622afa9, type: 2}
   - Monsters:
     - {fileID: 11400000, guid: 5a8c3c2cb3f4fdc49af557e0d0dd5b7b, type: 2}
+  - Monsters:
+    - {fileID: 11400000, guid: 6274bbab0ba7063488e70ccf2cbf15b2, type: 2}
+    - {fileID: 11400000, guid: c9994741a1244df4f836a781689956fe, type: 2}
+    - {fileID: 11400000, guid: 6274bbab0ba7063488e70ccf2cbf15b2, type: 2}
+    - {fileID: 11400000, guid: c9994741a1244df4f836a781689956fe, type: 2}
   Elite:
   - Monsters:
     - {fileID: 11400000, guid: 8a1947f83dfb8004b8ac8d666ab52551, type: 2}

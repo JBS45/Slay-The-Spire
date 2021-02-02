@@ -38,7 +38,7 @@ MonoBehaviour:
     SkillSprite: {fileID: 6731979846000164124, guid: 77c451ff4f5d19e45b21ded97f1525ab,
       type: 3}
     variety: 0
-    Value: 8
+    Value: 81
     Stack: 0
     Decription: "\uD53C\uD574\uB97C <size=24><color=#{0}>{1}</color></size> \uC90D\uB2C8\uB2E4.\n"
   - Type: 2

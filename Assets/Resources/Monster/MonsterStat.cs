@@ -8,7 +8,6 @@ public interface IMonsterPatten
     void SetPattern(MonsterAsset data);
     void SetIntent();
     bool GetAttackEnd();
-    void BattleInit();
     IEnumerator Action();
 }
 /*public class MonsterStat : Stat

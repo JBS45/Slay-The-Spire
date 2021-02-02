@@ -206,6 +206,11 @@ public class Stat : MonoBehaviour
             }
         }
 
+        foreach(var power in Powers)
+        {
+            power.GetDamage();
+        }
+
         StartCoroutine(ShakeEffect(0.4f));
         StartCoroutine(DamageEffect());
     }
@@ -371,5 +376,18 @@ public class Stat : MonoBehaviour
 
 
         PowerContents.Add(tmp);
+    }
+    protected void OnDestroy()
+    {
+        Powers.Clear();
+        Destroy(HPBar);
+        Destroy(TargetEffect);
+        foreach (var power in PowerContents)
+        {
+            Destroy(power);
+        }
+        PowerContents.Clear();
+        Defence = 0;
+        IsEnableTarget = false;
     }
 }

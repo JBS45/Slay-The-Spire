@@ -99,7 +99,14 @@ public class BattleData : MonoBehaviour
                     relic.BattleEnd();
                 }
                 ClearData();
-                Invoke("ShowRewardWindow", 0.5f);
+                if (MainSceneController.Instance.CurrentNode != MapNodeType.Boss)
+                {
+                    Invoke("ShowRewardWindow", 0.5f);
+                }
+                else
+                {
+                    //보스전 종료시 window;
+                }
                 break;
             case BattleDataState.Lose:
                 Player.GetComponentInChildren<CharacterStat>().BattleEnd();
@@ -133,10 +140,6 @@ public class BattleData : MonoBehaviour
 
         TurnCount = 0;
 
-        foreach(var item in Monsters)
-        {
-            item.GetComponentInChildren<IMonsterPatten>().BattleInit();
-        }
         //UI 배틀 시작시에 움직임
         //종료시 Battle로 상태전환
         BattleUI.StartBattle(ChangeBattleState, BattleDataState.Battle);
@@ -368,7 +371,8 @@ public class BattleData : MonoBehaviour
     }
     IEnumerator MonsterAction()
     {
-        for (int i = 0; i < Monsters.Count; ++i)
+        int tmp = Monsters.Count;
+        for (int i = 0; i < tmp; ++i)
         {
             StartCoroutine(Monsters[i].GetComponentInChildren<IMonsterPatten>().Action());
             while (!Monsters[i].GetComponentInChildren<IMonsterPatten>().GetAttackEnd())
@@ -377,6 +381,7 @@ public class BattleData : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(0.5f);
+        Monsters.RemoveAll(item => item == null);
         EnemyTurnProgress(TurnState.TurnEnd);
     }
     void EnemyTurnEnd()

@@ -10,6 +10,9 @@ public class MonsterPattern
 [CreateAssetMenu(menuName = "MonsterSpawn")]
 public class MonsterSpawn : ScriptableObject
 {
+    [Header("Slime")]
+    public List<MonsterAsset> Slime;
+
     [Header("Normal")]
 
     public List<MonsterPattern> MonsterPool;

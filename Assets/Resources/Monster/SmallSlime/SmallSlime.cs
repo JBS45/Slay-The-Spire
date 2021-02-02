@@ -5,11 +5,7 @@ using Spine.Unity;
 using Spine;
 
 
-public interface ISplit
-{
-    void Split();
-}
-public class BossSlime : Stat,IMonsterPatten
+public class SmallSlime : Stat,IMonsterPatten
 {
     [SerializeField]
     GameObject Monster;
@@ -35,7 +31,7 @@ public class BossSlime : Stat,IMonsterPatten
     int Count;
 
     bool IsIntent;
-    bool IsSplit;
+
     private new void Awake()
     {
         base.Awake();
@@ -43,7 +39,6 @@ public class BossSlime : Stat,IMonsterPatten
         anim = GetComponentInParent<Animator>();
         m_MonsterRenderer = GetComponentInParent<MonsterRenderer>();
         IsIntent = false;
-        IsSplit = false;
         CurDeckCount = 0;
     }
     public new void SetUp(int curHP,int maxHP)
@@ -85,6 +80,8 @@ public class BossSlime : Stat,IMonsterPatten
     public override void GetDamage(int damage)
     {
         base.GetDamage(damage);
+        m_MonsterRenderer.SetAnimation(m_MonsterRenderer.AnimClips[1], false, 1.0f);
+        m_MonsterRenderer.AddAnimation(m_MonsterRenderer.AnimClips[0], true, 1.0f);
         foreach(var item in Powers)
         {
             item.GetDamage();
@@ -134,7 +131,7 @@ public class BossSlime : Stat,IMonsterPatten
         {
             int rand;
 
-            //일단 무조건 3개 뽑는다
+            Deck = new MonsterAction[3];
             for (int i = 0; i < Deck.Length; ++i)
             {
                 rand = Random.Range(0, Pattern.Count);
@@ -207,11 +204,10 @@ public class BossSlime : Stat,IMonsterPatten
     }
     public void BattleInit()
     {
-        PowerManager.Instance.AssginBuff(Monster, PowerVariety.Split, 0, true);
+        
     }
     public IEnumerator Action()
     {
-        if (IsSplit == false) { 
         IsIntent = false;
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
@@ -244,10 +240,10 @@ public class BossSlime : Stat,IMonsterPatten
 
                 yield return new WaitForSeconds(0.3f);
             }
-        }
-        CurDeckCount++;
-        Intent.GetComponent<IntentControl>().OnAction();
-        IsAttackEnd = true;
+            CurDeckCount++;
+            Intent.GetComponent<IntentControl>().OnAction();
+            IsAttackEnd = true;
+        
     }
     public bool GetAttackEnd()
     {
@@ -257,17 +253,9 @@ public class BossSlime : Stat,IMonsterPatten
     {
         anim.SetTrigger("Attack");
     }
-    public void Split()
+    private new void OnDestroy()
     {
-        IsSplit = true;
-        Debug.Log("분열");
-    }
-
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
-        Destroy(HPBar);
-        Destroy(Intent);
+        base.OnDestroy();
     }
 
 }

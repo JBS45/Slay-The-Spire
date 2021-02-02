@@ -35,6 +35,7 @@ public class MainSceneController : MonoBehaviour
 
     [SerializeField]
     MonsterSpawner m_Spawner;
+    public MonsterSpawner Spawner { get => m_Spawner; set => m_Spawner = value; }
     [SerializeField]
     BattleData m_BattleData;
     public BattleData BattleData
@@ -57,8 +58,9 @@ public class MainSceneController : MonoBehaviour
     }
     public Transform m_CharSpawnPoint;
 
-
+    
     MapNodeType m_State;
+    public MapNodeType CurrentNode { get => m_State; }
 
     [SerializeField]
     PlayerDataAsset m_playerData;
@@ -93,7 +95,7 @@ public class MainSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+         
     }
 
     void ChangeState(MapNodeType state)

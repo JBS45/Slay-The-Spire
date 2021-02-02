@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723ed49b48b2f4f40859460c90388c0b, type: 3}
+  m_Name: SmallSlime
+  m_EditorClassIdentifier: 
+  MonsterName: SmallSlime
+  Description: "\uC0B0\uC131 \uC2AC\uB77C\uC784(\uC18C)"
+  Prefab: {fileID: 6921262958194185632, guid: 24a0b108388438b4a93e1d62a03d051c, type: 3}
+  MinHp: 10
+  MaxHp: 14
+  Pattern:
+  - OnlyOnceAction: 0
+    Target: 0
+    Intent: 0
+    Function:
+    - Type: 0
+      AbilityKey: Attack
+      SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
+        type: 3}
+      SkillSprite: {fileID: 0}
+      variety: 0
+      Value: 3
+      Stack: 0
+      Decription: 
+    Repeat: 1

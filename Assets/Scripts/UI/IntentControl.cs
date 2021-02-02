@@ -192,7 +192,7 @@ public class IntentControl : MonoBehaviour
     {
         for(int i = 0; i < Intent.Count; ++i)
         {
-            Intent[i].GetComponent<IntentItemControl>().OnAfterImage();
+            Intent[i].GetComponent<IntentItemControl>().OnAfterImage(()=> { Destroy(this.gameObject); });
         }
         DeBuffEffect.GetComponent<ParticleSystem>().Stop();
         BuffEffect.GetComponent<ParticleSystem>().Stop();
