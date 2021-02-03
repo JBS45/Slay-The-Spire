@@ -30,7 +30,7 @@ public class RelicDB : MonoBehaviour
         _RelicDatas = new List<RelicData>();
         _CurrentRelicDatas = new List<RelicData>();
     }
-    public void NoSaveInit()
+    public void Init()
     {
         foreach(var item in Relic)
         {

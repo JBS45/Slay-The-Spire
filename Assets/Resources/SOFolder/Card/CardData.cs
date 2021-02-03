@@ -279,7 +279,6 @@ public class CardData : ITargetLoader
         if (MultipleEnchant || EnchantCount == 0)
         {
             m_IsExtinct = Enchant.EnchantIsExtinct;
-            m_CardName = Enchant.EnchantCardName;
             m_Targets = Enchant.EnchantTargets;
             m_Cost -= Enchant.EnchantCost;
             m_Repeat += Enchant.EnchantRepeat;
@@ -309,18 +308,22 @@ public class CardData : ITargetLoader
 public class SaveCardData
 {
     public string CardName;
-    public CharacterType type;
+    public CharacterType Type;
     public int EnchantCount;
 
+    public SaveCardData()
+    {
+       
+    }
     public SaveCardData(CardData data)
     {
         CardName = data.CardName;
-        type = data.CharType;
+        Type = data.CharType;
         EnchantCount = data.EnchantCount;
     }
     public CardData GetCardData()
     {
-        CardAsset card = CardDB.Instance.FindCard(type, CardName);
+        CardAsset card = CardDB.Instance.FindCard(Type, CardName);
         CardData tmp = new CardData(card);
         for(int i = 0; i < EnchantCount; ++i)
         {

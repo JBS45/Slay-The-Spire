@@ -23,7 +23,7 @@ MonoBehaviour:
   Repeat: 1
   EnchantData:
     EnchantIsExtinct: 0
-    EnchantCardName: "\uCC9C\uB465+"
+    EnchantCardName: +
     EnchantTargets: 1
     EnchantCost: 0
     EnchantRepeat: 0

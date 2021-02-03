@@ -58,4 +58,15 @@ public class CharDB : MonoBehaviour
 
         }
     }
+    public CharacterAsset GetCharacterAsset(CharacterType type)
+    {
+        switch (type)
+        {
+            case CharacterType.Ironclad:
+                return m_CharInfo[0];
+            default:
+                return null;
+
+        }
+    }
 }

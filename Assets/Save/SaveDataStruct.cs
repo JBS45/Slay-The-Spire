@@ -22,6 +22,7 @@ public class SaveDataStruct
     public List<SaveCardData> Card = new List<SaveCardData>();
     public List<SaveRelic> Relic = new List<SaveRelic>();
     public List<string> PastEvents = new List<string>();
+    public List<int> Path = new List<int>();
 
 
 
@@ -52,6 +53,10 @@ public class SaveDataStruct
             SaveRelic tmp = new SaveRelic(item);
             Relic.Add(tmp);
         }
+        if (Path.Count <= CurFloor)
+        {
+            Path.Add(CurFloorIndex);
+        }
     }
     public void Save(PlayerDataAsset PlayerData,string EventKey)
     {
@@ -81,5 +86,9 @@ public class SaveDataStruct
             Relic.Add(tmp);
         }
         PastEvents.Add(EventKey);
+        if (Path.Count <= CurFloor)
+        {
+            Path.Add(CurFloorIndex);
+        }
     }
 }

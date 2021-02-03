@@ -32,7 +32,7 @@ public class BarScript : MonoBehaviour,IObservers
     public void BarInit(PlayerDataAsset playerdata)
     {
         m_PlayerData = playerdata;
-        m_CharName.text = CharDB.Instance.GetCharacterAsset().CharacterName;
+        m_CharName.text = CharDB.Instance.GetCharacterAsset(m_PlayerData.CharType).CharacterName;
         m_PlayerData.Attach(this);
         UpdateData();
     }

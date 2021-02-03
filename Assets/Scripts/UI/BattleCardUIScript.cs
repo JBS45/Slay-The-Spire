@@ -114,7 +114,7 @@ public class BattleCardUIScript : MonoBehaviour
             case CardType.Condition:
                 CardTypeText.text = "Condition";
                 CardBackground.sprite = CardBackgroundRes[2];
-                RareFrame.sprite = RareFrameRes[(int)(card.CardType - 3)];
+                RareFrame.sprite = RareFrameRes[3];
                 if (card.Cost == 0)
                 {
                     CostOrb.enabled = false;
@@ -241,7 +241,13 @@ public class BattleCardUIScript : MonoBehaviour
         int tmpInt = 0;
         Color tmpColor;
 
-        
+        if (data.EnchantCount > 0)
+        {
+            CardName.color = TextColor[1];
+        }
+        CardName.text = data.CardName + data.Enchant.EnchantCardName;
+
+
         for (int i = 0; i < data.Action.Count; ++i)
         {
             switch (data.Action[i].Type)

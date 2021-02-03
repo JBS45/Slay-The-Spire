@@ -171,4 +171,8 @@ public class MapIconScript : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
                     });
         
     }
+    public void Check()
+    {
+        Circle.enabled = true;
+    }
 }

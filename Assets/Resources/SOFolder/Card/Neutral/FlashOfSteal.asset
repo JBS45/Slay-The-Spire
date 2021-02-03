@@ -23,7 +23,7 @@ MonoBehaviour:
   Repeat: 1
   EnchantData:
     EnchantIsExtinct: 0
-    EnchantCardName: "\uAC15\uCCA0\uC758 \uC12C\uAD11+"
+    EnchantCardName: +
     EnchantTargets: 3
     EnchantCost: 0
     EnchantRepeat: 0

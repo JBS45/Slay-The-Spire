@@ -22,7 +22,7 @@ public class TitleSceneController : MonoBehaviour
 
     public enum TitleSceneState
     {
-        Create = 0, BeginAnimation, Ready, CharSelectPanel
+        None=0,Create, BeginAnimation, Ready, CharSelectPanel
     }
 
     public enum ScreenUIState
@@ -41,19 +41,21 @@ public class TitleSceneController : MonoBehaviour
     public Image FadePanel;
     public GameObject SelectPanelRes;
 
+    bool IsSave = false;
+
     [SerializeField]
     BGMManager m_BGMManager;
     [SerializeField]
     SEManager m_SEManager;
 
-    TitleSceneState m_State=TitleSceneState.Create;
+    TitleSceneState m_State=TitleSceneState.None;
 
     Vector3 TargetPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        ChangeState(TitleSceneState.BeginAnimation);
+        ChangeState(TitleSceneState.Create);
     }
 
     // Update is called once per frame
@@ -70,6 +72,10 @@ public class TitleSceneController : MonoBehaviour
         switch (m_State)
         {
             case TitleSceneState.Create:
+                SaveDataStruct tmp = new SaveDataStruct();
+                IsSave = SaveLoadManager.Instance.Load(ref tmp) ? tmp.IsSave : false;
+                MakePanelButton(IsSave);
+                ChangeState(TitleSceneState.BeginAnimation);
                 break;
             case TitleSceneState.BeginAnimation:
                 StartCoroutine("TitleBeginMoveTowerImage");
@@ -111,6 +117,21 @@ public class TitleSceneController : MonoBehaviour
         }
     }
 
+    void MakePanelButton(bool IsSave)
+    {
+        ButtonPanel.GetComponent<ButtonPanel>().Clear();
+        if (IsSave)
+        {
+            ButtonPanel.GetComponent<ButtonPanel>().ButtonSetting("Continue", SceneChange);
+            ButtonPanel.GetComponent<ButtonPanel>().ButtonSetting("New Game", NewGame);
+        }
+        else
+        {
+            ButtonPanel.GetComponent<ButtonPanel>().ButtonSetting("Start", PushStartButton);
+        }
+        ButtonPanel.GetComponent<ButtonPanel>().ButtonSetting("Option", PushOptionButton);
+        ButtonPanel.GetComponent<ButtonPanel>().ButtonSetting("Exit", PushQuitButton);
+    }
 
     //버튼 함수 구역
     public void PushStartButton()
@@ -129,6 +150,11 @@ public class TitleSceneController : MonoBehaviour
         obj.GetComponent<SelectPanelScript>().CancelButton.GetComponentInChildren<Button>().onClick.AddListener(() => { ChangeState(TitleSceneState.Ready); m_SEManager.PlaySE(1); });
 
         ChangeState(TitleSceneState.CharSelectPanel);
+    }
+    public void NewGame()
+    {
+        SaveLoadManager.Instance.Delete();
+        MakePanelButton(false);
     }
     public void PushOptionButton()
     {

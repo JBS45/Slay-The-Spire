@@ -46,15 +46,32 @@ public class CardDB : MonoBehaviour
 
     public CardAsset FindCard(CharacterType CharType,string CardName)
     {
-        CardAsset result;
-
-        foreach(var CardData in m_CardDB[(int)CharType])
+        switch (CharType)
         {
-            if (CardData.CardName.Equals(CardName))
-            {
-                result = CardData;
-                return result;
-            }
+            case CharacterType.Ironclad:
+                if (IronClad.BaseCard.Exists(item => item.CardName == CardName))
+                {
+                    return IronClad.BaseCard.Find(item => item.CardName == CardName);
+                }
+                else if(IronClad.Card.Exists(item => item.CardName == CardName))
+                {
+                    return IronClad.Card.Find(item => item.CardName == CardName);
+                }
+                else
+                {
+                    return null;
+                }
+                break;
+            case CharacterType.None:
+                if (Neutral.Card.Exists(item => item.CardName == CardName))
+                {
+                    return Neutral.BaseCard.Find(item => item.CardName == CardName);
+                }
+                else if (Condition.Card.Exists(item => item.CardName == CardName))
+                {
+                    return Condition.Card.Find(item => item.CardName == CardName);
+                }
+                break;
         }
 
 

@@ -364,6 +364,7 @@ public class Stat : MonoBehaviour
             PowerUI.GetComponent<HorizontalLayoutGroup>().childControlHeight = false;
             PowerUI.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight = false;
             PowerUI.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth = false;
+            PowerUI.GetComponent<HorizontalLayoutGroup>().spacing = 10;
 
             PowerContents.Clear();
         }

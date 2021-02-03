@@ -75,25 +75,37 @@ public class MainSceneController : MonoBehaviour
     private void Awake()
     {
         GameDataInit();
-        m_Char = Instantiate(CharDB.Instance.GetCharacterAsset().Prefab);
+        m_Char = Instantiate(CharDB.Instance.GetCharacterAsset(m_playerData.CharType).Prefab);
         m_Char.transform.SetParent(m_CharSpawnPoint);
         m_Char.transform.localPosition = Vector3.zero;
-        m_Char.GetComponentInChildren<CharacterStat>().SetUp(PlayerData);
         m_UIControl.InfoBar.BarInit(PlayerData);
     }
     // Start is called before the first frame update
     void Start()
     {
-        //저장된 정보가 있으면 그 층의 정보를 기반으로 로드
-
-        //그게 아닌 경우
-
+        Random.InitState(m_playerData.Seed);
         m_MapControl.MapGenerate();
         m_UIControl.MakeMap();
+        m_UIControl.MakeToolTip();
         m_MapControl.DrawMap(m_UIControl.GetMapUI());
         m_UIControl.GetMapUI().GetComponent<MapUIScript>().HideMap();
 
-        ChangeState(MapNodeType.None);
+        //저장된 정보가 있으면 그 층의 정보를 기반으로 로드
+        if (SaveData.IsSave)
+        {
+            int last = SaveData.Path.Count-1;
+            for (int i = 1; i < last; ++i)
+            {
+                m_UIControl.GetMapUI().GetComponent<MapUIScript>().ClearStage(i, SaveData.Path[i]);
+            }
+            m_UIControl.GetMapUI().GetComponent<MapUIScript>().SaveStage(last, SaveData.Path[last]);
+        }
+        //그게 아닌 경우
+        else
+        {
+
+            ChangeState(MapNodeType.None);
+        }
     }
 
     // Update is called once per frame
@@ -109,9 +121,8 @@ public class MainSceneController : MonoBehaviour
         m_Reward.Clear();
         m_UIControl.RemoveCurUI();
         m_UIControl.OffMap();
+        PlayerData.Notify();
         Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
-        SaveData.Save(m_playerData);
-        SaveLoadManager.Instance.Save(SaveData);
 
         switch (m_State)
         {
@@ -119,8 +130,8 @@ public class MainSceneController : MonoBehaviour
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.NPCSpawn(NPCType.Neow);
                 m_UIControl.ZeroFloorUI();
-                m_UIControl.MakeToolTip();
-                m_Char.GetComponentInChildren<CharacterStat>().HIdeUI();
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
             case MapNodeType.Merchant:
                 m_Reward.ShopReward();
@@ -130,6 +141,8 @@ public class MainSceneController : MonoBehaviour
                 m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetClassCard(Reward.CardList);
                 m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetNeutralCard(Reward.Neutral);
                 m_BattleData.Monsters[0].GetComponent<Merchant>().SetShowWindow(m_UIControl.GetCurUI().GetComponent<ShopWindowScript>());
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
             case MapNodeType.Mistery:
                 MysterySelect();
@@ -140,6 +153,8 @@ public class MainSceneController : MonoBehaviour
                 m_Spawner.MonsterSpawn();
                 m_UIControl.MakeBattleUI();
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
             case MapNodeType.Elite:
                 m_Reward.EliteReward(PlayerData.CharType, 3);
@@ -147,21 +162,29 @@ public class MainSceneController : MonoBehaviour
                 m_Spawner.EliteSpawn();
                 m_UIControl.MakeBattleUI();
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
             case MapNodeType.Boss:
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.BossSpawn(Boss);
                 m_UIControl.MakeBattleUI();
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
             case MapNodeType.Rest:
                 m_BackgroundControl.BackgroundChange(BackgroundType.FireCamp);
                 m_UIControl.MakeFireCampWindow();
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
             case MapNodeType.Treasure:
                 m_Reward.TreasureReward();
                 m_Spawner.NPCSpawn(NPCType.Chest);
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
+                SaveData.Save(m_playerData);
+                SaveLoadManager.Instance.Save(SaveData);
                 break;
         }
     }
@@ -206,7 +229,7 @@ public class MainSceneController : MonoBehaviour
             MysteryDB.Instance.NoSaveInit();
 
             //유물 DB 초기화
-            RelicDB.Instance.NoSaveInit();
+            RelicDB.Instance.Init();
 
             //유물 기본
             if (m_playerData.Relics == null)
@@ -233,7 +256,6 @@ public class MainSceneController : MonoBehaviour
             }
 
             m_playerData.Seed = SaveData.MapGenrateSeed;
-            Random.InitState(m_playerData.Seed);
 
             m_playerData.Notify();
         }
@@ -256,7 +278,7 @@ public class MainSceneController : MonoBehaviour
             MysteryDB.Instance.NoSaveInit();
 
             //유물 DB 초기화
-            RelicDB.Instance.NoSaveInit();
+            RelicDB.Instance.Init();
 
             //유물 기본
             if (m_playerData.Relics == null)
@@ -282,7 +304,7 @@ public class MainSceneController : MonoBehaviour
 
             MapSeed = Random.Range(0, int.MaxValue);
             m_playerData.Seed = MapSeed;
-            Random.InitState(m_playerData.Seed);
+
 
             m_playerData.Notify();
             //포션 없음
@@ -306,7 +328,10 @@ public class MainSceneController : MonoBehaviour
             {
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_UIControl.MakeEventWindow();
-                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(MysterySelector());
+                string tmp = MysterySelector();
+                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(tmp);
+                SaveData.Save(PlayerData,tmp);
+                SaveLoadManager.Instance.Save(SaveData);
             }
         }
         else

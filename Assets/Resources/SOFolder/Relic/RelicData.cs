@@ -182,6 +182,10 @@ public class SaveRelic
     public string RelicName;
     public int StackCount;
 
+    public SaveRelic()
+    {
+
+    }
     public SaveRelic(RelicData data)
     {
         RelicName = data.Name;

@@ -151,6 +151,8 @@ public class MapUIScript : MonoBehaviour
     {
         IsEnableMap = false;
         this.gameObject.SetActive(true);
+        int floor = MainSceneController.Instance.PlayerData.CurrentFloor;
+        Content.localPosition = new Vector3(0, 1080 - 100 * floor, 0);
         StartCoroutine(CancelButtonMove());
         AllButtonDisabled();
     }
@@ -158,6 +160,8 @@ public class MapUIScript : MonoBehaviour
     {
         IsEnableMap = true;
         this.gameObject.SetActive(true);
+        int floor = MainSceneController.Instance.PlayerData.CurrentFloor;
+        Content.localPosition = new Vector3(0,1080-100* floor, 0);
         StartCoroutine(CancelButtonMove());
         ButtonRefresh();
     }
@@ -190,7 +194,7 @@ public class MapUIScript : MonoBehaviour
 
 
 
-    void FloorProgress(int floor,int floorIndex)
+    public void FloorProgress(int floor,int floorIndex)
     {
         List<int> NextPath = MainSceneController.Instance.GetMapControl().FindCanMoveNode(floor,floorIndex);
         for (int i = 0; i < NextPath.Count; ++i) {
@@ -207,8 +211,17 @@ public class MapUIScript : MonoBehaviour
         MainSceneController.Instance.PlayerData.CurrentFloorIndex = floorIndex;
 
         MapNodeType type = MainSceneController.Instance.GetMapControl().GetMapNodeType(floor, floorIndex);
-
+        MapIcons[floor][floorIndex].GetComponent<MapIconScript>().Check();
         MainSceneController.Instance.EventStateChange(type);
+    }
+    public MapNodeType ClearStage(int floor, int floorIndex)
+    {
+        MainSceneController.Instance.PlayerData.CurrentFloor = floor;
+        MainSceneController.Instance.PlayerData.CurrentFloorIndex = floorIndex;
+
+        MapNodeType type = MainSceneController.Instance.GetMapControl().GetMapNodeType(floor, floorIndex);
+        MapIcons[floor][floorIndex].GetComponent<MapIconScript>().Check();
+        return type;
     }
     void AllButtonDisabled()
     {

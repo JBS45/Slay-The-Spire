@@ -208,7 +208,7 @@ public class SmallSlime : Stat,IMonsterPatten
     }
     public IEnumerator Action()
     {
-        IsIntent = false;
+
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
@@ -242,6 +242,7 @@ public class SmallSlime : Stat,IMonsterPatten
             }
             CurDeckCount++;
             Intent.GetComponent<IntentControl>().OnAction();
+            IsIntent = false;
             IsAttackEnd = true;
         
     }
@@ -256,6 +257,7 @@ public class SmallSlime : Stat,IMonsterPatten
     private new void OnDestroy()
     {
         base.OnDestroy();
+        Destroy(Intent);
     }
 
 }

@@ -66,9 +66,8 @@ public class SaveLoadManager : MonoBehaviour
 
 
             //data = JsonConvert.DeserializeObject<PlayerInfo>(reformat);
-            data = JsonConvert.DeserializeObject<SaveDataStruct>(jData);
-            Debug.Log(data);
-            if (data.IsSave)
+            data = JsonConvert.DeserializeObject<SaveDataStruct>(jData);;
+            if (data!=null&&data.IsSave)
             {
                 return true;
             }
@@ -82,6 +81,9 @@ public class SaveLoadManager : MonoBehaviour
     }
     public void Delete()
     {
-        
+        if (File.Exists(Application.dataPath + FileName))
+        {
+            File.Delete(Application.dataPath + FileName);
+        }
     }
 }
