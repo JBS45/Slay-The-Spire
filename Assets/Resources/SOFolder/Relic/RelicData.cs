@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinct, IBattleStart, IBattleEnd
 {
     bool m_IsEnable;
@@ -174,4 +175,23 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
         m_Action = data.Action;
     }
 
+}
+[System.Serializable]
+public class SaveRelic
+{
+    public string RelicName;
+    public int StackCount;
+
+    public SaveRelic(RelicData data)
+    {
+        RelicName = data.Name;
+        StackCount = data.StackCount;
+    }
+    public RelicData GetRelic()
+    {
+        RelicData tmp = RelicDB.Instance.RelicDatas.Find(item => item.Name == RelicName);
+        tmp.StackCount = StackCount;
+
+        return tmp;
+    }
 }

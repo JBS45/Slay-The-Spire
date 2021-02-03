@@ -305,3 +305,27 @@ public class CardData : ITargetLoader
         Target = null;
     }
 }
+[System.Serializable]
+public class SaveCardData
+{
+    public string CardName;
+    public CharacterType type;
+    public int EnchantCount;
+
+    public SaveCardData(CardData data)
+    {
+        CardName = data.CardName;
+        type = data.CharType;
+        EnchantCount = data.EnchantCount;
+    }
+    public CardData GetCardData()
+    {
+        CardAsset card = CardDB.Instance.FindCard(type, CardName);
+        CardData tmp = new CardData(card);
+        for(int i = 0; i < EnchantCount; ++i)
+        {
+            tmp.CardEnchant();
+        }
+        return tmp;
+    }
+}

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public enum CharacterType
 {
     None=0,Ironclad,Silent,Defect,Watcher

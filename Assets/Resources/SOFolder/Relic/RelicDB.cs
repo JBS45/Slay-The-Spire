@@ -49,4 +49,8 @@ public class RelicDB : MonoBehaviour
 
         return tmp;
     }
+    public void RemoveData(RelicData data)
+    {
+        _CurrentRelicDatas.Remove(_CurrentRelicDatas.Find(item => item.Name == data.Name));
+    }
 }

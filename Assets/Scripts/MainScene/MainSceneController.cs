@@ -61,6 +61,7 @@ public class MainSceneController : MonoBehaviour
     
     MapNodeType m_State;
     public MapNodeType CurrentNode { get => m_State; }
+    int MapSeed;
 
     [SerializeField]
     PlayerDataAsset m_playerData;
@@ -68,6 +69,8 @@ public class MainSceneController : MonoBehaviour
     {
         get { return m_playerData; }
     }
+
+    SaveDataStruct SaveData;
 
     private void Awake()
     {
@@ -84,6 +87,7 @@ public class MainSceneController : MonoBehaviour
         //저장된 정보가 있으면 그 층의 정보를 기반으로 로드
 
         //그게 아닌 경우
+
         m_MapControl.MapGenerate();
         m_UIControl.MakeMap();
         m_MapControl.DrawMap(m_UIControl.GetMapUI());
@@ -106,6 +110,8 @@ public class MainSceneController : MonoBehaviour
         m_UIControl.RemoveCurUI();
         m_UIControl.OffMap();
         Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
+        SaveData.Save(m_playerData);
+        SaveLoadManager.Instance.Save(SaveData);
 
         switch (m_State)
         {
@@ -181,49 +187,108 @@ public class MainSceneController : MonoBehaviour
 
     void GameDataInit()
     {
-        //저장 정보가 없으면
-        m_playerData.CharType = CharDB.Instance.GetPlayChar();
-        m_playerData.MaxHp = CharDB.Instance.GetCharacterAsset().Hp;
-        m_playerData.CurrentHp = CharDB.Instance.GetCharacterAsset().Hp;
-        m_playerData.CurrentMoney = CharDB.Instance.GetCharacterAsset().Gold;
-        m_playerData.CurrentFloor = 0;
-        m_playerData.CurrentFloorIndex = 0;
-        m_playerData.MaxPotions = 3;
-        m_playerData.DrawPerTurn = 5;
-        m_playerData.EnergeyPerTurn = 3;
-        m_playerData.CardRemoveCount = 0;
-
-        //미스터리 이벤트
-        MysteryDB.Instance.NoSaveInit();
-
-        //유물 DB 초기화
-        RelicDB.Instance.NoSaveInit();
-
-        //유물 기본
-        if (m_playerData.Relics == null)
+        if (SaveLoadManager.Instance.Load(ref SaveData))
         {
-            m_playerData.Relics = new List<RelicData>();
+            //저장 정보가 있으면
+
+            m_playerData.CharType = SaveData.Character;
+            m_playerData.MaxHp = SaveData.MaxHP;
+            m_playerData.CurrentHp = SaveData.CurHP;
+            m_playerData.CurrentMoney = SaveData.CurMoney;
+            m_playerData.CurrentFloor = SaveData.CurFloor;
+            m_playerData.CurrentFloorIndex = SaveData.CurFloorIndex;
+            m_playerData.MaxPotions = 3;
+            m_playerData.DrawPerTurn = 5;
+            m_playerData.EnergeyPerTurn = 3;
+            m_playerData.CardRemoveCount = SaveData.CardRemove;
+
+            //미스터리 이벤트
+            MysteryDB.Instance.NoSaveInit();
+
+            //유물 DB 초기화
+            RelicDB.Instance.NoSaveInit();
+
+            //유물 기본
+            if (m_playerData.Relics == null)
+            {
+                m_playerData.Relics = new List<RelicData>();
+            }
+            m_playerData.Relics.Clear();
+
+            foreach (var item in SaveData.Relic)
+            {
+                m_playerData.AddRelic(item.GetRelic());
+                RelicDB.Instance.RemoveData(item.GetRelic());
+            }
+
+            if (m_playerData.OriginDecks == null)
+            {
+                m_playerData.OriginDecks = new List<CardData>();
+            }
+
+            m_playerData.OriginDecks.Clear();
+            foreach(var item in SaveData.Card)
+            {
+                m_playerData.OriginDecks.Add(item.GetCardData());
+            }
+
+            m_playerData.Seed = SaveData.MapGenrateSeed;
+            Random.InitState(m_playerData.Seed);
+
+            m_playerData.Notify();
         }
-        m_playerData.Relics.Clear();
-
-        m_playerData.AddRelic(CharDB.Instance.GetCharacterAsset().StartRelic);
-
-        if (m_playerData.OriginDecks == null)
+        else
         {
-            m_playerData.OriginDecks = new List<CardData>();
+            SaveData = new SaveDataStruct();
+            //저장 정보가 없으면
+            m_playerData.CharType = CharDB.Instance.GetPlayChar();
+            m_playerData.MaxHp = CharDB.Instance.GetCharacterAsset().Hp;
+            m_playerData.CurrentHp = CharDB.Instance.GetCharacterAsset().Hp;
+            m_playerData.CurrentMoney = CharDB.Instance.GetCharacterAsset().Gold;
+            m_playerData.CurrentFloor = 0;
+            m_playerData.CurrentFloorIndex = 0;
+            m_playerData.MaxPotions = 3;
+            m_playerData.DrawPerTurn = 5;
+            m_playerData.EnergeyPerTurn = 3;
+            m_playerData.CardRemoveCount = 0;
+
+            //미스터리 이벤트
+            MysteryDB.Instance.NoSaveInit();
+
+            //유물 DB 초기화
+            RelicDB.Instance.NoSaveInit();
+
+            //유물 기본
+            if (m_playerData.Relics == null)
+            {
+                m_playerData.Relics = new List<RelicData>();
+            }
+            m_playerData.Relics.Clear();
+
+            m_playerData.AddRelic(CharDB.Instance.GetCharacterAsset().StartRelic);
+
+            if (m_playerData.OriginDecks == null)
+            {
+                m_playerData.OriginDecks = new List<CardData>();
+            }
+
+            m_playerData.OriginDecks.Clear();
+
+            for (int i = 0; i < CharDB.Instance.GetCharacterAsset().StartDeck.Length; ++i)
+            {
+                CardData Tmp = new CardData(CharDB.Instance.GetCharacterAsset().StartDeck[i]);
+                m_playerData.OriginDecks.Add(Tmp);
+            }
+
+            MapSeed = Random.Range(0, int.MaxValue);
+            m_playerData.Seed = MapSeed;
+            Random.InitState(m_playerData.Seed);
+
+            m_playerData.Notify();
+            //포션 없음
+
         }
-
-        m_playerData.OriginDecks.Clear();
-
-        for (int i = 0; i < CharDB.Instance.GetCharacterAsset().StartDeck.Length; ++i)
-        {
-            CardData Tmp = new CardData(CharDB.Instance.GetCharacterAsset().StartDeck[i]);
-            m_playerData.OriginDecks.Add(Tmp);
-        }
-        m_playerData.Notify();
-        //포션 없음
-
-        //저장 정보가 있으면
+        
     }
     void MysterySelect()
     {
