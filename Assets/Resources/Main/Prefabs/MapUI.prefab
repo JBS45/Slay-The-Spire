@@ -2092,6 +2092,7 @@ MonoBehaviour:
   PathDotRes: {fileID: 5768930278453368017, guid: ff466dc06f528924581a5efe91d42302,
     type: 3}
   CancelButton: {fileID: 1358034404561734436}
+  MapSoundEffect: {fileID: 8300000, guid: 354a41b0d6485154abca1bbc7d2e7146, type: 3}
 --- !u!1 &7930377671265783257
 GameObject:
   m_ObjectHideFlags: 0

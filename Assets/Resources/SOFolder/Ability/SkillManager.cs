@@ -80,7 +80,7 @@ public class SkillManager : MonoBehaviour
         float result = value;
         if (IsUse)
         {
-            MainSceneController.Instance.BattleData.DrawCard((int)result);
+            MainSceneController.Instance.BattleData.DrawCard((int)result,null);
         }
         return (int)result;
     }

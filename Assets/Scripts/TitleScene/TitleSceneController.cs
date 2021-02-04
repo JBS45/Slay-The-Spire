@@ -85,7 +85,7 @@ public class TitleSceneController : MonoBehaviour
             case TitleSceneState.Ready:
                 if (!m_BGMManager.IsPlay())
                 {
-                    m_BGMManager.PlayBGM();
+                    m_BGMManager.PlayBGM(0);
                 }
                 TitleString.SetActive(true);
                 StartCoroutine(MoveToTarget(ButtonPanel, new Vector3(550, 0, 0), null));

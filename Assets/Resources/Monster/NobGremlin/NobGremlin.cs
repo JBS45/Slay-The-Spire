@@ -195,6 +195,7 @@ public class NobGremlin : Stat, IMonsterPatten
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
+        Intent.GetComponent<IntentControl>().OnAction();
         for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
         {
             foreach (var func in Deck[CurDeckCount].Function)
@@ -225,7 +226,6 @@ public class NobGremlin : Stat, IMonsterPatten
             yield return new WaitForSeconds(0.3f);
         }
         CurDeckCount++;
-        Intent.GetComponent<IntentControl>().OnAction();
         IsAttackEnd = true;
     }
     public bool GetAttackEnd()

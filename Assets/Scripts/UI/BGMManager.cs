@@ -6,12 +6,13 @@ public class BGMManager : MonoBehaviour
 {
     AudioSource audio;
     [SerializeField]
-    AudioClip BGM;
+    AudioClip[] BGM;
+
+    int CurrentClipNum;
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
-        audio.clip = BGM;
-        
+        CurrentClipNum = -1;
     }
     // Start is called before the first frame update
     void Start()
@@ -24,9 +25,14 @@ public class BGMManager : MonoBehaviour
     {
         
     }
-    public void PlayBGM()
+    public void PlayBGM(int ClipNum)
     {
-        audio.Play();
+        if (CurrentClipNum != ClipNum)
+        {
+            CurrentClipNum = ClipNum;
+            audio.clip = BGM[ClipNum];
+            audio.Play();
+        }
     }
     public bool IsPlay()
     {

@@ -9,11 +9,7 @@ public class MainSceneController : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<MainSceneController>();
-            }
-            return _instance;
+             return _instance = FindObjectOfType<MainSceneController>() ?? _instance;
         }
     }
     [SerializeField]
@@ -70,7 +66,15 @@ public class MainSceneController : MonoBehaviour
         get { return m_playerData; }
     }
 
+    [SerializeField]
+    SEManager _SEManager;
+    public SEManager SEManager { get => _SEManager; }
+    [SerializeField]
+    BGMManager _BGMManager;
+    public BGMManager BGMManager { get => _BGMManager; }
+
     SaveDataStruct SaveData;
+
 
     private void Awake()
     {
@@ -123,6 +127,7 @@ public class MainSceneController : MonoBehaviour
         m_UIControl.OffMap();
         PlayerData.Notify();
         Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
+        BGMManager.PlayBGM(1);
 
         switch (m_State)
         {
@@ -141,6 +146,7 @@ public class MainSceneController : MonoBehaviour
                 m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetClassCard(Reward.CardList);
                 m_UIControl.GetCurUI().GetComponent<ShopWindowScript>().SetNeutralCard(Reward.Neutral);
                 m_BattleData.Monsters[0].GetComponent<Merchant>().SetShowWindow(m_UIControl.GetCurUI().GetComponent<ShopWindowScript>());
+                BGMManager.PlayBGM(2);
                 SaveData.Save(m_playerData);
                 SaveLoadManager.Instance.Save(SaveData);
                 break;
@@ -170,6 +176,7 @@ public class MainSceneController : MonoBehaviour
                 m_Spawner.BossSpawn(Boss);
                 m_UIControl.MakeBattleUI();
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
+                BGMManager.PlayBGM(3);
                 SaveData.Save(m_playerData);
                 SaveLoadManager.Instance.Save(SaveData);
                 break;

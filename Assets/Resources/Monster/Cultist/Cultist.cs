@@ -202,6 +202,7 @@ public class Cultist : Stat,IMonsterPatten
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
+        Intent.GetComponent<IntentControl>().OnAction();
         for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
         {
             if (Deck[CurDeckCount].OnlyOnceAction)
@@ -237,7 +238,6 @@ public class Cultist : Stat,IMonsterPatten
             yield return new WaitForSeconds(0.3f);
         }
         CurDeckCount++;
-        Intent.GetComponent<IntentControl>().OnAction();
         IsAttackEnd = true;
     }
     public void BattleInit()

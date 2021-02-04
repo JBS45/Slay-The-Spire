@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d327e595eec977a44ab22088a98bc16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SE:
-  - {fileID: 8300000, guid: 46e2705684997e3439590c8fd9134432, type: 3}
+  UISE:
   - {fileID: 8300000, guid: 94b97364192fd9643b315ee866b7e3f0, type: 3}
+  - {fileID: 8300000, guid: 46e2705684997e3439590c8fd9134432, type: 3}
+  BattleSE:
+  - {fileID: 8300000, guid: d451015f0c68324459b2da15d9221a6f, type: 3}

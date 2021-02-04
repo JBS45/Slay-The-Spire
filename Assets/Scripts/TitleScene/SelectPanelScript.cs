@@ -66,7 +66,7 @@ public class SelectPanelScript : MonoBehaviour
         TitleSceneController.Instance.SceneChange();
     }
 
-    public void CharTypeToBackground(CharacterType Type)
+    public void CharTypeToBackground(CharacterType Type,Delvoid Del)
     {
         if (m_CurrentChar == Type) return;
         if (m_CurrentChar == CharacterType.None)
@@ -74,7 +74,7 @@ public class SelectPanelScript : MonoBehaviour
             StartCoroutine(MoveButton(StartButton, true));
         }
         m_CurrentChar = Type;
-        Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 0.1f);
+        Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.1f, 0.2f);
         switch (m_CurrentChar)
         {
             case CharacterType.None:
@@ -83,6 +83,7 @@ public class SelectPanelScript : MonoBehaviour
                 Background.sprite = BackgroundSpirtes[0];
                 CharDB.Instance.SetPlayChar(m_CurrentChar);
                 CharDescriptionPanel.GetComponent<CharDescriptionPanel>().PanelRefresh(m_CurrentChar);
+                Del();
                 break;
             case CharacterType.Silent:
                 CharDB.Instance.SetPlayChar(m_CurrentChar);

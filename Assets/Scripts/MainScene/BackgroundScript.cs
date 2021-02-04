@@ -17,6 +17,8 @@ public class BackgroundScript : MonoBehaviour
 
     [Header("Battle")]
     [SerializeField]
+    SpriteRenderer GameOverBackground;
+    [SerializeField]
     SpriteRenderer[] Background;
 
     [SerializeField]
@@ -177,5 +179,17 @@ public class BackgroundScript : MonoBehaviour
             yield return null;
         }
         Shoulder.transform.localPosition = target;
+    }
+    public void ChangeGameOver()
+    {
+        foreach(var item in Background)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in WallSprite)
+        {
+            item.enabled = false;
+        }
+        GameOverBackground.enabled = true;
     }
 }

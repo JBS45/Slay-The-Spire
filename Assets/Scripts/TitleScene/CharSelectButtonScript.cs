@@ -12,6 +12,9 @@ public class CharSelectButtonScript : MonoBehaviour, IPointerEnterHandler, IPoin
     public Image ButtonImage;
     public Image HighlightImage;
 
+    [SerializeField]
+    AudioClip SoundEffect;
+
     Toggle m_Toggle;
 
     float m_alpha;
@@ -80,7 +83,8 @@ public class CharSelectButtonScript : MonoBehaviour, IPointerEnterHandler, IPoin
     public void OnPushButton()
     {
         m_SEManager.PlaySE(1);
-        GetComponentInParent<SelectPanelScript>().CharTypeToBackground(m_CharButton);
+
+        GetComponentInParent<SelectPanelScript>().CharTypeToBackground(m_CharButton, PlaySound);
     }
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
@@ -96,6 +100,13 @@ public class CharSelectButtonScript : MonoBehaviour, IPointerEnterHandler, IPoin
         if (m_CharButton != CharacterType.None)
         {
             ButtonImage.color = Color.gray;
+        }
+    }
+    void PlaySound()
+    {
+        if (SoundEffect != null)
+        {
+            m_SEManager.PlaySE(SoundEffect);
         }
     }
 }

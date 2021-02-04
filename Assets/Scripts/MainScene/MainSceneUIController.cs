@@ -52,6 +52,9 @@ public class MainSceneUIController : MonoBehaviour
     [SerializeField]
     GameObject EventRes;
 
+    [SerializeField]
+    GameObject GameOverUI;
+
     [Header("ToolTip")]
     [SerializeField]
     GameObject ToolTipRes;
@@ -177,6 +180,11 @@ public class MainSceneUIController : MonoBehaviour
         EnchantCard.transform.SetAsLastSibling();
         InfoBar.gameObject.transform.SetAsLastSibling();
     }
+    public void MakeGameOver()
+    {
+        CurUI = Instantiate(GameOverUI, UICanvas.transform);
+        InfoBar.gameObject.transform.SetAsLastSibling();
+    }
     public void GetDeckWindow()
     {
         if (CurrentDeckWindow == null)
@@ -263,5 +271,15 @@ public class MainSceneUIController : MonoBehaviour
     public GameObject GetCurUI()
     {
         return CurUI;
+    }
+    public void RemoveAllTagUI()
+    {
+        for(int i = 0; i < UICanvas.transform.childCount; ++i)
+        {
+            if (UICanvas.transform.GetChild(i).tag=="UI")
+            {
+                Destroy(UICanvas.transform.GetChild(i));
+            }
+        }
     }
 }

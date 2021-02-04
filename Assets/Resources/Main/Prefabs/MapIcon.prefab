@@ -269,6 +269,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2c0641fe7c13484418f1ede0c721610c, type: 3}
   - {fileID: 21300000, guid: 34d547620b878c44c8f8f0156438a414, type: 3}
   - {fileID: 21300000, guid: da505014f7057ca4eb8f94c618598257, type: 3}
+  SoundEffect: {fileID: 8300000, guid: 14e5dc7f3ff044a409397eccb6f69478, type: 3}
 --- !u!1 &8958203356385421917
 GameObject:
   m_ObjectHideFlags: 0

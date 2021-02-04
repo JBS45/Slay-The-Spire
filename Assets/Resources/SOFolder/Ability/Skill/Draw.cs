@@ -9,7 +9,7 @@ public class Draw : Ability
     public override void OnExcute(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)
     {
         float result = Func.Value;
-        MainSceneController.Instance.BattleData.DrawCard((int)result);
+        MainSceneController.Instance.BattleData.DrawCard((int)result,null);
         
     }
     public override int PredictValue(GameObject Performer, GameObject Target, FunctionModule Func, int EnchantCount)

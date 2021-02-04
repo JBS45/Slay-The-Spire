@@ -18,6 +18,8 @@ public class MapUIScript : MonoBehaviour
 
     Dictionary<int, List<GameObject>> MapIcons;
 
+    [SerializeField]
+    AudioClip MapSoundEffect;
     bool IsEnableMap;
     void Awake()
     {
@@ -149,6 +151,7 @@ public class MapUIScript : MonoBehaviour
     }
     public void OpenMapInfoBar()
     {
+        PlaySound();
         IsEnableMap = false;
         this.gameObject.SetActive(true);
         int floor = MainSceneController.Instance.PlayerData.CurrentFloor;
@@ -158,6 +161,7 @@ public class MapUIScript : MonoBehaviour
     }
     public void OpenMapProgress()
     {
+        PlaySound();
         IsEnableMap = true;
         this.gameObject.SetActive(true);
         int floor = MainSceneController.Instance.PlayerData.CurrentFloor;
@@ -211,7 +215,10 @@ public class MapUIScript : MonoBehaviour
         MainSceneController.Instance.PlayerData.CurrentFloorIndex = floorIndex;
 
         MapNodeType type = MainSceneController.Instance.GetMapControl().GetMapNodeType(floor, floorIndex);
-        MapIcons[floor][floorIndex].GetComponent<MapIconScript>().Check();
+        if (floor > 0)
+        {
+            MapIcons[floor][floorIndex].GetComponent<MapIconScript>().Check();
+        }
         MainSceneController.Instance.EventStateChange(type);
     }
     public MapNodeType ClearStage(int floor, int floorIndex)
@@ -220,7 +227,10 @@ public class MapUIScript : MonoBehaviour
         MainSceneController.Instance.PlayerData.CurrentFloorIndex = floorIndex;
 
         MapNodeType type = MainSceneController.Instance.GetMapControl().GetMapNodeType(floor, floorIndex);
-        MapIcons[floor][floorIndex].GetComponent<MapIconScript>().Check();
+        if (floor > 0)
+        {
+            MapIcons[floor][floorIndex].GetComponent<MapIconScript>().Check();
+        };
         return type;
     }
     void AllButtonDisabled()
@@ -245,4 +255,8 @@ public class MapUIScript : MonoBehaviour
         FloorProgress(MainSceneController.Instance.PlayerData.CurrentFloor, MainSceneController.Instance.PlayerData.CurrentFloorIndex);
     }
   
+    void PlaySound()
+    {
+        MainSceneController.Instance.SEManager.PlaySE(MapSoundEffect);
+    }
 }

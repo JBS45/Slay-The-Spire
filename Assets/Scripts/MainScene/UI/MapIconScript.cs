@@ -27,7 +27,8 @@ public class MapIconScript : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
     Sprite[] BossOutlineImages;
 
     Animator Anim;
-
+    [SerializeField]
+    AudioClip SoundEffect;
 
     MapNodeType NodeType;
     BossType Boss;
@@ -166,13 +167,18 @@ public class MapIconScript : MonoBehaviour,IPointerEnterHandler,IPointerExitHand
         IsCanGo = true;
         IconButton.onClick.AddListener(
             () => { del();
-                   Circle.enabled = true;
-                   Anim.SetTrigger("Check");
+                    PlaySound();
+                    Circle.enabled = true;
+                    Anim.SetTrigger("Check");
                     });
         
     }
     public void Check()
     {
         Circle.enabled = true;
+    }
+    void PlaySound()
+    {
+        MainSceneController.Instance.SEManager.PlaySE(SoundEffect);
     }
 }

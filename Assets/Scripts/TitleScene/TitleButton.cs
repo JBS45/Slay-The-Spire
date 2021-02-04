@@ -18,6 +18,7 @@ public class TitleButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
         HighligtImage.enabled = false;
         target = ButtonText.transform.localPosition;
         m_SEManager = GameObject.Find("SEManager").GetComponent<SEManager>();
+        GetComponentInChildren<Button>().onClick.AddListener(PlayClickSound);
     }
     // Start is called before the first frame update
     void Start()
@@ -63,5 +64,9 @@ public class TitleButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
         }
         ButtonText.transform.localPosition = target;
         bTextMoving = false;
+    }
+    void PlayClickSound()
+    {
+        m_SEManager.PlaySE(1);
     }
 }

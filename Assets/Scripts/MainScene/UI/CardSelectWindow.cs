@@ -130,8 +130,8 @@ public class CardSelectWindow : MonoBehaviour
         MainSceneController.Instance.PlayerData.RemoveCard(Data);
         MainSceneController.Instance.PlayerData.CurrentMoney -= MainSceneController.Instance.PlayerData.RemoveCardGold();
         MainSceneController.Instance.PlayerData.CardRemoveCount++;
-        MainSceneController.Instance.PlayerData.Notify();
         del();
+        MainSceneController.Instance.PlayerData.Notify();
         Destroy(this.gameObject);
     }
 }

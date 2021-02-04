@@ -765,6 +765,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 83eb306f7c96c5e439ec1afbb9283c3f,
         type: 3}
+    - target: {fileID: 8940801251804345710, guid: e9a4036ce6f725547a7e1991818b82ff,
+        type: 3}
+      propertyPath: SoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: b530baa6d3565984c8649c7513446201, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a4036ce6f725547a7e1991818b82ff, type: 3}
 --- !u!1 &5695525100618241318 stripped

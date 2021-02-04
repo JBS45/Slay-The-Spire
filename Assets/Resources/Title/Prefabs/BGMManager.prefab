@@ -140,4 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc6e8396f13edb40928bffb0d2811a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BGM: {fileID: 8300000, guid: 0de6d85666e89624293cc5bb25ff89c2, type: 3}
+  BGM:
+  - {fileID: 8300000, guid: 0de6d85666e89624293cc5bb25ff89c2, type: 3}
+  - {fileID: 8300000, guid: 3c5a66418c3c3914eaf49bf87b0b56a2, type: 3}
+  - {fileID: 8300000, guid: 9a36a769f92bbbf488d54a7b98c46a62, type: 3}
+  - {fileID: 8300000, guid: 7e876689458ec2340b4a0f588082140b, type: 3}
+  - {fileID: 8300000, guid: fd11a26de0925f946867176291cca971, type: 3}

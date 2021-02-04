@@ -10,6 +10,10 @@ public class CharacterStat : Stat,IObservers
     Animator anim;
 
     CharacterRenderer renderer;
+    [SerializeField]
+    SpriteRenderer Corpse;
+
+    MeshRenderer Mesh;
 
 
     private new void Awake()
@@ -17,6 +21,8 @@ public class CharacterStat : Stat,IObservers
         base.Awake();
         anim = GetComponentInParent<Animator>();
         renderer = GetComponentInParent<CharacterRenderer>();
+        Mesh = GetComponent<MeshRenderer>();
+        Corpse.enabled = false;
     }
     public void SetUp(PlayerDataAsset data)
     {
@@ -66,8 +72,20 @@ public class CharacterStat : Stat,IObservers
     }
     public void UpdateData()
     {
-        m_PlayerData.CurrentHp = base.CurrentHP;
-        m_PlayerData.MaxHp = base.MaxHP;
+        if (IsDead())
+        {
+            Mesh.enabled = false;
+            Corpse.enabled = true;
+            m_PlayerData.CurrentHp = 0;
+            m_PlayerData.MaxHp = base.MaxHP;
+            SaveLoadManager.Instance.Delete();
+            MainSceneController.Instance.BattleData.ChangeBattleState(BattleDataState.Lose);
+        }
+        else
+        {
+            m_PlayerData.CurrentHp = base.CurrentHP;
+            m_PlayerData.MaxHp = base.MaxHP;
+        }
     }
     new bool IsDead()
     {

@@ -94,7 +94,8 @@ public class BattleData : MonoBehaviour
                 break;
             case BattleDataState.Win:
                 Player.GetComponentInChildren<CharacterStat>().BattleEnd();
-                foreach(var relic in MainSceneController.Instance.PlayerData.Relics)
+                MainSceneController.Instance.SEManager.BattleSEPlay(BattelSEType.Win);
+                foreach (var relic in MainSceneController.Instance.PlayerData.Relics)
                 {
                     relic.BattleEnd();
                 }
@@ -106,12 +107,22 @@ public class BattleData : MonoBehaviour
                 else
                 {
                     //보스전 종료시 window;
+                    MainSceneController.Instance.BGMManager.PlayBGM(4);
+                    MainSceneController.Instance.Background.ChangeGameOver();
+                    MainSceneController.Instance.UIControl.RemoveCurUI();
+                    MainSceneController.Instance.UIControl.MakeGameOver();
+                    MainSceneController.Instance.UIControl.GetCurUI().GetComponent<GameOverUI>().SetUI(true);
+                    MainSceneController.Instance.UIControl.RemoveAllTagUI();
                 }
                 break;
             case BattleDataState.Lose:
                 Player.GetComponentInChildren<CharacterStat>().BattleEnd();
+                MainSceneController.Instance.Background.ChangeGameOver();
                 MainSceneController.Instance.UIControl.RemoveCurUI();
-                ClearData();
+                MainSceneController.Instance.UIControl.MakeGameOver();
+                MainSceneController.Instance.UIControl.GetCurUI().GetComponent<GameOverUI>().SetUI(false);
+                MainSceneController.Instance.UIControl.RemoveAllTagUI();
+                StopAllCoroutines();
                 break;
         }
     }
@@ -162,11 +173,11 @@ public class BattleData : MonoBehaviour
     }
 
     //드로우 해야하는 경우네는 얘를 호출
-    public void DrawCard(int CardCount)
+    public void DrawCard(int CardCount,Delvoid del)
     {
-        StartCoroutine(Draw(CardCount));
+        StartCoroutine(Draw(CardCount,del));
     }
-    IEnumerator Draw(int CardCount)
+    IEnumerator Draw(int CardCount,Delvoid del)
     {
         for (int i = 0; i < CardCount; ++i)
         {
@@ -203,6 +214,8 @@ public class BattleData : MonoBehaviour
             m_CardData.Notify();
             yield return new WaitForSeconds(0.2f);
         }
+
+        del?.Invoke();
         BattleCardNotify();
     }
     void DeckShuffle()
@@ -274,8 +287,6 @@ public class BattleData : MonoBehaviour
         //플레이어 데이터의 매턴 회복되는 에너지 만큼 회복
         CurrEnergy = MainSceneController.Instance.PlayerData.EnergeyPerTurn;
 
-        //카드 5장 드로우
-        DrawCard(5);
 
         foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
         {
@@ -284,7 +295,8 @@ public class BattleData : MonoBehaviour
         Player.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
 
         BattleUI.PlayerTurnBegin();
-        PlayerTurnProgress(TurnState.Turn);
+        //카드 5장 드로우
+        DrawCard(5, () => { PlayerTurnProgress(TurnState.Turn); });
     }
     void SelectMonsterIntent()
     {
@@ -545,5 +557,9 @@ public class BattleData : MonoBehaviour
     {
         MainSceneController.Instance.UIControl.RemoveCurUI();
         MainSceneController.Instance.UIControl.MakeReward();
+    }
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

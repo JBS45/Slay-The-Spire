@@ -290,15 +290,19 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
     }
     public void TurnEnd()
     {
-        if (HandCard.Count > 0)
+        if (m_BattleData.CurrentTurn == Turn.Player &&
+            m_BattleData.CurrentTurnState == TurnState.Turn)
         {
-            foreach (var item in HandCard)
+            if (HandCard.Count > 0)
             {
-                item.GetComponent<BattleCardUIScript>().DiscardCard();
+                foreach (var item in HandCard)
+                {
+                    item.GetComponent<BattleCardUIScript>().DiscardCard();
+                }
             }
+            SetEnable(false);
+            StartCoroutine(TurnEndCheck());
         }
-        SetEnable(false);
-        StartCoroutine(TurnEndCheck());
     }
 
     IEnumerator MoveOrb()

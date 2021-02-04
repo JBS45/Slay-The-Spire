@@ -209,6 +209,7 @@ public class JawWorm : Stat,IMonsterPatten
     public void OnAction(TrackEntry entry)
     {
         IsIntent = false;
+        Intent.GetComponent<IntentControl>().OnAction();
         foreach (var func in Deck[CurDeckCount].Function)
         {
             MonsterTargetType target = Deck[CurDeckCount].Target;
@@ -235,7 +236,6 @@ public class JawWorm : Stat,IMonsterPatten
         }
         m_MonsterRenderer.AddAnimation(m_MonsterRenderer.AnimClips[0], true,1.0f);
         CurDeckCount++;
-        Intent.GetComponent<IntentControl>().OnAction();
         IsAttackEnd = true;
 
     }
