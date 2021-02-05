@@ -63,10 +63,11 @@ public class SaveLoadManager : MonoBehaviour
             string jData = File.ReadAllText(Application.dataPath + FileName);
             //byte[] bytes = System.Convert.FromBase64String(jData);
             //string reformat = System.Text.Encoding.UTF8.GetString(bytes);
-
+            if (jData.Length < 1) return false;
 
             //data = JsonConvert.DeserializeObject<PlayerInfo>(reformat);
-            data = JsonConvert.DeserializeObject<SaveDataStruct>(jData);;
+            data = JsonConvert.DeserializeObject<SaveDataStruct>(jData);
+
             if (data!=null&&data.IsSave)
             {
                 return true;

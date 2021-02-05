@@ -38,6 +38,9 @@ public class SkillManager : MonoBehaviour
             case "Heal":
                 result = Heal(Performer, Target, value, IsUse);
                 break;
+            case "Energy":
+                result = Energy(Performer, Target, value, IsUse);
+                break;
             case "Slime":
                 result = AddSlime(Performer, Target, value, IsUse);
                 break;
@@ -90,6 +93,15 @@ public class SkillManager : MonoBehaviour
         if (IsUse)
         {
             Target.GetComponentInChildren<Stat>().Cure((int)result);
+        }
+        return (int)result;
+    }
+    int Energy(GameObject Performer, GameObject Target, int value, bool IsUse)
+    {
+        float result = value;
+        if (IsUse)
+        {
+            MainSceneController.Instance.BattleData.CurrentEnergy += (int)result;
         }
         return (int)result;
     }

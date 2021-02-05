@@ -23,7 +23,9 @@ public class BattleCardUIScript : MonoBehaviour
     BattleCardData BattleCardData;
 
     CharacterStat CharStat;
+    
     GameObject UICanvas;
+    public GameObject Canvas { get => UICanvas; }
 
     int siblingIndex;
 
@@ -274,7 +276,22 @@ public class BattleCardUIScript : MonoBehaviour
             {
                 tmpColor = TextColor[2];
             }
-            tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt,0);
+            if (data.Action[i].AbilityKey == "Energy")
+            {
+                string result = "";
+                string EnergyStr = "<sprite=0>";
+
+                for (int j = 0; j < tmpInt; ++j)
+                {
+                    result += EnergyStr;
+                }
+
+                tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), result, data.Repeat);
+            }
+            else
+            {
+                tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt, data.Repeat);
+            }
         }
         CardDescription.text = tmp;
     }

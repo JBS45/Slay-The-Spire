@@ -181,6 +181,7 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                     tmpInt=PowerManager.Instance.AssginBuff(data.GetTarget(), data.Action[i].variety, data.Action[i].Value,false);
                     break;
             }
+
             if (Mathf.Abs(data.BaseValue[i]) > tmpInt)
             {
                 tmpColor = TextColor[1];
@@ -193,7 +194,22 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             {
                 tmpColor = TextColor[2];
             }
-            tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt,data.Repeat);
+            if (data.Action[i].AbilityKey == "Energy")
+            {
+                string result = "";
+                string EnergyStr = "<sprite=0>";
+
+                for(int j = 0; j < tmpInt; ++j)
+                {
+                    result += EnergyStr;
+                }
+
+                tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), result, data.Repeat);
+            }
+            else
+            {
+                tmp += string.Format(data.Action[i].Decription, ColorTohexadecimal(tmpColor), tmpInt, data.Repeat);
+            }
         }
         CardDescription.text = tmp;
     }

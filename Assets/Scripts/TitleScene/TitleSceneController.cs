@@ -169,7 +169,6 @@ public class TitleSceneController : MonoBehaviour
     public void SceneChange()
     {
         StartCoroutine(FadeOut(()=> { SceneManager.LoadScene("MainScene"); }));
-
     }
 
     IEnumerator TitleBeginMoveTowerImage()

@@ -223,7 +223,9 @@ public class MysteryEventWindow : MonoBehaviour,IDeckChange
                     break;
                 case "Money":
                     button.GetComponentInChildren<TMP_Text>().text += string.Format(func.ButtonString, ColorTohexadecimal(TextColor[3]), func.Value);
-                    Del += (MysteryButton) => { MainSceneController.Instance.PlayerData.CurrentMoney -= func.Value; };
+                    Del += (MysteryButton) => { if(MainSceneController.Instance.PlayerData.CurrentMoney>=func.Value)
+                                                    MainSceneController.Instance.PlayerData.CurrentMoney -= func.Value; };
+                    
                     break;
                 case "Damage":
                     button.GetComponentInChildren<TMP_Text>().text += string.Format(func.ButtonString, ColorTohexadecimal(TextColor[2]), (int)(((float)func.Value / 100) * MainSceneController.Instance.PlayerData.MaxHp));

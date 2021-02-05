@@ -148,8 +148,15 @@ public class BattleCardData : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void CardTracePointer()
     {
+        Vector3 screenPos = Input.mousePosition;
+        float widthRate = CardUI.Canvas.GetComponent<RectTransform>().rect.size.x / Camera.main.pixelRect.width;
+        float HeightRate = CardUI.Canvas.GetComponent<RectTransform>().rect.size.y / Camera.main.pixelRect.height;
+        screenPos = new Vector3((widthRate * screenPos.x)- (CardUI.Canvas.GetComponent<RectTransform>().rect.size.x/2),
+            HeightRate * screenPos.y, 0);
+        transform.localPosition = screenPos;
+        /*
         Vector3 tmp = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        transform.localPosition = new Vector3(Camera.main.scaledPixelWidth * (tmp.x - 0.5f), Camera.main.scaledPixelHeight * tmp.y);
+        transform.localPosition = new Vector3(Camera.main.scaledPixelWidth * (tmp.x - 0.5f), Camera.main.scaledPixelHeight * tmp.y);*/
     }
 
     void CardPositionCheck()

@@ -49,7 +49,7 @@ public class BattleData : MonoBehaviour
 
     bool IsDraw;
     int CurrEnergy;
-    public int CurrentEnergy { get => CurrEnergy; }
+    public int CurrentEnergy { get => CurrEnergy; set => CurrEnergy = value; }
 
     private void Awake()
     {
