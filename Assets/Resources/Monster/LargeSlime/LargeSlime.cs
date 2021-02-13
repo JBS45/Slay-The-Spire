@@ -6,7 +6,7 @@ using Spine;
 
 
 
-public class LargeSlime : Stat,IMonsterPatten,ISplit
+public class LargeSlime : Stat,IMonsterPatten,ISplit,ISoundObserver
 {
     [SerializeField]
     GameObject Monster;
@@ -31,6 +31,11 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
     int SelectPattern;
     int Count;
 
+    [SerializeField]
+    AudioSource Audio;
+    [SerializeField]
+    AudioClip[] Clips;
+
     bool IsIntent;
     bool IsSplit;
     private new void Awake()
@@ -42,6 +47,7 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
         IsIntent = false;
         IsSplit = false;
         CurDeckCount = 0;
+        AudioManager.Attach(this);
 
     }
     public new void SetUp(int curHP,int maxHP)
@@ -54,7 +60,10 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
 
         BattleInit();
     }
-
+    public void SoundUpdate(float volume)
+    {
+        Audio.volume = volume;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -64,22 +73,19 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
             {
                 if (item.Type == AbilityType.Attack)
                 {
-                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, item.AbilityKey, item.Value, false);
+                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, null, item.AbilityKey, item.Value, false);
                     Intent.GetComponent<IntentControl>().SetIntent(tmp, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
                 }
             }
 
         }
     }
-
-    void PreBattleOperation()
+    void PlayAudio(int num)
     {
+        Audio.clip = Clips[num];
+        Audio.Play();
+    }
 
-    }
-    void AfterBattleOperation()
-    {
-        
-    }
     public override void GetDamage(int damage)
     {
         base.GetDamage(damage);
@@ -96,6 +102,10 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
     }
     IEnumerator DeathEffect()
     {
+        while (MainSceneController.Instance.BattleData.IsCardUsing)
+        {
+            yield return null;
+        }
         float Timer = 0;
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
@@ -215,6 +225,7 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
             List<GameObject> Player = new List<GameObject>();
             Player.Add(MainSceneController.Instance.Character);
             Attack();
+            PlayAudio(0);
             Intent.GetComponent<IntentControl>().OnAction();
             for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
             {
@@ -224,7 +235,7 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
                     switch (func.Type)
                     {
                         case AbilityType.Attack:
-                            AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.AbilityKey, func.Value, true);
+                            AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.SkillSprite, func.AbilityKey, func.Value, true);
                             break;
                         case AbilityType.Skill:
                             SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
@@ -286,18 +297,20 @@ public class LargeSlime : Stat,IMonsterPatten,ISplit
         Intent.transform.localScale = Vector3.one;
         Intent.transform.localPosition = UIcoordinatePos(IntentPos.position);
         Intent.GetComponent<IntentControl>().SetIntent(0, 0, IntentType.UnKnown);
-        IsIntent = true;
+        IsIntent = false;
     }
 
     private new void OnDestroy()
     {
         base.OnDestroy();
+        AudioManager.Observers.Remove(this);
         Destroy(Intent);
         
     }
 
     public void SummonMiddle()
     {
+        PlayAudio(1);
         Vector3 tmp = Monster.transform.localPosition;
         MainSceneController.Instance.Spawner.SummonMonster("MiddleSlime", CurrentHealthPoint, tmp - new Vector3(3, 0, 0));
         MainSceneController.Instance.Spawner.SummonMonster("MiddleSlime", CurrentHealthPoint, tmp + new Vector3(3, 0, 0));

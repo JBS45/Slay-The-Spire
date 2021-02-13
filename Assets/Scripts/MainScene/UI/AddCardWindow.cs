@@ -83,6 +83,7 @@ public class AddCardWindow : MonoBehaviour
                     MainSceneController.Instance.PlayerData.AddCard(TmpData);
                     MainSceneController.Instance.Reward.transform.SetParent(MainSceneController.Instance.UIControl.UICanvas.transform);
                     MainSceneController.Instance.UIControl.GetCurUI().SetActive(true);
+                    MainSceneController.Instance.UIControl.MakeCard(WindowType.Reward, 1, TmpData);
                     StartCoroutine(tmp.GetComponent<CardUIScript>().MoveToOriginDeck());
                     IsEnable = false;
                     DestroyWindow();

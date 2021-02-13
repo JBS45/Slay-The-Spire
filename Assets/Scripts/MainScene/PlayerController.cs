@@ -36,7 +36,7 @@ public class PlayerController
             {
                 if ((Input.GetKeyDown((KeyCode)KeyNum + (i+1)) && BattleUI.Hand.Count >= (i+1)))
                 {
-                    if (BattleUI.Hand[i].GetComponent<BattleCardData>().IsEnable)
+                    if (BattleUI.Hand[i].GetComponent<BattleCardData>().IsEnable&& !BattleUI.Hand[i].GetComponent<BattleCardData>().IsLowCost)
                     {
                         SetHand(BattleUI.Hand[i]);
                         Hand.GetComponent<BattleCardData>().ChangeState(HandCardState.CardSelect);
@@ -46,7 +46,7 @@ public class PlayerController
             }
             if (Input.GetKeyDown(KeyCode.Alpha0) && BattleUI.Hand.Count >= 10)
             {
-                if (BattleUI.Hand[9].GetComponent<BattleCardData>().IsEnable)
+                if (BattleUI.Hand[9].GetComponent<BattleCardData>().IsEnable && !BattleUI.Hand[9].GetComponent<BattleCardData>().IsLowCost)
                 {
                     SetHand(BattleUI.Hand[9]);
                     Hand.GetComponent<BattleCardData>().ChangeState(HandCardState.CardSelect);

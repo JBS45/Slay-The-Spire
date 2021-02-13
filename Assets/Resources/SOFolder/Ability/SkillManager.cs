@@ -57,7 +57,6 @@ public class SkillManager : MonoBehaviour
         float result = value;
         int agi = 0;
         //민첩이 있으면 힘만큼 증가
-
         if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Agillity))
         {
             agi = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Agillity).Value;
@@ -72,6 +71,7 @@ public class SkillManager : MonoBehaviour
 
         if (IsUse)
         {
+            MainSceneController.Instance.AtkSEManager.BattleSEPlay(BattelSEType.GainDefence);
             Performer.GetComponentInChildren<Stat>().SetDefence((int)result);
             Performer.GetComponentInChildren<Stat>().MakeSkillEffect(DefenceRes);
         }
@@ -92,6 +92,7 @@ public class SkillManager : MonoBehaviour
         float result = value;
         if (IsUse)
         {
+            MainSceneController.Instance.AtkSEManager.BattleSEPlay(BattelSEType.Heal);
             Target.GetComponentInChildren<Stat>().Cure((int)result);
         }
         return (int)result;
@@ -102,6 +103,7 @@ public class SkillManager : MonoBehaviour
         if (IsUse)
         {
             MainSceneController.Instance.BattleData.CurrentEnergy += (int)result;
+            MainSceneController.Instance.BattleData.BattleCardNotify();
         }
         return (int)result;
     }
@@ -111,8 +113,14 @@ public class SkillManager : MonoBehaviour
         if (IsUse)
         {
             CardData tmp = new CardData(CardDB.Instance.Condition.Card.Find(item => item.CardName == "점액투성이"));
-            MainSceneController.Instance.BattleData.CardData.Discard.Add(tmp);
+            MainSceneController.Instance.UIControl.MakeCard(true, value, tmp);
+            for (int i = 0; i < value; ++i)
+            {
+                MainSceneController.Instance.BattleData.CardData.Discard.Add(tmp);
+            }
+            Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
         }
+        
         return (int)result;
     }
     int NoAction(GameObject Performer, GameObject Target, int value, bool IsUse)

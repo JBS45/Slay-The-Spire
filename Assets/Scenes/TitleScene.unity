@@ -261,6 +261,8 @@ MonoBehaviour:
   FadePanel: {fileID: 1471738872}
   SelectPanelRes: {fileID: 7872065685771463850, guid: 384133c67ae2aba4891ff6a9e0ebefd4,
     type: 3}
+  OptionPanelRes: {fileID: 1402099344654815335, guid: 14dc5cb3ca17e974b9c953f579fd4540,
+    type: 3}
   m_BGMManager: {fileID: 1559803115}
   m_SEManager: {fileID: 1665767489}
 --- !u!4 &465574324
@@ -717,6 +719,7 @@ GameObject:
   - component: {fileID: 1535488549}
   - component: {fileID: 1535488550}
   - component: {fileID: 1535488551}
+  - component: {fileID: 1535488552}
   m_Layer: 0
   m_Name: AbilityManager
   m_TagString: Untagged
@@ -746,6 +749,11 @@ MonoBehaviour:
   - {fileID: 7486017478780492331, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
   - {fileID: -5207760925450329673, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
   - {fileID: -3699505331945966078, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
+  - {fileID: 5016663925881315534, guid: 5cce1e5c1c511c943a395c75943f19bd, type: 3}
+  PowerEffectRes: {fileID: 2232631784918387750, guid: b830a0dd5400f7841a0306b228bf5e82,
+    type: 3}
+  FinishPowerEffectRes: {fileID: 4128309514547044813, guid: c819cd4ca5b19a14ab3c6a4c8d085ef7,
+    type: 3}
 --- !u!4 &1535488548
 Transform:
   m_ObjectHideFlags: 0
@@ -796,6 +804,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3baec20a1c5e9a649971529c1c4942dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1535488552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535488546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f354be1c406ebb547b3998c76af4bf93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1559803115 stripped

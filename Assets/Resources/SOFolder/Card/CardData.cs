@@ -92,6 +92,9 @@ public class CardData : ITargetLoader
     Sprite m_CardImage;
     public Sprite CardImage { get { return m_CardImage; } }
 
+    AudioClip m_CardAudio;
+    public AudioClip CardAudio { get { return m_CardAudio; } }
+
     bool m_MultipleEnchant;
     public bool MultipleEnchant { get { return m_MultipleEnchant; } }
 
@@ -131,6 +134,7 @@ public class CardData : ITargetLoader
         m_Targets = asset.Targets;
         m_Repeat = asset.Repeat;
         m_Cost = asset.Cost;
+        m_CardAudio = asset.CardAudio;
 
         m_CardImage = asset.CardImage;
 
@@ -168,6 +172,7 @@ public class CardData : ITargetLoader
         m_Targets = data.m_Targets;
         m_Repeat = data.m_Repeat;
         m_Cost = data.m_Cost;
+        m_CardAudio = data.m_CardAudio;
 
 
         m_CardImage = data.CardImage;
@@ -196,6 +201,7 @@ public class CardData : ITargetLoader
     public IEnumerator OnExcute()
     {
         MainSceneController.Instance.UIControl.GetCurUI().GetComponent<BattleUIScript>().IsCardUsing(true);
+        MainSceneController.Instance.BattleData.IsCardUsing = true;
 
         if (Targets == TargetOptions.Enemy)
         {
@@ -206,7 +212,8 @@ public class CardData : ITargetLoader
                     switch (action.Type)
                     {
                         case AbilityType.Attack:
-                            AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, Target, action.SkillEffect, action.AbilityKey, action.Value, true);
+                            MainSceneController.Instance.AtkSEManager.PlaySE(m_CardAudio);
+                            AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, Target, action.SkillEffect,action.SkillSprite, action.AbilityKey, action.Value, true);
                             break;
                         case AbilityType.Skill:
                             SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, Target, action.AbilityKey, action.Value, true);
@@ -215,6 +222,7 @@ public class CardData : ITargetLoader
                             PowerManager.Instance.AssginBuff(Target, action.variety, action.Value, true);
                             break;
                     }
+                    yield return new WaitForSeconds(0.1f);
                 }
                 yield return new WaitForSeconds(0.2f);
             }
@@ -231,7 +239,16 @@ public class CardData : ITargetLoader
                         switch (action.Type)
                         {
                             case AbilityType.Attack:
-                                AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, action.SkillEffect, action.AbilityKey, action.Value, true);
+                                if (action.AbilityKey == "Attack")
+                                {
+                                    MainSceneController.Instance.AtkSEManager.PlaySE(m_CardAudio);
+                                    AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, action.SkillEffect, action.SkillSprite, action.AbilityKey, action.Value, true);
+                                }
+                                else if (action.AbilityKey == "OneEffect")
+                                {
+                                    MainSceneController.Instance.AtkSEManager.PlaySE(m_CardAudio);
+                                    AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, action.SkillEffect, action.SkillSprite, action.AbilityKey, action.Value, true);
+                                }
                                 break;
                             case AbilityType.Skill:
                                 SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, monster, action.AbilityKey, action.Value, true);
@@ -242,7 +259,7 @@ public class CardData : ITargetLoader
                         }
                     }
                 }
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.3f);
 
             }
         }
@@ -255,7 +272,7 @@ public class CardData : ITargetLoader
                     switch (action.Type)
                     {
                         case AbilityType.Attack:
-                            AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, MainSceneController.Instance.Character, action.SkillEffect, action.AbilityKey, action.Value, true);
+                            AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, MainSceneController.Instance.Character, action.SkillEffect, action.SkillSprite, action.AbilityKey, action.Value, true);
                             break;
                         case AbilityType.Skill:
                             SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, MainSceneController.Instance.Character, action.AbilityKey, action.Value, true);
@@ -271,6 +288,7 @@ public class CardData : ITargetLoader
         if (MainSceneController.Instance.BattleData.CurrentBattelState == BattleDataState.Battle)
         {
             MainSceneController.Instance.UIControl.GetCurUI().GetComponent<BattleUIScript>().IsCardUsing(false);
+            MainSceneController.Instance.BattleData.IsCardUsing = false;
             ClearTarget();
         }
     }

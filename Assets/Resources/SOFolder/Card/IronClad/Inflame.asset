@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8adec0b8ce630b84da90655ef97e8338, type: 3}
   m_Name: Inflame
   m_EditorClassIdentifier: 
-  IsExtinct: 1
+  IsExtinct: 0
   IsAllCost: 0
   charType: 1
   CardName: "\uBC1C\uD654"
@@ -28,6 +28,7 @@ MonoBehaviour:
     EnchantCost: 0
     EnchantRepeat: 0
     EnchantValue: 01000000
+  CardAudio: {fileID: 0}
   CardImage: {fileID: 21300000, guid: 0fc25cd501aa2d3429d0bebd4684dfb9, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:

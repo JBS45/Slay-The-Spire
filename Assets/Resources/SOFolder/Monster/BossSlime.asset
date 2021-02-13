@@ -27,23 +27,7 @@ MonoBehaviour:
       SkillEffect: {fileID: 0}
       SkillSprite: {fileID: 0}
       variety: 0
-      Value: 0
-      Stack: 0
-      Decription: 
-    - Type: 1
-      AbilityKey: Slime
-      SkillEffect: {fileID: 0}
-      SkillSprite: {fileID: 0}
-      variety: 0
-      Value: 0
-      Stack: 0
-      Decription: 
-    - Type: 1
-      AbilityKey: Slime
-      SkillEffect: {fileID: 0}
-      SkillSprite: {fileID: 0}
-      variety: 0
-      Value: 0
+      Value: 3
       Stack: 0
       Decription: 
     Repeat: 1
@@ -68,7 +52,8 @@ MonoBehaviour:
       AbilityKey: Attack
       SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
-      SkillSprite: {fileID: 0}
+      SkillSprite: {fileID: 3297825888562002999, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+        type: 3}
       variety: 0
       Value: 35
       Stack: 0

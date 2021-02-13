@@ -25,10 +25,10 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
     public List<GameObject> Hand { get => HandCard; }
 
     [SerializeField]
-    GameObject BattleDeckButton;
+    public GameObject BattleDeckButton;
     GameObject DeckWindow;
     [SerializeField]
-    GameObject DiscardDeckButton;
+    public GameObject DiscardDeckButton;
     GameObject DiscardWindow;
     [SerializeField]
     GameObject ExtinctiontButton;
@@ -49,6 +49,10 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
     Image Sword2;
     [SerializeField]
     TMP_Text BattleStartText;
+
+    [SerializeField]
+    ArrowBase _ArrowBase;
+    public ArrowBase ArrowBase { get => _ArrowBase; }
 
     PlayerController controller;
     public PlayerController Control { get => controller; }
@@ -77,58 +81,61 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
 
     public void CardAlign()
     {
-        int TotalCardNum = HandCard.Count;
-        TermPerCard = Length / TotalCardNum;
-        float twist;
-        if (TotalCardNum == 0)
+        if (Hand.Count > 0)
         {
-            twist = 0;
-        }
-        else
-        {
-            twist = 20 / TotalCardNum;
-        }
-        //홀수
-        if (TotalCardNum % 2 == 1)
-        {
+            int TotalCardNum = HandCard.Count;
+            TermPerCard = Length / TotalCardNum;
+            float twist;
+            if (TotalCardNum == 0)
+            {
+                twist = 0;
+            }
+            else
+            {
+                twist = 20 / TotalCardNum;
+            }
+            //홀수
+            if (TotalCardNum % 2 == 1)
+            {
+                for (int i = 0; i < TotalCardNum; ++i)
+                {
+                    float delta = TermPerCard * (i - (TotalCardNum / 2));
+                    float twistDelta = twist * (i - (TotalCardNum / 2));
+                    HandCard[i].transform.localPosition = new Vector3(delta, -Mathf.Abs(twistDelta * 3), 0);
+                    HandCard[i].GetComponent<BattleCardUIScript>().SetOriginPos(HandCard[i].transform.localPosition);
+                    HandCard[i].GetComponent<BattleCardUIScript>().CardAlignRotate(-twistDelta);
+
+                }
+
+                HandCard[TotalCardNum / 2].transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                for (int i = 0; i < TotalCardNum / 2; ++i)
+                {
+                    float delta = TermPerCard * (i - (TotalCardNum / 2));
+                    float twistDelta = twist * (i - (TotalCardNum / 2));
+                    HandCard[i].transform.localPosition = new Vector3(delta + TermPerCard / 2, -Mathf.Abs(twistDelta * 3), 0);
+                    HandCard[i].GetComponent<BattleCardUIScript>().SetOriginPos(HandCard[i].transform.localPosition);
+                    HandCard[i].GetComponent<BattleCardUIScript>().CardAlignRotate(-twistDelta);
+                }
+                for (int i = TotalCardNum / 2; i < TotalCardNum; ++i)
+                {
+                    float delta = TermPerCard * ((i + 1) - (TotalCardNum / 2));
+                    float twistDelta = twist * ((i + 1) - (TotalCardNum / 2));
+                    HandCard[i].transform.localPosition = new Vector3(delta - TermPerCard / 2, -Mathf.Abs(twistDelta * 3), 0);
+                    HandCard[i].GetComponent<BattleCardUIScript>().SetOriginPos(HandCard[i].transform.localPosition);
+                    HandCard[i].GetComponent<BattleCardUIScript>().CardAlignRotate(-twistDelta);
+                }
+            }
+
+            int tmpSilbling = HandCard[0].transform.GetSiblingIndex();
             for (int i = 0; i < TotalCardNum; ++i)
             {
-                float delta = TermPerCard * (i - (TotalCardNum / 2));
-                float twistDelta = twist * (i - (TotalCardNum / 2));
-                HandCard[i].transform.localPosition = new Vector3(delta, -Mathf.Abs(twistDelta * 3), 0);
-                HandCard[i].GetComponent<BattleCardUIScript>().SetOriginPos(HandCard[i].transform.localPosition);
-                HandCard[i].GetComponent<BattleCardUIScript>().CardAlignRotate(-twistDelta);
-
+                HandCard[i].GetComponent<BattleCardData>().SetHandNum(i);
+                HandCard[i].GetComponent<BattleCardData>().SetSibling(tmpSilbling + i);
+                HandCard[i].GetComponent<BattleCardData>().OriginSibling();
             }
-
-            HandCard[TotalCardNum / 2].transform.localPosition = Vector3.zero;
-        }
-        else
-        {
-            for (int i = 0; i < TotalCardNum / 2; ++i)
-            {
-                float delta = TermPerCard * (i - (TotalCardNum / 2));
-                float twistDelta = twist * (i - (TotalCardNum / 2));
-                HandCard[i].transform.localPosition = new Vector3(delta + TermPerCard / 2, -Mathf.Abs(twistDelta * 3), 0);
-                HandCard[i].GetComponent<BattleCardUIScript>().SetOriginPos(HandCard[i].transform.localPosition);
-                HandCard[i].GetComponent<BattleCardUIScript>().CardAlignRotate(-twistDelta);
-            }
-            for (int i = TotalCardNum / 2; i < TotalCardNum; ++i)
-            {
-                float delta = TermPerCard * ((i + 1) - (TotalCardNum / 2));
-                float twistDelta = twist * ((i + 1) - (TotalCardNum / 2));
-                HandCard[i].transform.localPosition = new Vector3(delta - TermPerCard / 2, -Mathf.Abs(twistDelta * 3), 0);
-                HandCard[i].GetComponent<BattleCardUIScript>().SetOriginPos(HandCard[i].transform.localPosition);
-                HandCard[i].GetComponent<BattleCardUIScript>().CardAlignRotate(-twistDelta);
-            }
-        }
-
-        int tmpSilbling = HandCard[0].transform.GetSiblingIndex();
-        for (int i = 0; i < TotalCardNum; ++i)
-        {
-            HandCard[i].GetComponent<BattleCardData>().SetHandNum(i);
-            HandCard[i].GetComponent<BattleCardData>().SetSibling(tmpSilbling + i);
-            HandCard[i].GetComponent<BattleCardData>().OriginSibling();
         }
 
     }
@@ -297,7 +304,7 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
             {
                 foreach (var item in HandCard)
                 {
-                    item.GetComponent<BattleCardUIScript>().DiscardCard();
+                    item.GetComponent<BattleCardData>().ChangeState(HandCardState.Discard);
                 }
             }
             SetEnable(false);
@@ -326,12 +333,14 @@ public class BattleUIScript : MonoBehaviour, IDrawEvent,IObservers
             }
             yield return null;
         }
+        TurnEndButton.gameObject.GetComponent<MainSceneEventButton>().ChangeText(Turn.Enemy);
         MainSceneController.Instance.BattleData.PlayerTurnProgress(TurnState.TurnEnd);
     }
 
     public void PlayerTurnBegin()
     {
         EnergyOrb.EnergyCharge(CurrEnergy, MaxEnergy);
+        TurnEndButton.gameObject.GetComponent<MainSceneEventButton>().ChangeText(Turn.Player);
     }
     //드로우 관련
     public void DrawCard(CardData data)

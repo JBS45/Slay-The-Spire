@@ -28,6 +28,7 @@ MonoBehaviour:
     EnchantCost: 0
     EnchantRepeat: 0
     EnchantValue: 0200000001000000
+  CardAudio: {fileID: 8300000, guid: 0cf8094fb0bf06f45981936a62f7f7e1, type: 3}
   CardImage: {fileID: 21300000, guid: 5c45e12dd7fa0cb4c82e9692cdb1a6f1, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:

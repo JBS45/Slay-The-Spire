@@ -70,6 +70,9 @@ public class Stat : MonoBehaviour
     bool IsEnableTarget;
     bool IsDefenceOn;
 
+    List<GameObject> FinishPowerList;
+    public List<GameObject> FinishList { get => FinishPowerList; }
+
     protected void Awake()
     {
         IsEnableTarget = false;
@@ -78,6 +81,7 @@ public class Stat : MonoBehaviour
         origin = m_Skeleton.Skeleton.GetColor();
         PowerList = new List<Power>();
         PowerContents = new List<GameObject>();
+        FinishPowerList = new List<GameObject>();
     }
     public void SetClear()
     {
@@ -174,6 +178,7 @@ public class Stat : MonoBehaviour
             //데미지가 방어도 이상이면
             if (Defence <= Damage)
             {
+                MainSceneController.Instance.AtkSEManager.BattleSEPlay(BattelSEType.Block);
                 DamageAmount = Damage - Defence;
                 //방어도에 데미지
                 MakeDefenceDamageText(Defence);
@@ -189,6 +194,7 @@ public class Stat : MonoBehaviour
             }
             else if(Defence>Damage)
             {
+                MainSceneController.Instance.AtkSEManager.BattleSEPlay(BattelSEType.BlockBreak);
                 Defence -= Damage;
                 MakeDefenceDamageText(Damage);
                 HPBar.GetComponentInChildren<HPBarScript>().GetDamage(CurrentHP, MaxHP, Defence);
@@ -269,6 +275,15 @@ public class Stat : MonoBehaviour
         obj.transform.localPosition = UIcoordinatePos(SkillEffectPos.position);
         obj.GetComponent<DamageTextUI>().AttackDefence(dmg, UIcoordinatePos(DamagePos.localPosition));
     }
+    public void MakeFinishPowerEffect(GameObject Resource,Sprite sprite)
+    {
+        GameObject obj = Instantiate(Resource,Canvas.transform);
+        obj.transform.localScale = Vector3.one;
+        obj.transform.localPosition = UIcoordinatePos(SkillEffectPos.position);
+        obj.GetComponent<FinishPowerEffect>().Setting(SkillEffectPos, sprite);
+        FinishPowerList.Add(obj);
+    }
+
     protected bool IsDead()
     {
         if (CurrentHP <= 0)

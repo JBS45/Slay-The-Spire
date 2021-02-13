@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.ParticleSystemJobs;
 
 public interface IBattleCard
 {
@@ -22,6 +23,10 @@ public class CardEffectScript : MonoBehaviour
     Image Highlight;
     [SerializeField]
     TrailRenderer Trail;
+    [SerializeField]
+    ParticleSystem ExtinctionEffect;
+    [SerializeField]
+    Gradient ExtinctionGradient;
 
     Animator Anim;
     private void Awake()
@@ -44,7 +49,8 @@ public class CardEffectScript : MonoBehaviour
     }
     public void afterEffectOn()
     {
-        foreach(var item in AfterImages)
+        Anim.enabled = true;
+        foreach (var item in AfterImages)
         {
             item.color = HighlightColor;
             item.enabled = true;
@@ -55,6 +61,7 @@ public class CardEffectScript : MonoBehaviour
     }
     public void afterEffectOff()
     {
+        Anim.enabled = false;
         foreach (var item in AfterImages)
         {
             item.color = HighlightColor;
@@ -75,5 +82,11 @@ public class CardEffectScript : MonoBehaviour
     public void OnTrail()
     {
         Trail.enabled = true;
+    }
+    public void Extinction()
+    {
+        ParticleSystem.MainModule main = ExtinctionEffect.main;
+        //main.startColor = ExtinctionGradient.Evaluate(Random.Range(0f, 1f));
+        ExtinctionEffect.Play();
     }
 }

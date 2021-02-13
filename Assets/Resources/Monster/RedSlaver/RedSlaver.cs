@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 
-public class RedSlaver : Stat,IMonsterPatten
+public class RedSlaver : Stat,IMonsterPatten,ISoundObserver
 {
     [SerializeField]
     GameObject Monster;
@@ -27,6 +27,12 @@ public class RedSlaver : Stat,IMonsterPatten
     int CurDeckCount;
     int SelectPattern;
 
+
+    [SerializeField]
+    AudioSource Audio;
+    [SerializeField]
+    AudioClip[] Clips;
+
     bool IsIntent;
 
     private new void Awake()
@@ -38,6 +44,7 @@ public class RedSlaver : Stat,IMonsterPatten
         Deck = new MonsterAction[3];
         IsIntent = false;
         CurDeckCount = 0;
+        AudioManager.Attach(this);
     }
     public new void SetUp(int curHP,int maxHP)
     {
@@ -51,7 +58,10 @@ public class RedSlaver : Stat,IMonsterPatten
 
         
     }
-
+    public void SoundUpdate(float volume)
+    {
+        Audio.volume = volume;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -61,7 +71,7 @@ public class RedSlaver : Stat,IMonsterPatten
             {
                 if (item.Type == AbilityType.Attack)
                 {
-                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, item.AbilityKey, item.Value, false);
+                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character,null, null, item.AbilityKey, item.Value, false);
                     Intent.GetComponent<IntentControl>().SetIntent(tmp, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
                 }
             }
@@ -69,14 +79,12 @@ public class RedSlaver : Stat,IMonsterPatten
         }
     }
 
-    void PreBattleOperation()
+    void PlayAudio(int num)
     {
+        Audio.clip = Clips[num];
+        Audio.Play();
+    }
 
-    }
-    void AfterBattleOperation()
-    {
-        
-    }
     public override void GetDamage(int damage)
     {
         base.GetDamage(damage);
@@ -92,6 +100,10 @@ public class RedSlaver : Stat,IMonsterPatten
     }
     IEnumerator DeathEffect()
     {
+        while (MainSceneController.Instance.BattleData.IsCardUsing)
+        {
+            yield return null;
+        }
         float Timer = 0;
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
@@ -104,6 +116,7 @@ public class RedSlaver : Stat,IMonsterPatten
     }
     new void Death()
     {
+        PlayAudio(1);
         base.Death();
         StopAllCoroutines();
         Destroy(Monster);
@@ -183,6 +196,7 @@ public class RedSlaver : Stat,IMonsterPatten
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
+        PlayAudio(0);
         Intent.GetComponent<IntentControl>().OnAction();
         for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
         {
@@ -196,7 +210,7 @@ public class RedSlaver : Stat,IMonsterPatten
                 switch (func.Type)
                 {
                     case AbilityType.Attack:
-                        AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.AbilityKey, func.Value, true);
+                        AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.SkillSprite, func.AbilityKey, func.Value, true);
                         break;
                     case AbilityType.Skill:
                         SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
@@ -229,8 +243,10 @@ public class RedSlaver : Stat,IMonsterPatten
         anim.SetTrigger("Attack");
     }
 
-    private void OnDestroy()
+    private new void OnDestroy()
     {
+        base.OnDestroy();
+        AudioManager.Observers.Remove(this);
         StopAllCoroutines();
         Destroy(HPBar);
         Destroy(Intent);

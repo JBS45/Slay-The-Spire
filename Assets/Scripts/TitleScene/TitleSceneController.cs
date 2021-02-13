@@ -41,6 +41,8 @@ public class TitleSceneController : MonoBehaviour
     public Image FadePanel;
     public GameObject SelectPanelRes;
 
+    public GameObject OptionPanelRes;
+
     bool IsSave = false;
 
     [SerializeField]
@@ -159,6 +161,7 @@ public class TitleSceneController : MonoBehaviour
     public void PushOptionButton()
     {
         m_SEManager.PlaySE(1);
+        GameObject obj = Instantiate(OptionPanelRes, MainCanvas.transform);
     }
     public void PushQuitButton()
     {
@@ -168,6 +171,7 @@ public class TitleSceneController : MonoBehaviour
 
     public void SceneChange()
     {
+        AudioManager.Clear();
         StartCoroutine(FadeOut(()=> { SceneManager.LoadScene("MainScene"); }));
     }
 

@@ -9,7 +9,7 @@ public interface ISplit
 {
     void Split();
 }
-public class BossSlime : Stat,IMonsterPatten,ISplit
+public class BossSlime : Stat,IMonsterPatten,ISplit,ISoundObserver
 {
     [SerializeField]
     GameObject Monster;
@@ -34,6 +34,11 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
     int SelectPattern;
     int Count;
 
+    [SerializeField]
+    AudioSource Audio;
+    [SerializeField]
+    AudioClip[] Clips;
+
     bool IsIntent;
     bool IsSplit;
     private new void Awake()
@@ -45,6 +50,7 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
         IsIntent = false;
         IsSplit = false;
         CurDeckCount = 0;
+        AudioManager.Attach(this);
     }
     public new void SetUp(int curHP,int maxHP)
     {
@@ -66,7 +72,7 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
             {
                 if (item.Type == AbilityType.Attack)
                 {
-                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, item.AbilityKey, item.Value, false);
+                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null,null, item.AbilityKey, item.Value, false);
                     Intent.GetComponent<IntentControl>().SetIntent(tmp, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
                 }
             }
@@ -74,13 +80,9 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
         }
     }
 
-    void PreBattleOperation()
+    public void SoundUpdate(float volume)
     {
-
-    }
-    void AfterBattleOperation()
-    {
-        
+        Audio.volume = volume;
     }
     public override void GetDamage(int damage)
     {
@@ -96,6 +98,10 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
     }
     IEnumerator DeathEffect()
     {
+        while (MainSceneController.Instance.BattleData.IsCardUsing)
+        {
+            yield return null;
+        }
         float Timer = 0;
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
@@ -214,7 +220,6 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
             IsIntent = false;
             List<GameObject> Player = new List<GameObject>();
             Player.Add(MainSceneController.Instance.Character);
-            Attack();
             Intent.GetComponent<IntentControl>().OnAction();
             for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
             {
@@ -224,9 +229,20 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
                     switch (func.Type)
                     {
                         case AbilityType.Attack:
-                            AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.AbilityKey, func.Value, true);
+                            Attack();
+                            PlayAudio(0);
+                            AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.SkillSprite, func.AbilityKey, func.Value, true);
                             break;
                         case AbilityType.Skill:
+                            if (func.AbilityKey == "Slime")
+                            {
+                                PlayAudio(0);
+                                anim.SetTrigger("Slime");
+                            }
+                            else
+                            {
+                                PlayAudio(2);
+                            }
                             SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
                             break;
                         case AbilityType.Power:
@@ -266,6 +282,11 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
             Destroy(Monster);
         }
     }
+    void PlayAudio(int num)
+    {
+        Audio.clip = Clips[num];
+        Audio.Play();
+    }
     public bool GetAttackEnd()
     {
         return IsAttackEnd;
@@ -287,17 +308,19 @@ public class BossSlime : Stat,IMonsterPatten,ISplit
         Intent.transform.localScale = Vector3.one;
         Intent.transform.localPosition = UIcoordinatePos(IntentPos.position);
         Intent.GetComponent<IntentControl>().SetIntent(0, 0, IntentType.UnKnown);
-        IsIntent = true;
+        IsIntent = false;
     }
 
     private new void OnDestroy()
     {
         base.OnDestroy();
+        AudioManager.Observers.Remove(this);
         Destroy(Intent);
         
     }
     public void SummonLarge()
     {
+        PlayAudio(1);
         Vector3 tmp = Monster.transform.localPosition;
         MainSceneController.Instance.Spawner.SummonMonster("LargeSlime", CurrentHealthPoint, tmp - new Vector3(10, 0, 0));
         MainSceneController.Instance.Spawner.SummonMonster("LargeSlimeAlt", CurrentHealthPoint, tmp + new Vector3(2, 0, 0));

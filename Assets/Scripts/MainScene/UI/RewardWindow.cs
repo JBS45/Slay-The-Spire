@@ -54,7 +54,7 @@ public class RewardWindow : MonoBehaviour
     void Start()
     {
         ProceedButton.GetComponentInChildren<Button>().onClick.AddListener(() => { MainSceneController.Instance.GetUIControl().OpenMapProgress(); });
-        AddCard.SetActive(false);
+        AddCard?.SetActive(false);
     }
 
     // Update is called once per frame
@@ -75,8 +75,6 @@ public class RewardWindow : MonoBehaviour
             Text.text = "보상!";
         }
         RewardBar.transform.localPosition = new Vector3(0, 200.0f, 0);
-
-
 
         StartCoroutine(ProceedButtonMove());
         StartCoroutine(InitRewardBarMove());

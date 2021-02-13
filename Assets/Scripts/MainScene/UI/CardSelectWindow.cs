@@ -122,11 +122,13 @@ public class CardSelectWindow : MonoBehaviour
     public void EnchantConfirm(Delvoid del)
     {
         Data.CardEnchant();
+        MainSceneController.Instance.UIControl.MakeCard(WindowType.Enchant, 1, Data);
         del();
         Destroy(this.gameObject);
     }
     public void RemoveConfirm(Delvoid del)
     {
+        MainSceneController.Instance.UIControl.MakeCard(WindowType.Remove, 1, Data);
         MainSceneController.Instance.PlayerData.RemoveCard(Data);
         MainSceneController.Instance.PlayerData.CurrentMoney -= MainSceneController.Instance.PlayerData.RemoveCardGold();
         MainSceneController.Instance.PlayerData.CardRemoveCount++;

@@ -54,18 +54,23 @@ SpriteAtlas:
     - {fileID: 2800000, guid: dfc5008a7ea9f6a4781fa5fab6469621, type: 3}
     - {fileID: 2800000, guid: bbc3c5d121918764b9df9fe4a356f5d9, type: 3}
     - {fileID: 2800000, guid: 345ee3a6c5eff26488bbbcfb4ac8c06e, type: 3}
-    totalSpriteSurfaceArea: 2639495
+    - {fileID: 2800000, guid: 5cfff0468f7fcf54aa755f4ca0a5ddef, type: 3}
+    - {fileID: 2800000, guid: b774d53d4bd467c4f9313a6d76be8363, type: 3}
+    - {fileID: 2800000, guid: e4c9bf118663dee4490d480b66ea6f6e, type: 3}
+    totalSpriteSurfaceArea: 2796471
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 379eee50873d20544aa6ca365d3f3d3a, type: 3}
   - {fileID: 21300000, guid: da5fc9f0f4237124da191fe2907d0226, type: 3}
+  - {fileID: 21300000, guid: e4c9bf118663dee4490d480b66ea6f6e, type: 3}
   - {fileID: -1382241488390423641, guid: bbc3c5d121918764b9df9fe4a356f5d9, type: 3}
   - {fileID: 21300000, guid: 0ac540d22420a7a41bc7a91e5975a45b, type: 3}
   - {fileID: 21300000, guid: 56923a439d615924cb80936641fe5def, type: 3}
   - {fileID: 21300000, guid: 80c61804449ad624cb72a8e5e2e36ccc, type: 3}
   - {fileID: 21300000, guid: 44eab074dd70b3940809f95794c4b4dc, type: 3}
   - {fileID: 21300000, guid: 53d5c5f4a4a279f45adc91cd59854432, type: 3}
+  - {fileID: 21300000, guid: 5cfff0468f7fcf54aa755f4ca0a5ddef, type: 3}
   - {fileID: 21300000, guid: b95243564a33e1f49b64fa0e505b8cae, type: 3}
   - {fileID: 21300000, guid: 345ee3a6c5eff26488bbbcfb4ac8c06e, type: 3}
   - {fileID: 21300000, guid: 75e079d6cabbf564481a102fa9e6f8ec, type: 3}
@@ -79,18 +84,21 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 78a17bccfd2f56345880a24497e85e3f, type: 3}
   - {fileID: 21300000, guid: 3430441d1611189429d68f1fc75ba819, type: 3}
   - {fileID: 21300000, guid: 1a34261d0d3c9334a89aa65826d5a99e, type: 3}
+  - {fileID: 21300000, guid: b774d53d4bd467c4f9313a6d76be8363, type: 3}
   - {fileID: 21300000, guid: f8e1530fbbd02e1428b7d1635cf6cd31, type: 3}
   - {fileID: 21300000, guid: a59ae22fc1229ab4eb66e668ea7fc42d, type: 3}
   - {fileID: 21300000, guid: 5cef5effc79145b4586cbcd8b6ebf86c, type: 3}
   m_PackedSpriteNamesToIndex:
   - gold
   - gold2
+  - confirm
   - proceedButtonOutline_0
   - map
   - deck
   - endTurnButtonGlow
   - enabledButton
   - panelHeart
+  - sliderBg
   - l3
   - roomTextPanel
   - disabledButton
@@ -104,6 +112,7 @@ SpriteAtlas:
   - magGlass2
   - panel
   - panelGoldBag
+  - slider
   - floor
   - l4
   - potion_placeholder

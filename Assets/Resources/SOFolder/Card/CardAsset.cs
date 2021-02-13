@@ -43,7 +43,9 @@ public class CardAsset : ScriptableObject
 
     public CardEnchantData EnchantData;
 
-    
+    [Header("Audio"), Space(10.0f)]
+    public AudioClip CardAudio;
+
     [Header("Sprite"),Space(10.0f),PreviewSprite]
     public Sprite CardImage;
 

@@ -13,7 +13,7 @@ public enum PowerType
 }
 public enum PowerVariety
 {
-    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual,Rage,Split
+    None=0,Strength, Agillity, Fragile, Weak, injure, Entangle,Ritual,Rage,Split,Demon
 }
 [System.Serializable]
 public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleStart,IBattleEnd
@@ -45,6 +45,9 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
             case PowerVariety.Ritual:
                 PowerManager.Instance.AssginBuff(Target, PowerVariety.Strength, Value,true);
                 break;
+            case PowerVariety.Demon:
+                PowerManager.Instance.AssginBuff(Target, PowerVariety.Strength, Value, true);
+                break;
         }
     }
     public void TurnEnd()
@@ -59,6 +62,7 @@ public class Power:IDrawEvent,ITurnBegin,ITurnEnd,ICardUse,ICardExtinct,IBattleS
                 if (Value <= 0)
                 {
                     IsEnable = false;
+                    PowerManager.Instance.FinishPower(Target, Variety);
                 }
                 break;
         }

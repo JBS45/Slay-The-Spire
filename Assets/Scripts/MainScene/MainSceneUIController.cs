@@ -13,6 +13,9 @@ public class MainSceneUIController : MonoBehaviour
     public GameObject BattleUI;
 
     [SerializeField]
+    GameObject CardRes;
+    
+    [SerializeField]
     Transform RelicBar;
     public Transform RelicBarPos { get => RelicBar; }
 
@@ -54,6 +57,9 @@ public class MainSceneUIController : MonoBehaviour
 
     [SerializeField]
     GameObject GameOverUI;
+
+    [SerializeField]
+    GameObject OptionUI;
 
     [Header("ToolTip")]
     [SerializeField]
@@ -107,11 +113,11 @@ public class MainSceneUIController : MonoBehaviour
             yield return null;
         }
         FadePanel.color = new Color(FadePanel.color.r, FadePanel.color.g, FadePanel.color.b, 0);
-        FadePanel.enabled = false;
         if (Del != null)
         {
             Del();
         }
+        FadePanel.enabled = false;
     }
     IEnumerator FadeOut(Delvoid Del)
     {
@@ -124,12 +130,10 @@ public class MainSceneUIController : MonoBehaviour
             yield return null;
         }
         FadePanel.color = new Color(FadePanel.color.r, FadePanel.color.g, FadePanel.color.b, 1);
-        FadePanel.enabled = false;
         if (Del != null)
         {
             Del();
         }
-
     }
     public void ZeroFloorUI()
     {
@@ -184,6 +188,10 @@ public class MainSceneUIController : MonoBehaviour
     {
         CurUI = Instantiate(GameOverUI, UICanvas.transform);
         InfoBar.gameObject.transform.SetAsLastSibling();
+    }
+    public void MakeOption()
+    {
+        GameObject obj = Instantiate(OptionUI, UICanvas.transform);
     }
     public void GetDeckWindow()
     {
@@ -281,5 +289,34 @@ public class MainSceneUIController : MonoBehaviour
                 Destroy(UICanvas.transform.GetChild(i));
             }
         }
+    }
+    public void MakeCard(WindowType type,int count,CardData data)
+    {
+        for (int i = 0; i < count; ++i) {
+            GameObject obj = Instantiate(CardRes, UICanvas.transform);
+            obj.transform.localScale = Vector3.one * 0.1f;
+            obj.transform.localPosition = Vector3.zero - new Vector3(200 * (count-1)-400*i, 0, 0);
+            obj.GetComponent<CardUIScript>().SetCardUI(data);
+            obj.GetComponent<CardUIScript>().IsEnable = false;
+            obj.GetComponent<CardUIScript>().CardEffect(type);
+        }
+    }
+    public void MakeCard(bool IsDiscard,int count, CardData data)
+    {
+        Debug.Log(count);
+        for (int i = 0; i < count; ++i)
+        {
+            GameObject obj = Instantiate(CardRes, UICanvas.transform);
+            obj.transform.localScale = Vector3.one;
+            obj.transform.localPosition = Vector3.zero - new Vector3(200 * (count - 1) - 400 * i, 0, 0);
+            obj.GetComponent<CardUIScript>().SetCardUI(data);
+            obj.GetComponent<CardUIScript>().IsEnable = false;
+            obj.GetComponent<CardUIScript>().SelectMoveCard(IsDiscard);
+            
+        }
+    }
+    public  GameObject GetCanvas()
+    {
+        return UICanvas.gameObject;
     }
 }

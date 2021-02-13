@@ -28,7 +28,7 @@ MonoBehaviour:
     AbilityKey: Defence
     SkillEffect: {fileID: 0}
     SkillSprite: {fileID: 0}
-    variety: 1
+    variety: 0
     Value: 10
     Stack: 0
     Decription: 

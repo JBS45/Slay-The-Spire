@@ -28,12 +28,13 @@ MonoBehaviour:
     EnchantCost: 0
     EnchantRepeat: 0
     EnchantValue: 03000000
+  CardAudio: {fileID: 8300000, guid: 30006077dea837d48b1721c20647031c, type: 3}
   CardImage: {fileID: 21300000, guid: c2a7ecb7a2efdf045ab5706b428db5e3, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
   - Type: 0
-    AbilityKey: AllEffect
-    SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
+    AbilityKey: OneEffect
+    SkillEffect: {fileID: 2232631784918387750, guid: b0dad140a9ffe55469c8a8ac2034cccc,
       type: 3}
     SkillSprite: {fileID: 0}
     variety: 0

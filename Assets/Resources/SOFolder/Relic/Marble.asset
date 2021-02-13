@@ -29,7 +29,7 @@ MonoBehaviour:
     AbilityKey: 
     SkillEffect: {fileID: 0}
     SkillSprite: {fileID: 0}
-    variety: 2
+    variety: 3
     Value: 1
     Stack: 0
     Decription: 

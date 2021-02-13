@@ -4,7 +4,7 @@ using UnityEngine;
 using Spine.Unity;
 using Spine;
 
-public class Cultist : Stat,IMonsterPatten
+public class Cultist : Stat,IMonsterPatten,ISoundObserver
 {
     [SerializeField]
     GameObject Monster;
@@ -29,7 +29,14 @@ public class Cultist : Stat,IMonsterPatten
     int SelectPattern;
     int Count;
 
+    [SerializeField]
+    AudioSource Audio;
+    [SerializeField]
+    AudioClip[] Clips;
+
+
     bool IsIntent;
+    bool IsAttack;
 
     private new void Awake()
     {
@@ -39,6 +46,8 @@ public class Cultist : Stat,IMonsterPatten
         m_MonsterRenderer = GetComponentInParent<MonsterRenderer>();
         IsIntent = false;
         CurDeckCount = 0;
+        m_MonsterRenderer.SetAnimation(m_MonsterRenderer.AnimClips[0], true, 1.0f);
+        AudioManager.Attach(this);
     }
     public new void SetUp(int curHP,int maxHP)
     {
@@ -50,7 +59,10 @@ public class Cultist : Stat,IMonsterPatten
 
         
     }
-
+    public void SoundUpdate(float volume)
+    {
+        Audio.volume = volume;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -60,7 +72,7 @@ public class Cultist : Stat,IMonsterPatten
             {
                 if (item.Type == AbilityType.Attack)
                 {
-                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, item.AbilityKey, item.Value, false);
+                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, null,item.AbilityKey, item.Value, false);
                     Intent.GetComponent<IntentControl>().SetIntent(tmp, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
                 }
             }
@@ -68,13 +80,10 @@ public class Cultist : Stat,IMonsterPatten
         }
     }
 
-    void PreBattleOperation()
+    void PlayAudio(int num)
     {
-
-    }
-    void AfterBattleOperation()
-    {
-        
+        Audio.clip = Clips[num];
+        Audio.Play();
     }
     public override void GetDamage(int damage)
     {
@@ -91,6 +100,10 @@ public class Cultist : Stat,IMonsterPatten
     }
     IEnumerator DeathEffect()
     {
+        while (MainSceneController.Instance.BattleData.IsCardUsing)
+        {
+            yield return null;
+        }
         float Timer = 0;
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
@@ -103,6 +116,7 @@ public class Cultist : Stat,IMonsterPatten
     }
     new void Death()
     {
+        PlayAudio(1);
         base.Death();
         StopAllCoroutines();
         Destroy(Monster);
@@ -201,7 +215,8 @@ public class Cultist : Stat,IMonsterPatten
         IsIntent = false;
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
-        Attack();
+        IsAttack = false;
+        PlayAudio(0);
         Intent.GetComponent<IntentControl>().OnAction();
         for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
         {
@@ -216,7 +231,8 @@ public class Cultist : Stat,IMonsterPatten
                 switch (func.Type)
                 {
                     case AbilityType.Attack:
-                        AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.AbilityKey, func.Value, true);
+                        AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.SkillSprite, func.AbilityKey, func.Value, true);
+                        Attack();
                         break;
                     case AbilityType.Skill:
                         SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
@@ -228,11 +244,12 @@ public class Cultist : Stat,IMonsterPatten
                         }
                         else if (target == MonsterTargetType.Player)
                         {
+                            Attack();
                             PowerManager.Instance.AssginBuff(MainSceneController.Instance.Character, func.variety, func.Value,true);
                         }
                         break;
                 }
-                //func.CardAbility.OnExcute(Monster, MainSceneController.Instance.Character, func, 0);
+               
             }
 
             yield return new WaitForSeconds(0.3f);
@@ -250,11 +267,17 @@ public class Cultist : Stat,IMonsterPatten
     }
     public void Attack()
     {
-        anim.SetTrigger("Attack");
+        if (!IsAttack)
+        {
+            anim.SetTrigger("Attack");
+            IsAttack = true;
+        }
     }
 
-    private void OnDestroy()
+    private new void OnDestroy()
     {
+        base.OnDestroy();
+        AudioManager.Observers.Remove(this);
         StopAllCoroutines();
         Destroy(HPBar);
         Destroy(Intent);

@@ -132,7 +132,7 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
                         switch (Func.Type)
                         {
                             case AbilityType.Attack:
-                                AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, Func.SkillEffect, Func.AbilityKey, Func.Value, true);
+                                AttackManager.Instance.UseAttack(MainSceneController.Instance.Character, monster, Func.SkillEffect, Func.SkillSprite, Func.AbilityKey, Func.Value, true);
                                 break;
                             case AbilityType.Skill:
                                 SkillManager.Instance.UseSkill(MainSceneController.Instance.Character, monster, Func.AbilityKey, Func.Value, true);

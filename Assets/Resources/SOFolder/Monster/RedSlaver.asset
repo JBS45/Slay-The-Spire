@@ -64,7 +64,7 @@ MonoBehaviour:
     Function:
     - Type: 2
       AbilityKey: 
-      SkillEffect: {fileID: 2232631784918387750, guid: b5a14deaa5dc102409c2f982cc119b10,
+      SkillEffect: {fileID: 2232631784918387750, guid: b830a0dd5400f7841a0306b228bf5e82,
         type: 3}
       SkillSprite: {fileID: 5570326342399938224, guid: a0d9e576c7fd8b84d82e630e15a321d9,
         type: 3}

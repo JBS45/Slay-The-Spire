@@ -70,6 +70,9 @@ public class MainSceneController : MonoBehaviour
     SEManager _SEManager;
     public SEManager SEManager { get => _SEManager; }
     [SerializeField]
+    SEManager _AtkSEManager;
+    public SEManager AtkSEManager { get => _AtkSEManager; }
+    [SerializeField]
     BGMManager _BGMManager;
     public BGMManager BGMManager { get => _BGMManager; }
 
@@ -107,7 +110,6 @@ public class MainSceneController : MonoBehaviour
         //그게 아닌 경우
         else
         {
-
             ChangeState(MapNodeType.None);
         }
     }
@@ -183,6 +185,7 @@ public class MainSceneController : MonoBehaviour
             case MapNodeType.Rest:
                 m_BackgroundControl.BackgroundChange(BackgroundType.FireCamp);
                 m_UIControl.MakeFireCampWindow();
+                BGMManager.PlayBGM(5);
                 SaveData.Save(m_playerData);
                 SaveLoadManager.Instance.Save(SaveData);
                 break;
@@ -227,7 +230,7 @@ public class MainSceneController : MonoBehaviour
             m_playerData.CurrentMoney = SaveData.CurMoney;
             m_playerData.CurrentFloor = SaveData.CurFloor;
             m_playerData.CurrentFloorIndex = SaveData.CurFloorIndex;
-            m_playerData.MaxPotions = 3;
+            m_playerData.MaxPotions = 0;
             m_playerData.DrawPerTurn = 5;
             m_playerData.EnergeyPerTurn = 3;
             m_playerData.CardRemoveCount = SaveData.CardRemove;
@@ -238,12 +241,12 @@ public class MainSceneController : MonoBehaviour
             //유물 DB 초기화
             RelicDB.Instance.Init();
 
+            m_playerData.Clear();
             //유물 기본
             if (m_playerData.Relics == null)
             {
                 m_playerData.Relics = new List<RelicData>();
             }
-            m_playerData.Relics.Clear();
 
             foreach (var item in SaveData.Relic)
             {
@@ -256,7 +259,6 @@ public class MainSceneController : MonoBehaviour
                 m_playerData.OriginDecks = new List<CardData>();
             }
 
-            m_playerData.OriginDecks.Clear();
             foreach(var item in SaveData.Card)
             {
                 m_playerData.OriginDecks.Add(item.GetCardData());
@@ -276,7 +278,7 @@ public class MainSceneController : MonoBehaviour
             m_playerData.CurrentMoney = CharDB.Instance.GetCharacterAsset().Gold;
             m_playerData.CurrentFloor = 0;
             m_playerData.CurrentFloorIndex = 0;
-            m_playerData.MaxPotions = 3;
+            m_playerData.MaxPotions = 0;
             m_playerData.DrawPerTurn = 5;
             m_playerData.EnergeyPerTurn = 3;
             m_playerData.CardRemoveCount = 0;
@@ -287,12 +289,12 @@ public class MainSceneController : MonoBehaviour
             //유물 DB 초기화
             RelicDB.Instance.Init();
 
+            m_playerData.Clear();
             //유물 기본
             if (m_playerData.Relics == null)
             {
                 m_playerData.Relics = new List<RelicData>();
             }
-            m_playerData.Relics.Clear();
 
             m_playerData.AddRelic(CharDB.Instance.GetCharacterAsset().StartRelic);
 
@@ -301,7 +303,6 @@ public class MainSceneController : MonoBehaviour
                 m_playerData.OriginDecks = new List<CardData>();
             }
 
-            m_playerData.OriginDecks.Clear();
 
             for (int i = 0; i < CharDB.Instance.GetCharacterAsset().StartDeck.Length; ++i)
             {
@@ -314,6 +315,9 @@ public class MainSceneController : MonoBehaviour
 
 
             m_playerData.Notify();
+
+            SaveData.Save(m_playerData);
+            SaveLoadManager.Instance.Save(SaveData);
             //포션 없음
 
         }

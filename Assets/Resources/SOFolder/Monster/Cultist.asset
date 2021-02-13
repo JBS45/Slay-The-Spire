@@ -41,7 +41,7 @@ MonoBehaviour:
       AbilityKey: Attack
       SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
         type: 3}
-      SkillSprite: {fileID: 7447516423718122844, guid: 77c451ff4f5d19e45b21ded97f1525ab,
+      SkillSprite: {fileID: -4964818982224020305, guid: 77c451ff4f5d19e45b21ded97f1525ab,
         type: 3}
       variety: 0
       Value: 3

@@ -20,7 +20,7 @@ public class AttackManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
     }
-    public int UseAttack(GameObject Performer, GameObject Target, GameObject Effect,string key, int value, bool IsUse)
+    public int UseAttack(GameObject Performer, GameObject Target, GameObject Effect,Sprite sprite, string key, int value, bool IsUse)
     {
         int result = 0;
         switch (key)
@@ -28,11 +28,11 @@ public class AttackManager : MonoBehaviour
             case "Kill":
                 InstantKill();
                 break;
-            case "AllEffect":
-                result = AllStirkeAllEffect(Performer, Target, Effect, value, IsUse);
+            case "OneEffect":
+                result = AttackOneEffect(Performer, Target, Effect,sprite, value, IsUse);
                 break;
             case "Attack":
-                result = Attack(Performer, Target, Effect, value, IsUse);
+                result = Attack(Performer, Target, Effect,sprite, value, IsUse);
                 break;
         }
 
@@ -53,46 +53,42 @@ public class AttackManager : MonoBehaviour
             tmpTarget[i].GetComponentInChildren<Stat>().GetDamage((int)result);
         }
     }
-    int AllStirkeAllEffect(GameObject Performer, GameObject Target,GameObject Effect ,int value, bool IsUse)
+    int AttackOneEffect(GameObject Performer, GameObject Target,GameObject Effect, Sprite sprite, int value, bool IsUse)
     {
-        List<GameObject> tmpTarget = MainSceneController.Instance.BattleData.Monsters;
-        float result = value;
-        int str = 0;
-        //힘이 있으면 힘만큼 증가
-        if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Strength))
+
+        float result;
+        float TmpValue = BasePerformer(Performer, value);
+        //타겟이 취약 걸려있으면
+        result = BaseTarget(Target,TmpValue);
+
+        if (IsUse)
         {
-            str = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Strength).Value;
+            Target.GetComponentInChildren<Stat>().GetDamage((int)result);
+            GameObject obj = Instantiate(Effect,MainSceneController.Instance.Spawner.MonsterSpawnPoint);
+            obj.GetComponent<SkillEffect>().Setting(MainSceneController.Instance.Spawner.MonsterSpawnPoint);
+            Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
         }
 
-        result += str;
-        //플레이어가 약화 걸려있으면
-        if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Weak))
-        {
-            result *= 0.75f;
-        }
-        for (int i = 0; i < tmpTarget.Count; ++i)
-        {
-            if (tmpTarget[i].tag != "NPC")
-            {
-                float tmp = result;
-                //타겟이 취약 걸려있으면
-                if (tmpTarget[i].GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Fragile))
-                {
-                    tmp *= 1.5f;
-                }
-
-                if (IsUse)
-                {
-                    tmpTarget[i].GetComponentInChildren<Stat>().GetDamage((int)tmp);
-                    tmpTarget[i].GetComponentInChildren<Stat>().MakeSkillEffect(Effect);
-                    Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
-                }
-            }
-        }
-        
         return (int)result;
     }
-    int Attack(GameObject Performer, GameObject Target, GameObject Effect, int value, bool IsUse)
+
+    int Attack(GameObject Performer, GameObject Target, GameObject Effect, Sprite sprite, int value, bool IsUse)
+    {
+        float result;
+        float TmpValue = BasePerformer(Performer, value);
+        //타겟이 취약 걸려있으면
+        result=BaseTarget(Target,TmpValue);
+
+        if (IsUse)
+        {
+            Target.GetComponentInChildren<Stat>().GetDamage((int)result);
+            Target.GetComponentInChildren<Stat>().MakeSkillEffect(Effect,sprite);
+            Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
+        }
+
+        return (int)result;
+    }
+    float BasePerformer(GameObject Performer, int value)
     {
         float result = value;
         int str = 0;
@@ -101,14 +97,19 @@ public class AttackManager : MonoBehaviour
         {
             str = Performer.GetComponentInChildren<Stat>().Powers.Find(power => power.Variety == PowerVariety.Strength).Value;
         }
-        
+
         result += str;
         //플레이어가 약화 걸려있으면
         if (Performer.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Weak))
         {
             result *= 0.75f;
         }
-        //타겟이 취약 걸려있으면
+
+        return result;
+    }
+    float BaseTarget(GameObject Target, float value)
+    {
+        float result = value;
         if (Target != null)
         {
             if (Target.GetComponentInChildren<Stat>().Powers.Exists(power => power.Variety == PowerVariety.Fragile))
@@ -117,12 +118,6 @@ public class AttackManager : MonoBehaviour
             }
         }
 
-        if (IsUse)
-        {
-            Target.GetComponentInChildren<Stat>().GetDamage((int)result);
-            Target.GetComponentInChildren<Stat>().MakeSkillEffect(Effect);
-            Camera.main.GetComponent<CameraController>().CameraShakeFunc(0.05f, 1.0f);
-        }
-        return (int)result;
+        return result;
     }
 }

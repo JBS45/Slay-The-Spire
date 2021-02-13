@@ -26,7 +26,8 @@ public class BattleData : MonoBehaviour
     BattleDataAsset m_CardData;
     public BattleDataAsset CardData { get => m_CardData; }
 
-    bool IsCardUsing;
+    bool _IsCardUsing;
+    public bool IsCardUsing { get => _IsCardUsing; set => _IsCardUsing = value; }
 
     BattleDataState m_BattelState = BattleDataState.None;
     public BattleDataState CurrentBattelState { get => m_BattelState; }
@@ -60,7 +61,7 @@ public class BattleData : MonoBehaviour
 
         Monsters = new List<GameObject>();
 
-        IsCardUsing = false;
+        _IsCardUsing = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -251,6 +252,7 @@ public class BattleData : MonoBehaviour
         switch (m_Turn)
         {
             case Turn.Player:
+                MainSceneController.Instance.SEManager.BattleSEPlay(BattelSEType.PlayerTurn);
                 PlayerTurnProgress(TurnState.TurnBegin);
                 break;
             case Turn.Enemy:
@@ -287,10 +289,10 @@ public class BattleData : MonoBehaviour
         //플레이어 데이터의 매턴 회복되는 에너지 만큼 회복
         CurrEnergy = MainSceneController.Instance.PlayerData.EnergeyPerTurn;
 
-
-        foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
+        int PowerCount = Player.GetComponentInChildren<Stat>().Powers.Count;
+        for (int i=0;i< PowerCount; ++i)
         {
-            power.TurnBegin();
+            Player.GetComponentInChildren<Stat>().Powers[i].TurnBegin();
         }
         Player.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
 
@@ -340,7 +342,7 @@ public class BattleData : MonoBehaviour
             m_CardData.Discard.Add(m_CardData.Hand[0]);
             m_CardData.Hand.RemoveAt(0);
         }
-        ChangeTurn(Turn.Enemy);
+        StartCoroutine(CheckFinishPower(true));
     }
     //적 턴
     public void EnemyTurnProgress(TurnState turnstate)
@@ -391,10 +393,35 @@ public class BattleData : MonoBehaviour
             {
                 yield return null;
             }
+            yield return new WaitForSeconds(0.3f);
         }
         yield return new WaitForSeconds(0.5f);
         Monsters.RemoveAll(item => item == null);
         EnemyTurnProgress(TurnState.TurnEnd);
+    }
+    IEnumerator CheckFinishPower(bool IsPlayer)
+    {
+        if (IsPlayer)
+        {
+            while (Player.GetComponentInChildren<Stat>().FinishList.Count > 0)
+            {
+                Player.GetComponentInChildren<Stat>().FinishList.RemoveAll(item => item == null);
+                yield return null;
+            }
+            ChangeTurn(Turn.Enemy);
+        }
+        else
+        {
+            foreach (var Monster in Monsters)
+            {
+                while (Monster.GetComponentInChildren<Stat>().FinishList.Count > 0)
+                {
+                    Monster.GetComponentInChildren<Stat>().FinishList.RemoveAll(item => item == null);
+                    yield return null;
+                }
+            }
+            ChangeTurn(Turn.Player);
+        }
     }
     void EnemyTurnEnd()
     {
@@ -411,7 +438,7 @@ public class BattleData : MonoBehaviour
         //플레이어 쉴드 리셋
         Player.GetComponentInChildren<Stat>().ResetDefence();
 
-        ChangeTurn(Turn.Player);
+        StartCoroutine(CheckFinishPower(false));
     }
     public void AllEnemyTargetOn()
     {
@@ -456,6 +483,19 @@ public class BattleData : MonoBehaviour
         //에너지랑 카드 이동
         CurrEnergy -= m_CardData.Hand[num].Cost;
 
+        foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
+        {
+            power.CardUse(m_CardData.Hand[num]);
+        }
+        foreach (var monster in Monsters)
+        {
+            int tmp = monster.GetComponentInChildren<Stat>().Powers.Count;
+            for (int i = 0; i < tmp; ++i)
+            {
+                monster.GetComponentInChildren<Stat>().Powers[i].CardUse(m_CardData.Hand[num]);
+            }
+        }
+
         if (m_CardData.Hand[num].IsExtinct)
         {
             foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
@@ -466,20 +506,13 @@ public class BattleData : MonoBehaviour
             m_CardData.Extinction.Add(m_CardData.Hand[num]);
             m_CardData.Hand.RemoveAt(num);
         }
+        else if(m_CardData.Hand[num].CardType == CardType.Power)
+        {
+            m_CardData.Hand[0].IsEnable = false;
+            m_CardData.Hand.RemoveAt(num);
+        }
         else
         {
-            foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
-            {
-                power.CardUse(m_CardData.Hand[num]);
-            }
-            foreach(var monster in Monsters)
-            {
-                int tmp = monster.GetComponentInChildren<Stat>().Powers.Count;
-                for (int i=0;i<tmp;++i)
-                {
-                    monster.GetComponentInChildren<Stat>().Powers[i].CardUse(m_CardData.Hand[num]);
-                }
-            }
             m_CardData.Hand[0].IsEnable = false;
             m_CardData.Discard.Add(m_CardData.Hand[num]);
             m_CardData.Hand.RemoveAt(num);
@@ -487,8 +520,6 @@ public class BattleData : MonoBehaviour
         BattleUI.UpdateData();
 
         
-
-
         //사용할 수 있는 카드 확인
         BattleCardNotify();
         //덱 갯수랑 상황 변경점 알림
@@ -503,7 +534,7 @@ public class BattleData : MonoBehaviour
         }
         if (Monsters.Count <= 0)
         {
-            ChangeBattleState(BattleDataState.Win);
+            Invoke("Victory",0.5f);
         }
     }
     /*
@@ -561,5 +592,9 @@ public class BattleData : MonoBehaviour
     private void OnDestroy()
     {
         StopAllCoroutines();
+    }
+    void Victory()
+    {
+        ChangeBattleState(BattleDataState.Win);
     }
 }

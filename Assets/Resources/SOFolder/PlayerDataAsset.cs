@@ -72,6 +72,13 @@ public class PlayerDataAsset : ScriptableObject
     {
         Observers.Remove(observer);
     }
+    public void Clear()
+    {
+        OriginDecks?.Clear();
+        Observers?.Clear();
+        DeckChanges?.Clear();
+        Relics?.Clear();
+    }
     public void AddCard(CardData data)
     {
         CardData tmp = new CardData(data);

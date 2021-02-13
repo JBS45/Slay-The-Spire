@@ -5,7 +5,7 @@ using Spine.Unity;
 using Spine;
 
 
-public class SmallSlime : Stat,IMonsterPatten
+public class SmallSlime : Stat,IMonsterPatten,ISoundObserver
 {
     [SerializeField]
     GameObject Monster;
@@ -30,6 +30,11 @@ public class SmallSlime : Stat,IMonsterPatten
     int SelectPattern;
     int Count;
 
+    [SerializeField]
+    AudioSource Audio;
+    [SerializeField]
+    AudioClip[] Clips;
+
     bool IsIntent;
 
     private new void Awake()
@@ -40,6 +45,7 @@ public class SmallSlime : Stat,IMonsterPatten
         m_MonsterRenderer = GetComponentInParent<MonsterRenderer>();
         IsIntent = false;
         CurDeckCount = 0;
+        AudioManager.Attach(this);
     }
     public new void SetUp(int curHP,int maxHP)
     {
@@ -51,7 +57,10 @@ public class SmallSlime : Stat,IMonsterPatten
 
         
     }
-
+    public void SoundUpdate(float volume)
+    {
+        Audio.volume = volume;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -61,7 +70,7 @@ public class SmallSlime : Stat,IMonsterPatten
             {
                 if (item.Type == AbilityType.Attack)
                 {
-                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, null, item.AbilityKey, item.Value, false);
+                    int tmp = AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character,null, null, item.AbilityKey, item.Value, false);
                     Intent.GetComponent<IntentControl>().SetIntent(tmp, Deck[CurDeckCount].Repeat, Deck[CurDeckCount].Intent);
                 }
             }
@@ -69,13 +78,10 @@ public class SmallSlime : Stat,IMonsterPatten
         }
     }
 
-    void PreBattleOperation()
+    void PlayAudio(int num)
     {
-
-    }
-    void AfterBattleOperation()
-    {
-        
+        Audio.clip = Clips[num];
+        Audio.Play();
     }
     public override void GetDamage(int damage)
     {
@@ -97,6 +103,10 @@ public class SmallSlime : Stat,IMonsterPatten
     }
     IEnumerator DeathEffect()
     {
+        while (MainSceneController.Instance.BattleData.IsCardUsing)
+        {
+            yield return null;
+        }
         float Timer = 0;
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
@@ -212,6 +222,7 @@ public class SmallSlime : Stat,IMonsterPatten
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         Attack();
+        PlayAudio(0);
         Intent.GetComponent<IntentControl>().OnAction();
         for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
             {
@@ -221,7 +232,7 @@ public class SmallSlime : Stat,IMonsterPatten
                     switch (func.Type)
                     {
                         case AbilityType.Attack:
-                            AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.AbilityKey, func.Value, true);
+                            AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.SkillSprite, func.AbilityKey, func.Value, true);
                             break;
                         case AbilityType.Skill:
                             SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
@@ -256,6 +267,7 @@ public class SmallSlime : Stat,IMonsterPatten
     }
     private new void OnDestroy()
     {
+        AudioManager.Observers.Remove(this);
         base.OnDestroy();
         Destroy(Intent);
     }

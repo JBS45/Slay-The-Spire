@@ -24,7 +24,8 @@ public class SaveDataStruct
     public List<string> PastEvents = new List<string>();
     public List<int> Path = new List<int>();
 
-
+    public float SEVolume;
+    public float BGMVolume;
 
     public void Save(PlayerDataAsset PlayerData)
     {
@@ -40,6 +41,9 @@ public class SaveDataStruct
         CurMoney = PlayerData.CurrentMoney;
 
         CardRemove = PlayerData.CardRemoveCount;
+
+        SEVolume = AudioManager.SEVolume;
+        BGMVolume = AudioManager.BGMVolume;
 
         Card.Clear();
         foreach (var item in PlayerData.OriginDecks)
@@ -72,6 +76,9 @@ public class SaveDataStruct
         CurMoney = PlayerData.CurrentMoney;
 
         CardRemove = PlayerData.CardRemoveCount;
+
+        SEVolume = AudioManager.SEVolume;
+        BGMVolume = AudioManager.BGMVolume;
 
         Card.Clear();
         foreach (var item in PlayerData.OriginDecks)
