@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ShopWindowScript : MonoBehaviour
+public class ShopWindowScript : MonoBehaviour,IObservers
 {
     [SerializeField]
     GameObject CardRes;
@@ -43,6 +43,8 @@ public class ShopWindowScript : MonoBehaviour
 
     GameObject Target;
 
+    List<GameObject> Cards;
+
     private void Awake()
     {
         CancelButtonOriginVector = CancelBtn.transform.localPosition;
@@ -54,6 +56,8 @@ public class ShopWindowScript : MonoBehaviour
         HandOrigin = Hand.transform.localPosition;
         RemoveCard.GetComponent<CardRemoveScript>().ShopUISetting(MainSceneController.Instance.PlayerData.RemoveCardGold(), Detach);
         Goods.Add(RemoveCard.GetComponent<IShopWindow>());
+        Cards = new List<GameObject>();
+        MainSceneController.Instance.PlayerData.Attach(this);
     }
     // Start is called before the first frame update
     void Start()
@@ -103,6 +107,7 @@ public class ShopWindowScript : MonoBehaviour
 
             tmp.GetComponent<IShopWindow>().ShopUISetting(tmpGold, Detach);
             Attach(tmp.GetComponent<IShopWindow>());
+            Cards.Add(tmp);
 
         }
     }
@@ -132,6 +137,7 @@ public class ShopWindowScript : MonoBehaviour
 
             tmp.GetComponent<IShopWindow>().ShopUISetting(tmpGold, Detach);
             Attach(tmp.GetComponent<IShopWindow>());
+            Cards.Add(tmp);
         }
     }
 
@@ -246,5 +252,13 @@ public class ShopWindowScript : MonoBehaviour
     public void UseRemove()
     {
         RemoveCard.GetComponent<CardRemoveScript>().Use();
+    }
+    public void UpdateData()
+    {
+        Cards.RemoveAll(item => item == null);
+        foreach(var card in Cards)
+        {
+            card.GetComponent<CardUIScript>().ShopRefresh();
+        }
     }
 }

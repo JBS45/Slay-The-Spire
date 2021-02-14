@@ -251,7 +251,7 @@ public class BattleCardUIScript : MonoBehaviour
         if (data.EnchantCount > 0)
         {
             CardName.color = TextColor[2];
-            CardNameResult+= data.Enchant.EnchantCardName;
+            CardNameResult += "+";
         }
         CardName.text = CardNameResult;
 

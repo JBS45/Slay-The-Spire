@@ -20,7 +20,7 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    string FileName = "/Save/SaveFile.json";
+    string FileName = "/SaveFile.json";
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -31,14 +31,14 @@ public class SaveLoadManager : MonoBehaviour
     }
     IEnumerator CheckFile(string filename,Delvoid del)
     {
-        if (File.Exists(Application.dataPath + filename))
+        if (File.Exists(Application.persistentDataPath + filename))
         {
             del();
         }
         else
         {
-            File.Create(Application.dataPath + filename).Dispose();
-            while (File.Exists(Application.dataPath + filename))
+            File.Create(Application.persistentDataPath + filename).Dispose();
+            while (File.Exists(Application.persistentDataPath + filename))
             {
                 yield return null;
             }
@@ -53,14 +53,14 @@ public class SaveLoadManager : MonoBehaviour
         //string format = System.Convert.ToBase64String(bytes);
         //                                   "/JsonTest.json"
         //File.WriteAllText(Application.dataPath + filename, format);
-        File.WriteAllText(Application.dataPath + filename, jData);
+        File.WriteAllText(Application.persistentDataPath + filename, jData);
 
     }
     public bool Load(ref SaveDataStruct data)
     {
-        if (File.Exists(Application.dataPath + FileName))
+        if (File.Exists(Application.persistentDataPath + FileName))
         {
-            string jData = File.ReadAllText(Application.dataPath + FileName);
+            string jData = File.ReadAllText(Application.persistentDataPath + FileName);
             //byte[] bytes = System.Convert.FromBase64String(jData);
             //string reformat = System.Text.Encoding.UTF8.GetString(bytes);
             if (jData.Length < 1) return false;
@@ -82,9 +82,9 @@ public class SaveLoadManager : MonoBehaviour
     }
     public void Delete()
     {
-        if (File.Exists(Application.dataPath + FileName))
+        if (File.Exists(Application.persistentDataPath + FileName))
         {
-            File.Delete(Application.dataPath + FileName);
+            File.Delete(Application.persistentDataPath + FileName);
         }
     }
 }

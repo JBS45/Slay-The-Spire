@@ -28,7 +28,7 @@ MonoBehaviour:
     EnchantCost: 0
     EnchantRepeat: 0
     EnchantValue: 0200000002000000
-  CardAudio: {fileID: 8300000, guid: 3812244ce8ec67c4698aec9f32c5c9a2, type: 3}
+  CardAudio: {fileID: 8300000, guid: 30006077dea837d48b1721c20647031c, type: 3}
   CardImage: {fileID: 21300000, guid: 732fdd8d6b2ac0d43987fe9441211435, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -45,7 +45,7 @@ MonoBehaviour:
       \uC5BB\uC2B5\uB2C8\uB2E4. \n"
   - Type: 0
     AbilityKey: Attack
-    SkillEffect: {fileID: 2232631784918387750, guid: d0d52321bfa16644abf48716647d58d1,
+    SkillEffect: {fileID: 2232631784918387750, guid: aab03da48a0b194468e1a6091d708117,
       type: 3}
     SkillSprite: {fileID: 0}
     variety: 0

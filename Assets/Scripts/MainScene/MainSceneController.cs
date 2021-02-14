@@ -112,6 +112,7 @@ public class MainSceneController : MonoBehaviour
         {
             ChangeState(MapNodeType.None);
         }
+        DispathMonster();
     }
 
     // Update is called once per frame
@@ -130,7 +131,7 @@ public class MainSceneController : MonoBehaviour
         PlayerData.Notify();
         Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
         BGMManager.PlayBGM(1);
-
+        
         switch (m_State)
         {
             case MapNodeType.None:
@@ -160,6 +161,7 @@ public class MainSceneController : MonoBehaviour
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.MonsterSpawn();
                 m_UIControl.MakeBattleUI();
+                m_BattleData.IsClear = SaveData.IsClear;
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
                 SaveData.Save(m_playerData);
                 SaveLoadManager.Instance.Save(SaveData);
@@ -169,6 +171,7 @@ public class MainSceneController : MonoBehaviour
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.EliteSpawn();
                 m_UIControl.MakeBattleUI();
+                m_BattleData.IsClear = SaveData.IsClear;
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
                 SaveData.Save(m_playerData);
                 SaveLoadManager.Instance.Save(SaveData);
@@ -177,6 +180,7 @@ public class MainSceneController : MonoBehaviour
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_Spawner.BossSpawn(Boss);
                 m_UIControl.MakeBattleUI();
+                m_BattleData.IsClear = SaveData.IsClear;
                 m_BattleData.ChangeBattleState(BattleDataState.Init);
                 BGMManager.PlayBGM(3);
                 SaveData.Save(m_playerData);
@@ -235,6 +239,10 @@ public class MainSceneController : MonoBehaviour
             m_playerData.EnergeyPerTurn = 3;
             m_playerData.CardRemoveCount = SaveData.CardRemove;
 
+            m_playerData.Monster = 0;
+            m_playerData.Elite = 0;
+            m_playerData.Boss = 0;
+
             //미스터리 이벤트
             MysteryDB.Instance.NoSaveInit();
 
@@ -282,6 +290,11 @@ public class MainSceneController : MonoBehaviour
             m_playerData.DrawPerTurn = 5;
             m_playerData.EnergeyPerTurn = 3;
             m_playerData.CardRemoveCount = 0;
+
+            m_playerData.Monster = 0;
+            m_playerData.Elite = 0;
+            m_playerData.Boss = 0;
+
 
             //미스터리 이벤트
             MysteryDB.Instance.NoSaveInit();
@@ -361,5 +374,29 @@ public class MainSceneController : MonoBehaviour
     string MysterySelector()
     {
         return MysteryDB.Instance.RandomSelector();
+    }
+    public void Save(bool IsClear)
+    {
+        SaveData.Save(m_playerData, IsClear);
+        SaveLoadManager.Instance.Save(SaveData);
+    }
+    public void DispathMonster()
+    {
+        for (int i = 0; i < SaveData.Path.Count - 1; ++i)
+        {
+            MapNodeType tmp = m_MapControl.GetMapNodeType(i, SaveData.Path[i]);
+            if (tmp == MapNodeType.Monster)
+            {
+                m_playerData.Monster++;
+            }
+            else if (tmp == MapNodeType.Elite)
+            {
+                m_playerData.Elite++;
+            }
+            else if (tmp == MapNodeType.Boss)
+            {
+                m_playerData.Boss++;
+            }
+        }
     }
 }

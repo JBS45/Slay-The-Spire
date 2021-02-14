@@ -9,7 +9,7 @@ public interface ISplit
 {
     void Split();
 }
-public class BossSlime : Stat,IMonsterPatten,ISplit,ISoundObserver
+public class BossSlime : Stat,IMonsterPatten,ISplit,ISoundObserver,ISpeech
 {
     [SerializeField]
     GameObject Monster;
@@ -238,12 +238,18 @@ public class BossSlime : Stat,IMonsterPatten,ISplit,ISoundObserver
                             {
                                 PlayAudio(0);
                                 anim.SetTrigger("Slime");
+                                SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
+                            }
+                            else if(func.AbilityKey == "Speech")
+                            {
+                                PlayAudio(2);
+                                SkillManager.Instance.Speech(Monster, Monster, func.Decription);
                             }
                             else
                             {
                                 PlayAudio(2);
+                                SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
                             }
-                            SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
                             break;
                         case AbilityType.Power:
                             if (target == MonsterTargetType.Self)
@@ -324,5 +330,11 @@ public class BossSlime : Stat,IMonsterPatten,ISplit,ISoundObserver
         Vector3 tmp = Monster.transform.localPosition;
         MainSceneController.Instance.Spawner.SummonMonster("LargeSlime", CurrentHealthPoint, tmp - new Vector3(10, 0, 0));
         MainSceneController.Instance.Spawner.SummonMonster("LargeSlimeAlt", CurrentHealthPoint, tmp + new Vector3(2, 0, 0));
+    }
+    public void Speech(GameObject Res, string Description)
+    {
+        GameObject obj = Instantiate(Res, Canvas.transform);
+        obj.transform.localPosition = UIcoordinatePos(SkillEffectPos.localPosition);
+        obj.GetComponent<SpeechUI>().SetDescription(Description);
     }
 }

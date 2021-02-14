@@ -15,19 +15,19 @@ MonoBehaviour:
   IsExtinct: 0
   IsAllCost: 0
   charType: 1
-  CardName: "\uC545\uB9C8\uC758 \uD615"
+  CardName: "\uC545\uB9C8\uC758 \uD615\uC0C1"
   cardType: 3
   Rarity: 2
   Targets: 0
   Cost: 3
   Repeat: 1
   EnchantData:
-    EnchantIsExtinct: 1
-    EnchantCardName: 
+    EnchantIsExtinct: 0
+    EnchantCardName: +
     EnchantTargets: 0
     EnchantCost: 0
     EnchantRepeat: 0
-    EnchantValue: 00000000
+    EnchantValue: 01000000
   CardAudio: {fileID: 0}
   CardImage: {fileID: 21300000, guid: 180f45fbd801e9c48aa978c8c4525852, type: 3}
   MultipleEnchant: 0

@@ -105,6 +105,7 @@ public class Cultist : Stat,IMonsterPatten,ISoundObserver
             yield return null;
         }
         float Timer = 0;
+        PlayAudio(1);
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
             Timer += Time.deltaTime;
@@ -116,7 +117,6 @@ public class Cultist : Stat,IMonsterPatten,ISoundObserver
     }
     new void Death()
     {
-        PlayAudio(1);
         base.Death();
         StopAllCoroutines();
         Destroy(Monster);

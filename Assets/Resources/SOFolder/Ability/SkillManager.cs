@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public interface ISpeech
+{
+    void Speech(GameObject Res,string Description);
+}
 public class SkillManager : MonoBehaviour
 {
     static SkillManager _instance = null;
@@ -19,6 +24,9 @@ public class SkillManager : MonoBehaviour
 
     [SerializeField]
     GameObject DefenceRes;
+
+    [SerializeField]
+    GameObject SpeechRes;
 
     private void Awake()
     {
@@ -71,7 +79,7 @@ public class SkillManager : MonoBehaviour
 
         if (IsUse)
         {
-            MainSceneController.Instance.AtkSEManager.BattleSEPlay(BattelSEType.GainDefence);
+            MainSceneController.Instance.SEManager.BattleSEPlay(BattelSEType.GainDefence);
             Performer.GetComponentInChildren<Stat>().SetDefence((int)result);
             Performer.GetComponentInChildren<Stat>().MakeSkillEffect(DefenceRes);
         }
@@ -122,6 +130,10 @@ public class SkillManager : MonoBehaviour
         }
         
         return (int)result;
+    }
+    public void Speech(GameObject Performer, GameObject Target, string description)
+    {
+        Target.GetComponentInChildren<ISpeech>().Speech(SpeechRes, description);
     }
     int NoAction(GameObject Performer, GameObject Target, int value, bool IsUse)
     {

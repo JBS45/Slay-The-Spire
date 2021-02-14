@@ -31,6 +31,10 @@ public class PlayerDataAsset : ScriptableObject
     int _Seed;
     public int Seed { get => _Seed; set => _Seed = value; }
 
+    public int Monster;
+    public int Elite;
+    public int Boss;
+
     public List<CardData> OriginDecks { get; set; }
     public List<IObservers> Observers { get; set; }
     public List<IDeckChange> DeckChanges { get; set; }

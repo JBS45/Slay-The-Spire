@@ -36,13 +36,13 @@ MonoBehaviour:
     Intent: 11
     Function:
     - Type: 1
-      AbilityKey: 
+      AbilityKey: Speech
       SkillEffect: {fileID: 0}
       SkillSprite: {fileID: 0}
       variety: 0
       Value: 0
       Stack: 0
-      Decription: 
+      Decription: "<color=#EC0D0D>\uC2AC\uB77C\uC784</color>.....\n          \n\t\uC73C\uAE6C\uB2E4."
     Repeat: 1
   - OnlyOnceAction: 0
     Target: 0

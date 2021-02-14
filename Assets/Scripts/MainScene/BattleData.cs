@@ -47,6 +47,8 @@ public class BattleData : MonoBehaviour
 
     BattleUIScript BattleUI;
 
+    bool _IsClear;
+    public bool IsClear { get => _IsClear; set => _IsClear = value; }
 
     bool IsDraw;
     int CurrEnergy;
@@ -94,20 +96,26 @@ public class BattleData : MonoBehaviour
                 ChangeTurn(Turn.Player);
                 break;
             case BattleDataState.Win:
-                Player.GetComponentInChildren<CharacterStat>().BattleEnd();
                 MainSceneController.Instance.SEManager.BattleSEPlay(BattelSEType.Win);
+                MainSceneController.Instance.DispathMonster();
                 foreach (var relic in MainSceneController.Instance.PlayerData.Relics)
                 {
                     relic.BattleEnd();
                 }
+                Player.GetComponentInChildren<CharacterStat>().BattleEnd();
                 ClearData();
-                if (MainSceneController.Instance.CurrentNode != MapNodeType.Boss)
+                if (MainSceneController.Instance.CurrentNode == MapNodeType.Monster)
+                {
+                    Invoke("ShowRewardWindow", 0.5f);
+                }
+                else if (MainSceneController.Instance.CurrentNode == MapNodeType.Elite)
                 {
                     Invoke("ShowRewardWindow", 0.5f);
                 }
                 else
                 {
                     //보스전 종료시 window;
+                    MainSceneController.Instance.PlayerData.Boss++;
                     MainSceneController.Instance.BGMManager.PlayBGM(4);
                     MainSceneController.Instance.Background.ChangeGameOver();
                     MainSceneController.Instance.UIControl.RemoveCurUI();
@@ -135,6 +143,7 @@ public class BattleData : MonoBehaviour
         Player = MainSceneController.Instance.Character;
         Player.GetComponentInChildren<CharacterStat>().SetUp(MainSceneController.Instance.PlayerData);
 
+       
         //카드 데이터 세팅
         m_CardData.Clear();
         foreach(var card in MainSceneController.Instance.PlayerData.OriginDecks)
@@ -154,6 +163,10 @@ public class BattleData : MonoBehaviour
 
         //UI 배틀 시작시에 움직임
         //종료시 Battle로 상태전환
+        if (IsClear)
+        {
+            ChangeBattleState(BattleDataState.Win);
+        }
         BattleUI.StartBattle(ChangeBattleState, BattleDataState.Battle);
     }
     public void ClearData()

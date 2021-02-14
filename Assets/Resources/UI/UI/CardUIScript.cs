@@ -140,7 +140,6 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         SetDescription(card);
         CardImage.sprite = card.CardImage;
-        CardName.text = card.CardName;
 
         switch (card.CharType)
         {
@@ -172,7 +171,7 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (data.EnchantCount > 0)
         {
             CardName.color = TextColor[2];
-            CardNameResult += data.Enchant.EnchantCardName;
+            CardNameResult += "+";
         }
         CardName.text = CardNameResult;
 
@@ -435,6 +434,7 @@ public class CardUIScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 StartCoroutine(RemoveEffect());
                 break;
             case WindowType.Reward:
+                MainSceneController.Instance.PlayerData.Notify();
                 StartCoroutine(CardMove(MainSceneController.Instance.UIControl.InfoBar.m_DeckCount.gameObject));
                 break;
         }

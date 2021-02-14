@@ -222,7 +222,7 @@ public class CardData : ITargetLoader
                             PowerManager.Instance.AssginBuff(Target, action.variety, action.Value, true);
                             break;
                     }
-                    yield return new WaitForSeconds(0.1f);
+                    
                 }
                 yield return new WaitForSeconds(0.2f);
             }
@@ -257,6 +257,7 @@ public class CardData : ITargetLoader
                                 PowerManager.Instance.AssginBuff(monster, action.variety, action.Value, true);
                                 break;
                         }
+                        
                     }
                 }
                 yield return new WaitForSeconds(0.3f);

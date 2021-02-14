@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NobGremlin : Stat, IMonsterPatten,ISoundObserver
+public class NobGremlin : Stat, IMonsterPatten,ISoundObserver,ISpeech
 {
     [SerializeField]
     GameObject Monster;
@@ -103,6 +103,7 @@ public class NobGremlin : Stat, IMonsterPatten,ISoundObserver
             yield return null;
         }
         float Timer = 0;
+        PlayAudio(1);
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
             Timer += Time.deltaTime;
@@ -114,7 +115,6 @@ public class NobGremlin : Stat, IMonsterPatten,ISoundObserver
     }
     new void Death()
     {
-        PlayAudio(1);
         base.Death();
         StopAllCoroutines();
         Destroy(Monster);
@@ -207,7 +207,6 @@ public class NobGremlin : Stat, IMonsterPatten,ISoundObserver
         List<GameObject> Player = new List<GameObject>();
         Player.Add(MainSceneController.Instance.Character);
         IsAttack = false;
-        PlayAudio(0);
         Intent.GetComponent<IntentControl>().OnAction();
         for (int i = 0; i < Deck[CurDeckCount].Repeat; ++i)
         {
@@ -217,10 +216,19 @@ public class NobGremlin : Stat, IMonsterPatten,ISoundObserver
                 switch (func.Type)
                 {
                     case AbilityType.Attack:
+                        Attack();
                         AttackManager.Instance.UseAttack(Monster, MainSceneController.Instance.Character, func.SkillEffect, func.SkillSprite, func.AbilityKey, func.Value, true);
                         break;
                     case AbilityType.Skill:
-                        SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
+                        if (func.AbilityKey == "Speech")
+                        {
+                            PlayAudio(0); 
+                            SkillManager.Instance.Speech(Monster, Monster, func.Decription);
+                        }
+                        else
+                        {
+                            SkillManager.Instance.UseSkill(Monster, MainSceneController.Instance.Character, func.AbilityKey, func.Value, true);
+                        }
                         break;
                     case AbilityType.Power:
                         if (target == MonsterTargetType.Self)
@@ -263,6 +271,11 @@ public class NobGremlin : Stat, IMonsterPatten,ISoundObserver
         Destroy(HPBar);
         Destroy(Intent);
     }
-
+    public void Speech(GameObject Res, string Description)
+    {
+        GameObject obj = Instantiate(Res, Canvas.transform);
+        obj.transform.localPosition = UIcoordinatePos(SkillEffectPos.localPosition);
+        obj.GetComponent<SpeechUI>().SetDescription(Description);
+    }
 }
 

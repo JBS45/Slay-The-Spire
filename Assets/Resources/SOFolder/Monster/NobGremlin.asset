@@ -30,6 +30,14 @@ MonoBehaviour:
       Value: 2
       Stack: 0
       Decription: 
+    - Type: 1
+      AbilityKey: Speech
+      SkillEffect: {fileID: 0}
+      SkillSprite: {fileID: 0}
+      variety: 0
+      Value: 0
+      Stack: 0
+      Decription: "\uADF8\uB974\uB974\uB974\uB974\uB974\uC5B4\uC5B4\uC5B4\uC5B4\uC5B4\uC5B4\uC5B4!"
     Repeat: 1
   - OnlyOnceAction: 0
     Target: 0

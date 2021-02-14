@@ -104,6 +104,7 @@ public class JawWorm : Stat,IMonsterPatten,ISoundObserver
             yield return null;
         }
         float Timer = 0;
+        PlayAudio(0);
         while (m_Skeleton.Skeleton.a > 0.3f)
         {
             Timer += Time.deltaTime;
@@ -115,7 +116,6 @@ public class JawWorm : Stat,IMonsterPatten,ISoundObserver
     }
     new void Death()
     {
-        PlayAudio(0);
         base.Death();
         StopAllCoroutines();
         Destroy(Monster);

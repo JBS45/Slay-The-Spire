@@ -18,6 +18,9 @@ public class GameOverUI : MonoBehaviour
     [SerializeField]
     TMP_Text TextRes;
 
+    [SerializeField]
+    TMP_Text Detail;
+
     List<TMP_Text> TextList;
     private void Awake()
     {
@@ -39,6 +42,12 @@ public class GameOverUI : MonoBehaviour
     {
         Banner.GetComponentInChildren<TMP_Text>().text = IsClear ? "승리" : "굴복";
         Button.GetComponentInChildren<Button>().onClick.AddListener(ButtonEvent);
+
+        Detail.text = "";
+        Detail.text += string.Format("오른 층 수({0})\n", MainSceneController.Instance.PlayerData.CurrentFloor);
+        Detail.text += string.Format("처치한 몬스터({0})\n", MainSceneController.Instance.PlayerData.Monster);
+        Detail.text += string.Format("처치한 엘리트({0})\n", MainSceneController.Instance.PlayerData.Elite);
+        Detail.text += string.Format("처치한 보스({0})\n", MainSceneController.Instance.PlayerData.Boss);
 
     }
     void ButtonEvent()

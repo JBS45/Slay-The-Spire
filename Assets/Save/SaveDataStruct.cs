@@ -6,6 +6,7 @@ using UnityEngine;
 public class SaveDataStruct
 {
     public bool IsSave = false;
+    public bool IsClear = false;
     public int MapGenrateSeed;
 
     public CharacterType Character;
@@ -24,12 +25,11 @@ public class SaveDataStruct
     public List<string> PastEvents = new List<string>();
     public List<int> Path = new List<int>();
 
-    public float SEVolume;
-    public float BGMVolume;
 
     public void Save(PlayerDataAsset PlayerData)
     {
         IsSave = true;
+        IsClear = false;
         MapGenrateSeed = PlayerData.Seed;
         Character = PlayerData.CharType;
 
@@ -41,9 +41,6 @@ public class SaveDataStruct
         CurMoney = PlayerData.CurrentMoney;
 
         CardRemove = PlayerData.CardRemoveCount;
-
-        SEVolume = AudioManager.SEVolume;
-        BGMVolume = AudioManager.BGMVolume;
 
         Card.Clear();
         foreach (var item in PlayerData.OriginDecks)
@@ -62,9 +59,10 @@ public class SaveDataStruct
             Path.Add(CurFloorIndex);
         }
     }
-    public void Save(PlayerDataAsset PlayerData,string EventKey)
+    public void Save(PlayerDataAsset PlayerData,bool clear)
     {
         IsSave = true;
+        IsClear = clear;
         MapGenrateSeed = PlayerData.Seed;
         Character = PlayerData.CharType;
 
@@ -77,8 +75,41 @@ public class SaveDataStruct
 
         CardRemove = PlayerData.CardRemoveCount;
 
-        SEVolume = AudioManager.SEVolume;
-        BGMVolume = AudioManager.BGMVolume;
+
+        Card.Clear();
+        foreach (var item in PlayerData.OriginDecks)
+        {
+            SaveCardData tmp = new SaveCardData(item);
+            Card.Add(tmp);
+        }
+        Relic.Clear();
+        foreach (var item in PlayerData.Relics)
+        {
+            SaveRelic tmp = new SaveRelic(item);
+            Relic.Add(tmp);
+        }
+        if (Path.Count <= CurFloor)
+        {
+            Path.Add(CurFloorIndex);
+        }
+    }
+    public void Save(PlayerDataAsset PlayerData,string EventKey)
+    {
+        IsSave = true;
+        IsClear = false;
+        MapGenrateSeed = PlayerData.Seed;
+        Character = PlayerData.CharType;
+
+        MaxHP = PlayerData.MaxHp;
+        CurHP = PlayerData.CurrentHp;
+
+        CurFloor = PlayerData.CurrentFloor;
+        CurFloorIndex = PlayerData.CurrentFloorIndex;
+        CurMoney = PlayerData.CurrentMoney;
+
+        CardRemove = PlayerData.CardRemoveCount;
+
+
 
         Card.Clear();
         foreach (var item in PlayerData.OriginDecks)
