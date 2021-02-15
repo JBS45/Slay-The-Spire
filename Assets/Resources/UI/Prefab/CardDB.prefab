@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7726085901768937204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7726085901768937206}
+  - component: {fileID: 7726085901768937207}
+  - component: {fileID: 7726085901768937209}
+  m_Layer: 0
+  m_Name: CardDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7726085901768937206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726085901768937204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.3372474, y: 2.703737, z: -13.151312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7726085901768937207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726085901768937204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8512d4c1efd7e40b029af82d506028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Condition: {fileID: 11400000, guid: d51da34b759a6914391893931b79715f, type: 2}
+  _Neutral: {fileID: 11400000, guid: 85e0afa7fa420b5408091f48b7e3405d, type: 2}
+  _IronClad: {fileID: 11400000, guid: ac8e5660cd1fc5a46abe0dee1b5513ac, type: 2}
+--- !u!114 &7726085901768937209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726085901768937204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754f0cb6c6d005c459caf919c439c03f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Relic:
+  - {fileID: 11400000, guid: 759e2b84fa7af5d41b985a698dad0516, type: 2}
+  - {fileID: 11400000, guid: c3cb9a043f0d90448a6b268086e534ac, type: 2}
+  - {fileID: 11400000, guid: 369a5f4ceb7460041aab02a3c5bea64b, type: 2}
+  - {fileID: 11400000, guid: 7727e58e6eca5b24fabaaadef0bbe4b6, type: 2}
+  - {fileID: 11400000, guid: f59682bfdcfca7142830d68a98e254ba, type: 2}
+  - {fileID: 11400000, guid: 0b30729b4cd1a7446b50cfa088721b45, type: 2}
+  - {fileID: 11400000, guid: 46882a25bbf15704382dd3a9136fa6e4, type: 2}

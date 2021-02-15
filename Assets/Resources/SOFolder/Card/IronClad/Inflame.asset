@@ -22,7 +22,7 @@ MonoBehaviour:
   Cost: 1
   Repeat: 1
   EnchantData:
-    EnchantIsExtinct: 1
+    EnchantIsExtinct: 0
     EnchantCardName: +
     EnchantTargets: 0
     EnchantCost: 0

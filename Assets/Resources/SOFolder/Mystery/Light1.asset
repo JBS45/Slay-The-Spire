@@ -23,7 +23,7 @@ MonoBehaviour:
   - condtion:
       type: 0
       value: 0
-    NextKey: M402
+    NextKey: M403
     ButtonEvents:
     - ButtonString: "[\uB4E4\uC5B4\uAC04\uB2E4]"
       ButtonEventKey: 
@@ -38,7 +38,7 @@ MonoBehaviour:
   - condtion:
       type: 0
       value: 0
-    NextKey: M403
+    NextKey: M402
     ButtonEvents:
     - ButtonString: "[\uB5A0\uB098\uAE30]"
       ButtonEventKey: 

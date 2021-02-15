@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddf805ee3d2a8f42ae4823e771cecf3, type: 3}
   m_Name: Marble
   m_EditorClassIdentifier: 
+  CanGet: 1
   Name: "\uAD6C\uC2AC \uC8FC\uBA38\uB2C8"
   CharType: 0
   Description: "\uC804\uD22C \uC2DC\uC791 \uC2DC \uC801 \uC804\uCCB4\uC5D0\uAC8C

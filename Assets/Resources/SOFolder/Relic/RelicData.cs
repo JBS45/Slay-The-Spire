@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinct, IBattleStart, IBattleEnd
 {
+    bool m_CanGet;
+    public bool CanGet { get => m_CanGet; }
     bool m_IsEnable;
     public bool IsEnable { get => m_IsEnable; set => m_IsEnable = value; }
     string m_Name;
@@ -157,6 +159,7 @@ public class RelicData : IDrawEvent, ITurnBegin, ITurnEnd, ICardUse, ICardExtinc
 
     public RelicData(Relic data)
     {
+        m_CanGet = data.CanGet;
         IsEnable = true;
         Name = data.Name;
         CharType = data.CharType;

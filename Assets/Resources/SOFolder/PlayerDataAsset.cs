@@ -38,6 +38,7 @@ public class PlayerDataAsset : ScriptableObject
     public List<CardData> OriginDecks { get; set; }
     public List<IObservers> Observers { get; set; }
     public List<IDeckChange> DeckChanges { get; set; }
+    public List<string> PastEvents = new List<string>();
 
     public List<RelicData> Relics;
 

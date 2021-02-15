@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Relic")]
 public class Relic : ScriptableObject
 {
+    public bool CanGet;
     [Header("General Info")]
     public string Name;
     public CharacterType CharType;

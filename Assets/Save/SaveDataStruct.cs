@@ -18,6 +18,11 @@ public class SaveDataStruct
     public int CurFloorIndex;
     public int CurMoney;
 
+    public int Monster;
+    public int Elite;
+    public int Boss;
+
+
     public int CardRemove;
 
     public List<SaveCardData> Card = new List<SaveCardData>();
@@ -42,6 +47,10 @@ public class SaveDataStruct
 
         CardRemove = PlayerData.CardRemoveCount;
 
+        Monster = PlayerData.Monster;
+        Elite = PlayerData.Elite;
+        Boss = PlayerData.Boss; 
+
         Card.Clear();
         foreach (var item in PlayerData.OriginDecks)
         {
@@ -57,6 +66,12 @@ public class SaveDataStruct
         if (Path.Count <= CurFloor)
         {
             Path.Add(CurFloorIndex);
+        }
+        PastEvents.Clear();
+        foreach (var item in PlayerData.PastEvents)
+        {
+            string tmp = item;
+            PastEvents.Add(tmp);
         }
     }
     public void Save(PlayerDataAsset PlayerData,bool clear)
@@ -75,6 +90,10 @@ public class SaveDataStruct
 
         CardRemove = PlayerData.CardRemoveCount;
 
+        Monster = PlayerData.Monster;
+        Elite = PlayerData.Elite;
+        Boss = PlayerData.Boss;
+
 
         Card.Clear();
         foreach (var item in PlayerData.OriginDecks)
@@ -91,6 +110,12 @@ public class SaveDataStruct
         if (Path.Count <= CurFloor)
         {
             Path.Add(CurFloorIndex);
+        }
+        PastEvents.Clear();
+        foreach (var item in PlayerData.PastEvents)
+        {
+            string tmp = item;
+            PastEvents.Add(tmp);
         }
     }
     public void Save(PlayerDataAsset PlayerData,string EventKey)
@@ -109,6 +134,9 @@ public class SaveDataStruct
 
         CardRemove = PlayerData.CardRemoveCount;
 
+        Monster = PlayerData.Monster;
+        Elite = PlayerData.Elite;
+        Boss = PlayerData.Boss;
 
 
         Card.Clear();
@@ -123,10 +151,12 @@ public class SaveDataStruct
             SaveRelic tmp = new SaveRelic(item);
             Relic.Add(tmp);
         }
-        PastEvents.Add(EventKey);
-        if (Path.Count <= CurFloor)
+        PastEvents.Clear();
+        foreach (var item in PlayerData.PastEvents)
         {
-            Path.Add(CurFloorIndex);
+            string tmp = item;
+            PastEvents.Add(tmp);
         }
+
     }
 }

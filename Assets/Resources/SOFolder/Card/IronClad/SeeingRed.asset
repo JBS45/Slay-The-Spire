@@ -28,6 +28,7 @@ MonoBehaviour:
     EnchantCost: 0
     EnchantRepeat: 0
     EnchantValue: 01000000
+  CardAudio: {fileID: 0}
   CardImage: {fileID: 21300000, guid: 09b133190e2476a459cb39a9cb27cdeb, type: 3}
   MultipleEnchant: 0
   FunctionAndValue:
@@ -38,4 +39,4 @@ MonoBehaviour:
     variety: 0
     Value: 2
     Stack: 0
-    Decription: "<color=#{0}>{1}</color>\uC744 \uC5BB\uC2B5\uB2C8\uB2E4."
+    Decription: "<color=#{0}>{1}</color>\uC744 \uC5BB\uC2B5\uB2C8\uB2E4.\n<color=#ffa500ff>\uC18C\uBA78</color>"

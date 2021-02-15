@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddf805ee3d2a8f42ae4823e771cecf3, type: 3}
   m_Name: Anchor
   m_EditorClassIdentifier: 
+  CanGet: 1
   Name: "\uB2FB"
   CharType: 0
   Description: "\uC804\uD22C \uC2DC\uC791\uC2DC \uBC29\uC5B4\uB3C4\uB97C 10 \uC5BB\uC2B5\uB2C8\uB2E4"

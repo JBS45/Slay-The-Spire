@@ -99,7 +99,7 @@ public class RelicScript : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         MainSceneController.Instance.UIControl.ToolTip.SetActive(true);
-        MainSceneController.Instance.UIControl.ToolTip.transform.localPosition = GameUtill.CoordCanvasPosition(transform.localPosition - new Vector3(0,100,0));
+        MainSceneController.Instance.UIControl.ToolTip.transform.localPosition = GameUtill.ChildCoordCanvas(this.gameObject,MainSceneController.Instance.UIControl.UICanvas.gameObject)- new Vector3(0, 50,0);
         MainSceneController.Instance.UIControl.ToolTip.GetComponent<ToolTipScript>().SetData(Data);
     }
     public void OnPointerExit(PointerEventData eventData)

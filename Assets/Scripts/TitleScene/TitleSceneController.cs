@@ -43,6 +43,17 @@ public class TitleSceneController : MonoBehaviour
 
     public GameObject OptionPanelRes;
 
+    [Header("DBRes")]
+    [SerializeField]
+    GameObject CharDBRes;
+    [SerializeField]
+    GameObject CardDBRes;
+    [SerializeField]
+    GameObject MysteryDBRes;
+    [SerializeField]
+    GameObject CursorRes;
+    [SerializeField]
+    GameObject AbilityRes;
     bool IsSave = false;
 
     [SerializeField]
@@ -54,6 +65,10 @@ public class TitleSceneController : MonoBehaviour
 
     Vector3 TargetPos;
 
+    private void Awake()
+    {
+        TitleSceneInit();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -161,7 +176,9 @@ public class TitleSceneController : MonoBehaviour
     public void PushOptionButton()
     {
         m_SEManager.PlaySE(1);
+        TitleString.SetActive(false);
         GameObject obj = Instantiate(OptionPanelRes, MainCanvas.transform);
+        obj.GetComponent<OptionWindow>().SetExitEvent(() => { TitleString.SetActive(true); });
     }
     public void PushQuitButton()
     {
@@ -222,6 +239,30 @@ public class TitleSceneController : MonoBehaviour
         if (Del != null)
         {
             Del();
+        }
+    }
+
+    void TitleSceneInit()
+    {
+        if (CharDB.Instance == null)
+        {
+            GameObject obj = Instantiate(CharDBRes);
+        }
+        if (CardDB.Instance == null)
+        {
+            GameObject obj = Instantiate(CardDBRes);
+        }
+        if (MysteryDB.Instance == null)
+        {
+            GameObject obj = Instantiate(MysteryDBRes);
+        }
+        if (MouseCursors.Instance == null)
+        {
+            GameObject obj = Instantiate(CursorRes);
+        }
+        if (SkillManager.Instance == null)
+        {
+            GameObject obj = Instantiate(AbilityRes);
         }
     }
 }

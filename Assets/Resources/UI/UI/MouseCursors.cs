@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class MouseCursors : MonoBehaviour
 {
+    static MouseCursors _instance = null;
+    public static MouseCursors Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<MouseCursors>();
+            }
+            return _instance;
+        }
+    }
     public Texture2D NormalCursor;
     public Texture2D MapCursor;
 

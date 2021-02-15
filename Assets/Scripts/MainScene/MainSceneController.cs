@@ -78,6 +78,8 @@ public class MainSceneController : MonoBehaviour
 
     SaveDataStruct SaveData;
 
+    MapNodeType IsPreNodeMytery;
+    string Mysterystring;
 
     private void Awake()
     {
@@ -86,6 +88,7 @@ public class MainSceneController : MonoBehaviour
         m_Char.transform.SetParent(m_CharSpawnPoint);
         m_Char.transform.localPosition = Vector3.zero;
         m_UIControl.InfoBar.BarInit(PlayerData);
+        IsPreNodeMytery = MapNodeType.None;
     }
     // Start is called before the first frame update
     void Start()
@@ -112,7 +115,6 @@ public class MainSceneController : MonoBehaviour
         {
             ChangeState(MapNodeType.None);
         }
-        DispathMonster();
     }
 
     // Update is called once per frame
@@ -123,13 +125,27 @@ public class MainSceneController : MonoBehaviour
 
     void ChangeState(MapNodeType state)
     {
+        IsPreNodeMytery = m_State;
         m_State = state;
         m_BattleData.ClearData();
         m_Reward.Clear();
         m_UIControl.RemoveCurUI();
         m_UIControl.OffMap();
-        PlayerData.Notify();
         Random.InitState(m_MapControl.GetMapNode(PlayerData.CurrentFloor, PlayerData.CurrentFloorIndex).Seed);
+        if (IsPreNodeMytery == MapNodeType.Mistery&& Mysterystring!="")
+        {
+            PlayerData.PastEvents.Add(Mysterystring);
+        }
+        else if(IsPreNodeMytery == MapNodeType.Monster)
+        {
+            PlayerData.Monster++;
+        }
+        else if(IsPreNodeMytery == MapNodeType.Elite)
+        {
+            PlayerData.Elite++;
+        }
+
+        PlayerData.Notify();
         BGMManager.PlayBGM(1);
         
         switch (m_State)
@@ -239,12 +255,13 @@ public class MainSceneController : MonoBehaviour
             m_playerData.EnergeyPerTurn = 3;
             m_playerData.CardRemoveCount = SaveData.CardRemove;
 
-            m_playerData.Monster = 0;
-            m_playerData.Elite = 0;
-            m_playerData.Boss = 0;
+            m_playerData.Monster = SaveData.Monster;
+            m_playerData.Elite = SaveData.Elite;
+            m_playerData.Boss = SaveData.Boss;
 
             //미스터리 이벤트
             MysteryDB.Instance.NoSaveInit();
+            MysteryDB.Instance.SaveInit(SaveData.PastEvents);
 
             //유물 DB 초기화
             RelicDB.Instance.Init();
@@ -352,10 +369,11 @@ public class MainSceneController : MonoBehaviour
             {
                 m_BackgroundControl.BackgroundChange(BackgroundType.Battle);
                 m_UIControl.MakeEventWindow();
-                string tmp = MysterySelector();
-                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(tmp);
-                SaveData.Save(PlayerData,tmp);
+                Mysterystring = MysterySelector();
+                m_UIControl.GetCurUI().GetComponent<MysteryEventWindow>().SetWindow(Mysterystring);
+                SaveData.Save(m_playerData);
                 SaveLoadManager.Instance.Save(SaveData);
+
             }
         }
         else

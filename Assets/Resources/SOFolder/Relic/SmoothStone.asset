@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddf805ee3d2a8f42ae4823e771cecf3, type: 3}
   m_Name: SmoothStone
   m_EditorClassIdentifier: 
+  CanGet: 1
   Name: "\uB9E4\uB044\uB7EC\uC6B4 \uB3CC"
   CharType: 0
   Description: "\uBBFC\uCCA9\uC744 1 \uC5BB\uC740 \uCC44\uB85C \uC804\uD22C\uB97C

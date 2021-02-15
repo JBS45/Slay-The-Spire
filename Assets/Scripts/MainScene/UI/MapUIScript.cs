@@ -155,7 +155,7 @@ public class MapUIScript : MonoBehaviour
         IsEnableMap = false;
         this.gameObject.SetActive(true);
         int floor = MainSceneController.Instance.PlayerData.CurrentFloor;
-        Content.localPosition = new Vector3(0, 1080 - 100 * floor, 0);
+        Content.localPosition = new Vector3(0, 1080 - 150 * floor, 0);
         StartCoroutine(CancelButtonMove());
         AllButtonDisabled();
     }
@@ -165,7 +165,7 @@ public class MapUIScript : MonoBehaviour
         IsEnableMap = true;
         this.gameObject.SetActive(true);
         int floor = MainSceneController.Instance.PlayerData.CurrentFloor;
-        Content.localPosition = new Vector3(0,1080-100* floor, 0);
+        Content.localPosition = new Vector3(0,1080-150* floor, 0);
         StartCoroutine(CancelButtonMove());
         ButtonRefresh();
     }
@@ -203,7 +203,7 @@ public class MapUIScript : MonoBehaviour
         List<int> NextPath = MainSceneController.Instance.GetMapControl().FindCanMoveNode(floor,floorIndex);
         for (int i = 0; i < NextPath.Count; ++i) {
             int tmpInt = NextPath[i];
-            MapIcons[floor + 1][NextPath[i]].GetComponent<MapIconScript>().ButtonOn(
+            MapIcons[floor + 1][tmpInt].GetComponent<MapIconScript>().ButtonOn(
                 ()=> {
                     SaveStage(floor + 1, tmpInt);
                 });

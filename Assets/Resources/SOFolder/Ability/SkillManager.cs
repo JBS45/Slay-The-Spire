@@ -79,7 +79,7 @@ public class SkillManager : MonoBehaviour
 
         if (IsUse)
         {
-            MainSceneController.Instance.SEManager.BattleSEPlay(BattelSEType.GainDefence);
+            MainSceneController.Instance.AtkSEManager.BattleSEPlay(BattelSEType.GainDefence);
             Performer.GetComponentInChildren<Stat>().SetDefence((int)result);
             Performer.GetComponentInChildren<Stat>().MakeSkillEffect(DefenceRes);
         }

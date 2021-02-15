@@ -61,4 +61,15 @@ public class OptionWindow : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
         System.GC.Collect();
     }
+    public void SetExitEvent(Delvoid del)
+    {
+        Exit.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
+        Exit.GetComponentInChildren<Button>().onClick.AddListener(
+            () =>
+            {
+                del();
+                SaveData();
+            });
+
+    }
 }

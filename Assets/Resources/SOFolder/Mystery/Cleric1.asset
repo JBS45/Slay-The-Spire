@@ -38,7 +38,7 @@ MonoBehaviour:
       Value: 25
   - condtion:
       type: 1
-      value: 0
+      value: 50
     NextKey: M303
     ButtonEvents:
     - ButtonString: "[\uC815\uD654] "

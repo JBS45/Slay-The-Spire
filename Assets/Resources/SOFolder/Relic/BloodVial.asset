@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddf805ee3d2a8f42ae4823e771cecf3, type: 3}
   m_Name: BloodVial
   m_EditorClassIdentifier: 
+  CanGet: 1
   Name: "\uD53C\uAC00 \uB2F4\uAE34 \uBCD1"
   CharType: 0
   Description: "\uC804\uD22C \uC2DC\uC791 \uC2DC \uCCB4\uB825\uC744 2 \uC5BB\uC2B5\uB2C8\uB2E4."

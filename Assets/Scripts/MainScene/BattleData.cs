@@ -97,7 +97,6 @@ public class BattleData : MonoBehaviour
                 break;
             case BattleDataState.Win:
                 MainSceneController.Instance.SEManager.BattleSEPlay(BattelSEType.Win);
-                MainSceneController.Instance.DispathMonster();
                 foreach (var relic in MainSceneController.Instance.PlayerData.Relics)
                 {
                     relic.BattleEnd();
@@ -115,6 +114,7 @@ public class BattleData : MonoBehaviour
                 else
                 {
                     //보스전 종료시 window;
+                    SaveLoadManager.Instance.Delete();
                     MainSceneController.Instance.PlayerData.Boss++;
                     MainSceneController.Instance.BGMManager.PlayBGM(4);
                     MainSceneController.Instance.Background.ChangeGameOver();
@@ -126,6 +126,7 @@ public class BattleData : MonoBehaviour
                 break;
             case BattleDataState.Lose:
                 Player.GetComponentInChildren<CharacterStat>().BattleEnd();
+                SaveLoadManager.Instance.Delete();
                 MainSceneController.Instance.Background.ChangeGameOver();
                 MainSceneController.Instance.UIControl.RemoveCurUI();
                 MainSceneController.Instance.UIControl.MakeGameOver();
@@ -309,6 +310,15 @@ public class BattleData : MonoBehaviour
         }
         Player.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
 
+        foreach (var Monster in Monsters)
+        {
+            for (int i = 0; i < Monster.GetComponentInChildren<Stat>().Powers.Count; ++i)
+            {
+                Monster.GetComponentInChildren<Stat>().Powers[i].TurnBegin();
+            }
+            Monster.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
+        }
+
         BattleUI.PlayerTurnBegin();
         //카드 5장 드로우
         DrawCard(5, () => { PlayerTurnProgress(TurnState.Turn); });
@@ -337,7 +347,7 @@ public class BattleData : MonoBehaviour
         foreach (var power in Player.GetComponentInChildren<Stat>().Powers)
         {
             power.TurnEnd();
-            
+
         }
         Player.GetComponentInChildren<Stat>().PowerRefresh();
 
@@ -379,15 +389,6 @@ public class BattleData : MonoBehaviour
     //적 턴시작시 처리
     void EnemyTurnBegin()
     {
-        //몬스터들 턴시작시 파워
-        foreach (var Monster in Monsters)
-        {
-            for(int i=0;i<Monster.GetComponentInChildren<Stat>().Powers.Count;++i)
-            {
-                Monster.GetComponentInChildren<Stat>().Powers[i].TurnBegin();
-            }
-            Monster.GetComponentInChildren<Stat>().Powers.RemoveAll(item => item.IsEnable == false);
-        }
 
         EnemyTurnProgress(TurnState.Turn);
     }
@@ -438,7 +439,9 @@ public class BattleData : MonoBehaviour
     }
     void EnemyTurnEnd()
     {
-        //턴 종료시 처리 되야 될것
+        //턴 종료시 처리 되야 될
+        
+
         foreach (var Monster in Monsters)
         {
             foreach (var power in Monster.GetComponentInChildren<Stat>().Powers)

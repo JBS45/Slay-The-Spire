@@ -44,7 +44,15 @@ public class RelicDB : MonoBehaviour
         if (_CurrentRelicDatas.Count == 0) return null;
 
         int random = Random.Range(0, _CurrentRelicDatas.Count);
-        RelicData tmp = _CurrentRelicDatas[random];
+        RelicData tmp;
+        while (true)
+        {
+            tmp = _CurrentRelicDatas[random];
+            if (tmp.CanGet)
+            {
+                break;
+            }
+        }
         _CurrentRelicDatas.RemoveAt(random);
 
         return tmp;

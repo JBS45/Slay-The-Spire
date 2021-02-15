@@ -130,8 +130,6 @@ public class CardSelectWindow : MonoBehaviour
     {
         MainSceneController.Instance.UIControl.MakeCard(WindowType.Remove, 1, Data);
         MainSceneController.Instance.PlayerData.RemoveCard(Data);
-        MainSceneController.Instance.PlayerData.CurrentMoney -= MainSceneController.Instance.PlayerData.RemoveCardGold();
-        MainSceneController.Instance.PlayerData.CardRemoveCount++;
         del();
         MainSceneController.Instance.PlayerData.Notify();
         Destroy(this.gameObject);

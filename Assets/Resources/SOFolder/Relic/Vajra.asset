@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddf805ee3d2a8f42ae4823e771cecf3, type: 3}
   m_Name: Vajra
   m_EditorClassIdentifier: 
+  CanGet: 1
   Name: "\uAE08\uAC15\uC800"
   CharType: 0
   Description: "\uD798\uC744 1 \uC5BB\uC740 \uCC44\uB85C \uC804\uD22C\uB97C \uC2DC\uC791\uD569\uB2C8\uB2E4."

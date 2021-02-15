@@ -53,6 +53,12 @@ public class MysteryDB : MonoBehaviour
             _data.Add(item.Key, item);
         }
     }
+    public void SaveInit(List<string> key)
+    {
+        foreach (var item in key) {
+            _CurrentKey.RemoveAll(element => element.Key == item);
+        }
+    }
     public void NoSaveInit()
     {
         foreach(var item in EventKeys)
@@ -66,7 +72,7 @@ public class MysteryDB : MonoBehaviour
 
         int random = Random.Range(0, _CurrentKey.Count);
         string TmpKey = _CurrentKey[random].Key;
-        _CurrentKey.RemoveAt(random);
+        _CurrentKey.Remove(_CurrentKey.Find(item => item.Key == TmpKey));
 
         return TmpKey;
     }

@@ -106,6 +106,8 @@ public class CardRemoveScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         IsEnable = false;
         m_Button.image.sprite = UsedSprite;
+        MainSceneController.Instance.PlayerData.CurrentMoney -= MainSceneController.Instance.PlayerData.RemoveCardGold();
+        MainSceneController.Instance.PlayerData.CardRemoveCount++;
         GoldText.SetActive(false);
         Destroy(RemoveCardWindow);
     }
